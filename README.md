@@ -1,5 +1,7 @@
 lol-client-java-api
 ----------
+[![lol-client-java-api](https://jitpack.io/v/stirante/lol-client-java-api.svg)](https://jitpack.io/#stirante/lol-client-java-api)
+----------
 
 Simple library which provides access to internal League of Legends Client API.
 
@@ -9,6 +11,54 @@ This product is not endorsed, certified or otherwise approved in any way by Riot
 ## Requirements
 
 **lol-client-java-api** requires Java 8 and depends on Google GSON.
+
+## Setup
+
+This project is available on [Jitpack](https://jitpack.io/#stirante/lol-client-java-api/1.0.0)
+
+### Gradle
+
+Add Jitpack to your root build.gradle at the end of repositories:
+
+```java
+allprojects {
+	repositories {
+		...
+		maven { url 'https://jitpack.io' }
+	}
+}
+```
+
+Add the project as a dependency:
+
+```java
+dependencies {
+	compile 'com.github.stirante:lol-client-java-api:1.0.0'
+}
+```
+
+### Maven
+
+Add Jitpack as a repository:
+
+```xml
+<repositories>
+	<repository>
+	    <id>jitpack.io</id>
+	    <url>https://jitpack.io</url>
+	</repository>
+</repositories>
+```
+
+Add the project as a dependency:
+
+```xml
+<dependency>
+    <groupId>com.github.stirante</groupId>
+    <artifactId>lol-client-java-api</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
 
 ## Usage
 
