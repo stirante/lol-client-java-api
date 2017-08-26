@@ -68,7 +68,7 @@ This library depends on League of Legends client and requires it to be open whil
 import generated.LolChampionsCollectionsChampion;
 import generated.LolChampionsCollectionsChampionSkin;
 import generated.Summoner;
-import lolclient.ClientApi;
+import com.stirante.lolclient.ClientApi;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -111,7 +111,7 @@ This library is still under development and lacks many features. Right now to ac
 
 ```java
 import generated.LolChatUserResource;
-import lolclient.ClientApi;
+import com.stirante.lolclient.ClientApi;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package lolclient;
+package com.stirante.lolclient;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

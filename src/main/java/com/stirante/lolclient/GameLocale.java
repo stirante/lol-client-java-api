@@ -1,4 +1,4 @@
-package lolclient;
+package com.stirante.lolclient;
 
 public class GameLocale {
 

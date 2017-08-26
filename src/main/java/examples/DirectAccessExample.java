@@ -1,7 +1,7 @@
 package examples;
 
 import generated.LolChatUserResource;
-import lolclient.ClientApi;
+import com.stirante.lolclient.ClientApi;
 
 import java.io.IOException;
 

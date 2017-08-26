@@ -1,7 +1,7 @@
 package examples;
 
 import generated.PlayerNotificationResource;
-import lolclient.ClientApi;
+import com.stirante.lolclient.ClientApi;
 
 import java.io.IOException;
 import java.util.HashMap;
