@@ -41,7 +41,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.stirante.com.stirante.lolclient.SimpleCLI</mainClass>
+                            <mainClass>com.stirante.lolclient.SimpleCLI</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
