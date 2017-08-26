@@ -138,6 +138,15 @@ All classes in ```generated``` package were generated from OpenAPI JSON.
 
 All examples are in ```examples``` package.
 
+Library contains very simple command line interface which can be like this
+```
+java -jar lol-client-java-api.jar -p PATH -m METHOD
+```
+Example:
+```
+java -jar lol-client-java-api.jar -p rso-auth/v1/authorization -m GET
+```
+
 ## Contributing
 All contributions are appreciated.
 If you would like to contribute to this project, please send a pull request.
