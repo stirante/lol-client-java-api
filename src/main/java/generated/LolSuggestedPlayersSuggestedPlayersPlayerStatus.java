@@ -1,0 +1,8 @@
+package generated;
+
+public class LolSuggestedPlayersSuggestedPlayersPlayerStatus {
+
+	public LolSuggestedPlayersSuggestedPlayersLobbyStatus currentLobbyStatus;
+	public LolSuggestedPlayersSuggestedPlayersLobbyStatus lastQueuedLobbyStatus;
+
+}
