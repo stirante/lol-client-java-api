@@ -20,6 +20,8 @@ public enum LolReplaysMetadataState {
 	MISSINGOREXPIRED,
 	@SerializedName("retryDownload")
 	RETRYDOWNLOAD,
+	@SerializedName("lost")
+	LOST,
 	@SerializedName("unsupported")
 	UNSUPPORTED,
 	@SerializedName("error")

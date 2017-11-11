@@ -9,6 +9,8 @@ public enum LolMatchmakingMatchmakingDodgeState {
 	@SerializedName("PartyDodged")
 	PARTYDODGED,
 	@SerializedName("StrangerDodged")
-	STRANGERDODGED
+	STRANGERDODGED,
+	@SerializedName("TournamentDodged")
+	TOURNAMENTDODGED
 
 }

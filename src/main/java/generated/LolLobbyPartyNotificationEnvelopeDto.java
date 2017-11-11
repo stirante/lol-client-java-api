@@ -1,11 +1,12 @@
 package generated;
 
+import java.util.Map;
 import java.util.List;
+import com.google.gson.annotations.SerializedName;
 
 public class LolLobbyPartyNotificationEnvelopeDto {
 
-	public List<LolLobbyPartyInviteDto> invites;
-	public List<LolLobbyPartyDto> parties;
-	public List<LolLobbyPlayerDto> players;
+	public LolLobbyPlayerDto player;
+	public LolLobbyQueueRestrictionDto queueRestriction;
 
 }

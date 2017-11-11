@@ -1,6 +1,8 @@
 package generated;
 
+import java.util.Map;
 import java.util.List;
+import com.google.gson.annotations.SerializedName;
 
 public class LolGameQueuesQueue {
 
@@ -16,6 +18,8 @@ public class LolGameQueuesQueue {
 	public Boolean isRanked;
 	public Boolean isTeamBuilderManaged;
 	public Boolean isTeamOnly;
+	public Long lastToggledOffTime;
+	public Long lastToggledOnTime;
 	public Integer mapId;
 	public Integer maxLevel;
 	public Integer maxSummonerLevelForFirstWinOfTheDay;

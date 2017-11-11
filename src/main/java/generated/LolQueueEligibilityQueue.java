@@ -1,5 +1,9 @@
 package generated;
 
+import java.util.Map;
+import java.util.List;
+import com.google.gson.annotations.SerializedName;
+
 public class LolQueueEligibilityQueue {
 
 	public Boolean areFreeChampionsAllowed;
@@ -11,6 +15,7 @@ public class LolQueueEligibilityQueue {
 	public Integer minLevel;
 	public Integer numPlayersPerTeam;
 	public LolQueueEligibilityQueueAvailability queueAvailability;
+	public Boolean showPositionSelector;
 	public String type;
 
 }

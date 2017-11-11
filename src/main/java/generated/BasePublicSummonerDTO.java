@@ -1,5 +1,9 @@
 package generated;
 
+import java.util.Map;
+import java.util.List;
+import com.google.gson.annotations.SerializedName;
+
 public class BasePublicSummonerDTO {
 
 	public Long acctId;
@@ -7,6 +11,7 @@ public class BasePublicSummonerDTO {
 	public String name;
 	public String previousSeasonHighestTier;
 	public Integer profileIconId;
+	public String puuid;
 	public Long sumId;
 
 }

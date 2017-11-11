@@ -1,7 +1,8 @@
 package generated;
 
-import java.util.List;
 import java.util.Map;
+import java.util.List;
+import com.google.gson.annotations.SerializedName;
 
 public class LolEndOfGameEndOfGameStats {
 
@@ -16,7 +17,6 @@ public class LolEndOfGameEndOfGameStats {
 	public Integer coOpVsAiMsecsUntilReset;
 	public Integer completionBonusPoints;
 	public Long currentLevel;
-	public Long currentXp;
 	public Integer customMinutesLeftToday;
 	public Integer customMsecsUntilReset;
 	public String difficulty;
@@ -26,13 +26,13 @@ public class LolEndOfGameEndOfGameStats {
 	public Integer experienceEarned;
 	public Integer experienceTotal;
 	public Integer firstWinBonus;
-	public Integer firstWinXpEarned;
 	public Boolean gameEndedInEarlySurrender;
 	public Long gameId;
 	public Integer gameLength;
 	public String gameMode;
 	public List<String> gameMutators;
 	public String gameType;
+	public Integer globalBoostXpEarned;
 	public Boolean imbalancedTeamsNoPoints;
 	public Boolean invalid;
 	public Integer ipEarned;
@@ -40,6 +40,7 @@ public class LolEndOfGameEndOfGameStats {
 	public Boolean leveledUp;
 	public Integer loyaltyBoostIpEarned;
 	public Integer loyaltyBoostXpEarned;
+	public Integer missionsXpEarned;
 	public String myTeamStatus;
 	public List<Integer> newSpells;
 	public Long nextLevelXp;

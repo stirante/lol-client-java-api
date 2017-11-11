@@ -1,5 +1,9 @@
 package generated;
 
+import java.util.Map;
+import java.util.List;
+import com.google.gson.annotations.SerializedName;
+
 public class LolMatchHistoryMatchHistoryParticipantStatistics {
 
 	public Long assists;
@@ -45,6 +49,32 @@ public class LolMatchHistoryMatchHistoryParticipantStatistics {
 	public Long objectivePlayerScore;
 	public Integer participantId;
 	public Long pentaKills;
+	public Long perk0;
+	public Long perk0Var1;
+	public Long perk0Var2;
+	public Long perk0Var3;
+	public Long perk1;
+	public Long perk1Var1;
+	public Long perk1Var2;
+	public Long perk1Var3;
+	public Long perk2;
+	public Long perk2Var1;
+	public Long perk2Var2;
+	public Long perk2Var3;
+	public Long perk3;
+	public Long perk3Var1;
+	public Long perk3Var2;
+	public Long perk3Var3;
+	public Long perk4;
+	public Long perk4Var1;
+	public Long perk4Var2;
+	public Long perk4Var3;
+	public Long perk5;
+	public Long perk5Var1;
+	public Long perk5Var2;
+	public Long perk5Var3;
+	public Long perkPrimaryStyle;
+	public Long perkSubStyle;
 	public Long physicalDamageDealt;
 	public Long physicalDamageDealtToChampions;
 	public Long physicalDamageTaken;

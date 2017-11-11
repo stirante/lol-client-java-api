@@ -1,0 +1,20 @@
+package generated;
+
+import java.util.Map;
+import java.util.List;
+import com.google.gson.annotations.SerializedName;
+
+public class LolPerksPerkUIStyle {
+
+	public List<Integer> allowedSubStyles;
+	public String defaultPageName;
+	public List<Integer> defaultPerks;
+	public Integer defaultSubStyle;
+	public String iconPath;
+	public Integer id;
+	public String name;
+	public List<LolPerksPerkUISlot> slots;
+	public List<LolPerksPerkSubStyleBonusResource> subStyleBonus;
+	public String tooltip;
+
+}

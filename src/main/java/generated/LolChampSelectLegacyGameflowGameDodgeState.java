@@ -9,6 +9,8 @@ public enum LolChampSelectLegacyGameflowGameDodgeState {
 	@SerializedName("PartyDodged")
 	PARTYDODGED,
 	@SerializedName("StrangerDodged")
-	STRANGERDODGED
+	STRANGERDODGED,
+	@SerializedName("TournamentDodged")
+	TOURNAMENTDODGED
 
 }

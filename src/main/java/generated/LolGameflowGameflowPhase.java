@@ -10,6 +10,8 @@ public enum LolGameflowGameflowPhase {
 	LOBBY,
 	@SerializedName("Matchmaking")
 	MATCHMAKING,
+	@SerializedName("CheckedIntoTournament")
+	CHECKEDINTOTOURNAMENT,
 	@SerializedName("ReadyCheck")
 	READYCHECK,
 	@SerializedName("ChampSelect")

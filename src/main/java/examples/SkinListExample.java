@@ -27,7 +27,7 @@ public class SkinListExample {
         //Get current summoner
         Summoner summoner = api.getCurrentSummoner();
         //Get champion collection of summoner
-        LolChampionsCollectionsChampion[] champions = api.getChampions(summoner.summonerId);
+        LolChampionsCollectionsChampion[] champions = api.getChampions(summoner.sumId);
         for (LolChampionsCollectionsChampion champion : champions) {
             if (champion.ownership.owned) {
                 System.out.println(champion.name + " purchased on " + FORMATTER.format(new Date(champion.ownership.rental.purchaseDate)));

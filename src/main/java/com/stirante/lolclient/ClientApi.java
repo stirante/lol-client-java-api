@@ -154,8 +154,8 @@ public class ClientApi {
         return executeGet("/riotclient/region-locale", RegionLocale.class);
     }
 
-    public Wallet getWallet() throws IOException {
-        return executeGet("/lol-store/v1/wallet", Wallet.class);
+    public LolStoreWallet getWallet() throws IOException {
+        return executeGet("/lol-store/v1/wallet", LolStoreWallet.class);
     }
 
     public boolean setRegionLocale(RegionLocale locale) throws IOException {
@@ -219,6 +219,25 @@ public class ClientApi {
         T result = GSON.fromJson(new InputStreamReader(in), clz);
         in.close();
         return result;
+    }
+
+    public void subscribe(String event) throws IOException {
+        HttpURLConnection conn = getConnection("/Subscribe?eventName=" + event + "&format=JSON", "POST");
+        conn.connect();
+        InputStream in = conn.getInputStream();
+        System.out.println("Status: " + conn.getResponseCode());
+        while (true) {
+            while (in.available() > 0) {
+                System.out.write(in.read());
+            }
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+//        T result = GSON.fromJson(new InputStreamReader(in), clz);
+//        in.close();
     }
 
     public boolean executePost(String path, Object jsonObject) throws IOException {

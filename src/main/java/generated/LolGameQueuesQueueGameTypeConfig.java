@@ -1,5 +1,9 @@
 package generated;
 
+import java.util.Map;
+import java.util.List;
+import com.google.gson.annotations.SerializedName;
+
 public class LolGameQueuesQueueGameTypeConfig {
 
 	public Boolean advancedLearningQuests;
@@ -12,11 +16,13 @@ public class LolGameQueuesQueueGameTypeConfig {
 	public Boolean doNotRemove;
 	public Boolean duplicatePick;
 	public Boolean exclusivePick;
+	public String gameModeOverride;
 	public Long id;
 	public Boolean learningQuests;
 	public Integer mainPickTimerDuration;
 	public Integer maxAllowableBans;
 	public String name;
+	public Integer numPlayersPerTeamOverride;
 	public Boolean onboardCoopBeginner;
 	public String pickMode;
 	public Integer postPickTimerDuration;

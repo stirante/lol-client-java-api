@@ -1,5 +1,9 @@
 package generated;
 
+import java.util.Map;
+import java.util.List;
+import com.google.gson.annotations.SerializedName;
+
 public class LolLootPlayerLoot {
 
 	public String asset;
@@ -12,6 +16,8 @@ public class LolLootPlayerLoot {
 	public Boolean isRental;
 	public String itemDesc;
 	public LolLootItemOwnershipStatus itemStatus;
+	public String localizedDescription;
+	public String localizedName;
 	public String lootId;
 	public String lootName;
 	public LolLootItemOwnershipStatus parentItemStatus;

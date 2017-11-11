@@ -1,6 +1,8 @@
 package generated;
 
+import java.util.Map;
 import java.util.List;
+import com.google.gson.annotations.SerializedName;
 
 public class GameQueuesLcdsGameQueueConfig {
 
@@ -12,6 +14,8 @@ public class GameQueuesLcdsGameQueueConfig {
 	public List<String> gameMutators;
 	public Integer gameTypeConfigId;
 	public Integer id;
+	public Long lastToggledOffTime;
+	public Long lastToggledOnTime;
 	public String mapSelectionAlgorithm;
 	public GameQueuesLcdsMatchingThrottleConfig matchingThrottleConfig;
 	public Integer maxLevel;

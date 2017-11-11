@@ -1,6 +1,8 @@
 package generated;
 
+import java.util.Map;
 import java.util.List;
+import com.google.gson.annotations.SerializedName;
 
 public class LolLobbyLobbyDto {
 
@@ -11,6 +13,7 @@ public class LolLobbyLobbyDto {
 	public List<LolLobbyLobbyInvitationDto> invitations;
 	public LolLobbyLobbyParticipantDto localMember;
 	public List<LolLobbyLobbyParticipantDto> members;
+	public String partyId;
 	public List<LolLobbyEligibilityRestriction> restrictions;
 
 }
