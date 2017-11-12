@@ -1,5 +1,6 @@
 package examples;
 
+import generated.LolChampSelectChampSelectSession;
 import generated.LolChatUserResource;
 import com.stirante.lolclient.ClientApi;
 

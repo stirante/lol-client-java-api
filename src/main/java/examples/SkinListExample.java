@@ -2,6 +2,7 @@ package examples;
 
 import generated.LolChampionsCollectionsChampion;
 import generated.LolChampionsCollectionsChampionSkin;
+import generated.LolSummonerSummoner;
 import generated.Summoner;
 import com.stirante.lolclient.ClientApi;
 
@@ -25,9 +26,9 @@ public class SkinListExample {
             return;
         }
         //Get current summoner
-        Summoner summoner = api.getCurrentSummoner();
+        LolSummonerSummoner summoner = api.getCurrentSummoner();
         //Get champion collection of summoner
-        LolChampionsCollectionsChampion[] champions = api.getChampions(summoner.sumId);
+        LolChampionsCollectionsChampion[] champions = api.getChampions(summoner.summonerId);
         for (LolChampionsCollectionsChampion champion : champions) {
             if (champion.ownership.owned) {
                 System.out.println(champion.name + " purchased on " + FORMATTER.format(new Date(champion.ownership.rental.purchaseDate)));

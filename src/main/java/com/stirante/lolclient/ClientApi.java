@@ -107,11 +107,15 @@ public class ClientApi {
     }
 
     public boolean isAuthorized() throws IOException {
-        return getAuth().currentAccountId > 0;
+        try {
+            return getAuth().currentAccountId > 0;
+        } catch (FileNotFoundException e) {
+            return false;
+        }
     }
 
-    public Summoner getCurrentSummoner() throws IOException {
-        return executeGet("/lol-summoner/v1/current-summoner", Summoner.class);
+    public LolSummonerSummoner getCurrentSummoner() throws IOException {
+        return executeGet("/lol-summoner/v1/current-summoner", LolSummonerSummoner.class);
     }
 
     public String getSwaggerJson() throws IOException {
@@ -219,25 +223,6 @@ public class ClientApi {
         T result = GSON.fromJson(new InputStreamReader(in), clz);
         in.close();
         return result;
-    }
-
-    public void subscribe(String event) throws IOException {
-        HttpURLConnection conn = getConnection("/Subscribe?eventName=" + event + "&format=JSON", "POST");
-        conn.connect();
-        InputStream in = conn.getInputStream();
-        System.out.println("Status: " + conn.getResponseCode());
-        while (true) {
-            while (in.available() > 0) {
-                System.out.write(in.read());
-            }
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-//        T result = GSON.fromJson(new InputStreamReader(in), clz);
-//        in.close();
     }
 
     public boolean executePost(String path, Object jsonObject) throws IOException {
