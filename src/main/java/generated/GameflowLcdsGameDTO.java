@@ -1,6 +1,5 @@
 package generated;
 
-import java.util.Map;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
@@ -13,10 +12,10 @@ public class GameflowLcdsGameDTO {
 	public Long id;
 	public Integer mapId;
 	public Integer maxNumPlayers;
-	public List<Map<String, Object>> playerChampionSelections;
+	public List<Object> playerChampionSelections;
 	public String queueTypeName;
 	public Integer spectatorDelay;
-	public List<Map<String, Object>> teamOne;
-	public List<Map<String, Object>> teamTwo;
+	public List<Object> teamOne;
+	public List<Object> teamTwo;
 
 }

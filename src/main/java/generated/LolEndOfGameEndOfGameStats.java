@@ -1,6 +1,5 @@
 package generated;
 
-import java.util.Map;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
@@ -46,7 +45,7 @@ public class LolEndOfGameEndOfGameStats {
 	public Long nextLevelXp;
 	public Integer odinBonusIp;
 	public Integer partyRewardsBonusIpEarned;
-	public Map<String, Object> pointsPenalties;
+	public Object pointsPenalties;
 	public Long preLevelUpExperienceTotal;
 	public Long preLevelUpNextLevelXp;
 	public Long previousLevel;

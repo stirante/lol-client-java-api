@@ -1,13 +1,12 @@
 package generated;
 
-import java.util.Map;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
 public class LolClashRosterStats {
 
 	public List<LolClashRosterPeriodAggregatedStats> periodStats;
-	public Map<String, Object> playerStats;
+	public Object playerStats;
 	public Integer rosterIconColorId;
 	public Integer rosterIconId;
 	public Long rosterId;

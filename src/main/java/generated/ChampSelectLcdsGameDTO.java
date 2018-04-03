@@ -1,6 +1,5 @@
 package generated;
 
-import java.util.Map;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
@@ -19,7 +18,7 @@ public class ChampSelectLcdsGameDTO {
 	public String roomPassword;
 	public Long spectatorDelay;
 	public String statusOfParticipants;
-	public List<Map<String, Object>> teamOne;
-	public List<Map<String, Object>> teamTwo;
+	public List<Object> teamOne;
+	public List<Object> teamTwo;
 
 }

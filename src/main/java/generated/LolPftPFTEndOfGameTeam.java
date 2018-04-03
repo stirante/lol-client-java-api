@@ -1,6 +1,5 @@
 package generated;
 
-import java.util.Map;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
@@ -14,7 +13,7 @@ public class LolPftPFTEndOfGameTeam {
 	public String memberStatusString;
 	public String name;
 	public List<LolPftPFTEndOfGamePlayer> players;
-	public Map<String, Object> stats;
+	public Object stats;
 	public String tag;
 	public Integer teamId;
 

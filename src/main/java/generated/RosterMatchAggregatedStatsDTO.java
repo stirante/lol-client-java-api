@@ -1,6 +1,5 @@
 package generated;
 
-import java.util.Map;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
@@ -12,7 +11,7 @@ public class RosterMatchAggregatedStatsDTO {
 	public Integer opponentLogo;
 	public Integer opponentLogoColor;
 	public String opponentShortName;
-	public Map<String, Object> playerChampionIds;
+	public Object playerChampionIds;
 	public Integer round;
 	public Boolean win;
 

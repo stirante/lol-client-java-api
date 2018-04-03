@@ -1,6 +1,5 @@
 package generated;
 
-import java.util.Map;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
@@ -14,7 +13,7 @@ public class LolStoreCatalogItem {
 	public Integer itemId;
 	public String itemInstanceId;
 	public List<LolStoreItemKey> itemRequirements;
-	public Map<String, Object> localizations;
+	public Object localizations;
 	public Integer maxQuantity;
 	public List<LolStoreItemCost> prices;
 	public String releaseDate;

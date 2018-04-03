@@ -16,19 +16,20 @@ public class PlayerNotificationExample {
         n.dismissible = true;
         n.iconUrl = "fe/lol-player-notifications/images/esports.png";
         n.type = "default";
-        n.data = new HashMap<>();
+        HashMap<String, Object> data = new HashMap<>();
         n.titleKey = "esports";
         n.detailKey = "esports_toast_watch_game_between";
         n.type = "game";
         n.source = "esports";
         n.created = "2017-08-25T17:24:19Z";
-        n.data.put("matchId", "d4c278e2-10fa-4990-a669-5dfb17ca1ded");
-        n.data.put("matchUrl", "http://watch.lolesports.com/en_GB/eulcs1/en?utm_source=eune_pvp_client&utm_medium=referral&utm_campaign=match_notifications");
-        n.data.put("teamA", "FC Schalke 04");
-        n.data.put("teamALogoUrl", "https://am-a.akamaihd.net/image/?f=https://lolstatic-a.akamaihd.net/esports-assets/production/team/fc-schalke-04-h992ofkj.png");
-        n.data.put("teamB", "Ninjas in Pyjamas");
-        n.data.put("teamBLogoUrl", "https://am-a.akamaihd.net/image/?f=https://lolstatic-a.akamaihd.net/esports-assets/production/team/ninjas-in-pyjamas-588ue1or.png");
-        n.data.put("tournamentDescription", "EU 2017 Summer Split");
+        data.put("matchId", "d4c278e2-10fa-4990-a669-5dfb17ca1ded");
+        data.put("matchUrl", "http://watch.lolesports.com/en_GB/eulcs1/en?utm_source=eune_pvp_client&utm_medium=referral&utm_campaign=match_notifications");
+        data.put("teamA", "FC Schalke 04");
+        data.put("teamALogoUrl", "https://am-a.akamaihd.net/image/?f=https://lolstatic-a.akamaihd.net/esports-assets/production/team/fc-schalke-04-h992ofkj.png");
+        data.put("teamB", "Ninjas in Pyjamas");
+        data.put("teamBLogoUrl", "https://am-a.akamaihd.net/image/?f=https://lolstatic-a.akamaihd.net/esports-assets/production/team/ninjas-in-pyjamas-588ue1or.png");
+        data.put("tournamentDescription", "EU 2017 Summer Split");
+        n.data = data;
         n = api.addPlayerNotification(n);
         System.out.println(n.id);
     }

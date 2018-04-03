@@ -1,6 +1,5 @@
 package generated;
 
-import java.util.Map;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
@@ -43,7 +42,7 @@ public class LolPftPFTEndOfGameStats {
 	public List<Integer> newSpells;
 	public Integer odinBonusIp;
 	public Integer partyRewardsBonusIpEarned;
-	public Map<String, Object> pointsPenalties;
+	public Object pointsPenalties;
 	public Long previousLevel;
 	public Long previousXpTotal;
 	public Integer queueBonusEarned;

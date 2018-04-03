@@ -1,12 +1,11 @@
 package generated;
 
-import java.util.Map;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
 public class LolPerksChampSelectSession {
 
-	public List<Map<String, Object>> actions;
+	public List<Object> actions;
 	public LolPerksChampSelectBannedChampions bans;
 	public LolPerksChampSelectChatRoomDetails chatDetails;
 	public Boolean isSpectating;

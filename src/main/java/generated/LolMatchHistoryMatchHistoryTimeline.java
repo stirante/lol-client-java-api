@@ -1,20 +1,19 @@
 package generated;
 
-import java.util.Map;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
 public class LolMatchHistoryMatchHistoryTimeline {
 
-	public Map<String, Object> creepsPerMinDeltas;
-	public Map<String, Object> csDiffPerMinDeltas;
-	public Map<String, Object> damageTakenDiffPerMinDeltas;
-	public Map<String, Object> damageTakenPerMinDeltas;
-	public Map<String, Object> goldPerMinDeltas;
+	public Object creepsPerMinDeltas;
+	public Object csDiffPerMinDeltas;
+	public Object damageTakenDiffPerMinDeltas;
+	public Object damageTakenPerMinDeltas;
+	public Object goldPerMinDeltas;
 	public String lane;
 	public Integer participantId;
 	public String role;
-	public Map<String, Object> xpDiffPerMinDeltas;
-	public Map<String, Object> xpPerMinDeltas;
+	public Object xpDiffPerMinDeltas;
+	public Object xpPerMinDeltas;
 
 }

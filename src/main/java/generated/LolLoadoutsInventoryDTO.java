@@ -1,6 +1,5 @@
 package generated;
 
-import java.util.Map;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
@@ -8,7 +7,7 @@ public class LolLoadoutsInventoryDTO {
 
 	public Long accountId;
 	public String expires;
-	public Map<String, Object> items;
+	public Object items;
 	public String itemsJwt;
 	public String puuid;
 	public Long summonerId;

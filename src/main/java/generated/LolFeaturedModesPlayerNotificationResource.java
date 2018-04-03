@@ -1,6 +1,5 @@
 package generated;
 
-import java.util.Map;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
@@ -8,7 +7,7 @@ public class LolFeaturedModesPlayerNotificationResource {
 
 	public String backgroundUrl;
 	public Boolean critical;
-	public Map<String, Object> data;
+	public Object data;
 	public String detailKey;
 	public String expires;
 	public String iconUrl;

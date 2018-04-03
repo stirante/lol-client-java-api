@@ -1,6 +1,5 @@
 package generated;
 
-import java.util.Map;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
@@ -17,7 +16,7 @@ public class PluginResource {
 	public List<PluginResourceContract> implementedContracts;
 	public Boolean isDynamicLibraryInited;
 	public Boolean isDynamicLibraryLoaded;
-	public Map<String, Object> mountedAssetBundles;
+	public Object mountedAssetBundles;
 	public Integer orderDynamicLibraryInited;
 	public Integer orderDynamicLibraryLoaded;
 	public Integer orderWADFileMounted;

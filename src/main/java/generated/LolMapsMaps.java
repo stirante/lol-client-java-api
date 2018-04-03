@@ -1,12 +1,11 @@
 package generated;
 
-import java.util.Map;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
 public class LolMapsMaps {
 
-	public Map<String, Object> assets;
+	public Object assets;
 	public String description;
 	public String gameMode;
 	public String gameModeDescription;
@@ -20,6 +19,6 @@ public class LolMapsMaps {
 	public String name;
 	public String platformId;
 	public String platformName;
-	public Map<String, Object> properties;
+	public Object properties;
 
 }

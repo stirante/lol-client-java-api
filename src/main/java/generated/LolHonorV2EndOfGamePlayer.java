@@ -1,6 +1,5 @@
 package generated;
 
-import java.util.Map;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
@@ -14,7 +13,7 @@ public class LolHonorV2EndOfGamePlayer {
 	public Integer profileIconId;
 	public Integer skinIndex;
 	public String skinName;
-	public Map<String, Object> stats;
+	public Object stats;
 	public Long summonerId;
 	public String summonerName;
 	public Integer teamId;

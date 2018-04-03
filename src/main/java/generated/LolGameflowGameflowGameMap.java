@@ -1,12 +1,11 @@
 package generated;
 
-import java.util.Map;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
 public class LolGameflowGameflowGameMap {
 
-	public Map<String, Object> assets;
+	public Object assets;
 	public String description;
 	public String gameMode;
 	public String gameModeName;
@@ -18,6 +17,6 @@ public class LolGameflowGameflowGameMap {
 	public String name;
 	public String platformId;
 	public String platformName;
-	public Map<String, Object> properties;
+	public Object properties;
 
 }

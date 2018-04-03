@@ -1,17 +1,16 @@
 package generated;
 
-import java.util.Map;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
 public class LolLobbyTeamBuilderChampionSelectStateV1 {
 
-	public List<Map<String, Object>> actionSetList;
+	public List<Object> actionSetList;
 	public Boolean allowOptingOutOfBanning;
 	public Boolean allowSkinSelection;
 	public LolLobbyTeamBuilderTeamBuilderBoostInfo battleBoostState;
 	public LolLobbyTeamBuilderCellsV1 cells;
-	public Map<String, Object> ceremoniesByActionSetIndex;
+	public Object ceremoniesByActionSetIndex;
 	public Integer currentActionSetIndex;
 	public Long currentTimeRemainingMillis;
 	public Long currentTotalTimeMillis;

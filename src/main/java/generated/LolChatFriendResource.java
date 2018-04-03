@@ -1,6 +1,5 @@
 package generated;
 
-import java.util.Map;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
@@ -13,7 +12,7 @@ public class LolChatFriendResource {
 	public Long id;
 	public Boolean isP2PConversationMuted;
 	public String lastSeenOnlineTimestamp;
-	public Map<String, Object> lol;
+	public Object lol;
 	public String name;
 	public String note;
 	public String statusMessage;

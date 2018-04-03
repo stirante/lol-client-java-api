@@ -1,6 +1,5 @@
 package generated;
 
-import java.util.Map;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
@@ -10,10 +9,10 @@ public class LolGameflowGameflowGameData {
 	public String gameName;
 	public Boolean isCustomGame;
 	public String password;
-	public List<Map<String, Object>> playerChampionSelections;
+	public List<Object> playerChampionSelections;
 	public LolGameflowQueue queue;
 	public Boolean spectatorsAllowed;
-	public List<Map<String, Object>> teamOne;
-	public List<Map<String, Object>> teamTwo;
+	public List<Object> teamOne;
+	public List<Object> teamTwo;
 
 }
