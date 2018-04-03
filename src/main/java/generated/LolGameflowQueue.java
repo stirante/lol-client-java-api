@@ -7,8 +7,10 @@ import com.google.gson.annotations.SerializedName;
 public class LolGameflowQueue {
 
 	public Boolean areFreeChampionsAllowed;
+	public String assetMutator;
 	public LolGameflowQueueGameCategory category;
 	public String description;
+	public String detailedDescription;
 	public String gameMode;
 	public String gameMutator;
 	public LolGameflowQueueGameTypeConfig gameTypeConfig;
@@ -26,6 +28,7 @@ public class LolGameflowQueue {
 	public Integer numPlayersPerTeam;
 	public LolGameflowQueueAvailability queueAvailability;
 	public LolGameflowQueueReward queueRewards;
+	public String shortName;
 	public Boolean spectatorEnabled;
 	public String type;
 

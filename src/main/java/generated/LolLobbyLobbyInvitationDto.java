@@ -10,5 +10,6 @@ public class LolLobbyLobbyInvitationDto {
 	public LolLobbyLobbyInvitationState state;
 	public String timestamp;
 	public Long toSummonerId;
+	public String toSummonerName;
 
 }

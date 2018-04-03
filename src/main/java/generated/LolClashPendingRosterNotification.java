@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 public class LolClashPendingRosterNotification {
 
 	public LolClashNotifyReason notifyReason;
-	public PendingRoster pendingRoster;
+	public PendingRosterDTO pendingRoster;
 	public Long sourcePlayerId;
 	public Long targetPlayerId;
 

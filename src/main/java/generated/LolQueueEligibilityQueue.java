@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class LolQueueEligibilityQueue {
 
+	public List<Integer> allowablePremadeSizes;
 	public Boolean areFreeChampionsAllowed;
 	public Integer championsRequiredToPlay;
 	public Integer id;

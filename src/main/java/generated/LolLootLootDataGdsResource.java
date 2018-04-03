@@ -8,5 +8,6 @@ public class LolLootLootDataGdsResource {
 
 	public List<LolLootLootItemGdsResource> LootItems;
 	public List<LolLootLootRecipeGdsResource> LootRecipes;
+	public List<LolLootLootTableGdsResource> LootTables;
 
 }

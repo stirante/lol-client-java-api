@@ -4,16 +4,14 @@ import com.google.gson.annotations.SerializedName;
 
 public enum LolClashTournamentState {
 
-	@SerializedName("REGISTRATION")
-	REGISTRATION,
-	@SerializedName("CHECK_IN")
-	CHECK_IN,
-	@SerializedName("PREPARATION")
-	PREPARATION,
-	@SerializedName("IN_GAME")
-	IN_GAME,
 	@SerializedName("IDLE")
 	IDLE,
+	@SerializedName("LOCK_IN")
+	LOCK_IN,
+	@SerializedName("SCOUTING")
+	SCOUTING,
+	@SerializedName("IN_GAME")
+	IN_GAME,
 	@SerializedName("RESULTS")
 	RESULTS
 

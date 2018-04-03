@@ -8,9 +8,11 @@ public class LolGameQueuesQueue {
 
 	public List<Integer> allowablePremadeSizes;
 	public Boolean areFreeChampionsAllowed;
+	public String assetMutator;
 	public LolGameQueuesQueueGameCategory category;
 	public Integer championsRequiredToPlay;
 	public String description;
+	public String detailedDescription;
 	public String gameMode;
 	public String gameMutator;
 	public LolGameQueuesQueueGameTypeConfig gameTypeConfig;
@@ -30,6 +32,7 @@ public class LolGameQueuesQueue {
 	public Integer numPlayersPerTeam;
 	public LolGameQueuesQueueAvailability queueAvailability;
 	public LolGameQueuesQueueReward queueRewards;
+	public String shortName;
 	public Boolean showPositionSelector;
 	public Boolean spectatorEnabled;
 	public String type;

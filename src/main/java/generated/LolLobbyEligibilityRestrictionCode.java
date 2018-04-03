@@ -42,6 +42,8 @@ public enum LolLobbyEligibilityRestrictionCode {
 	PLAYERRANKEDSUSPENSIONRESTRICTION,
 	@SerializedName("TeamHighMMRMaxSizeRestriction")
 	TEAMHIGHMMRMAXSIZERESTRICTION,
+	@SerializedName("TeamSizeRestriction")
+	TEAMSIZERESTRICTION,
 	@SerializedName("PrerequisiteQueuesNotPlayedRestriction")
 	PREREQUISITEQUEUESNOTPLAYEDRESTRICTION,
 	@SerializedName("UnknownRestriction")

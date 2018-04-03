@@ -15,6 +15,8 @@ public enum LolLobbyPartyMemberRoleEnum {
 	@SerializedName("KICKED")
 	KICKED,
 	@SerializedName("DECLINED")
-	DECLINED
+	DECLINED,
+	@SerializedName("NONE")
+	NONE
 
 }

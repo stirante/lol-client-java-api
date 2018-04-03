@@ -14,6 +14,7 @@ public class LolLobbyLobbyDto {
 	public LolLobbyLobbyParticipantDto localMember;
 	public List<LolLobbyLobbyParticipantDto> members;
 	public String partyId;
+	public String partyType;
 	public List<LolLobbyEligibilityRestriction> restrictions;
 
 }

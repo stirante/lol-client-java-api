@@ -6,10 +6,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class LolClashTournamentGameEndNotification {
 
-	public Bracket bracket;
+	public Long bracketId;
 	public Long currentMatchId;
 	public LolClashRosterNotifyReason notifyReason;
-	public Long timestamp;
 	public Long tournamentId;
 
 }

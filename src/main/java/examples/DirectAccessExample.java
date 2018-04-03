@@ -1,8 +1,7 @@
 package examples;
 
-import generated.LolChampSelectChampSelectSession;
-import generated.LolChatUserResource;
 import com.stirante.lolclient.ClientApi;
+import generated.LolChatUserResource;
 
 import java.io.IOException;
 

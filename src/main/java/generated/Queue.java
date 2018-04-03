@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class Queue {
 
-	public QueueGameTypeConfig gameTypeConfig;
+	public Integer id;
+	public Integer minLevel;
 
 }

@@ -9,6 +9,7 @@ public class LolClashQueue {
 	public Boolean areFreeChampionsAllowed;
 	public LolClashQueueGameCategory category;
 	public String description;
+	public String detailedDescription;
 	public String gameMode;
 	public String gameMutator;
 	public LolClashQueueGameTypeConfig gameTypeConfig;
@@ -26,6 +27,7 @@ public class LolClashQueue {
 	public Integer numPlayersPerTeam;
 	public LolClashQueueAvailability queueAvailability;
 	public LolClashQueueReward queueRewards;
+	public String shortName;
 	public Boolean spectatorEnabled;
 	public String type;
 

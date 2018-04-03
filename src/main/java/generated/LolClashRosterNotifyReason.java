@@ -4,39 +4,63 @@ import com.google.gson.annotations.SerializedName;
 
 public enum LolClashRosterNotifyReason {
 
+	@SerializedName("ROSTER_SET_TICKET")
+	ROSTER_SET_TICKET,
+	@SerializedName("ROSTER_OFFER_TICKET")
+	ROSTER_OFFER_TICKET,
+	@SerializedName("ROSTER_ACCEPT_TICKET")
+	ROSTER_ACCEPT_TICKET,
+	@SerializedName("ROSTER_DECLINE_TICKET")
+	ROSTER_DECLINE_TICKET,
+	@SerializedName("ROSTER_REVOKED_TICKET")
+	ROSTER_REVOKED_TICKET,
+	@SerializedName("BYE_AUTO_WIN")
+	BYE_AUTO_WIN,
+	@SerializedName("CHANGE_POSITION")
+	CHANGE_POSITION,
 	@SerializedName("REGISTERED")
 	REGISTERED,
+	@SerializedName("RESTRICTION_AUTO_WIN")
+	RESTRICTION_AUTO_WIN,
 	@SerializedName("PHASE_UNREADY")
 	PHASE_UNREADY,
 	@SerializedName("PHASE_READY")
 	PHASE_READY,
 	@SerializedName("PHASE_CHECKIN")
 	PHASE_CHECKIN,
-	@SerializedName("BUYBACK_UNREADY")
-	BUYBACK_UNREADY,
-	@SerializedName("BUYBACK_READY")
-	BUYBACK_READY,
-	@SerializedName("BUYBACK")
-	BUYBACK,
 	@SerializedName("GAME_COMPLETED")
 	GAME_COMPLETED,
 	@SerializedName("GAME_STARTED")
 	GAME_STARTED,
-	@SerializedName("QUEUE_DODGE")
-	QUEUE_DODGE,
-	@SerializedName("BYE_AUTO_WIN")
-	BYE_AUTO_WIN,
-	@SerializedName("RESTRICTION_AUTO_WIN")
-	RESTRICTION_AUTO_WIN,
 	@SerializedName("GAME_STARTED_ERROR")
 	GAME_STARTED_ERROR,
-	@SerializedName("ROUND_COMPLETE")
-	ROUND_COMPLETE,
+	@SerializedName("QUEUE_DODGE")
+	QUEUE_DODGE,
+	@SerializedName("LOSER_ROUND_COMPLETE")
+	LOSER_ROUND_COMPLETE,
+	@SerializedName("SUB_INVITE")
+	SUB_INVITE,
+	@SerializedName("SUB_ACCEPT")
+	SUB_ACCEPT,
+	@SerializedName("SUB_DECLINE")
+	SUB_DECLINE,
+	@SerializedName("SUB_REVOKE")
+	SUB_REVOKE,
+	@SerializedName("SUB_SUGGEST")
+	SUB_SUGGEST,
+	@SerializedName("SUB_ACCEPTSUGGEST")
+	SUB_ACCEPTSUGGEST,
+	@SerializedName("SUB_DECLINESUGGEST")
+	SUB_DECLINESUGGEST,
+	@SerializedName("SUB_RECLAIM")
+	SUB_RECLAIM,
 	@SerializedName("VOTE_WITHDRAW_UPDATE")
 	VOTE_WITHDRAW_UPDATE,
 	@SerializedName("VOTE_WITHDRAW_DISMISS")
 	VOTE_WITHDRAW_DISMISS,
 	@SerializedName("WITHDRAW")
-	WITHDRAW
+	WITHDRAW,
+	@SerializedName("WINNER_ROUND_COMPLETE")
+	WINNER_ROUND_COMPLETE
 
 }

@@ -8,7 +8,7 @@ public class LolClashRosterPlayerNotification {
 
 	public LolClashRosterNotifyReason notifyReason;
 	public PlayerDTO player;
-	public RegisteredRoster roster;
+	public RosterDTO roster;
 	public Long sourcePlayerId;
 
 }

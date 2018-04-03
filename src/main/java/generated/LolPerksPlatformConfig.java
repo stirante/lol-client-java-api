@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class LolPerksPlatformConfig {
 
+	public Boolean AutoRepairPagesEnabled;
 	public Boolean PerksEnabled;
 
 }

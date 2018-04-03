@@ -7,8 +7,10 @@ import com.google.gson.annotations.SerializedName;
 public class LolPerksPerkStyleResource {
 
 	public List<Integer> allowedSubStyles;
+	public Map<String, Object> assetMap;
 	public String defaultPageName;
 	public List<Integer> defaultPerks;
+	public List<Integer> defaultPerksWhenSplashed;
 	public Integer defaultSubStyle;
 	public String iconPath;
 	public Integer id;

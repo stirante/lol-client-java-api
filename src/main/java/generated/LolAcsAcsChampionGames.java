@@ -10,5 +10,6 @@ public class LolAcsAcsChampionGames {
 	public String lane;
 	public Integer queue;
 	public String role;
+	public Long timestamp;
 
 }

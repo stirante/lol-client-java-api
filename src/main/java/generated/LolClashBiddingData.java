@@ -7,7 +7,6 @@ import com.google.gson.annotations.SerializedName;
 public class LolClashBiddingData {
 
 	public Integer currentBid;
-	public Integer currentPaid;
-	public List<LolClashBidOffer> incomingOffers;
+	public List<LolClashTicketOffer> incomingOffers;
 
 }

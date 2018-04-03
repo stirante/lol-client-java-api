@@ -7,6 +7,5 @@ import com.google.gson.annotations.SerializedName;
 public class LolClashRMSMessage {
 
 	public String payload;
-	public Long timestamp;
 
 }

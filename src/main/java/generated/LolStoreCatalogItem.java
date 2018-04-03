@@ -8,11 +8,13 @@ public class LolStoreCatalogItem {
 
 	public Boolean active;
 	public LolStoreBundled bundled;
+	public String iconUrl;
 	public String inactiveDate;
 	public String inventoryType;
 	public Integer itemId;
 	public String itemInstanceId;
 	public List<LolStoreItemKey> itemRequirements;
+	public Map<String, Object> localizations;
 	public Integer maxQuantity;
 	public List<LolStoreItemCost> prices;
 	public String releaseDate;

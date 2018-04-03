@@ -47,6 +47,8 @@ public class LolEndOfGameEndOfGameStats {
 	public Integer odinBonusIp;
 	public Integer partyRewardsBonusIpEarned;
 	public Map<String, Object> pointsPenalties;
+	public Long preLevelUpExperienceTotal;
+	public Long preLevelUpNextLevelXp;
 	public Long previousLevel;
 	public Long previousXpTotal;
 	public Integer queueBonusEarned;

@@ -7,9 +7,10 @@ import com.google.gson.annotations.SerializedName;
 public class LolClashClashConfig {
 
 	public String DarkModeEntitlement;
-	public String EnabledState;
+	public LolClashClashState EnabledState;
 	public String IconConfig;
 	public Boolean IsPlaymodeRestrictionEnabled;
-	public Boolean UseInvidivualEntitlement;
+	public Boolean UseIndividualEntitlement;
+	public LolClashClashVisibility Visibility;
 
 }

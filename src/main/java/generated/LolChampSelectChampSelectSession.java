@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class LolChampSelectChampSelectSession {
 
-	public List<List<Map<String, Object>>> actions;
+	public List<Map<String, Object>> actions;
 	public Boolean allowBattleBoost;
 	public Boolean allowRerolling;
 	public Boolean allowSkinSelection;

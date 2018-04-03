@@ -6,12 +6,12 @@ import com.google.gson.annotations.SerializedName;
 
 public class LolClashEogPlayerUpdateDTO {
 
-	public List<LolClashTournamentReward> earnedRewards;
-	public Integer earnedVp;
+	public List<ClashRewardDefinition> earnedRewards;
 	public Long gameId;
-	public Map<String, Object> grantedLootItems;
+	public List<ClashRewardDefinition> rewardProgress;
 	public Integer seasonVp;
 	public Integer themeVp;
+	public Long tournamentId;
 	public Boolean winner;
 
 }

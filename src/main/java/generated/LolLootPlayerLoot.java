@@ -33,6 +33,8 @@ public class LolLootPlayerLoot {
 	public String tags;
 	public String tilePath;
 	public String type;
+	public String upgradeEssenceName;
+	public Integer upgradeEssenceValue;
 	public String upgradeLootName;
 	public Integer value;
 

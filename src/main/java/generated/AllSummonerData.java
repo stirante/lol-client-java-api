@@ -7,7 +7,6 @@ import com.google.gson.annotations.SerializedName;
 public class AllSummonerData {
 
 	public PrivateSummonerDTO summoner;
-	public SummonerLevel summonerLevel;
 	public SummonerLevelAndPoints summonerLevelAndPoints;
 
 }

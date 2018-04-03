@@ -6,9 +6,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class PublicRosterDTO {
 
-	public Integer icon;
-	public Integer iconColor;
 	public Long id;
+	public Integer logo;
+	public Integer logoColor;
 	public List<Long> memberIds;
 	public String name;
 	public String shortName;

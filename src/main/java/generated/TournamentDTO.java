@@ -9,10 +9,11 @@ public class TournamentDTO {
 	public List<Integer> buyInOptions;
 	public Integer entryFee;
 	public Long id;
+	public Integer maxSub;
 	public String nameLocKey;
 	public List<TournamentPhaseDTO> phases;
 	public Integer queueId;
-	public TournamentRewardConfigDTO rewardConfig;
+	public List<ClashRewardConfigClient> rewardConfig;
 	public Long rosterCreateDeadline;
 	public Long rosterDisbandDeadline;
 	public Integer rosterSize;

@@ -22,16 +22,16 @@ public enum LolClashNotifyReason {
 	DISMISS,
 	@SerializedName("OWNER_TRANSFER")
 	OWNER_TRANSFER,
-	@SerializedName("CHANGE_ICON")
-	CHANGE_ICON,
+	@SerializedName("CHANGE_LOGO")
+	CHANGE_LOGO,
 	@SerializedName("CHANGE_NAME")
 	CHANGE_NAME,
 	@SerializedName("CHANGE_SHORTNAME")
 	CHANGE_SHORTNAME,
 	@SerializedName("CHANGE_POSITION")
 	CHANGE_POSITION,
-	@SerializedName("CHANGE_NAMETAGICON")
-	CHANGE_NAMETAGICON,
+	@SerializedName("CHANGE_NAMETAGLOGO")
+	CHANGE_NAMETAGLOGO,
 	@SerializedName("INVITE")
 	INVITE,
 	@SerializedName("RESENT_INVITE")
@@ -44,9 +44,19 @@ public enum LolClashNotifyReason {
 	REVOKE_INVITE,
 	@SerializedName("LEAVE")
 	LEAVE,
+	@SerializedName("CAPTAIN_LEAVE")
+	CAPTAIN_LEAVE,
 	@SerializedName("KICK")
 	KICK,
 	@SerializedName("SET_TICKET")
-	SET_TICKET
+	SET_TICKET,
+	@SerializedName("OFFER_TICKET")
+	OFFER_TICKET,
+	@SerializedName("REVOKED_TICKET")
+	REVOKED_TICKET,
+	@SerializedName("DECLINE_TICKET")
+	DECLINE_TICKET,
+	@SerializedName("ACCEPT_TICKET")
+	ACCEPT_TICKET
 
 }

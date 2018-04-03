@@ -13,5 +13,6 @@ public class SanitizerSanitizerStatus {
 	public Integer projectedCharsCount;
 	public Boolean ready;
 	public String region;
+	public Map<String, Object> whitelistedWordCountsByLevel;
 
 }

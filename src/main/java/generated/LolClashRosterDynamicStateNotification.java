@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 public class LolClashRosterDynamicStateNotification {
 
 	public LolClashRosterNotifyReason notifyReason;
-	public RosterDynamicState rosterDynamicState;
+	public RosterDynamicStateDTO rosterDynamicState;
 	public Long sourcePlayerId;
 
 }

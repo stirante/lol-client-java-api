@@ -6,9 +6,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class TournamentInfoDTO {
 
-	public List<PendingRoster> inviteePendingRosters;
-	public PendingRoster pendingRoster;
-	public RegisteredRoster roster;
+	public List<PendingRosterDTO> inviteePendingRosters;
+	public PendingRosterDTO pendingRoster;
+	public RosterDTO roster;
+	public List<RosterDTO> subRosters;
 	public Integer themeVp;
 	public TournamentDTO tournament;
 

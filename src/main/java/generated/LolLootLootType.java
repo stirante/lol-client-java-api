@@ -7,6 +7,12 @@ public enum LolLootLootType {
 	@SerializedName("Chest")
 	CHEST,
 	@SerializedName("Currency")
-	CURRENCY
+	CURRENCY,
+	@SerializedName("Material")
+	MATERIAL,
+	@SerializedName("Skin")
+	SKIN,
+	@SerializedName("Skin_Rental")
+	SKIN_RENTAL
 
 }

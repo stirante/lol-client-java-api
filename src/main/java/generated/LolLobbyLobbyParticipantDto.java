@@ -22,12 +22,15 @@ public class LolLobbyLobbyParticipantDto {
 	public Boolean isBot;
 	public Boolean isLeader;
 	public Boolean isSpectator;
+	public String lastSeasonHighestRank;
 	public String puuid;
 	public Boolean ready;
 	public String secondPositionPreference;
 	public Boolean showGhostedBanner;
 	public Integer summonerIconId;
 	public Long summonerId;
+	public String summonerInternalName;
+	public Integer summonerLevel;
 	public String summonerName;
 	public Integer teamId;
 

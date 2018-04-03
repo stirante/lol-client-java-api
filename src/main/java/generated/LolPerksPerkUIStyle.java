@@ -7,6 +7,7 @@ import com.google.gson.annotations.SerializedName;
 public class LolPerksPerkUIStyle {
 
 	public List<Integer> allowedSubStyles;
+	public Map<String, Object> assetMap;
 	public String defaultPageName;
 	public List<Integer> defaultPerks;
 	public Integer defaultSubStyle;

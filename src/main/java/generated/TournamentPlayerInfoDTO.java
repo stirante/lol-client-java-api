@@ -7,8 +7,7 @@ import com.google.gson.annotations.SerializedName;
 public class TournamentPlayerInfoDTO {
 
 	public PlayerDTO player;
-	public List<PlayerReward> playerRewards;
-	public TournamentRewardConfigDTO seasonRewards;
+	public List<RosterStatsDTO> rosterStats;
 	public Integer seasonVp;
 	public List<ThemeVp> themeVps;
 	public Long time;

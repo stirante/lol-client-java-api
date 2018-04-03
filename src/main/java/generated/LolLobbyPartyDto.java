@@ -11,6 +11,8 @@ public class LolLobbyPartyDto {
 	public Long activityResumeUtcMillis;
 	public Long activityStartedUtcMillis;
 	public LolLobbyPartyChatDto chat;
+	public Long eligibilityHash;
+	public List<LolLobbyGatekeeperRestrictionDto> eligibilityRestrictions;
 	public LolLobbyGameModeDto gameMode;
 	public Integer maxPartySize;
 	public String partyId;

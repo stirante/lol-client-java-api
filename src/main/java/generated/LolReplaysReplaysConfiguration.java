@@ -7,6 +7,7 @@ import com.google.gson.annotations.SerializedName;
 public class LolReplaysReplaysConfiguration {
 
 	public String gameVersion;
+	public Boolean isInTournament;
 	public Boolean isLoggedIn;
 	public Boolean isPatching;
 	public Boolean isPlayingGame;

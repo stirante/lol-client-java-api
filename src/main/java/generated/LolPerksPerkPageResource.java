@@ -6,8 +6,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class LolPerksPerkPageResource {
 
+	public List<Integer> autoModifiedSelections;
 	public Boolean current;
-	public Integer formatVersion;
 	public Integer id;
 	public Boolean isActive;
 	public Boolean isDeletable;
