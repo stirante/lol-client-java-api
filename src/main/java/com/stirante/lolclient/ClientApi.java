@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 
 public class ClientApi {
 
-    private static final Pattern TOKEN = Pattern.compile(".+--remoting-auth-token=([a-zA-Z_0-9-]+).+");
+    private static final Pattern INSTALL_DIR = Pattern.compile(".+\"--install-directory=([a-zA-Z_0-9- :.\\\\/]+)\".+");
     private static final Pattern PORT = Pattern.compile(".+--app-port=([0-9]+).+");
     private static final Gson GSON = new GsonBuilder().create();
 
@@ -75,7 +75,7 @@ public class ClientApi {
             while (sc.hasNextLine()) {
                 String s = sc.nextLine();
                 //executable has to be LeagueClientUx.exe and must containt in arguments remoting-auth-token
-                if (s.contains("LeagueClientUx.exe") && s.contains("--remoting-auth-token")) {
+                if (s.contains("LeagueClientUx.exe") && s.contains("--install-directory=")) {
                     target = s;
                     break;
                 }
@@ -85,11 +85,15 @@ public class ClientApi {
             if (target.isEmpty()) {
                 throw new IllegalStateException("Couldn't find League of Legends process!");
             }
-            Matcher matcher = TOKEN.matcher(target);
+            Matcher matcher = INSTALL_DIR.matcher(target);
             Matcher matcher1 = PORT.matcher(target);
             if (matcher.find() && matcher1.find()) {
                 //Base64("user:password")
-                token = new String(Base64.getEncoder().encode(("riot:" + matcher.group(1)).getBytes()));
+                String path = matcher.group(1) + "lockfile";
+                String lockfile = readFile(path);
+                if (lockfile == null) throw new IllegalStateException("Couldn't find lockfile! Check if League of Legends client properly launched.");
+                String[] split = lockfile.split(":");
+                token = new String(Base64.getEncoder().encode(("riot:" + split[3]).getBytes()));
                 port = Integer.parseInt(matcher1.group(1));
             } else {
                 throw new IllegalStateException("Couldn't find port or token!");
@@ -100,6 +104,21 @@ public class ClientApi {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private String readFile(String path) {
+        try {
+            Scanner scanner = new Scanner(new InputStreamReader(new FileInputStream(path)));
+            StringBuilder sb = new StringBuilder();
+            while (scanner.hasNextLine()) {
+                if (!sb.toString().isEmpty()) sb.append("\n");
+                sb.append(scanner.nextLine());
+            }
+            return sb.toString();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public RsoAuthAuthorization getAuth() throws IOException {
@@ -192,6 +211,7 @@ public class ClientApi {
         InputStream in = conn.getInputStream();
         T result = GSON.fromJson(new InputStreamReader(in), clz);
         in.close();
+        conn.disconnect();
         return result;
     }
 
@@ -202,6 +222,7 @@ public class ClientApi {
         writeJson(conn, jsonObject);
         boolean b = conn.getResponseCode() == 204;
         conn.getInputStream().close();
+        conn.disconnect();
         return b;
     }
 
@@ -213,6 +234,7 @@ public class ClientApi {
         InputStream in = conn.getInputStream();
         T result = GSON.fromJson(new InputStreamReader(in), clz);
         in.close();
+        conn.disconnect();
         return result;
     }
 
@@ -222,6 +244,7 @@ public class ClientApi {
         InputStream in = conn.getInputStream();
         T result = GSON.fromJson(new InputStreamReader(in), clz);
         in.close();
+        conn.disconnect();
         return result;
     }
 
@@ -232,6 +255,7 @@ public class ClientApi {
         writeJson(conn, jsonObject);
         boolean b = conn.getResponseCode() == 204;
         conn.getInputStream().close();
+        conn.disconnect();
         return b;
     }
 
@@ -240,16 +264,19 @@ public class ClientApi {
         conn.connect();
         boolean b = conn.getResponseCode() == 204;
         conn.getInputStream().close();
+        conn.disconnect();
         return b;
     }
 
     private HttpURLConnection getConnection(String endpoint, String method) throws IOException {
-        URL url = new URL("https", "localhost", port, endpoint);
+        URL url = new URL("https", "127.0.0.1", port, endpoint);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.addRequestProperty("Authorization", "Basic " + token);
         conn.setRequestProperty("Content-Type", "application/json");
         conn.setRequestProperty("Accept", "application/json");
         conn.setRequestMethod(method);
+        conn.setReadTimeout(5000);
+        conn.setConnectTimeout(5000);
         return conn;
     }
 
