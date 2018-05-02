@@ -30,6 +30,14 @@ public class ClientApi {
      * Local rest api port
      */
     private int port = 0;
+    /**
+     * Connect timeout
+     */
+    private int connectTimeout;
+    /**
+     * Read timeout
+     */
+    private int readTimeout;
 
     /*
      * Localhost needs HTTPS, but doesn't provide valid SSL
@@ -66,6 +74,12 @@ public class ClientApi {
     }
 
     public ClientApi() {
+        this(5000, 5000);
+    }
+
+    public ClientApi(int connectTimeout, int readTimeout) {
+        this.connectTimeout = connectTimeout;
+        this.readTimeout = readTimeout;
         try {
             String target = "";
             //Get all processes command line
@@ -211,6 +225,7 @@ public class ClientApi {
         InputStream in = conn.getInputStream();
         T result = GSON.fromJson(new InputStreamReader(in), clz);
         in.close();
+        conn.getOutputStream().close();
         conn.disconnect();
         return result;
     }
@@ -244,6 +259,7 @@ public class ClientApi {
         InputStream in = conn.getInputStream();
         T result = GSON.fromJson(new InputStreamReader(in), clz);
         in.close();
+        conn.getOutputStream().close();
         conn.disconnect();
         return result;
     }
@@ -264,6 +280,7 @@ public class ClientApi {
         conn.connect();
         boolean b = conn.getResponseCode() == 204;
         conn.getInputStream().close();
+        conn.getOutputStream().close();
         conn.disconnect();
         return b;
     }
@@ -275,8 +292,8 @@ public class ClientApi {
         conn.setRequestProperty("Content-Type", "application/json");
         conn.setRequestProperty("Accept", "application/json");
         conn.setRequestMethod(method);
-        conn.setReadTimeout(5000);
-        conn.setConnectTimeout(5000);
+        conn.setReadTimeout(readTimeout);
+        conn.setConnectTimeout(connectTimeout);
         return conn;
     }
 
