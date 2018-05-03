@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 
 public class ClientWebSocket extends WebSocketClient {
 
-    private EventHandler eventHandler;
+    private SocketListener socketListener;
     private static final Gson GSON = new GsonBuilder()
             .registerTypeAdapter(Event.class, new EventDeserializer())
             .registerTypeAdapter(Message.class, new MessageDeserializer())
@@ -82,19 +82,21 @@ public class ClientWebSocket extends WebSocketClient {
     }
 
     public void onClose(int code, String reason, boolean remote) {
-        System.out.println(reason);
+        if (socketListener != null) {
+            socketListener.onClose(code, reason);
+        }
     }
 
     public void onMessage(String message) {
         if (message.isEmpty()) return;
         Message mess = GSON.fromJson(message, Message.class);
-        if (mess.type == MessageType.EVENT && eventHandler != null) {
-            eventHandler.handleMessage(mess.event);
+        if (mess.type == MessageType.EVENT && socketListener != null) {
+            socketListener.onEvent(mess.event);
         }
     }
 
-    public void setEventHandler(EventHandler eventHandler) {
-        this.eventHandler = eventHandler;
+    public void setSocketListener(SocketListener socketListener) {
+        this.socketListener = socketListener;
     }
 
     public void sendMessage(MessageType type, String message) {
@@ -106,9 +108,11 @@ public class ClientWebSocket extends WebSocketClient {
         ex.printStackTrace();
     }
 
-    public interface EventHandler {
+    public interface SocketListener {
 
-        void handleMessage(Event event);
+        void onEvent(Event event);
+
+        void onClose(int code, String reason);
     }
 
     public enum MessageType {

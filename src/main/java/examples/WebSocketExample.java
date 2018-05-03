@@ -17,7 +17,7 @@ public class WebSocketExample {
         //open web socket
         ClientWebSocket socket = api.openWebSocket();
         //add event handler, which prints every received event
-        socket.setEventHandler(System.out::println);
+        socket.setSocketListener(System.out::println);
         //close socket when user enters something into console
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         reader.readLine();
