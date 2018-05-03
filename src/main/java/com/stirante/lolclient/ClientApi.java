@@ -234,7 +234,6 @@ public class ClientApi {
         InputStream in = conn.getInputStream();
         T result = GSON.fromJson(new InputStreamReader(in), clz);
         in.close();
-        conn.getOutputStream().close();
         conn.disconnect();
         return result;
     }
@@ -268,7 +267,6 @@ public class ClientApi {
         InputStream in = conn.getInputStream();
         T result = GSON.fromJson(new InputStreamReader(in), clz);
         in.close();
-        conn.getOutputStream().close();
         conn.disconnect();
         return result;
     }
@@ -289,7 +287,6 @@ public class ClientApi {
         conn.connect();
         boolean b = conn.getResponseCode() == 204;
         conn.getInputStream().close();
-        conn.getOutputStream().close();
         conn.disconnect();
         return b;
     }
