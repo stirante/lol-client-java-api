@@ -17,7 +17,17 @@ public class WebSocketExample {
         //open web socket
         ClientWebSocket socket = api.openWebSocket();
         //add event handler, which prints every received event
-        socket.setSocketListener(System.out::println);
+        socket.setSocketListener(new ClientWebSocket.SocketListener() {
+            @Override
+            public void onEvent(ClientWebSocket.Event event) {
+                System.out.println(event);
+            }
+
+            @Override
+            public void onClose(int code, String reason) {
+                System.out.println("Socket closed, reason: " + reason);
+            }
+        });
         //close socket when user enters something into console
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         reader.readLine();
