@@ -11,5 +11,7 @@ public class PlayerMissionRewardDTO {
 	public MissionRewardMediaDTO media;
 	public Boolean rewardFulfilled;
 	public String rewardType;
+	public Integer sequence;
+	public String uniqueName;
 
 }

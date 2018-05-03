@@ -6,6 +6,6 @@ import com.google.gson.annotations.SerializedName;
 public class LolBannersLoadoutsSlot {
 
 	public String inventoryType;
-	public Long itemId;
+	public Integer itemId;
 
 }

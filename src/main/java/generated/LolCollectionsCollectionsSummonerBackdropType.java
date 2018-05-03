@@ -11,6 +11,8 @@ public enum LolCollectionsCollectionsSummonerBackdropType {
 	@SerializedName("recently-played")
 	RECENTLY_PLAYED,
 	@SerializedName("highest-mastery")
-	HIGHEST_MASTERY
+	HIGHEST_MASTERY,
+	@SerializedName("specified-skin")
+	SPECIFIED_SKIN
 
 }

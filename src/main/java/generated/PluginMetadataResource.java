@@ -11,6 +11,7 @@ public class PluginMetadataResource {
 	public Boolean hasBundledAssets;
 	@SerializedName("implements")
 	public Object implementsField;
+	public String mock;
 	public Object perLocaleAssetBundles;
 	public String subtype;
 	public PluginThreadingModel threading;

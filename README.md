@@ -10,11 +10,11 @@ This product is not endorsed, certified or otherwise approved in any way by Riot
 
 ## Requirements
 
-**lol-client-java-api** requires Java 8 and depends on Google GSON.
+**lol-client-java-api** requires Java 8 and works only on Windows.
 
 ## Setup
 
-This project is available on [Jitpack](https://jitpack.io/#stirante/lol-client-java-api/1.0.1)
+This project is available on [Jitpack](https://jitpack.io/#stirante/lol-client-java-api/1.0.3)
 
 ### Gradle
 
@@ -138,13 +138,44 @@ All classes in ```generated``` package were generated from OpenAPI JSON.
 
 All examples are in ```examples``` package.
 
-Library contains very simple command line interface which can be like this
+Library contains very simple command line interface which can be used like this
 ```
 java -jar lol-client-java-api.jar -p PATH -m METHOD
 ```
 Example:
 ```
 java -jar lol-client-java-api.jar -p rso-auth/v1/authorization -m GET
+```
+
+Library also allows for listening to events from League of Legends client
+```java
+package examples;
+
+import com.stirante.lolclient.ClientApi;
+import com.stirante.lolclient.ClientWebSocket;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+public class WebSocketExample {
+
+    /**
+     * Simple example showing how to receive websocket events from client
+     */
+    public static void main(String[] args) throws Exception {
+        //Initialize API
+        ClientApi api = new ClientApi();
+        //open web socket
+        ClientWebSocket socket = api.openWebSocket();
+        //add event handler, which prints every received event
+        socket.setEventHandler(System.out::println);
+        //close socket when user enters something into console
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        reader.readLine();
+        socket.close();
+    }
+
+}
 ```
 
 ## Contributing

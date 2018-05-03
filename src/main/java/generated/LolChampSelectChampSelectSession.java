@@ -10,6 +10,8 @@ public class LolChampSelectChampSelectSession {
 	public Boolean allowRerolling;
 	public Boolean allowSkinSelection;
 	public LolChampSelectChampSelectBannedChampions bans;
+	public List<Integer> benchChampionIds;
+	public Boolean benchEnabled;
 	public LolChampSelectChampSelectChatRoomDetails chatDetails;
 	public Boolean isSpectating;
 	public Long localPlayerCellId;

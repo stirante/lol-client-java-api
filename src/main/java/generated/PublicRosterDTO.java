@@ -10,6 +10,8 @@ public class PublicRosterDTO {
 	public Integer logoColor;
 	public List<Long> memberIds;
 	public String name;
+	public List<PublicPhaseSubsDTO> phasesSubs;
 	public String shortName;
+	public Long tournamentId;
 
 }

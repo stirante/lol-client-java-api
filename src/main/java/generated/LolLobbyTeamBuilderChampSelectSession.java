@@ -9,6 +9,8 @@ public class LolLobbyTeamBuilderChampSelectSession {
 	public Boolean allowBattleBoost;
 	public Boolean allowRerolling;
 	public Boolean allowSkinSelection;
+	public List<Integer> benchChampionIds;
+	public Boolean benchEnabled;
 	public LolLobbyTeamBuilderChampSelectChatRoomDetails chatDetails;
 	public Long localPlayerCellId;
 	public List<LolLobbyTeamBuilderChampSelectPlayerSelection> myTeam;

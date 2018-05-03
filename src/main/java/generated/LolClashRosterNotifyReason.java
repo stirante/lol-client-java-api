@@ -16,6 +16,8 @@ public enum LolClashRosterNotifyReason {
 	ROSTER_REVOKED_TICKET,
 	@SerializedName("BYE_AUTO_WIN")
 	BYE_AUTO_WIN,
+	@SerializedName("BRACKET_READY")
+	BRACKET_READY,
 	@SerializedName("CHANGE_POSITION")
 	CHANGE_POSITION,
 	@SerializedName("REGISTERED")
@@ -38,6 +40,8 @@ public enum LolClashRosterNotifyReason {
 	QUEUE_DODGE,
 	@SerializedName("LOSER_ROUND_COMPLETE")
 	LOSER_ROUND_COMPLETE,
+	@SerializedName("OWNER_TRANSFER")
+	OWNER_TRANSFER,
 	@SerializedName("SUB_INVITE")
 	SUB_INVITE,
 	@SerializedName("SUB_ACCEPT")

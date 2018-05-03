@@ -7,6 +7,8 @@ public class SeriesDTO {
 
 	public Long createdDate;
 	public String description;
+	public String displayType;
+	public String eligibilityType;
 	public Long endDate;
 	public String id;
 	public String internalName;

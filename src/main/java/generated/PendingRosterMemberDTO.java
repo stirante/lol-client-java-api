@@ -12,5 +12,6 @@ public class PendingRosterMemberDTO {
 	public Long playerId;
 	public Position position;
 	public Integer selfBet;
+	public Integer tier;
 
 }

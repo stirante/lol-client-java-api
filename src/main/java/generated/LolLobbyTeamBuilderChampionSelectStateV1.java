@@ -11,6 +11,7 @@ public class LolLobbyTeamBuilderChampionSelectStateV1 {
 	public LolLobbyTeamBuilderTeamBuilderBoostInfo battleBoostState;
 	public LolLobbyTeamBuilderCellsV1 cells;
 	public Object ceremoniesByActionSetIndex;
+	public LolLobbyTeamBuilderChampionBenchStateV1 championBenchState;
 	public Integer currentActionSetIndex;
 	public Long currentTimeRemainingMillis;
 	public Long currentTotalTimeMillis;

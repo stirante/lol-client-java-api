@@ -12,6 +12,7 @@ public class LolCollectionsCollectionsSummonerBackdrop {
 	public String backdropVideo;
 	public Integer championId;
 	public Integer profileIconId;
+	public String puuid;
 	public Long summonerId;
 
 }

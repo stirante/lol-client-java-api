@@ -10,6 +10,7 @@ public class LolClashPlayerChatRoster {
 	public Integer iconId;
 	public Boolean isRegistered;
 	public String key;
+	public String logoUrl;
 	public String name;
 	public LolClashPlayerState playerState;
 	public String shortName;

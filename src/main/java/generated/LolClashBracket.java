@@ -15,5 +15,6 @@ public class LolClashBracket {
 	public List<BracketRoster> rosters;
 	public Integer size;
 	public Long tournamentId;
+	public Integer version;
 
 }

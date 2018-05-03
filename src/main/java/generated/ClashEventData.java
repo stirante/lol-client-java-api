@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class ClashEventData {
 
-	public Integer bracket;
+	public Long bracket;
 	public String earnedDate;
 	public List<String> playerUUIDs;
 	public ClashRewardSpec rewardSpec;

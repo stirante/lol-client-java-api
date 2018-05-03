@@ -9,7 +9,6 @@ public class LolLobbyOpenPartyToggleAnalytics {
 	public Long endTimestamp;
 	public String endTransition;
 	public Object eventData;
-	public Long eventTimestamp;
 	public String eventType;
 	public String finalState;
 	public String gameMode;

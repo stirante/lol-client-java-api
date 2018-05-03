@@ -10,6 +10,7 @@ public class LolLobbyJoinPartyAnalytics {
 	public String eventType;
 	public String gameMode;
 	public Integer numFriendsOnline;
+	public Integer numOpenFriends;
 	public Integer numOpenParties;
 	public Integer numOtherInvites;
 	public Integer numPartyInvites;

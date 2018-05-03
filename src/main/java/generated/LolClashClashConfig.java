@@ -11,5 +11,11 @@ public class LolClashClashConfig {
 	public Boolean IsPlaymodeRestrictionEnabled;
 	public Boolean UseIndividualEntitlement;
 	public LolClashClashVisibility Visibility;
+	public Boolean VoiceEnabled;
+	public Integer VoiceEobQuitDelaySeconds;
+	public Integer VoiceNoDelayAutoStartSeconds;
+	public Integer VoiceRandomStartMaxSeconds;
+	public Integer VoiceRandomStartMinSeconds;
+	public Integer VoiceRetryDelaySeconds;
 
 }

@@ -10,6 +10,8 @@ public class RosterStatsDTO {
 	public Integer rosterLogoColor;
 	public String rosterName;
 	public String rosterShortName;
+	public Long scheduleEndTime;
+	public Long scheduleTime;
 	public RosterAggregatedStatsDTO stats;
 	public Integer tier;
 	public String tournamentNameLocKey;

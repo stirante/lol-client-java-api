@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 public class PendingRosterDTO {
 
 	public Long captainId;
+	public Boolean highTierVariance;
 	public String invitationId;
 	public List<FailedInvite> inviteFaileds;
 	public List<PendingRosterInviteeDTO> invitees;

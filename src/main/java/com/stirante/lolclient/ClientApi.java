@@ -3,6 +3,7 @@ package com.stirante.lolclient;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import generated.*;
+import org.java_websocket.WebSocketImpl;
 
 import javax.net.ssl.*;
 import java.io.*;
@@ -49,6 +50,8 @@ public class ClientApi {
             e.printStackTrace();
         }
     }
+
+    private String password;
 
     private static void ignoreSSL() throws KeyManagementException, NoSuchAlgorithmException {
         TrustManager[] trustAllCerts = new TrustManager[]{
@@ -105,9 +108,11 @@ public class ClientApi {
                 //Base64("user:password")
                 String path = matcher.group(1) + "lockfile";
                 String lockfile = readFile(path);
-                if (lockfile == null) throw new IllegalStateException("Couldn't find lockfile! Check if League of Legends client properly launched.");
+                if (lockfile == null)
+                    throw new IllegalStateException("Couldn't find lockfile! Check if League of Legends client properly launched.");
                 String[] split = lockfile.split(":");
-                token = new String(Base64.getEncoder().encode(("riot:" + split[3]).getBytes()));
+                password = split[3];
+                token = new String(Base64.getEncoder().encode(("riot:" + password).getBytes()));
                 port = Integer.parseInt(matcher1.group(1));
             } else {
                 throw new IllegalStateException("Couldn't find port or token!");
@@ -118,6 +123,10 @@ public class ClientApi {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public ClientWebSocket openWebSocket() throws Exception {
+        return new ClientWebSocket(token, port);
     }
 
     private String readFile(String path) {

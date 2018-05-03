@@ -1,0 +1,12 @@
+package generated;
+
+import java.util.List;
+import com.google.gson.annotations.SerializedName;
+
+public class LolNpeTutorialPathProgress {
+
+	public Integer currentProgress;
+	public Integer lastViewedProgress;
+	public Integer totalCount;
+
+}
