@@ -8,6 +8,7 @@ public class LolClashPlayerChatRoster {
 	public Long endTimeMs;
 	public Integer iconColorId;
 	public Integer iconId;
+	public String invitationId;
 	public Boolean isRegistered;
 	public String key;
 	public String logoUrl;

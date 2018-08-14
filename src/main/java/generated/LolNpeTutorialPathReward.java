@@ -10,6 +10,8 @@ public class LolNpeTutorialPathReward {
 	public String itemId;
 	public LolNpeTutorialPathMedia media;
 	public Boolean rewardFulfilled;
+	public String rewardGroup;
+	public Boolean rewardGroupSelected;
 	public String rewardType;
 	public Integer sequence;
 	public String uniqueName;

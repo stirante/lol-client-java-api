@@ -16,7 +16,7 @@ public class SeriesDTO {
 	public SeriesMediaDTO media;
 	public String optInButtonText;
 	public String optOutButtonText;
-	public String parentName;
+	public String parentInternalName;
 	public Long startDate;
 	public String status;
 	public List<String> tags;

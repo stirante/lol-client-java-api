@@ -14,6 +14,9 @@ public class LolLootLootItemGdsResource {
 	public Integer mappedStoreId;
 	public String name;
 	public LolLootLootRarity rarity;
+	public Boolean recipeMenuActive;
+	public String recipeMenuSubtitle;
+	public String recipeMenuTitle;
 	public String startDate;
 	public LolLootLootType type;
 

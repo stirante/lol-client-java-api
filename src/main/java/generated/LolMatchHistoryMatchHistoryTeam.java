@@ -15,6 +15,7 @@ public class LolMatchHistoryMatchHistoryTeam {
 	public Boolean firstInhibitor;
 	public Boolean firstTower;
 	public Integer inhibitorKills;
+	public Integer riftHeraldKills;
 	public Integer teamId;
 	public Integer towerKills;
 	public Integer vilemawKills;

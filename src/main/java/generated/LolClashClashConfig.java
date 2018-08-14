@@ -9,13 +9,14 @@ public class LolClashClashConfig {
 	public LolClashClashState EnabledState;
 	public String IconConfig;
 	public Boolean IsPlaymodeRestrictionEnabled;
+	public Integer RewardGrantRetryIntervalSeconds;
 	public Boolean UseIndividualEntitlement;
 	public LolClashClashVisibility Visibility;
-	public Boolean VoiceEnabled;
 	public Integer VoiceEobQuitDelaySeconds;
 	public Integer VoiceNoDelayAutoStartSeconds;
 	public Integer VoiceRandomStartMaxSeconds;
 	public Integer VoiceRandomStartMinSeconds;
+	public Integer VoiceRetryCountLimit;
 	public Integer VoiceRetryDelaySeconds;
 
 }

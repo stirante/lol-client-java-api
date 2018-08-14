@@ -10,6 +10,8 @@ public class VoiceChatParticipantResource {
 	public Boolean isMuted;
 	public Boolean isSpeaking;
 	public String name;
+	public Integer speakingTimestamp;
+	public String uri;
 	public Integer volume;
 
 }

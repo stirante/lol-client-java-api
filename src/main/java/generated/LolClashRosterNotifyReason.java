@@ -20,6 +20,8 @@ public enum LolClashRosterNotifyReason {
 	BRACKET_READY,
 	@SerializedName("CHANGE_POSITION")
 	CHANGE_POSITION,
+	@SerializedName("EOG_PLAYER_UPDATE")
+	EOG_PLAYER_UPDATE,
 	@SerializedName("REGISTERED")
 	REGISTERED,
 	@SerializedName("RESTRICTION_AUTO_WIN")
@@ -58,6 +60,14 @@ public enum LolClashRosterNotifyReason {
 	SUB_DECLINESUGGEST,
 	@SerializedName("SUB_RECLAIM")
 	SUB_RECLAIM,
+	@SerializedName("SUB_LEAVE")
+	SUB_LEAVE,
+	@SerializedName("MEMBER_SUBBED")
+	MEMBER_SUBBED,
+	@SerializedName("MEMBER_SUB_REVOKE")
+	MEMBER_SUB_REVOKE,
+	@SerializedName("MEMBER_SUB_RECLAIM")
+	MEMBER_SUB_RECLAIM,
 	@SerializedName("VOTE_WITHDRAW_UPDATE")
 	VOTE_WITHDRAW_UPDATE,
 	@SerializedName("VOTE_WITHDRAW_DISMISS")
@@ -65,6 +75,16 @@ public enum LolClashRosterNotifyReason {
 	@SerializedName("WITHDRAW")
 	WITHDRAW,
 	@SerializedName("WINNER_ROUND_COMPLETE")
-	WINNER_ROUND_COMPLETE
+	WINNER_ROUND_COMPLETE,
+	@SerializedName("NO_SHOW_PING")
+	NO_SHOW_PING,
+	@SerializedName("BANNED_SMURF")
+	BANNED_SMURF,
+	@SerializedName("BANNED_SMURF_TEAMMATE")
+	BANNED_SMURF_TEAMMATE,
+	@SerializedName("BANNED_SMURF_OPPONENT")
+	BANNED_SMURF_OPPONENT,
+	@SerializedName("SUB_INVITE_SELF")
+	SUB_INVITE_SELF
 
 }

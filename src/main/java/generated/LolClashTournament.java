@@ -6,13 +6,18 @@ import com.google.gson.annotations.SerializedName;
 public class LolClashTournament {
 
 	public Boolean allowRosterCreation;
+	public String bracketSize;
 	public List<Integer> buyInOptions;
 	public Long endTimeMs;
 	public Integer entryFee;
 	public Long id;
+	public Boolean isHonorRestrictionEnabled;
+	public Boolean isRankedRestrictionEnabled;
+	public Boolean isSmsRestrictionEnabled;
 	public Boolean lastThemeOfSeason;
 	public Integer maxSubstitutes;
 	public String nameLocKey;
+	public String nameLocKeySecondary;
 	public List<LolClashTournamentPhase> phases;
 	public List<ClashRewardConfigClient> rewardConfig;
 	public Long rosterCreateDeadline;

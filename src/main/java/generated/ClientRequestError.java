@@ -20,6 +20,10 @@ public enum ClientRequestError {
 	CAPTAIN_NOT_ALLOWED,
 	@SerializedName("CANNOT_SUB")
 	CANNOT_SUB,
+	@SerializedName("CLASH_BANNED")
+	CLASH_BANNED,
+	@SerializedName("CLASH_BANNED_INVITEE")
+	CLASH_BANNED_INVITEE,
 	@SerializedName("ELIGIBILITY_SERVER_ERROR")
 	ELIGIBILITY_SERVER_ERROR,
 	@SerializedName("FAIL_INVITE")
@@ -36,6 +40,8 @@ public enum ClientRequestError {
 	IN_OTHER_ROSTER,
 	@SerializedName("IN_OTHER_PENDINGROSTER")
 	IN_OTHER_PENDINGROSTER,
+	@SerializedName("IN_OTHER_PENDINGSUB")
+	IN_OTHER_PENDINGSUB,
 	@SerializedName("IN_OTHER_PHASE_OF_PERIOD")
 	IN_OTHER_PHASE_OF_PERIOD,
 	@SerializedName("INACTIVE_REGISTRATION")

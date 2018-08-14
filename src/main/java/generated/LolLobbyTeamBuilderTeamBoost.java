@@ -10,7 +10,7 @@ public class LolLobbyTeamBuilderTeamBoost {
 	public Long ipRewardForPurchaser;
 	public Long price;
 	public String skinUnlockMode;
-	public String summonerName;
+	public Long summonerId;
 	public Boolean unlocked;
 
 }

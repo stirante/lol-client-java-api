@@ -9,7 +9,6 @@ public class LolChampSelectChampSelectPlayerSelection {
 	public Long cellId;
 	public Integer championId;
 	public Integer championPickIntent;
-	public String displayName;
 	public String playerType;
 	public Integer selectedSkinId;
 	public Long spell1Id;

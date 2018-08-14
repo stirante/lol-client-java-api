@@ -26,6 +26,7 @@ public class LolNpeTutorialPathMission {
 	public String missionType;
 	public List<LolNpeTutorialPathObjective> objectives;
 	public List<String> requirements;
+	public LolNpeTutorialPathRewardStrategy rewardStrategy;
 	public List<LolNpeTutorialPathReward> rewards;
 	public String seriesName;
 	public Long startTime;

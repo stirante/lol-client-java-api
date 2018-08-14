@@ -56,7 +56,7 @@ Add the project as a dependency:
 <dependency>
     <groupId>com.github.stirante</groupId>
     <artifactId>lol-client-java-api</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.4</version>
 </dependency>
 ```
 
@@ -132,7 +132,7 @@ public class DirectAccessExample {
 
 ```
 
-All possible paths can be found in ```api.getSwaggerJson()``` or ```api.getOpenapiJson()```.
+All possible paths can be found in ```api.getSwaggerJson()``` or ```api.getOpenapiJson()```. (In order to enable this, you need to add ```enable_swagger: true``` to ```Riot Games\League of Legends\RADS\projects\league_client\releases\<latest version>\deploy\system.yaml```)
 
 All classes in ```generated``` package were generated from OpenAPI JSON.
 

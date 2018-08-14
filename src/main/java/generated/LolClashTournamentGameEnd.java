@@ -9,5 +9,6 @@ public class LolClashTournamentGameEnd {
 	public LolClashBracket oldBracket;
 	public Long tournamentId;
 	public String tournamentNameLocKey;
+	public String tournamentNameLocKeySecondary;
 
 }

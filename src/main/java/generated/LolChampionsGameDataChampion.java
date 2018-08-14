@@ -16,5 +16,6 @@ public class LolChampionsGameDataChampion {
 	public List<LolChampionsGameDataChampionSpell> spells;
 	public String squarePortraitPath;
 	public String stingerSfxPath;
+	public String title;
 
 }

@@ -6,9 +6,9 @@ import com.google.gson.annotations.SerializedName;
 public class LolBannersBannerFlag {
 
 	public String earnedDateIso8601;
-	public String itemId;
-	public String level;
-	public String seasonId;
+	public Integer itemId;
+	public Long level;
+	public Long seasonId;
 	public String theme;
 
 }

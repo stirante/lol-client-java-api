@@ -15,6 +15,7 @@ public class RosterStatsDTO {
 	public RosterAggregatedStatsDTO stats;
 	public Integer tier;
 	public String tournamentNameLocKey;
+	public String tournamentNameLocKeySecondary;
 	public Integer tournamentPeriods;
 	public Integer tournamentThemeId;
 

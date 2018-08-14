@@ -7,6 +7,7 @@ public class LolContentTargetingPlatformConfig {
 
 	public Boolean ABTestFilterEnabled;
 	public Long ABTestFilterGroups;
+	public Long ABTestFilterSalt;
 	public Boolean Enabled;
 	public Boolean LaneFilterEnabled;
 	public Integer LaneFilterThreshold;
@@ -16,5 +17,6 @@ public class LolContentTargetingPlatformConfig {
 	public Boolean RankFilterEnabled;
 	public Boolean RankedFilterEnabled;
 	public Boolean RevivalFilterEnabled;
+	public Integer RevivalFilterThreshold;
 
 }

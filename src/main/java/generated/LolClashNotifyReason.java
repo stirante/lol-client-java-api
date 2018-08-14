@@ -57,6 +57,10 @@ public enum LolClashNotifyReason {
 	@SerializedName("DECLINE_TICKET")
 	DECLINE_TICKET,
 	@SerializedName("ACCEPT_TICKET")
-	ACCEPT_TICKET
+	ACCEPT_TICKET,
+	@SerializedName("REWARD_GRANT_FAILED")
+	REWARD_GRANT_FAILED,
+	@SerializedName("REWARD_GRANT_RETRY")
+	REWARD_GRANT_RETRY
 
 }

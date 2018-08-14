@@ -20,5 +20,6 @@ public class LolChampionsCollectionsChampionMinimal {
 	public List<String> roles;
 	public String squarePortraitPath;
 	public String stingerSfxPath;
+	public String title;
 
 }

@@ -12,6 +12,7 @@ public class LolPerksPerkPageResource {
 	public Boolean isDeletable;
 	public Boolean isEditable;
 	public Boolean isValid;
+	public Long lastModified;
 	public String name;
 	public Integer order;
 	public Integer primaryStyleId;

@@ -9,5 +9,6 @@ public class LolLobbyEligibilityRestriction {
 	public Object restrictionArgs;
 	public LolLobbyEligibilityRestrictionCode restrictionCode;
 	public List<Long> summonerIds;
+	public String summonerIdsString;
 
 }

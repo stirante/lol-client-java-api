@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 public class LolLobbyTeamBuilderChampionSelectStateV1 {
 
 	public List<Object> actionSetList;
+	public Boolean allowDuplicatePicks;
 	public Boolean allowOptingOutOfBanning;
 	public Boolean allowSkinSelection;
 	public LolLobbyTeamBuilderTeamBuilderBoostInfo battleBoostState;

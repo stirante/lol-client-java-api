@@ -5,6 +5,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class LolBannersBannerFrame {
 
-	public String level;
+	public Long level;
 
 }

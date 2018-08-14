@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class LolClashEogPlayerUpdateDTO {
 
+	public Integer bid;
 	public Integer bracketSize;
 	public List<ClashRewardDefinition> earnedRewards;
 	public Long gameId;
@@ -12,6 +13,7 @@ public class LolClashEogPlayerUpdateDTO {
 	public List<ClashRewardDefinition> rewardProgress;
 	public Integer seasonVp;
 	public Integer themeVp;
+	public Integer tier;
 	public Long tournamentId;
 	public Boolean winner;
 

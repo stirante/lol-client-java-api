@@ -14,6 +14,7 @@ public class LolClashRoster {
 	public String id;
 	public String invitationId;
 	public Boolean isActiveInCurrentPhase;
+	public Boolean isClashBanned;
 	public Boolean isCurrentBracketComplete;
 	public Boolean isEliminated;
 	public Boolean isRegistered;

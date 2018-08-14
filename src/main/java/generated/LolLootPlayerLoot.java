@@ -17,6 +17,8 @@ public class LolLootPlayerLoot {
 	public LolLootItemOwnershipStatus itemStatus;
 	public String localizedDescription;
 	public String localizedName;
+	public String localizedRecipeSubtitle;
+	public String localizedRecipeTitle;
 	public String lootId;
 	public String lootName;
 	public LolLootItemOwnershipStatus parentItemStatus;

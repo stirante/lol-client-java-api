@@ -16,6 +16,7 @@ public class LolClashRosterStats {
 	public Long startTimeMs;
 	public Integer tier;
 	public String tournamentNameLocKey;
+	public String tournamentNameLocKeySecondary;
 	public Integer tournamentPeriods;
 	public Integer tournamentThemeId;
 

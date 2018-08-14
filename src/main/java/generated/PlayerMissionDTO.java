@@ -26,6 +26,7 @@ public class PlayerMissionDTO {
 	public String missionType;
 	public List<PlayerMissionObjectiveDTO> objectives;
 	public List<String> requirements;
+	public RewardStrategy rewardStrategy;
 	public List<PlayerMissionRewardDTO> rewards;
 	public String seriesName;
 	public Long startTime;

@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 public class LolClashRosterPlayerNotification {
 
 	public LolClashRosterNotifyReason notifyReason;
-	public PlayerDTO player;
+	public PlayerDTO playerNotificationDTO;
 	public RosterDTO roster;
 	public Long sourcePlayerId;
 

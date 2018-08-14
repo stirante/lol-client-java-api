@@ -14,6 +14,5 @@ public class LolLobbyTeamBuilderTbLobbySlotResource {
 	public Boolean showPositionExcluder;
 	public Integer slotId;
 	public Long summonerId;
-	public String summonerName;
 
 }

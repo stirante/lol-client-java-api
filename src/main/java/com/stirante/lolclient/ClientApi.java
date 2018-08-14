@@ -91,7 +91,7 @@ public class ClientApi {
             Scanner sc = new Scanner(in);
             while (sc.hasNextLine()) {
                 String s = sc.nextLine();
-                //executable has to be LeagueClientUx.exe and must containt in arguments remoting-auth-token
+                //executable has to be LeagueClientUx.exe and must contain in arguments remoting-auth-token
                 if (s.contains("LeagueClientUx.exe") && s.contains("--install-directory=")) {
                     target = s;
                     break;
@@ -161,14 +161,14 @@ public class ClientApi {
     }
 
     public String getSwaggerJson() throws IOException {
-        HttpURLConnection conn = getConnection("/v2/swagger.json", "GET");
+        HttpURLConnection conn = getConnection("/swagger/v2/swagger.json", "GET");
         conn.connect();
         InputStream in = conn.getInputStream();
         return dumpStream(in);
     }
 
     public String getOpenapiJson() throws IOException {
-        HttpURLConnection conn = getConnection("/v3/openapi.json", "GET");
+        HttpURLConnection conn = getConnection("/swagger/v3/openapi.json", "GET");
         conn.connect();
         InputStream in = conn.getInputStream();
         return dumpStream(in);
@@ -284,6 +284,15 @@ public class ClientApi {
 
     public boolean executePost(String path) throws IOException {
         HttpURLConnection conn = getConnection(path, "POST");
+        conn.connect();
+        boolean b = conn.getResponseCode() == 204;
+        conn.getInputStream().close();
+        conn.disconnect();
+        return b;
+    }
+
+    public boolean executeDelete(String path) throws IOException {
+        HttpURLConnection conn = getConnection(path, "DELETE");
         conn.connect();
         boolean b = conn.getResponseCode() == 204;
         conn.getInputStream().close();

@@ -15,5 +15,7 @@ public class LolNpeTutorialPathTutorial {
 	public Integer stepNumber;
 	public String title;
 	public LolNpeTutorialPathTutorialType type;
+	public Boolean useChosenChampion;
+	public Boolean useQuickSearchMatchmaking;
 
 }

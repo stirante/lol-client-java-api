@@ -13,7 +13,6 @@ public class LolLobbyTeamBuilderCellV1 {
 	public Integer spell1Id;
 	public Integer spell2Id;
 	public Long summonerId;
-	public String summonerName;
 	public Integer teamId;
 
 }

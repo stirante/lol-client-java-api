@@ -5,8 +5,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class LolLoadoutsInventoryItemDTO {
 
-	public String eneitlementTypeId;
 	public String entitlementId;
+	public String entitlementTypeId;
 	public String expirationDate;
 	public Boolean f2p;
 	public String instanceId;

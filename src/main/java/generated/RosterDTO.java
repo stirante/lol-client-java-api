@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class RosterDTO {
 
+	public Boolean banned;
 	public Long captainId;
 	public RosterDynamicStateDTO dynamicState;
 	public Boolean eliminated;

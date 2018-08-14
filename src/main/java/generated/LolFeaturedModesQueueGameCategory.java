@@ -11,6 +11,8 @@ public enum LolFeaturedModesQueueGameCategory {
 	@SerializedName("PvP")
 	PVP,
 	@SerializedName("VersusAi")
-	VERSUSAI
+	VERSUSAI,
+	@SerializedName("Alpha")
+	ALPHA
 
 }
