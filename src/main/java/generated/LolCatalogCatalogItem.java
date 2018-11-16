@@ -6,10 +6,12 @@ import com.google.gson.annotations.SerializedName;
 public class LolCatalogCatalogItem {
 
 	public Boolean active;
+	public String iconUrl;
 	public String inactiveDate;
 	public String inventoryType;
 	public Integer itemId;
 	public String itemInstanceId;
+	public Object localizations;
 	public List<LolCatalogItemCost> prices;
 	public String releaseDate;
 	public LolCatalogSale sale;

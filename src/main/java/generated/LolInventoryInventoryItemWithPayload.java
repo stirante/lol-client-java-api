@@ -10,6 +10,7 @@ public class LolInventoryInventoryItemWithPayload {
 	public LolInventoryItemOwnershipType ownershipType;
 	public Object payload;
 	public String purchaseDate;
+	public Long quantity;
 	public String uuid;
 
 }

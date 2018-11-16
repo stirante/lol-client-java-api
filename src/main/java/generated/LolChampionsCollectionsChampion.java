@@ -23,6 +23,7 @@ public class LolChampionsCollectionsChampion {
 	public List<LolChampionsCollectionsChampionSpell> spells;
 	public String squarePortraitPath;
 	public String stingerSfxPath;
+	public LolChampionsCollectionsChampionTacticalInfo tacticalInfo;
 	public String title;
 
 }

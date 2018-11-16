@@ -6,7 +6,6 @@ import com.google.gson.annotations.SerializedName;
 public class LolLobbyLobbyCustomGameConfiguration {
 
 	public String gameMode;
-	public String gameMutator;
 	public String gameServerRegion;
 	public LolLobbyQueueGameTypeConfig gameTypeConfig;
 	public Integer mapId;

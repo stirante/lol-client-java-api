@@ -6,6 +6,8 @@ public enum LolLeaguesLeagueTier {
 
 	@SerializedName("NONE")
 	NONE,
+	@SerializedName("IRON")
+	IRON,
 	@SerializedName("BRONZE")
 	BRONZE,
 	@SerializedName("SILVER")
@@ -18,6 +20,8 @@ public enum LolLeaguesLeagueTier {
 	DIAMOND,
 	@SerializedName("MASTER")
 	MASTER,
+	@SerializedName("GRANDMASTER")
+	GRANDMASTER,
 	@SerializedName("CHALLENGER")
 	CHALLENGER
 

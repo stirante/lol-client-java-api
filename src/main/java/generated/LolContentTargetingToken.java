@@ -3,8 +3,8 @@ package generated;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class PlayerNotificationConfigResource {
+public class LolContentTargetingToken {
 
-	public Long ExpirationCheckFrequency;
+	public List<String> entitlements;
 
 }

@@ -11,7 +11,6 @@ public class LolGameflowQueue {
 	public String description;
 	public String detailedDescription;
 	public String gameMode;
-	public String gameMutator;
 	public LolGameflowQueueGameTypeConfig gameTypeConfig;
 	public Integer id;
 	public Boolean isRanked;

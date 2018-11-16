@@ -21,6 +21,9 @@ public class LolLeaguesSignedLeagueItemDTO {
 	public Long previousDayLeaguePosition;
 	public LeaguesLcdsQueueType queueType;
 	public LeaguesLcdsLeagueRank rank;
+	public LeaguesLcdsLeagueRank seasonEndRank;
+	public LeaguesLcdsLeagueTier seasonEndTier;
+	public Long seasonWins;
 	public LeaguesLcdsLeagueTier tier;
 	public Long timeUntilInactivityStatusChanges;
 	public Boolean veteran;

@@ -9,5 +9,6 @@ public class LolCareerStatsStatsQueryRequest {
 	public LolCareerStatsSummonersRiftPosition position;
 	public LolCareerStatsCareerStatsQueueType queueType;
 	public LolCareerStatsRankedTier rankTier;
+	public Integer season;
 
 }

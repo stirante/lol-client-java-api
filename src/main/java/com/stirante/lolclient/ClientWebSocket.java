@@ -172,6 +172,15 @@ public class ClientWebSocket extends WebSocketClient {
         public Event getEvent() {
             return event;
         }
+
+        @Override
+        public String toString() {
+            return "Message{" +
+                    "type=" + type +
+                    ", source='" + source + '\'' +
+                    ", event=" + event +
+                    '}';
+        }
     }
 
     public static class Event {
@@ -225,7 +234,12 @@ public class ClientWebSocket extends WebSocketClient {
             }
             if (c == null) data = context.deserialize((JsonElement) data, Object.class);
             else {
-                data = context.deserialize((JsonElement) data, c);
+                try {
+                    data = context.deserialize((JsonElement) data, c);
+                } catch (JsonSyntaxException e) {
+                    System.out.println("Failed to deserialize from URI " + uri);
+                    return new Event(data, eventType, uri);
+                }
             }
             return new Event(data, eventType, uri);
         }

@@ -3,9 +3,10 @@ package generated;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class LolCareerStatsMatchupQueryRequest {
+public class LolRankedLeagueChampAndStat {
 
 	public Integer championId;
-	public LolCareerStatsSummonersRiftPosition position;
+	public Long totalGamePlayed;
+	public Double winRate;
 
 }

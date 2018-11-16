@@ -12,5 +12,7 @@ public class LolLeaguesLeague {
 	public String name;
 	public LolLeaguesLeagueQueueType queueType;
 	public LolLeaguesLeagueRank requesterLeagueRank;
+	public LolLeaguesLeagueRank requesterSeasonEndRank;
+	public LolLeaguesLeagueTier requesterSeasonEndTier;
 
 }

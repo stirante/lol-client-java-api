@@ -6,7 +6,6 @@ import com.google.gson.annotations.SerializedName;
 public class LolGameQueuesQueueCustomGameSubcategory {
 
 	public String gameMode;
-	public String gameMutator;
 	public Integer mapId;
 	public Integer maxLevel;
 	public Integer maxPlayerCount;

@@ -7,7 +7,6 @@ public class LolFeaturedModesQueue {
 
 	public LolFeaturedModesQueueGameCategory category;
 	public String gameMode;
-	public String gameMutator;
 	public Integer id;
 	public Long lastToggledOffTime;
 	public Long lastToggledOnTime;

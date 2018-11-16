@@ -8,6 +8,8 @@ public enum LolCareerStatsRankedTier {
 	ALL,
 	@SerializedName("UNRANKED")
 	UNRANKED,
+	@SerializedName("IRON")
+	IRON,
 	@SerializedName("BRONZE")
 	BRONZE,
 	@SerializedName("SILVER")
@@ -20,6 +22,8 @@ public enum LolCareerStatsRankedTier {
 	DIAMOND,
 	@SerializedName("MASTER")
 	MASTER,
+	@SerializedName("GRANDMASTER")
+	GRANDMASTER,
 	@SerializedName("CHALLENGER")
 	CHALLENGER
 

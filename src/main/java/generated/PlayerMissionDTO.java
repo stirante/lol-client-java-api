@@ -12,6 +12,7 @@ public class PlayerMissionDTO {
 	public String completionExpression;
 	public Long cooldownTimeMillis;
 	public String description;
+	public MissionDisplay display;
 	public String displayType;
 	public Long endTime;
 	public List<MissionAlertDTO> expiringWarnings;

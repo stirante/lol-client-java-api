@@ -14,7 +14,6 @@ public class LolLobbyLobbyGameConfigDto {
 	public List<LolLobbyLobbyParticipantDto> customTeam100;
 	public List<LolLobbyLobbyParticipantDto> customTeam200;
 	public String gameMode;
-	public String gameMutator;
 	public Boolean isCustom;
 	public Boolean isLobbyFull;
 	public Boolean isTeamBuilderManaged;

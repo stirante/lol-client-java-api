@@ -9,6 +9,7 @@ public class LolCareerStatsStatisticsPercentilesResponse {
 	public LolCareerStatsSummonersRiftPosition position;
 	public LolCareerStatsCareerStatsQueueType queueType;
 	public LolCareerStatsRankedTier rankTier;
+	public Integer season;
 	public Object stats;
 
 }

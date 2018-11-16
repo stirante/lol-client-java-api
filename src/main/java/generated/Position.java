@@ -4,19 +4,19 @@ import com.google.gson.annotations.SerializedName;
 
 public enum Position {
 
+	@SerializedName("NONE")
+	NONE,
 	@SerializedName("TOP")
 	TOP,
+	@SerializedName("JUNGLE")
+	JUNGLE,
 	@SerializedName("MIDDLE")
 	MIDDLE,
 	@SerializedName("BOTTOM")
 	BOTTOM,
-	@SerializedName("JUNGLE")
-	JUNGLE,
 	@SerializedName("UTILITY")
 	UTILITY,
-	@SerializedName("FILL")
-	FILL,
-	@SerializedName("UNSELECTED")
-	UNSELECTED
+	@SerializedName("APEX")
+	APEX
 
 }

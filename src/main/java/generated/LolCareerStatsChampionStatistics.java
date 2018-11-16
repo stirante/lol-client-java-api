@@ -6,7 +6,6 @@ import com.google.gson.annotations.SerializedName;
 public class LolCareerStatsChampionStatistics {
 
 	public Integer championId;
-	public List<LolCareerStatsChampionMatchup> championMatchups;
 	public List<LolCareerStatsExpertPlayer> experts;
 	public List<LolCareerStatsStatisticsByQueue> queueStats;
 

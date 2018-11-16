@@ -20,5 +20,6 @@ public class LolMapsMaps {
 	public String platformId;
 	public String platformName;
 	public Object properties;
+	public List<LolMapsTutorialCard> tutorialCards;
 
 }

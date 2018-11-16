@@ -13,6 +13,7 @@ public class LolInventoryInventoryItemDTO {
 	public String instanceTypeId;
 	public String inventoryType;
 	public Integer itemId;
+	public Boolean loyalty;
 	public Boolean lsb;
 	public Object payload;
 	public String purchaseDate;

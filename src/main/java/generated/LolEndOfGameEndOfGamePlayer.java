@@ -7,6 +7,7 @@ public class LolEndOfGameEndOfGamePlayer {
 
 	public Boolean botPlayer;
 	public Integer championId;
+	public String detectedTeamPosition;
 	public Integer elo;
 	public Integer eloChange;
 	public Long gameId;
@@ -17,6 +18,7 @@ public class LolEndOfGameEndOfGamePlayer {
 	public Integer level;
 	public Integer losses;
 	public Integer profileIconId;
+	public String selectedPosition;
 	public Integer skinIndex;
 	public String skinName;
 	public Integer spell1Id;

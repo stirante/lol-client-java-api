@@ -12,5 +12,6 @@ public class LolLobbyTeamBuilderTbLobbyStateResource {
 	public String phaseName;
 	public LolLobbyTeamBuilderTbLobbyPremadeStateResource premadeState;
 	public Integer queueId;
+	public Boolean useInventoryPath2018;
 
 }

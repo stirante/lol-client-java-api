@@ -46,6 +46,8 @@ public enum LolFeaturedModesEligibilityRestrictionCode {
 	TEAMSIZERESTRICTION,
 	@SerializedName("PrerequisiteQueuesNotPlayedRestriction")
 	PREREQUISITEQUEUESNOTPLAYEDRESTRICTION,
+	@SerializedName("QueueEntryNotEntitledRestriction")
+	QUEUEENTRYNOTENTITLEDRESTRICTION,
 	@SerializedName("UnknownRestriction")
 	UNKNOWNRESTRICTION
 

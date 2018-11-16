@@ -10,6 +10,7 @@ public class LolPerksPerkStyleResource {
 	public String defaultPageName;
 	public List<Integer> defaultPerks;
 	public List<Integer> defaultPerksWhenSplashed;
+	public List<LolPerksDefaultStatModsPerSubStyle> defaultStatModsPerSubStyle;
 	public Integer defaultSubStyle;
 	public String iconPath;
 	public Integer id;

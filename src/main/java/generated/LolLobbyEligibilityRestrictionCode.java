@@ -46,7 +46,21 @@ public enum LolLobbyEligibilityRestrictionCode {
 	TEAMSIZERESTRICTION,
 	@SerializedName("PrerequisiteQueuesNotPlayedRestriction")
 	PREREQUISITEQUEUESNOTPLAYEDRESTRICTION,
+	@SerializedName("QueueEntryNotEntitledRestriction")
+	QUEUEENTRYNOTENTITLEDRESTRICTION,
 	@SerializedName("UnknownRestriction")
-	UNKNOWNRESTRICTION
+	UNKNOWNRESTRICTION,
+	@SerializedName("BanInfoNotAvailable")
+	BANINFONOTAVAILABLE,
+	@SerializedName("MinorInfoNotAvailable")
+	MINORINFONOTAVAILABLE,
+	@SerializedName("SummonerInfoNotAvailable")
+	SUMMONERINFONOTAVAILABLE,
+	@SerializedName("LeaguesInfoNotAvailable")
+	LEAGUESINFONOTAVAILABLE,
+	@SerializedName("InventoryChampsInfoNotAvailable")
+	INVENTORYCHAMPSINFONOTAVAILABLE,
+	@SerializedName("InventoryQueuesInfoNotAvailable")
+	INVENTORYQUEUESINFONOTAVAILABLE
 
 }

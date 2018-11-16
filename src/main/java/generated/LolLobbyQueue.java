@@ -13,7 +13,6 @@ public class LolLobbyQueue {
 	public String description;
 	public String detailedDescription;
 	public String gameMode;
-	public String gameMutator;
 	public LolLobbyQueueGameTypeConfig gameTypeConfig;
 	public Integer id;
 	public Boolean isRanked;

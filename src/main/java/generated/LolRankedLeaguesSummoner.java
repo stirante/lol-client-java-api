@@ -3,8 +3,9 @@ package generated;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class KickoutMessage {
+public class LolRankedLeaguesSummoner {
 
-	public String message;
+	public Long accountId;
+	public Long summonerId;
 
 }

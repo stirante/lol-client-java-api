@@ -32,12 +32,20 @@ public enum LolClashRosterNotifyReason {
 	PHASE_READY,
 	@SerializedName("PHASE_CHECKIN")
 	PHASE_CHECKIN,
+	@SerializedName("PHASE_BACKOUT")
+	PHASE_BACKOUT,
+	@SerializedName("PERIOD_CANCEL")
+	PERIOD_CANCEL,
+	@SerializedName("PERIOD_SPLIT")
+	PERIOD_SPLIT,
 	@SerializedName("GAME_COMPLETED")
 	GAME_COMPLETED,
 	@SerializedName("GAME_STARTED")
 	GAME_STARTED,
 	@SerializedName("GAME_STARTED_ERROR")
 	GAME_STARTED_ERROR,
+	@SerializedName("GAME_END_ERROR")
+	GAME_END_ERROR,
 	@SerializedName("QUEUE_DODGE")
 	QUEUE_DODGE,
 	@SerializedName("LOSER_ROUND_COMPLETE")
@@ -78,6 +86,8 @@ public enum LolClashRosterNotifyReason {
 	WINNER_ROUND_COMPLETE,
 	@SerializedName("NO_SHOW_PING")
 	NO_SHOW_PING,
+	@SerializedName("TIER_CHANGED")
+	TIER_CHANGED,
 	@SerializedName("BANNED_SMURF")
 	BANNED_SMURF,
 	@SerializedName("BANNED_SMURF_TEAMMATE")

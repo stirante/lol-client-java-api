@@ -7,8 +7,11 @@ public class LolClashClashConfig {
 
 	public String DarkModeEntitlement;
 	public LolClashClashState EnabledState;
+	public Integer HonorLevelRequired;
+	public Integer HonorRefreshRetrySeconds;
 	public String IconConfig;
 	public Boolean IsPlaymodeRestrictionEnabled;
+	public Integer MaxTimeBeforeLockinNotifySeconds;
 	public Integer RewardGrantRetryIntervalSeconds;
 	public Boolean UseIndividualEntitlement;
 	public LolClashClashVisibility Visibility;

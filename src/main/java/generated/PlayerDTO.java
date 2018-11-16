@@ -6,6 +6,6 @@ import com.google.gson.annotations.SerializedName;
 public class PlayerDTO {
 
 	public Boolean banned;
-	public Integer tickets;
+	public List<ClashOfflineNotification> notifications;
 
 }

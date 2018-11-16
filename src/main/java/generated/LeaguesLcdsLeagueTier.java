@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 public enum LeaguesLcdsLeagueTier {
 
+	@SerializedName("IRON")
+	IRON,
 	@SerializedName("BRONZE")
 	BRONZE,
 	@SerializedName("SILVER")
@@ -16,6 +18,8 @@ public enum LeaguesLcdsLeagueTier {
 	DIAMOND,
 	@SerializedName("MASTER")
 	MASTER,
+	@SerializedName("GRANDMASTER")
+	GRANDMASTER,
 	@SerializedName("CHALLENGER")
 	CHALLENGER
 

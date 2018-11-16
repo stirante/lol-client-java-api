@@ -9,6 +9,7 @@ public class PlayerMissionRewardDTO {
 	public String iconUrl;
 	public String itemId;
 	public MissionRewardMediaDTO media;
+	public Integer quantity;
 	public Boolean rewardFulfilled;
 	public String rewardGroup;
 	public Boolean rewardGroupSelected;

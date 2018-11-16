@@ -10,7 +10,6 @@ public class PlayerNotificationResource {
 	public Boolean critical;
 	public Object data;
 	public String detailKey;
-	public Boolean dismissible;
 	public String expires;
 	public String iconUrl;
 	public Long id;

@@ -13,7 +13,6 @@ public class PlayerNotificationExample {
         PlayerNotificationResource n = new PlayerNotificationResource();
         n.backgroundUrl = "images/esports_toast_background.jpg";
         n.critical = false;
-        n.dismissible = true;
         n.iconUrl = "fe/lol-player-notifications/images/esports.png";
         n.type = "default";
         HashMap<String, Object> data = new HashMap<>();
