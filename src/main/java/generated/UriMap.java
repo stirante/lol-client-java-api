@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class UriMap {
 
-	private static HashMap<String, Class> toClass = new HashMap<>();
+	public static HashMap<String, Class> toClass = new HashMap<>();
 
 	static {
 		toClass.put("\\/async\\/v1\\/result\\/[^/]+", Object.class);
