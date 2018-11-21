@@ -3,8 +3,9 @@ package generated;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class LolPatchAuthorization {
+public class LolRegaliaItemKey {
 
-	public Long currentAccountId;
+	public String inventoryType;
+	public Integer itemId;
 
 }

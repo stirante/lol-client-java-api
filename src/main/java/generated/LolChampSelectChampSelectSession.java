@@ -8,6 +8,7 @@ public class LolChampSelectChampSelectSession {
 	public List<Object> actions;
 	public Boolean allowBattleBoost;
 	public Boolean allowDuplicatePicks;
+	public Boolean allowLockedEvents;
 	public Boolean allowRerolling;
 	public Boolean allowSkinSelection;
 	public LolChampSelectChampSelectBannedChampions bans;
@@ -18,6 +19,7 @@ public class LolChampSelectChampSelectSession {
 	public Long counter;
 	public Boolean isSpectating;
 	public Long localPlayerCellId;
+	public Integer lockedEventIndex;
 	public List<LolChampSelectChampSelectPlayerSelection> myTeam;
 	public Integer rerollsRemaining;
 	public List<LolChampSelectChampSelectPlayerSelection> theirTeam;

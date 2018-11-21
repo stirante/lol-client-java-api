@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 public class LolMapsMaps {
 
 	public Object assets;
+	public Object categorizedContentBundles;
 	public String description;
 	public String gameMode;
 	public String gameModeDescription;

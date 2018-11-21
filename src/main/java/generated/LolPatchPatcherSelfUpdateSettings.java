@@ -3,9 +3,8 @@ package generated;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class MissionRewardMediaItemDTO {
+public class LolPatchPatcherSelfUpdateSettings {
 
-	public String sound;
-	public String video;
+	public Integer restart_delay;
 
 }

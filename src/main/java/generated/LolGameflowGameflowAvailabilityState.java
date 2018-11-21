@@ -15,6 +15,8 @@ public enum LolGameflowGameflowAvailabilityState {
 	@SerializedName("InGameFlow")
 	INGAMEFLOW,
 	@SerializedName("Configuration")
-	CONFIGURATION
+	CONFIGURATION,
+	@SerializedName("EligibilityInfoMissing")
+	ELIGIBILITYINFOMISSING
 
 }

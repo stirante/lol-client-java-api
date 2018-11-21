@@ -19,6 +19,7 @@ public class LolLobbyTeamBuilderChampionSelectStateV1 {
 	public LolLobbyTeamBuilderTbdInventory inventoryDraft;
 	public Boolean lcuSkipsSendingLoadoutsGco;
 	public Integer localPlayerCellId;
+	public LolLobbyTeamBuilderLockedEventsStateV1 lockedEventsState;
 	public String pickIntentClearedReason;
 	public LolLobbyTeamBuilderRerollStateV1 rerollState;
 	public String subphase;

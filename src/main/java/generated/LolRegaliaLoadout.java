@@ -3,10 +3,11 @@ package generated;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class LolRankedLeagueTeam {
+public class LolRegaliaLoadout {
 
 	public String id;
-	public List<LolRankedLeagueTeamMember> members;
+	public LolRegaliaRegaliaLoadout loadout;
 	public String name;
+	public String scope;
 
 }

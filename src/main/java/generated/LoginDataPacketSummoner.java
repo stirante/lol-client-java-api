@@ -3,8 +3,9 @@ package generated;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class LolPatchScdServiceProduct {
+public class LoginDataPacketSummoner {
 
-	public Object configurations;
+	public Long acctId;
+	public Long sumId;
 
 }

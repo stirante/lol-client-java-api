@@ -22,6 +22,7 @@ public class LolRankedSignedLeagueItemDTO {
 	public String playerOrTeamName;
 	public Position position;
 	public Long previousDayLeaguePosition;
+	public Integer provisionalGamesRemaining;
 	public LeaguesLcdsQueueType queueType;
 	public LeaguesLcdsLeagueRank rank;
 	public Integer seasonEndApexPosition;

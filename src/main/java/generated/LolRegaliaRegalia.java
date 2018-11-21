@@ -9,7 +9,6 @@ public class LolRegaliaRegalia {
 	public String crestType;
 	public LolRegaliaRankedPositionInfo highestRankedEntry;
 	public String lastSeasonHighestRank;
-	public Integer percentCompleteForNextLevel;
 	public Integer profileIconId;
 	public Integer summonerLevel;
 

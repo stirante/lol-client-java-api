@@ -13,5 +13,6 @@ public class PhaseRosterSubDTO {
 	public Long replacedPlayerId;
 	public Integer selfBet;
 	public SubState subState;
+	public Integer tier;
 
 }

@@ -3,8 +3,8 @@ package generated;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class LolPatchBuildInfo {
+public class LoginDataPacketSummonerData {
 
-	public String patchline;
+	public LoginDataPacketSummoner summoner;
 
 }

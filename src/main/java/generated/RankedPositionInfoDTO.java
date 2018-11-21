@@ -15,6 +15,7 @@ public class RankedPositionInfoDTO {
 	public Boolean provisional;
 	public LeaguesLcdsLeagueRank rank;
 	public LeaguesLcdsLeagueTier tier;
+	public Long timeUntilInactivityStatusChanges;
 	public Integer wins;
 
 }

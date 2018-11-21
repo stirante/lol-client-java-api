@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class LoginDataPacket {
 
-	public Long timeUntilFirstWinOfDay;
+	public LoginDataPacketSummonerData allSummonerData;
+	public List<LeaguesLcdsSimpleMessage> simpleMessages;
 
 }

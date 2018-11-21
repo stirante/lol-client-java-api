@@ -27,6 +27,7 @@ public class LolRankedLeagueNotificationItem {
 	public LolRankedRankedPosition position;
 	public Long previousPosition;
 	public Long provisionalGameThreshold;
+	public Long provisionalGamesRemaining;
 	public List<Integer> provisionalResults;
 	public LolRankedLeagueQueueType queueType;
 	public String rewardEarned;

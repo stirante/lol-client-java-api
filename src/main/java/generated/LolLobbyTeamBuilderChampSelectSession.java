@@ -8,6 +8,7 @@ public class LolLobbyTeamBuilderChampSelectSession {
 	public List<Object> actions;
 	public Boolean allowBattleBoost;
 	public Boolean allowDuplicatePicks;
+	public Boolean allowLockedEvents;
 	public Boolean allowRerolling;
 	public Boolean allowSkinSelection;
 	public List<Integer> benchChampionIds;
@@ -16,6 +17,7 @@ public class LolLobbyTeamBuilderChampSelectSession {
 	public LolLobbyTeamBuilderChampSelectChatRoomDetails chatDetails;
 	public Long counter;
 	public Long localPlayerCellId;
+	public Integer lockedEventIndex;
 	public List<LolLobbyTeamBuilderChampSelectPlayerSelection> myTeam;
 	public Integer rerollsRemaining;
 	public List<LolLobbyTeamBuilderChampSelectPlayerSelection> theirTeam;

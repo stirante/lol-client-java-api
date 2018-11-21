@@ -9,7 +9,6 @@ public class LolRegaliaRegaliaWithPreferences {
 	public String crestType;
 	public LolRegaliaRankedPositionInfo highestRankedEntry;
 	public String lastSeasonHighestRank;
-	public Integer percentCompleteForNextLevel;
 	public String preferredBannerType;
 	public String preferredCrestType;
 	public Integer profileIconId;

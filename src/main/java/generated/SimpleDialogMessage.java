@@ -7,7 +7,7 @@ public class SimpleDialogMessage {
 
 	public Long accountId;
 	public String msgId;
-	public Object params;
+	public List<String> params;
 	public String type;
 
 }

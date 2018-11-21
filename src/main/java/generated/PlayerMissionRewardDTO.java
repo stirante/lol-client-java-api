@@ -8,7 +8,6 @@ public class PlayerMissionRewardDTO {
 	public String description;
 	public String iconUrl;
 	public String itemId;
-	public MissionRewardMediaDTO media;
 	public Integer quantity;
 	public Boolean rewardFulfilled;
 	public String rewardGroup;

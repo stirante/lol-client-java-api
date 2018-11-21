@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class UriMap {
 
-	public static HashMap<String, Class> toClass = new HashMap<>();
+	private static HashMap<String, Class> toClass = new HashMap<>();
 
 	static {
 		toClass.put("\\/async\\/v1\\/result\\/[^/]+", Object.class);
@@ -129,6 +129,7 @@ public class UriMap {
 		toClass.put("\\/lol-clash\\/v1\\/time", Long.class);
 		toClass.put("\\/lol-clash\\/v1\\/tournament-state-info", LolClashTournamentStateInfo[].class);
 		toClass.put("\\/lol-clash\\/v1\\/tournament-summary", LolClashTournamentSummary[].class);
+		toClass.put("\\/lol-clash\\/v1\\/tournament\\/cancelled", Long[].class);
 		toClass.put("\\/lol-clash\\/v1\\/tournament\\/[^/]+", LolClashTournament.class);
 		toClass.put("\\/lol-clash\\/v1\\/tournament\\/[^/]+\\/player", LolClashPlayerTournamentData.class);
 		toClass.put("\\/lol-clash\\/v1\\/tournament\\/[^/]+\\/player-honor-restricted", Boolean.class);
@@ -179,6 +180,9 @@ public class UriMap {
 		toClass.put("\\/lol-game-queues\\/v1\\/queues", LolGameQueuesQueue[].class);
 		toClass.put("\\/lol-game-queues\\/v1\\/queues\\/type\\/[^/]+", LolGameQueuesQueue.class);
 		toClass.put("\\/lol-game-queues\\/v1\\/queues\\/[^/]+", LolGameQueuesQueue.class);
+		toClass.put("\\/lol-game-session\\/v1\\/echo", LolGameSessionGameSessionResult.class);
+		toClass.put("\\/lol-game-session\\/v1\\/reconnectInfo", LolGameSessionGameSessionReconnect.class);
+		toClass.put("\\/lol-game-session\\/v1\\/remote-echo", LolGameSessionGameSessionResult.class);
 		toClass.put("\\/lol-game-settings\\/v1\\/didreset", Boolean.class);
 		toClass.put("\\/lol-game-settings\\/v1\\/game-settings", Object.class);
 		toClass.put("\\/lol-game-settings\\/v1\\/game-settings-schema", Object.class);
@@ -191,6 +195,7 @@ public class UriMap {
 		toClass.put("\\/lol-gameflow\\/v1\\/battle-training", Boolean.class);
 		toClass.put("\\/lol-gameflow\\/v1\\/extra-game-client-args", String[].class);
 		toClass.put("\\/lol-gameflow\\/v1\\/gameflow-metadata\\/player-status", LolGameflowPlayerStatus.class);
+		toClass.put("\\/lol-gameflow\\/v1\\/gameflow-metadata\\/registration-status", LolGameflowRegistrationStatus.class);
 		toClass.put("\\/lol-gameflow\\/v1\\/gameflow-phase", LolGameflowGameflowPhase.class);
 		toClass.put("\\/lol-gameflow\\/v1\\/session", LolGameflowGameflowSession.class);
 		toClass.put("\\/lol-gameflow\\/v1\\/spectate", Boolean.class);

@@ -12,9 +12,11 @@ public class LolRankedRankedPositionInfo {
 	public String inactivityStatus;
 	public Long lp;
 	public List<LolRankedMiniseries> miniseriesResults;
+	public Long miniseriesTimeLeftToPlayMillis;
 	public LolRankedRankedPosition position;
 	public LolRankedLeagueQueueType queueType;
 	public LolRankedLeagueTier tier;
+	public Long timeUntilInactivityStatusChanges;
 	public Long wins;
 
 }
