@@ -6,8 +6,6 @@ import com.google.gson.annotations.SerializedName;
 public class LolRegaliaRegaliaFrontendConfig {
 
 	public Boolean hovercardEnabled;
-	public Boolean newLobbyEnabled;
-	public Boolean rankedCrestsEnabled;
 	public Boolean selectionsEnabled;
 
 }

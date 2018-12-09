@@ -1,10 +1,14 @@
 package com.stirante.lolclient;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.IOException;
 
 public class SimpleCLI {
 
     public static void main(String[] args) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         if (args.length == 0) {
             showUsage();
         } else {
@@ -28,7 +32,7 @@ public class SimpleCLI {
                 ClientApi api = new ClientApi();
                 try {
                     Object o = api.executeGet(path, Object.class);
-                    System.out.println(o);
+                    System.out.println(gson.toJson(o));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -36,7 +40,7 @@ public class SimpleCLI {
                 ClientApi api = new ClientApi();
                 try {
                     Object o = api.executePost(path, Object.class);
-                    System.out.println(o);
+                    System.out.println(gson.toJson(o));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -7,6 +7,7 @@ public class PlayerMissionRewardDTO {
 
 	public String description;
 	public String iconUrl;
+	public Boolean isObjectiveBasedReward;
 	public String itemId;
 	public Integer quantity;
 	public Boolean rewardFulfilled;

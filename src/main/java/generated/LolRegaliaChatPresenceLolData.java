@@ -5,9 +5,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class LolRegaliaChatPresenceLolData {
 
-	public String level;
-	public String rankedLeagueDivision;
-	public String rankedLeagueQueue;
-	public String rankedLeagueTier;
+	public Integer level;
+	public LolRegaliaLeagueDivision rankedLeagueDivision;
+	public LolRegaliaLeagueQueueType rankedLeagueQueue;
+	public LolRegaliaLeagueTier rankedLeagueTier;
+	public LolRegaliaSummonerProfileRegalia regalia;
 
 }

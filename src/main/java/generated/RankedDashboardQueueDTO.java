@@ -8,8 +8,9 @@ public class RankedDashboardQueueDTO {
 	public List<LeaguesLcdsLeagueListDTO> leagues;
 	public List<RankedPositionInfoDTO> positionInfos;
 	public Boolean positionRanks;
-	public LeaguesLcdsLeagueRank previousSeasonRank;
-	public LeaguesLcdsLeagueTier previousSeasonTier;
-	public LeaguesLcdsQueueType queue;
+	public String previousSeasonRank;
+	public String previousSeasonTier;
+	public Integer provisionalGameThreshold;
+	public String queue;
 
 }

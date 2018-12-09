@@ -19,6 +19,7 @@ public class LolRankedLeagueStanding {
 	public Long position;
 	public Long positionDelta;
 	public Long previousPosition;
+	public String rivalName;
 	public Long wins;
 
 }

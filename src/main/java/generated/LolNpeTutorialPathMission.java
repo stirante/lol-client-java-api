@@ -12,6 +12,7 @@ public class LolNpeTutorialPathMission {
 	public String completionExpression;
 	public Long cooldownTimeMillis;
 	public String description;
+	public LolNpeTutorialPathMissionDisplay display;
 	public String displayType;
 	public Long endTime;
 	public List<LolNpeTutorialPathExpiringWarning> expiringWarnings;

@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class LolNpeTutorialPathRewardStrategy {
 
-	public LolNpeTutorialPathRewardGroupStrategy groupStrategy;
+	public String groupStrategy;
 	public Integer selectMaxGroupCount;
 	public Integer selectMinGroupCount;
 

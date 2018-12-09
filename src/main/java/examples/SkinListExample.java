@@ -3,7 +3,6 @@ package examples;
 import generated.LolChampionsCollectionsChampion;
 import generated.LolChampionsCollectionsChampionSkin;
 import generated.LolSummonerSummoner;
-import generated.Summoner;
 import com.stirante.lolclient.ClientApi;
 
 import java.io.IOException;

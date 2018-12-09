@@ -5,12 +5,11 @@ import com.google.gson.annotations.SerializedName;
 
 public class LeaguesLcdsLeagueListDTO {
 
+	public Long apexUnlockTimeMillis;
 	public List<LeaguesLcdsLeagueItemDTO> entries;
 	public Long maxLeagueSize;
-	public String name;
 	public Long nextApexUpdate;
-	public LeaguesLcdsQueueType queue;
 	public String requestorsName;
-	public LeaguesLcdsLeagueTier tier;
+	public String tier;
 
 }

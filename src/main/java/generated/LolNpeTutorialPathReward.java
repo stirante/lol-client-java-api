@@ -8,7 +8,7 @@ public class LolNpeTutorialPathReward {
 	public String description;
 	public String iconUrl;
 	public String itemId;
-	public LolNpeTutorialPathMedia media;
+	public Integer quantity;
 	public Boolean rewardFulfilled;
 	public String rewardGroup;
 	public Boolean rewardGroupSelected;

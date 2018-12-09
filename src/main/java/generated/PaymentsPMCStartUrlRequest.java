@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class PaymentsPMCStartUrlRequest {
 
-	public Integer gifteeAccountId;
+	public String gifteeAccountId;
 	public String gifteeMessage;
 	public Boolean isPrepaid;
 	public String localeId;

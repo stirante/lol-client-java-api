@@ -5,8 +5,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class RankedDashboardDTO {
 
-	public LeaguesLcdsLeagueRank highestPreviousSeasonRank;
-	public LeaguesLcdsLeagueTier highestPreviousSeasonTier;
+	public String highestPreviousSeasonRank;
+	public String highestPreviousSeasonTier;
 	public List<RankedDashboardQueueDTO> queues;
 
 }

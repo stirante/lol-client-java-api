@@ -11,10 +11,10 @@ public class RankedPositionInfoDTO {
 	public String inactivityStatus;
 	public Integer lp;
 	public LeaguesLcdsMiniSeriesDTO miniSeries;
-	public Position position;
+	public String position;
 	public Boolean provisional;
-	public LeaguesLcdsLeagueRank rank;
-	public LeaguesLcdsLeagueTier tier;
+	public String rank;
+	public String tier;
 	public Long timeUntilInactivityStatusChanges;
 	public Integer wins;
 

@@ -3,7 +3,6 @@ package com.stirante.lolclient;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import generated.*;
-import org.java_websocket.WebSocketImpl;
 
 import javax.net.ssl.*;
 import java.io.*;
@@ -174,12 +173,12 @@ public class ClientApi {
         return dumpStream(in);
     }
 
-    public PlayerNotificationResource[] getPlayerNotifications() throws IOException {
-        return executeGet("/player-notifications/v1/notifications", PlayerNotificationResource[].class);
+    public PlayerNotificationsPlayerNotificationResource[] getPlayerNotifications() throws IOException {
+        return executeGet("/player-notifications/v1/notifications", PlayerNotificationsPlayerNotificationResource[].class);
     }
 
-    public PlayerNotificationResource addPlayerNotification(PlayerNotificationResource notification) throws IOException {
-        return executePost("/player-notifications/v1/notifications", notification, PlayerNotificationResource.class);
+    public PlayerNotificationsPlayerNotificationResource addPlayerNotification(PlayerNotificationsPlayerNotificationResource notification) throws IOException {
+        return executePost("/player-notifications/v1/notifications", notification, PlayerNotificationsPlayerNotificationResource.class);
     }
 
     private String dumpStream(InputStream in) throws IOException {

@@ -1,7 +1,7 @@
 package examples;
 
-import generated.PlayerNotificationResource;
 import com.stirante.lolclient.ClientApi;
+import generated.PlayerNotificationsPlayerNotificationResource;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -10,7 +10,7 @@ public class PlayerNotificationExample {
 
     public static void main(String[] args) throws IOException {
         ClientApi api = new ClientApi();
-        PlayerNotificationResource n = new PlayerNotificationResource();
+        PlayerNotificationsPlayerNotificationResource n = new PlayerNotificationsPlayerNotificationResource();
         n.backgroundUrl = "images/esports_toast_background.jpg";
         n.critical = false;
         n.iconUrl = "fe/lol-player-notifications/images/esports.png";

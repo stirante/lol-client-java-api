@@ -5,13 +5,13 @@ import com.google.gson.annotations.SerializedName;
 
 public class MultiLeagueEntryChangeEventDTO {
 
-	public Integer gameId;
+	public Long gameId;
 	public LeagueEntryChangeEventDTOV2 mainChangeEventDTO;
 	public String multiLeagueChangeEventJwt;
 	public String participantId;
 	public Boolean positionRanks;
 	public Integer provisionalGameThreshold;
-	public LeaguesLcdsQueueType queueType;
+	public String queueType;
 	public Object relatedChangeEventDTOs;
 	public String shardId;
 

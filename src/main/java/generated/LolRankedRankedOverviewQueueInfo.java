@@ -9,6 +9,7 @@ public class LolRankedRankedOverviewQueueInfo {
 	public List<LolRankedRankedPositionInfo> positions;
 	public LolRankedLeagueDivision previousSeasonDivision;
 	public LolRankedLeagueTier previousSeasonTier;
+	public Integer provisionalGameThreshold;
 	public LolRankedLeagueQueueType queueType;
 
 }

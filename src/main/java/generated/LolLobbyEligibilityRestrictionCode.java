@@ -38,6 +38,8 @@ public enum LolLobbyEligibilityRestrictionCode {
 	PLAYERMINLEVELRESTRICTION,
 	@SerializedName("PlayerMinorRestriction")
 	PLAYERMINORRESTRICTION,
+	@SerializedName("PlayerTimePlayedRestriction")
+	PLAYERTIMEPLAYEDRESTRICTION,
 	@SerializedName("PlayerRankedSuspensionRestriction")
 	PLAYERRANKEDSUSPENSIONRESTRICTION,
 	@SerializedName("TeamHighMMRMaxSizeRestriction")

@@ -7,6 +7,7 @@ public class LolLobbyGatekeeperRestrictionDto {
 
 	public Long accountId;
 	public String payload;
+	public String puuid;
 	public Integer queueId;
 	public String reason;
 	public Long remainingMillis;

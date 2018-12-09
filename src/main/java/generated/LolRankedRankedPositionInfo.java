@@ -10,6 +10,7 @@ public class LolRankedRankedPositionInfo {
 	public LolRankedLeagueDivision division;
 	public Long games;
 	public String inactivityStatus;
+	public Boolean isProvisional;
 	public Long lp;
 	public List<LolRankedMiniseries> miniseriesResults;
 	public Long miniseriesTimeLeftToPlayMillis;

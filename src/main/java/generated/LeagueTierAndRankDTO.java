@@ -7,8 +7,8 @@ public class LeagueTierAndRankDTO {
 
 	public String playerOrTeamId;
 	public String playerOrTeamName;
-	public LeaguesLcdsQueueType queueType;
-	public LeaguesLcdsLeagueRank rank;
-	public LeaguesLcdsLeagueTier tier;
+	public String queueType;
+	public String rank;
+	public String tier;
 
 }
