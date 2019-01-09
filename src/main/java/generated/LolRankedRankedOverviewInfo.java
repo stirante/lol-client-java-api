@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class LolRankedRankedOverviewInfo {
 
+	public List<String> earnedRegaliaRewardIds;
 	public LolRankedLeagueDivision highestPreviousSeasonDivision;
 	public LolRankedLeagueTier highestPreviousSeasonTier;
 	public LolRankedRankedPositionInfo highestRankedEntry;

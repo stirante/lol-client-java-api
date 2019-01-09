@@ -3,8 +3,9 @@ package generated;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class LolRankedStatsPluginStatus {
+public class SplitRewardGrantDTO {
 
-	public Boolean ready;
+	public String rewardId;
+	public String rewardType;
 
 }

@@ -95,6 +95,10 @@ public enum LolClashRosterNotifyReason {
 	@SerializedName("BANNED_SMURF_OPPONENT")
 	BANNED_SMURF_OPPONENT,
 	@SerializedName("SUB_INVITE_SELF")
-	SUB_INVITE_SELF
+	SUB_INVITE_SELF,
+	@SerializedName("GAME_START_RETRY")
+	GAME_START_RETRY,
+	@SerializedName("GAME_START_FAILED")
+	GAME_START_FAILED
 
 }

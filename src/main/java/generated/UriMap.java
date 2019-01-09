@@ -392,8 +392,6 @@ public class UriMap {
 		toClass.put("\\/lol-queue-eligibility\\/v1\\/initial-configuration-complete", Boolean.class);
 		toClass.put("\\/lol-queue-eligibility\\/v3\\/custom", LolQueueEligibilityEligibility[].class);
 		toClass.put("\\/lol-queue-eligibility\\/v3\\/eligibility", LolQueueEligibilityEligibility[].class);
-		toClass.put("\\/lol-ranked-stats\\/v1\\/stats\\/[^/]+", LolRankedStatsRankedData.class);
-		toClass.put("\\/lol-ranked-stats\\/v1\\/status", LolRankedStatsPluginStatus.class);
 		toClass.put("\\/lol-ranked\\/v1\\/apex-leagues\\/[^/]+\\/[^/]+", LolRankedRankedApexQueueInfo.class);
 		toClass.put("\\/lol-ranked\\/v1\\/current-lp-change-notification", LolRankedLeaguesNotification.class);
 		toClass.put("\\/lol-ranked\\/v1\\/notifications", LolRankedLeaguesNotification[].class);
@@ -439,6 +437,7 @@ public class UriMap {
 		toClass.put("\\/lol-store\\/v1\\/wallet", LolStoreWallet.class);
 		toClass.put("\\/lol-store\\/v1\\/[^/]+", Object.class);
 		toClass.put("\\/lol-suggested-players\\/v1\\/suggested-players", LolSuggestedPlayersSuggestedPlayersSuggestedPlayer[].class);
+		toClass.put("\\/lol-summoner\\/v1\\/check-name-availability-new-summoners\\/[^/]+", Boolean.class);
 		toClass.put("\\/lol-summoner\\/v1\\/check-name-availability\\/[^/]+", Boolean.class);
 		toClass.put("\\/lol-summoner\\/v1\\/current-summoner", LolSummonerSummoner.class);
 		toClass.put("\\/lol-summoner\\/v1\\/current-summoner\\/autofill", LolSummonerAutoFillDto.class);

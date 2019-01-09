@@ -14,5 +14,7 @@ public class MultiLeagueEntryChangeEventDTO {
 	public String queueType;
 	public Object relatedChangeEventDTOs;
 	public String shardId;
+	public Integer splitPointsGained;
+	public List<SplitRewardGrantDTO> splitRewardGrants;
 
 }

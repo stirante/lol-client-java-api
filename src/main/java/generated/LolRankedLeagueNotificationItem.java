@@ -31,9 +31,11 @@ public class LolRankedLeagueNotificationItem {
 	public List<Integer> provisionalResults;
 	public LolRankedLeagueQueueType queueType;
 	public String rewardEarned;
+	public String rewardEarnedType;
 	public Long seasonEndApexPosition;
 	public LolRankedLeagueDivision seasonEndDivision;
 	public LolRankedLeagueTier seasonEndTier;
+	public Integer splitPointsDelta;
 	public LolRankedLeagueTier tier;
 	public Long timeLastDecayMessageShown;
 	public Long timeUntilDecay;

@@ -8,6 +8,7 @@ public class LolRankedLeaguesNotification {
 	public Boolean acknowledgedByPlayer;
 	public LolRankedLeagueNotificationItem data;
 	public Long id;
+	public String msgId;
 	public Long priority;
 	public Object relatedData;
 	public LolRankedSeverity severity;

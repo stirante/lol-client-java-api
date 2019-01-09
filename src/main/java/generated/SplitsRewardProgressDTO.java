@@ -3,8 +3,8 @@ package generated;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class RankedSummonerLeaguesDTO {
+public class SplitsRewardProgressDTO {
 
-	public List<RankedLeagueListDTO> summonerLeagues;
+	public Object points;
 
 }

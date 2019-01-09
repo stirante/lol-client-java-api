@@ -3,8 +3,8 @@ package generated;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class RankedSummonerLeagueItemsDTO {
+public class LolPatchPatcherExecutableSettings {
 
-	public List<RankedLeagueItemDTO> summonerLeagues;
+	public String app;
 
 }
