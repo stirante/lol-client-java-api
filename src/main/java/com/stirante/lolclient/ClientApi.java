@@ -6,13 +6,14 @@ import generated.*;
 
 import javax.net.ssl.*;
 import java.io.*;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
-import java.util.Base64;
-import java.util.Scanner;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -48,6 +49,7 @@ public class ClientApi {
         } catch (KeyManagementException | NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
+        allowMethods("PATCH");
     }
 
     private String password;
@@ -73,6 +75,32 @@ public class ClientApi {
 
         HostnameVerifier allHostsValid = (hostname, session) -> true;
         HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
+    }
+
+    /**
+     * Great workaround for java rejecting to send http requests with custom methods
+     * From https://stackoverflow.com/a/46323891/6459649
+     * @param methods
+     */
+    private static void allowMethods(String... methods) {
+        try {
+            Field methodsField = HttpURLConnection.class.getDeclaredField("methods");
+
+            Field modifiersField = Field.class.getDeclaredField("modifiers");
+            modifiersField.setAccessible(true);
+            modifiersField.setInt(methodsField, methodsField.getModifiers() & ~Modifier.FINAL);
+
+            methodsField.setAccessible(true);
+
+            String[] oldMethods = (String[]) methodsField.get(null);
+            Set<String> methodsSet = new LinkedHashSet<>(Arrays.asList(oldMethods));
+            methodsSet.addAll(Arrays.asList(methods));
+            String[] newMethods = methodsSet.toArray(new String[0]);
+
+            methodsField.set(null/*static field*/, newMethods);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new IllegalStateException(e);
+        }
     }
 
     public ClientApi() {
@@ -107,13 +135,15 @@ public class ClientApi {
                 //Base64("user:password")
                 String path = matcher.group(1) + "lockfile";
                 String lockfile = readFile(path);
-                if (lockfile == null)
+                if (lockfile == null) {
                     throw new IllegalStateException("Couldn't find lockfile! Check if League of Legends client properly launched.");
+                }
                 String[] split = lockfile.split(":");
                 password = split[3];
                 token = new String(Base64.getEncoder().encode(("riot:" + password).getBytes()));
                 port = Integer.parseInt(matcher1.group(1));
-            } else {
+            }
+            else {
                 throw new IllegalStateException("Couldn't find port or token!");
             }
             if (token.isEmpty() || port == 0) {
@@ -133,7 +163,9 @@ public class ClientApi {
             Scanner scanner = new Scanner(new InputStreamReader(new FileInputStream(path)));
             StringBuilder sb = new StringBuilder();
             while (scanner.hasNextLine()) {
-                if (!sb.toString().isEmpty()) sb.append("\n");
+                if (!sb.toString().isEmpty()) {
+                    sb.append("\n");
+                }
                 sb.append(scanner.nextLine());
             }
             return sb.toString();
@@ -192,7 +224,8 @@ public class ClientApi {
     }
 
     public LolChampionsCollectionsChampion[] getChampions(long summonerId) throws IOException {
-        return executeGet("/lol-champions/v1/inventories/" + summonerId + "/champions", LolChampionsCollectionsChampion[].class);
+        return executeGet(
+                "/lol-champions/v1/inventories/" + summonerId + "/champions", LolChampionsCollectionsChampion[].class);
     }
 
     public RegionLocale getRegionLocale() throws IOException {
@@ -272,6 +305,17 @@ public class ClientApi {
 
     public boolean executePost(String path, Object jsonObject) throws IOException {
         HttpURLConnection conn = getConnection(path, "POST");
+        conn.setDoOutput(true);
+        conn.connect();
+        writeJson(conn, jsonObject);
+        boolean b = conn.getResponseCode() == 204;
+        conn.getInputStream().close();
+        conn.disconnect();
+        return b;
+    }
+
+    public boolean executePatch(String path, Object jsonObject) throws IOException {
+        HttpURLConnection conn = getConnection(path, "PATCH");
         conn.setDoOutput(true);
         conn.connect();
         writeJson(conn, jsonObject);
