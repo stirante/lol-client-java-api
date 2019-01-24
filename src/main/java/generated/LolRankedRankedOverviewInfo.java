@@ -10,5 +10,6 @@ public class LolRankedRankedOverviewInfo {
 	public LolRankedLeagueTier highestPreviousSeasonTier;
 	public LolRankedRankedPositionInfo highestRankedEntry;
 	public List<LolRankedRankedOverviewQueueInfo> queues;
+	public Integer rankedRegaliaLevel;
 
 }

@@ -9,6 +9,6 @@ public class LolRegaliaChatPresenceLolData {
 	public LolRegaliaLeagueDivision rankedLeagueDivision;
 	public LolRegaliaLeagueQueueType rankedLeagueQueue;
 	public LolRegaliaLeagueTier rankedLeagueTier;
-	public LolRegaliaSummonerProfileRegalia regalia;
+	public LolRegaliaRegaliaSettings regalia;
 
 }

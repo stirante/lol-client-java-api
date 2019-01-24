@@ -11,6 +11,8 @@ public enum PatcherComponentStateAction {
 	@SerializedName("Patching")
 	PATCHING,
 	@SerializedName("Repairing")
-	REPAIRING
+	REPAIRING,
+	@SerializedName("Migrating")
+	MIGRATING
 
 }

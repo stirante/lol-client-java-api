@@ -11,6 +11,8 @@ public enum LolPatchComponentStateAction {
 	@SerializedName("Patching")
 	PATCHING,
 	@SerializedName("Repairing")
-	REPAIRING
+	REPAIRING,
+	@SerializedName("Migrating")
+	MIGRATING
 
 }

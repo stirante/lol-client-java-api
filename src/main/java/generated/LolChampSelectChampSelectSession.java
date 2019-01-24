@@ -17,6 +17,7 @@ public class LolChampSelectChampSelectSession {
 	public Integer boostableSkinCount;
 	public LolChampSelectChampSelectChatRoomDetails chatDetails;
 	public Long counter;
+	public LolChampSelectEntitledFeatureState entitledFeatureState;
 	public Boolean isSpectating;
 	public Long localPlayerCellId;
 	public Integer lockedEventIndex;

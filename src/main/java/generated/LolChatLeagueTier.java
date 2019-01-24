@@ -2,12 +2,10 @@ package generated;
 
 import com.google.gson.annotations.SerializedName;
 
-public enum LolChatChatRankedTier {
+public enum LolChatLeagueTier {
 
-	@SerializedName("NOT_RANKED")
-	NOT_RANKED,
-	@SerializedName("PROVISIONAL")
-	PROVISIONAL,
+	@SerializedName("NONE")
+	NONE,
 	@SerializedName("IRON")
 	IRON,
 	@SerializedName("BRONZE")

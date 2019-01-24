@@ -3,9 +3,9 @@ package generated;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class LolCollectionsCollectionsRuneQuantities {
+public class LolWorldsTokenCardLoginSession {
 
-	public List<LolCollectionsCollectionsRuneQuantity> runeQuantities;
+	public Long accountId;
 	public Long summonerId;
 
 }

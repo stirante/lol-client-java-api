@@ -2,7 +2,7 @@ package generated;
 
 import com.google.gson.annotations.SerializedName;
 
-public enum LolRegaliaSummonerProfileRegaliaBannerType {
+public enum LolRegaliaRegaliaBannerType {
 
 	@SerializedName("blank")
 	BLANK,

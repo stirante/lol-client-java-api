@@ -3,13 +3,13 @@ package generated;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class LolChatChatRankedPositionInfo {
+public class LolChatRankedPositionInfo {
 
-	public LolChatChatRankedDivision division;
+	public LolChatLeagueDivision division;
 	public Long games;
 	public Boolean isProvisional;
-	public LolChatChatRankedQueue queueType;
-	public LolChatChatRankedTier tier;
+	public LolChatLeagueQueueType queueType;
+	public LolChatLeagueTier tier;
 	public Long wins;
 
 }
