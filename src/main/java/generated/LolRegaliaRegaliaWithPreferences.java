@@ -7,7 +7,7 @@ public class LolRegaliaRegaliaWithPreferences {
 
 	public String bannerType;
 	public String crestType;
-	public LolRegaliaRankedPositionInfo highestRankedEntry;
+	public LolRegaliaRegaliaRankedEntry highestRankedEntry;
 	public String lastSeasonHighestRank;
 	public String preferredBannerType;
 	public String preferredCrestType;

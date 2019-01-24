@@ -9,5 +9,6 @@ public class SeriesMediaDTO {
 	public String backgroundImageLargeUrl;
 	public String backgroundImageSmallUrl;
 	public String backgroundUrl;
+	public String trackerIconUrl;
 
 }

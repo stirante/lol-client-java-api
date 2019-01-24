@@ -16,6 +16,7 @@ public class LolLobbyTeamBuilderChampionSelectStateV1 {
 	public Integer currentActionSetIndex;
 	public Long currentTimeRemainingMillis;
 	public Long currentTotalTimeMillis;
+	public LolLobbyTeamBuilderEntitledFeatureStateV1 entitledFeatureState;
 	public LolLobbyTeamBuilderTbdInventory inventoryDraft;
 	public Boolean lcuSkipsSendingLoadoutsGco;
 	public Integer localPlayerCellId;

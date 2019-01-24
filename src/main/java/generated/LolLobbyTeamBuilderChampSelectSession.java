@@ -16,6 +16,7 @@ public class LolLobbyTeamBuilderChampSelectSession {
 	public Integer boostableSkinCount;
 	public LolLobbyTeamBuilderChampSelectChatRoomDetails chatDetails;
 	public Long counter;
+	public LolLobbyTeamBuilderEntitledFeatureState entitledFeatureState;
 	public Long localPlayerCellId;
 	public Integer lockedEventIndex;
 	public List<LolLobbyTeamBuilderChampSelectPlayerSelection> myTeam;

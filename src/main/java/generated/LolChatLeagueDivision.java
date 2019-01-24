@@ -2,7 +2,7 @@ package generated;
 
 import com.google.gson.annotations.SerializedName;
 
-public enum LolChatChatRankedDivision {
+public enum LolChatLeagueDivision {
 
 	@SerializedName("I")
 	I,

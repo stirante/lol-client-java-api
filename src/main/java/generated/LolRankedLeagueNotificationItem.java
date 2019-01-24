@@ -20,12 +20,15 @@ public class LolRankedLeagueNotificationItem {
 	public List<LolRankedMiniseries> miniseriesResults;
 	public Long miniseriesTimeLeftToPlayMillis;
 	public Long miniseriesWins;
+	public String nextRewardId;
+	public String nextRewardType;
 	public String notifyReason;
 	public String playerOrTeamId;
 	public String playerOrTeamName;
 	public Long points;
 	public LolRankedRankedPosition position;
 	public Long previousPosition;
+	public Integer previousSplitPointsRequired;
 	public Long provisionalGameThreshold;
 	public Long provisionalGamesRemaining;
 	public List<Integer> provisionalResults;
@@ -35,12 +38,15 @@ public class LolRankedLeagueNotificationItem {
 	public Long seasonEndApexPosition;
 	public LolRankedLeagueDivision seasonEndDivision;
 	public LolRankedLeagueTier seasonEndTier;
-	public Integer splitPointsDelta;
+	public Integer splitPointsBeforeGame;
+	public Integer splitPointsGained;
+	public Integer splitPointsRequired;
 	public LolRankedLeagueTier tier;
 	public Long timeLastDecayMessageShown;
 	public Long timeUntilDecay;
 	public Long timeUntilInactivityStatusChanges;
 	public Long totalPlayed;
+	public Integer upcomingSplitPointsRequired;
 	public Long wins;
 
 }

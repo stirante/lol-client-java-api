@@ -9,6 +9,7 @@ public class LolLobbyTeamBuilderCellV1 {
 	public Integer cellId;
 	public Integer championId;
 	public Integer championPickIntent;
+	public String entitledFeatureType;
 	public Integer skinId;
 	public Integer spell1Id;
 	public Integer spell2Id;

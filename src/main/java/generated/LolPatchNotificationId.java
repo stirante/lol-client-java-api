@@ -15,6 +15,8 @@ public enum LolPatchNotificationId {
 	@SerializedName("WillRestoreClientBackupOnRestart")
 	WILLRESTORECLIENTBACKUPONRESTART,
 	@SerializedName("DidRestoreClientBackup")
-	DIDRESTORECLIENTBACKUP
+	DIDRESTORECLIENTBACKUP,
+	@SerializedName("NotEnoughDiskSpace")
+	NOTENOUGHDISKSPACE
 
 }

@@ -11,6 +11,8 @@ public enum LolGameflowPatcherProductStateAction {
 	@SerializedName("Patching")
 	PATCHING,
 	@SerializedName("Repairing")
-	REPAIRING
+	REPAIRING,
+	@SerializedName("Migrating")
+	MIGRATING
 
 }

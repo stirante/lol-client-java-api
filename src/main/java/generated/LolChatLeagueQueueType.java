@@ -2,15 +2,15 @@ package generated;
 
 import com.google.gson.annotations.SerializedName;
 
-public enum LolChatChatRankedQueue {
+public enum LolChatLeagueQueueType {
 
 	@SerializedName("NONE")
 	NONE,
 	@SerializedName("SOLO5V5")
 	SOLO5V5,
-	@SerializedName("FLEXSR")
-	FLEXSR,
 	@SerializedName("FLEXTT")
-	FLEXTT
+	FLEXTT,
+	@SerializedName("FLEXSR")
+	FLEXSR
 
 }
