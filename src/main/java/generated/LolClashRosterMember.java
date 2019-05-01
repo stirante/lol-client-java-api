@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class LolClashRosterMember {
 
+	public TicketType buyinType;
 	public Integer currentBuyin;
 	public List<LolClashTicketOffer> incomingOffers;
 	public Boolean isSubForOtherTeam;

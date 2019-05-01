@@ -15,6 +15,12 @@ public enum LolLootLootType {
 	@SerializedName("Skin_Rental")
 	SKIN_RENTAL,
 	@SerializedName("SummonerIcon")
-	SUMMONERICON
+	SUMMONERICON,
+	@SerializedName("Companion")
+	COMPANION,
+	@SerializedName("Egg")
+	EGG,
+	@SerializedName("Egg_Color")
+	EGG_COLOR
 
 }

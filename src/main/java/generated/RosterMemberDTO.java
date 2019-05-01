@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class RosterMemberDTO {
 
+	public TicketType bidType;
 	public Integer currentBid;
 	public Long joinTime;
 	public Long playerId;

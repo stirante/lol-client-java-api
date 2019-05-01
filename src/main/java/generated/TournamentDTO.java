@@ -7,6 +7,7 @@ public class TournamentDTO {
 
 	public String bracketSize;
 	public List<Integer> buyInOptions;
+	public List<Integer> buyInOptionsPremium;
 	public Integer entryFee;
 	public Boolean honorRestriction;
 	public Long id;
@@ -25,6 +26,7 @@ public class TournamentDTO {
 	public Long scoutingTimeMs;
 	public Boolean smsRestriction;
 	public Integer themeId;
+	public List<TierCheckinDelay> tierCheckinTimes;
 	public Boolean voiceEnabled;
 
 }

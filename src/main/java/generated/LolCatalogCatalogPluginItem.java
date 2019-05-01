@@ -16,5 +16,7 @@ public class LolCatalogCatalogPluginItem {
 	public List<LolCatalogCatalogPluginPrice> prices;
 	public Long purchaseDate;
 	public Long releaseDate;
+	public String subInventoryType;
+	public List<String> tags;
 
 }

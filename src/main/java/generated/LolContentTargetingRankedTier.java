@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 public enum LolContentTargetingRankedTier {
 
-	@SerializedName("NOT_RANKED")
-	NOT_RANKED,
+	@SerializedName("NONE")
+	NONE,
 	@SerializedName("PROVISIONAL")
 	PROVISIONAL,
 	@SerializedName("IRON")

@@ -8,6 +8,7 @@ public class LolClashTournament {
 	public Boolean allowRosterCreation;
 	public String bracketSize;
 	public List<Integer> buyInOptions;
+	public List<Integer> buyInOptionsPremium;
 	public Long endTimeMs;
 	public Integer entryFee;
 	public Long id;
@@ -25,5 +26,6 @@ public class LolClashTournament {
 	public Long scoutingDurationMs;
 	public Long startTimeMs;
 	public Integer themeId;
+	public List<TierCheckinDelay> tierCheckinTimes;
 
 }

@@ -14,5 +14,6 @@ public class LolCollectionsCollectionsChampionMastery {
 	public String highestGrade;
 	public Long lastPlayTime;
 	public Long playerId;
+	public Integer tokensEarned;
 
 }

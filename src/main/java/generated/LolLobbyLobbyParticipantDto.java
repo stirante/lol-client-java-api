@@ -21,7 +21,6 @@ public class LolLobbyLobbyParticipantDto {
 	public Boolean isBot;
 	public Boolean isLeader;
 	public Boolean isSpectator;
-	public String lastSeasonHighestRank;
 	public String puuid;
 	public Boolean ready;
 	public String secondPositionPreference;

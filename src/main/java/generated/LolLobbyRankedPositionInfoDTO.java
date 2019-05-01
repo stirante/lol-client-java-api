@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class LolLobbyRankedPositionInfoDTO {
 
-	public String position;
+	public String queue;
 	public String rank;
 	public String tier;
 

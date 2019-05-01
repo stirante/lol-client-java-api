@@ -133,7 +133,8 @@ public class ClientApi {
             Matcher matcher1 = PORT.matcher(target);
             if (matcher.find() && matcher1.find()) {
                 //Base64("user:password")
-                String path = matcher.group(1) + "lockfile";
+                //This should fix a bug, where path would not end with '/'
+                String path = new File(new File(matcher.group(1)), "lockfile").getAbsolutePath();
                 String lockfile = readFile(path);
                 if (lockfile == null) {
                     throw new IllegalStateException("Couldn't find lockfile! Check if League of Legends client properly launched.");
@@ -175,8 +176,8 @@ public class ClientApi {
         return null;
     }
 
-    public RsoAuthAuthorization getAuth() throws IOException {
-        return executeGet("/rso-auth/v1/authorization", RsoAuthAuthorization.class);
+    public LolRsoAuthAuthorization getAuth() throws IOException {
+        return executeGet("/rso-auth/v1/authorization", LolRsoAuthAuthorization.class);
     }
 
     public boolean isAuthorized() throws IOException {

@@ -6,12 +6,16 @@ import com.google.gson.annotations.SerializedName;
 public class LolClashClashConfig {
 
 	public String DarkModeEntitlement;
+	public List<String> DisabledEvents;
 	public LolClashClashState EnabledState;
+	public Boolean EventSendingEnabled;
 	public Integer HonorLevelRequired;
 	public Integer HonorRefreshRetrySeconds;
 	public String IconConfig;
 	public Boolean IsPlaymodeRestrictionEnabled;
 	public Integer MaxTimeBeforeLockinNotifySeconds;
+	public Integer MinClashNotificationsSummonerLevel;
+	public Integer MinClashSummonerLevel;
 	public Integer RewardGrantRetryIntervalSeconds;
 	public Boolean UseIndividualEntitlement;
 	public LolClashClashVisibility Visibility;

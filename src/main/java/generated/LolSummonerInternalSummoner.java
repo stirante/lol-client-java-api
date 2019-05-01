@@ -11,7 +11,6 @@ public class LolSummonerInternalSummoner {
 	public String displayName;
 	public Boolean helpFlag;
 	public String internalName;
-	public String lastSeasonHighestRank;
 	public Boolean nameChangeFlag;
 	public Integer profileIconId;
 	public Long summonerId;

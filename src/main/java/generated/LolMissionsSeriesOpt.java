@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class LolMissionsSeriesOpt {
 
-	public String optStatus;
+	public String option;
 	public String seriesId;
 
 }

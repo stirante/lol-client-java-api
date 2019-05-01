@@ -5,21 +5,25 @@ import com.google.gson.annotations.SerializedName;
 
 public class LolRankedLeagueStanding {
 
-	public Long apexDaysUntilDecay;
-	public List<LolRankedLeagueEmblem> emblems;
-	public String id;
-	public Boolean inactive;
-	public String inactivityStatus;
+	public LolRankedLeagueDivision division;
+	public List<String> earnedRegaliaRewardIds;
+	public Boolean isProvisional;
+	public Long leaguePoints;
 	public Long losses;
 	public List<LolRankedMiniseries> miniseriesResults;
-	public String name;
 	public Boolean pendingDemotion;
 	public Boolean pendingPromotion;
-	public Long points;
-	public Long position;
-	public Long positionDelta;
-	public Long previousPosition;
+	public Integer position;
+	public Integer positionDelta;
+	public Integer previousPosition;
+	public LolRankedLeagueDivision previousSeasonAchievedDivision;
+	public LolRankedLeagueTier previousSeasonAchievedTier;
+	public Integer provisionalGamesRemaining;
+	public Integer rankedRegaliaLevel;
 	public String rivalName;
+	public Long summonerId;
+	public String summonerName;
+	public LolRankedLeagueTier tier;
 	public Long wins;
 
 }

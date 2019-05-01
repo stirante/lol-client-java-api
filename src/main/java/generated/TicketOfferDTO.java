@@ -9,5 +9,6 @@ public class TicketOfferDTO {
 	public Long offerPlayerId;
 	public Long receivePlayerId;
 	public TicketOfferState ticketOfferState;
+	public TicketType type;
 
 }

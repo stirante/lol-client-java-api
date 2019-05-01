@@ -6,9 +6,9 @@ import com.google.gson.annotations.SerializedName;
 public class LolRankedLeagueDivisionInfo {
 
 	public Long apexUnlockTimeMillis;
-	public LolRankedLeagueDivision leagueDivision;
-	public LolRankedLeagueTier leagueTier;
+	public LolRankedLeagueDivision division;
 	public Long maxLeagueSize;
 	public List<LolRankedLeagueStanding> standings;
+	public LolRankedLeagueTier tier;
 
 }

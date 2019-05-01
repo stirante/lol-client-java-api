@@ -24,5 +24,8 @@ public class LolContentTargetingPlatformConfig {
 	public Boolean RankedFilterEnabled;
 	public Boolean RevivalFilterEnabled;
 	public Integer RevivalFilterThreshold;
+	public Boolean TargetingAttributeStorageEnabled;
+	public Long TargetingAttributeStorageRolloutPct;
+	public String TargetingAttributeStorageUri;
 
 }

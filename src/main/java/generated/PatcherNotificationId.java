@@ -17,6 +17,8 @@ public enum PatcherNotificationId {
 	@SerializedName("DidRestoreClientBackup")
 	DIDRESTORECLIENTBACKUP,
 	@SerializedName("NotEnoughDiskSpace")
-	NOTENOUGHDISKSPACE
+	NOTENOUGHDISKSPACE,
+	@SerializedName("BrokenPermissions")
+	BROKENPERMISSIONS
 
 }

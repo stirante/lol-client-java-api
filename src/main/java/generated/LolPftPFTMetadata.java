@@ -9,6 +9,7 @@ public class LolPftPFTMetadata {
 	public String appName;
 	public String appVersion;
 	public String env;
+	public Double homepageTimer;
 	public String locale;
 	public LolPftPFTEndOfGameStats stats;
 	public String systemOs;

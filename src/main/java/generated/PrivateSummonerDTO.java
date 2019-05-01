@@ -11,7 +11,6 @@ public class PrivateSummonerDTO {
 	public String internalName;
 	public String name;
 	public Boolean nameChangeFlag;
-	public String previousSeasonHighestTier;
 	public Integer profileIconId;
 	public Long sumId;
 	public Boolean tutorialFlag;

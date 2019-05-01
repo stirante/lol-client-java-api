@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class MissionMetadata {
 
+	public NpeRewardPackMetadata npeRewardPack;
 	public TutorialMetadata tutorial;
 
 }

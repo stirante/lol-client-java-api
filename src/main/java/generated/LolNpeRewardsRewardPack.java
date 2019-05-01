@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 public class LolNpeRewardsRewardPack {
 
 	public Long delay;
+	public Integer index;
 	public LolNpeRewardsReward majorReward;
 	public List<LolNpeRewardsReward> minorRewards;
 	public Boolean premiumReward;

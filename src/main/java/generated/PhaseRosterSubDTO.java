@@ -6,12 +6,12 @@ import com.google.gson.annotations.SerializedName;
 public class PhaseRosterSubDTO {
 
 	public Integer bet;
+	public TicketType betType;
 	public Integer pay;
-	public Integer pendingPay;
 	public Long playerId;
 	public Position position;
+	public Integer premiumPay;
 	public Long replacedPlayerId;
-	public Integer selfBet;
 	public SubState subState;
 	public Integer tier;
 

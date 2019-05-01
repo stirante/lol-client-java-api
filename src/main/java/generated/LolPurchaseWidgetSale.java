@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 public class LolPurchaseWidgetSale {
 
 	public String endDate;
-	public List<LolPurchaseWidgetItemPrice> prices;
+	public List<LolPurchaseWidgetItemCost> prices;
 	public String startDate;
 
 }

@@ -17,6 +17,8 @@ public enum LolPatchNotificationId {
 	@SerializedName("DidRestoreClientBackup")
 	DIDRESTORECLIENTBACKUP,
 	@SerializedName("NotEnoughDiskSpace")
-	NOTENOUGHDISKSPACE
+	NOTENOUGHDISKSPACE,
+	@SerializedName("BrokenPermissions")
+	BROKENPERMISSIONS
 
 }

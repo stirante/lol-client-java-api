@@ -8,8 +8,8 @@ public class LolPurchaseWidgetValidationResponseItem {
 	public String description;
 	public LolPurchaseWidgetItemKey itemKey;
 	public String name;
-	public List<LolPurchaseWidgetItemPrice> prices;
 	public Integer quantity;
 	public LolPurchaseWidgetSale sale;
+	public List<LolPurchaseWidgetItemPrice> validationCurrencyInfo;
 
 }

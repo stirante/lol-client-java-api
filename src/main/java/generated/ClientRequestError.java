@@ -134,6 +134,10 @@ public enum ClientRequestError {
 	PENDING_ROSTER_FULL,
 	@SerializedName("PENDING_ROSTER_CLOSE")
 	PENDING_ROSTER_CLOSE,
+	@SerializedName("PHASE_CANCELLED")
+	PHASE_CANCELLED,
+	@SerializedName("PHASE_FULL")
+	PHASE_FULL,
 	@SerializedName("ROSTER_ELIMINATED")
 	ROSTER_ELIMINATED,
 	@SerializedName("ROSTER_DISBAND_NOT_ALLOWED")

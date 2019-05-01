@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class LolChampionsCollectionsChampionSkin {
 
-	public String cardPath;
 	public Integer championId;
 	public String chromaPath;
 	public List<LolChampionsCollectionsChampionChroma> chromas;
@@ -15,6 +14,7 @@ public class LolChampionsCollectionsChampionSkin {
 	public Integer id;
 	public Boolean isBase;
 	public Boolean lastSelected;
+	public String loadScreenPath;
 	public String name;
 	public LolChampionsCollectionsOwnership ownership;
 	public String rarityGemPath;

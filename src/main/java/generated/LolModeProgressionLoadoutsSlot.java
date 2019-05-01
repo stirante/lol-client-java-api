@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class LolModeProgressionLoadoutsSlot {
 
+	public String contentId;
 	public String inventoryType;
 	public Integer itemId;
 

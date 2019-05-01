@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class LolNpeTutorialPathSeriesOpt {
 
-	public String optStatus;
+	public String option;
 	public String seriesId;
 
 }

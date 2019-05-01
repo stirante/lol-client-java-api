@@ -15,6 +15,8 @@ public enum ClashRewardType {
 	@SerializedName("LOOT")
 	LOOT,
 	@SerializedName("VP")
-	VP
+	VP,
+	@SerializedName("TOC")
+	TOC
 
 }
