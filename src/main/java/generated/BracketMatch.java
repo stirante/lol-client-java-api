@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class BracketMatch {
 
+	public Integer failRosterStatus;
 	public Long forfeitRosterId;
 	public Long gameId;
 	public Long gameStartTime;

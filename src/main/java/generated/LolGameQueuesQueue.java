@@ -30,6 +30,8 @@ public class LolGameQueuesQueue {
 	public Integer numPlayersPerTeam;
 	public LolGameQueuesQueueAvailability queueAvailability;
 	public LolGameQueuesQueueReward queueRewards;
+	public Boolean removalFromGameAllowed;
+	public Integer removalFromGameDelayMinutes;
 	public String shortName;
 	public Boolean showPositionSelector;
 	public Boolean spectatorEnabled;
