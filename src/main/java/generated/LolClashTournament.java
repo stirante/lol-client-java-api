@@ -6,6 +6,8 @@ import com.google.gson.annotations.SerializedName;
 public class LolClashTournament {
 
 	public Boolean allowRosterCreation;
+	public Long bracketFormationInitDelayMs;
+	public Long bracketFormationIntervalMs;
 	public String bracketSize;
 	public List<Integer> buyInOptions;
 	public List<Integer> buyInOptionsPremium;
@@ -26,6 +28,6 @@ public class LolClashTournament {
 	public Long scoutingDurationMs;
 	public Long startTimeMs;
 	public Integer themeId;
-	public List<TierCheckinDelay> tierCheckinTimes;
+	public List<TierConfig> tierConfigs;
 
 }

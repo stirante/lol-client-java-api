@@ -5,6 +5,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class TournamentDTO {
 
+	public Long bracketFormationInitDelayMs;
+	public Long bracketFormationIntervalMs;
 	public String bracketSize;
 	public List<Integer> buyInOptions;
 	public List<Integer> buyInOptionsPremium;
@@ -26,7 +28,7 @@ public class TournamentDTO {
 	public Long scoutingTimeMs;
 	public Boolean smsRestriction;
 	public Integer themeId;
-	public List<TierCheckinDelay> tierCheckinTimes;
+	public List<TierConfig> tierConfigs;
 	public Boolean voiceEnabled;
 
 }

@@ -187,9 +187,6 @@ public class UriMap {
 		toClass.put("\\/lol-game-queues\\/v1\\/queues", LolGameQueuesQueue[].class);
 		toClass.put("\\/lol-game-queues\\/v1\\/queues\\/type\\/[^/]+", LolGameQueuesQueue.class);
 		toClass.put("\\/lol-game-queues\\/v1\\/queues\\/[^/]+", LolGameQueuesQueue.class);
-		toClass.put("\\/lol-game-session\\/v1\\/echo", LolGameSessionGameSessionResult.class);
-		toClass.put("\\/lol-game-session\\/v1\\/reconnectInfo", LolGameSessionGameSessionReconnect.class);
-		toClass.put("\\/lol-game-session\\/v1\\/remote-echo", LolGameSessionGameSessionResult.class);
 		toClass.put("\\/lol-game-settings\\/v1\\/didreset", Boolean.class);
 		toClass.put("\\/lol-game-settings\\/v1\\/game-settings", Object.class);
 		toClass.put("\\/lol-game-settings\\/v1\\/game-settings-schema", Object.class);

@@ -11,6 +11,7 @@ public class LolContentTargetingPlatformConfig {
 	public Boolean Enabled;
 	public Boolean EntitlementsFilterEnabled;
 	public String EntitlementsPrefix;
+	public Boolean InactiveFilterEnabled;
 	public Boolean LaneFilterEnabled;
 	public Integer LaneFilterThreshold;
 	public Boolean LevelFilterEnabled;
@@ -20,10 +21,10 @@ public class LolContentTargetingPlatformConfig {
 	public Integer MasteryFilterDaysSinceLastPlayed;
 	public Boolean MasteryFilterEnabled;
 	public Integer MasteryFilterLevelThreshold;
+	public Boolean MissionsFilterEnabled;
 	public Boolean RankFilterEnabled;
 	public Boolean RankedFilterEnabled;
-	public Boolean RevivalFilterEnabled;
-	public Integer RevivalFilterThreshold;
+	public Boolean SummonerIconFilterEnabled;
 	public Boolean TargetingAttributeStorageEnabled;
 	public Long TargetingAttributeStorageRolloutPct;
 	public String TargetingAttributeStorageUri;

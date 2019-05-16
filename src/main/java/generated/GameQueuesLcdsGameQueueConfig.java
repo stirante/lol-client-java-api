@@ -30,6 +30,8 @@ public class GameQueuesLcdsGameQueueConfig {
 	public String queueStateString;
 	public Boolean randomizeTeamSizes;
 	public Boolean ranked;
+	public Boolean removalFromGameAllowed;
+	public Integer removalFromGameDelayMinutes;
 	public List<Integer> supportedMapIds;
 	public Boolean teamOnly;
 	public Boolean thresholdEnabled;
