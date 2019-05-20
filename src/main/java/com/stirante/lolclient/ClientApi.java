@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 
 public class ClientApi {
 
-    private static final Pattern INSTALL_DIR = Pattern.compile(".+\"--install-directory=([a-zA-Z_0-9- :.\\\\/]+)\".+");
+    private static final Pattern INSTALL_DIR = Pattern.compile(".+\"--install-directory=([()a-zA-Z_0-9- :.\\\\/]+)\".+");
     private static final Pattern PORT = Pattern.compile(".+--app-port=([0-9]+).+");
     private static final Gson GSON = new GsonBuilder().create();
 
