@@ -19,7 +19,8 @@ import java.util.regex.Pattern;
 
 public class ClientApi {
 
-    private static final Pattern INSTALL_DIR = Pattern.compile(".+\"--install-directory=([()a-zA-Z_0-9- :.\\\\/]+)\".+");
+    private static final Pattern INSTALL_DIR =
+            Pattern.compile(".+\"--install-directory=([()a-zA-Z_0-9- :.\\\\/]+)\".+");
     private static final Pattern PORT = Pattern.compile(".+--app-port=([0-9]+).+");
     private static final Gson GSON = new GsonBuilder().create();
 
@@ -52,8 +53,6 @@ public class ClientApi {
         allowMethods("PATCH");
     }
 
-    private String password;
-
     private static void ignoreSSL() throws KeyManagementException, NoSuchAlgorithmException {
         TrustManager[] trustAllCerts = new TrustManager[]{
                 new X509TrustManager() {
@@ -80,7 +79,8 @@ public class ClientApi {
     /**
      * Great workaround for java rejecting to send http requests with custom methods
      * From https://stackoverflow.com/a/46323891/6459649
-     * @param methods
+     *
+     * @param methods methods to allow
      */
     private static void allowMethods(String... methods) {
         try {
@@ -107,6 +107,10 @@ public class ClientApi {
         this(5000, 5000);
     }
 
+    /**
+     * @param connectTimeout an {@code int} that specifies the connect timeout value in milliseconds
+     * @param readTimeout an {@code int} that specifies the timeout value to be used in milliseconds
+     */
     public ClientApi(int connectTimeout, int readTimeout) {
         this.connectTimeout = connectTimeout;
         this.readTimeout = readTimeout;
@@ -140,7 +144,7 @@ public class ClientApi {
                     throw new IllegalStateException("Couldn't find lockfile! Check if League of Legends client properly launched.");
                 }
                 String[] split = lockfile.split(":");
-                password = split[3];
+                String password = split[3];
                 token = new String(Base64.getEncoder().encode(("riot:" + password).getBytes()));
                 port = Integer.parseInt(matcher1.group(1));
             }
@@ -155,10 +159,19 @@ public class ClientApi {
         }
     }
 
+    /**
+     * Creates and opens a websocket for receiving LoL client events
+     * @return connected websocket
+     */
     public ClientWebSocket openWebSocket() throws Exception {
         return new ClientWebSocket(token, port);
     }
 
+    /**
+     * Simple method for reading text file into string
+     * @param path path to the file
+     * @return text contents of the file
+     */
     private String readFile(String path) {
         try {
             Scanner scanner = new Scanner(new InputStreamReader(new FileInputStream(path)));
@@ -176,6 +189,21 @@ public class ClientApi {
         return null;
     }
 
+    /**
+     * Reads {@code java.io.InputStream} content into String
+     * @param in InputStream
+     * @return Text contents of {@code java.io.InputStream}
+     */
+    private String dumpStream(InputStream in) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        Scanner sc = new Scanner(in);
+        while (sc.hasNextLine()) {
+            sb.append(sc.nextLine()).append("\n");
+        }
+        in.close();
+        return sb.toString();
+    }
+
     public LolRsoAuthAuthorization getAuth() throws IOException {
         return executeGet("/rso-auth/v1/authorization", LolRsoAuthAuthorization.class);
     }
@@ -186,10 +214,6 @@ public class ClientApi {
         } catch (FileNotFoundException e) {
             return false;
         }
-    }
-
-    public LolSummonerSummoner getCurrentSummoner() throws IOException {
-        return executeGet("/lol-summoner/v1/current-summoner", LolSummonerSummoner.class);
     }
 
     public String getSwaggerJson() throws IOException {
@@ -204,61 +228,6 @@ public class ClientApi {
         conn.connect();
         InputStream in = conn.getInputStream();
         return dumpStream(in);
-    }
-
-    public PlayerNotificationsPlayerNotificationResource[] getPlayerNotifications() throws IOException {
-        return executeGet("/player-notifications/v1/notifications", PlayerNotificationsPlayerNotificationResource[].class);
-    }
-
-    public PlayerNotificationsPlayerNotificationResource addPlayerNotification(PlayerNotificationsPlayerNotificationResource notification) throws IOException {
-        return executePost("/player-notifications/v1/notifications", notification, PlayerNotificationsPlayerNotificationResource.class);
-    }
-
-    private String dumpStream(InputStream in) throws IOException {
-        StringBuilder sb = new StringBuilder();
-        Scanner sc = new Scanner(in);
-        while (sc.hasNextLine()) {
-            sb.append(sc.nextLine()).append("\n");
-        }
-        in.close();
-        return sb.toString();
-    }
-
-    public LolChampionsCollectionsChampion[] getChampions(long summonerId) throws IOException {
-        return executeGet(
-                "/lol-champions/v1/inventories/" + summonerId + "/champions", LolChampionsCollectionsChampion[].class);
-    }
-
-    public RegionLocale getRegionLocale() throws IOException {
-        return executeGet("/riotclient/region-locale", RegionLocale.class);
-    }
-
-    public LolStoreWallet getWallet() throws IOException {
-        return executeGet("/lol-store/v1/wallet", LolStoreWallet.class);
-    }
-
-    public boolean setRegionLocale(RegionLocale locale) throws IOException {
-        return executePut("/riotclient/region-locale", locale);
-    }
-
-    public String[] getProducts() throws IOException {
-        return executeGet("/patcher/v1/products", String[].class);
-    }
-
-    public PatcherProductState requestCorruptionCheck(String product) throws IOException {
-        return executePost("/patcher/v1/products/" + product + "/detect-corruption-request", PatcherProductState.class);
-    }
-
-    public boolean requestPartialRepair(String product) throws IOException {
-        return executePost("/patcher/v1/products/" + product + "/partial-repair-request");
-    }
-
-    public boolean requestFullRepair(String product) throws IOException {
-        return executePost("/patcher/v1/products/" + product + "/full-repair-request");
-    }
-
-    public LolChatSessionResource getChatSession() throws IOException {
-        return executeGet("/lol-chat/v1/session", LolChatSessionResource.class);
     }
 
     public <T> T executeGet(String path, Class<T> clz) throws IOException {
@@ -361,6 +330,103 @@ public class ClientApi {
         new DataOutputStream(out).write(GSON.toJson(obj).getBytes());
         out.flush();
         out.close();
+    }
+
+    /**
+     * @deprecated Will be removed someday. It should be moved and organized.
+     */
+    @Deprecated
+    public LolSummonerSummoner getCurrentSummoner() throws IOException {
+        return executeGet("/lol-summoner/v1/current-summoner", LolSummonerSummoner.class);
+    }
+
+    /**
+     * @deprecated Will be removed someday. It should be moved and organized.
+     */
+    @Deprecated
+    public PlayerNotificationsPlayerNotificationResource[] getPlayerNotifications() throws IOException {
+        return executeGet("/player-notifications/v1/notifications", PlayerNotificationsPlayerNotificationResource[].class);
+    }
+
+    /**
+     * @deprecated Will be removed someday. It should be moved and organized.
+     */
+    @Deprecated
+    public PlayerNotificationsPlayerNotificationResource addPlayerNotification(PlayerNotificationsPlayerNotificationResource notification) throws IOException {
+        return executePost("/player-notifications/v1/notifications", notification, PlayerNotificationsPlayerNotificationResource.class);
+    }
+
+    /**
+     * @deprecated Will be removed someday. It should be moved and organized.
+     */
+    @Deprecated
+    public LolChampionsCollectionsChampion[] getChampions(long summonerId) throws IOException {
+        return executeGet(
+                "/lol-champions/v1/inventories/" + summonerId + "/champions", LolChampionsCollectionsChampion[].class);
+    }
+
+    /**
+     * @deprecated Will be removed someday. It should be moved and organized.
+     */
+    @Deprecated
+    public RegionLocale getRegionLocale() throws IOException {
+        return executeGet("/riotclient/region-locale", RegionLocale.class);
+    }
+
+    /**
+     * @deprecated Will be removed someday. It should be moved and organized.
+     */
+    @Deprecated
+    public LolStoreWallet getWallet() throws IOException {
+        return executeGet("/lol-store/v1/wallet", LolStoreWallet.class);
+    }
+
+    /**
+     * @deprecated Will be removed someday. It should be moved and organized.
+     */
+    @Deprecated
+    public boolean setRegionLocale(RegionLocale locale) throws IOException {
+        return executePut("/riotclient/region-locale", locale);
+    }
+
+    /**
+     * @deprecated Will be removed someday. It should be moved and organized.
+     */
+    @Deprecated
+    public String[] getProducts() throws IOException {
+        return executeGet("/patcher/v1/products", String[].class);
+    }
+
+    /**
+     * @deprecated Will be removed someday. It should be moved and organized.
+     */
+    @Deprecated
+    public PatcherProductState requestCorruptionCheck(String product) throws IOException {
+        return executePost("/patcher/v1/products/" + product + "/detect-corruption-request", PatcherProductState.class);
+    }
+
+    /**
+     * @deprecated Will be removed someday. It should be moved and organized.
+     */
+    @Deprecated
+    public boolean requestPartialRepair(String product) throws IOException {
+        return executePost("/patcher/v1/products/" + product + "/partial-repair-request");
+    }
+
+    /**
+     * @deprecated Will be removed someday. It should be moved and organized.
+     */
+    @Deprecated
+    public boolean requestFullRepair(String product) throws IOException {
+        return executePost("/patcher/v1/products/" + product + "/full-repair-request");
+    }
+
+    /**
+     * @deprecated Will be removed someday. It should be moved and organized.
+     */
+    @Deprecated
+    public LolChatSessionResource getChatSession() throws IOException {
+        return executeGet("/lol-chat/v1/session", LolChatSessionResource.class);
     }
 
 }
