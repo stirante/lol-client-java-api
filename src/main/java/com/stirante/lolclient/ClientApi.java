@@ -10,18 +10,24 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.file.FileSystems;
+import java.nio.file.WatchEvent;
+import java.nio.file.WatchKey;
+import java.nio.file.WatchService;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static java.nio.file.StandardWatchEventKinds.*;
 
 public class ClientApi {
 
     private static final Pattern INSTALL_DIR =
             Pattern.compile(".+\"--install-directory=([()a-zA-Z_0-9- :.\\\\/]+)\".+");
-    private static final Pattern PORT = Pattern.compile(".+--app-port=([0-9]+).+");
     private static final Gson GSON = new GsonBuilder().create();
 
     /**
@@ -33,6 +39,10 @@ public class ClientApi {
      */
     private int port = 0;
     /**
+     * Path to the League of Legends client directory
+     */
+    private String clientPath;
+    /**
      * Connect timeout
      */
     private int connectTimeout;
@@ -40,6 +50,19 @@ public class ClientApi {
      * Read timeout
      */
     private int readTimeout;
+    /**
+     * Is api connected
+     */
+    private AtomicBoolean connected = new AtomicBoolean(false);
+    /**
+     * Is file watcher started
+     */
+    private AtomicBoolean fileWatcherStarted = new AtomicBoolean(false);
+    /**
+     * Is process watcher started
+     */
+    private AtomicBoolean processWatcherStarted = new AtomicBoolean(false);
+    private Set<ClientConnectionListener> clientListeners = new HashSet<>();
 
     /*
      * Localhost needs HTTPS, but doesn't provide valid SSL
@@ -103,72 +126,212 @@ public class ClientApi {
         }
     }
 
+    /**
+     * Creates and starts the League of Legends client API
+     */
     public ClientApi() {
-        this(5000, 5000);
+        this(null);
     }
 
     /**
-     * @param connectTimeout an {@code int} that specifies the connect timeout value in milliseconds
-     * @param readTimeout an {@code int} that specifies the timeout value to be used in milliseconds
+     * Creates and starts the League of Legends client API
+     *
+     * @param clientPath Path to the League of Legends client directory
      */
-    public ClientApi(int connectTimeout, int readTimeout) {
+    public ClientApi(String clientPath) {
+        this(clientPath, 5000, 5000);
+    }
+
+    /**
+     * Creates and starts the League of Legends client API
+     *
+     * @param clientPath     a {@code java.lang.String} that points to the League of Legends client directory
+     * @param connectTimeout an {@code int} that specifies the connect timeout value in milliseconds
+     * @param readTimeout    an {@code int} that specifies the timeout value to be used in milliseconds
+     */
+    public ClientApi(String clientPath, int connectTimeout, int readTimeout) {
+        this.clientPath = clientPath;
         this.connectTimeout = connectTimeout;
         this.readTimeout = readTimeout;
-        try {
-            String target = "";
-            //Get all processes command line
-            Process process = Runtime.getRuntime().exec("wmic process get CommandLine");
-            InputStream in = process.getInputStream();
-            Scanner sc = new Scanner(in);
-            while (sc.hasNextLine()) {
-                String s = sc.nextLine();
-                //executable has to be LeagueClientUx.exe and must contain in arguments remoting-auth-token
-                if (s.contains("LeagueClientUx.exe") && s.contains("--install-directory=")) {
-                    target = s;
-                    break;
-                }
-            }
-            in.close();
-            process.destroy();
-            if (target.isEmpty()) {
-                throw new IllegalStateException("Couldn't find League of Legends process!");
-            }
-            Matcher matcher = INSTALL_DIR.matcher(target);
-            Matcher matcher1 = PORT.matcher(target);
-            if (matcher.find() && matcher1.find()) {
-                //Base64("user:password")
-                //This should fix a bug, where path would not end with '/'
-                String path = new File(new File(matcher.group(1)), "lockfile").getAbsolutePath();
-                String lockfile = readFile(path);
-                if (lockfile == null) {
-                    throw new IllegalStateException("Couldn't find lockfile! Check if League of Legends client properly launched.");
-                }
-                String[] split = lockfile.split(":");
-                String password = split[3];
-                token = new String(Base64.getEncoder().encode(("riot:" + password).getBytes()));
-                port = Integer.parseInt(matcher1.group(1));
-            }
-            else {
-                throw new IllegalStateException("Couldn't find port or token!");
-            }
-            if (token.isEmpty() || port == 0) {
-                throw new IllegalStateException("Couldn't parse port or token!");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        start();
+    }
+
+    /**
+     * Adds client connection listener
+     */
+    public void addClientConnectionListener(ClientConnectionListener listener) {
+        clientListeners.add(listener);
+        if (isConnected()) {
+            listener.onClientConnected();
         }
     }
 
     /**
+     * Removes a client connection listener
+     */
+    public void removeClientConnectionListener(ClientConnectionListener listener) {
+        clientListeners.remove(listener);
+    }
+
+    /**
+     * Starts the connection with League of Legends client
+     */
+    public void start() {
+        if (clientPath == null) {
+            startProcessWatcher();
+        }
+        else {
+            startFileWatcher(new File(new File(clientPath), "lockfile").getAbsolutePath());
+        }
+    }
+
+    private void setupApiWithLockfile() {
+        String path = new File(new File(clientPath), "lockfile").getAbsolutePath();
+        String lockfile = readFile(path);
+        if (lockfile == null) {
+            throw new IllegalStateException("Couldn't find lockfile! Check if League of Legends client properly launched.");
+        }
+        String[] split = lockfile.split(":");
+        String password = split[3];
+        token = new String(Base64.getEncoder().encode(("riot:" + password).getBytes()));
+        port = Integer.parseInt(split[2]);
+        connected.set(true);
+        for (ClientConnectionListener listener : clientListeners) {
+            listener.onClientConnected();
+        }
+        startFileWatcher(path);
+    }
+
+    /**
+     * Stops watcher services.
+     */
+    public void stop() {
+        fileWatcherStarted.set(false);
+        processWatcherStarted.set(false);
+        connected.set(false);
+        for (ClientConnectionListener listener : clientListeners) {
+            listener.onClientDisconnected();
+        }
+    }
+
+    /**
+     * Starts service, which listens for creation of League of Legends client process
+     */
+    private void startProcessWatcher() {
+        if (processWatcherStarted.get()) {
+            return;
+        }
+        new Thread(() -> {
+            processWatcherStarted.set(true);
+            while (processWatcherStarted.get()) {
+                try {
+                    String target = "";
+                    //Get all processes command line
+                    Process process =
+                            Runtime.getRuntime().exec("WMIC PROCESS WHERE name='LeagueClientUx.exe' GET commandline");
+                    InputStream in = process.getInputStream();
+                    Scanner sc = new Scanner(in);
+                    while (sc.hasNextLine()) {
+                        String s = sc.nextLine();
+                        //executable has to be LeagueClientUx.exe and must contain in arguments install-directory
+                        if (s.contains("LeagueClientUx.exe") && s.contains("--install-directory=")) {
+                            target = s;
+                            break;
+                        }
+                    }
+                    in.close();
+                    process.destroy();
+                    if (target.isEmpty()) {
+                        //slow down a bit
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        continue;
+                    }
+                    Matcher matcher = INSTALL_DIR.matcher(target);
+                    if (matcher.find()) {
+                        clientPath = new File(matcher.group(1)).getAbsolutePath();
+                        setupApiWithLockfile();
+                        processWatcherStarted.set(false);
+                        return;
+                    }
+                    else {
+                        throw new IllegalStateException("Couldn't find port or token in lockfile!");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    /**
+     * Start file watcher, which listens for changes in lockfile
+     *
+     * @param lockfilePath absolute path to the lockfile
+     */
+    private void startFileWatcher(String lockfilePath) {
+        if (fileWatcherStarted.get()) {
+            return;
+        }
+        new Thread(() -> {
+            try {
+                WatchService watcher = FileSystems.getDefault().newWatchService();
+                File file = new File(lockfilePath);
+                WatchKey key = file.getParentFile().toPath().register(watcher,
+                        ENTRY_CREATE,
+                        ENTRY_DELETE);
+                fileWatcherStarted.set(true);
+                while (fileWatcherStarted.get()) {
+                    for (WatchEvent<?> event : key.pollEvents()) {
+                        if (!event.context().toString().equals(file.getName())) {
+                            continue;
+                        }
+                        connected.set(false);
+                        for (ClientConnectionListener listener : clientListeners) {
+                            listener.onClientDisconnected();
+                        }
+                        if (event.kind() != ENTRY_DELETE) {
+                            setupApiWithLockfile();
+                        }
+                    }
+                    //slow down a bit
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+    /**
+     * Is api connected to the League of Legends client
+     */
+    public boolean isConnected() {
+        return connected.get();
+    }
+
+    /**
      * Creates and opens a websocket for receiving LoL client events
+     *
      * @return connected websocket
      */
     public ClientWebSocket openWebSocket() throws Exception {
+        if (!connected.get()) {
+            throw new IllegalStateException("API not connected!");
+        }
         return new ClientWebSocket(token, port);
     }
 
     /**
      * Simple method for reading text file into string
+     *
      * @param path path to the file
      * @return text contents of the file
      */
@@ -191,6 +354,7 @@ public class ClientApi {
 
     /**
      * Reads {@code java.io.InputStream} content into String
+     *
      * @param in InputStream
      * @return Text contents of {@code java.io.InputStream}
      */
@@ -314,6 +478,9 @@ public class ClientApi {
     }
 
     private HttpURLConnection getConnection(String endpoint, String method) throws IOException {
+        if (!connected.get()) {
+            throw new IllegalStateException("API not connected!");
+        }
         URL url = new URL("https", "127.0.0.1", port, endpoint);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.addRequestProperty("Authorization", "Basic " + token);

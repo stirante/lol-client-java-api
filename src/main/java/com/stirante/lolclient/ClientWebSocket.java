@@ -33,7 +33,7 @@ public class ClientWebSocket extends WebSocketClient {
 
     ClientWebSocket(String token, int port) throws Exception {
         super(new URI("wss://localhost:" + port + "/"), createHeaders("Authorization", "Basic " + token));
-        //ignore SSL as
+        //ignore SSL as sockets are secure, but without valid certificate
         TrustManager[] trustAllCerts = new TrustManager[]{
                 new X509TrustManager() {
                     public X509Certificate[] getAcceptedIssuers() {
