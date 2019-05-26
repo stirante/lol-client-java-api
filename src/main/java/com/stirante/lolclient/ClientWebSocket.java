@@ -23,7 +23,7 @@ public class ClientWebSocket extends WebSocketClient {
             .registerTypeAdapter(Event.class, new EventDeserializer())
             .registerTypeAdapter(Message.class, new MessageDeserializer())
             .create();
-    private static HashMap<Pattern, Class> patterns = new HashMap<>();
+    private static final HashMap<Pattern, Class> patterns = new HashMap<>();
 
     static {
         for (String s : UriMap.toClass.keySet()) {
@@ -151,9 +151,9 @@ public class ClientWebSocket extends WebSocketClient {
     }
 
     public static class Message {
-        private MessageType type;
-        private String source;
-        private Event event;
+        private final MessageType type;
+        private final String source;
+        private final Event event;
 
         private Message(MessageType type, String source, Event event) {
             this.type = type;
@@ -184,9 +184,9 @@ public class ClientWebSocket extends WebSocketClient {
     }
 
     public static class Event {
-        private Object data;
-        private String eventType;
-        private String uri;
+        private final Object data;
+        private final String eventType;
+        private final String uri;
 
         private Event(Object data, String eventType, String uri) {
             this.data = data;
@@ -237,7 +237,8 @@ public class ClientWebSocket extends WebSocketClient {
                 try {
                     data = context.deserialize((JsonElement) data, c);
                 } catch (JsonSyntaxException e) {
-                    System.out.println("Failed to deserialize from URI " + uri);
+                    //TODO: I think it should be reported a bit better, but don't really have an idea for that
+                    System.err.println("Failed to deserialize from URI " + uri);
                     return new Event(data, eventType, uri);
                 }
             }

@@ -1,8 +1,5 @@
 package generated;
 
-import java.util.List;
-import com.google.gson.annotations.SerializedName;
-
 public class LolPatchPublishedReleaseResponse {
 
 	public String client_app_patch_url;

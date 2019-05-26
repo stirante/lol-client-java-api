@@ -1,5 +1,9 @@
 package com.stirante.lolclient;
 
+/**
+ * I don't think anyone finds this class useful, so I'm marking it for removal in future versions
+ */
+@Deprecated
 public class GameLocale {
 
     public static final String CZECH_CZECHIA = "cs_CZ";

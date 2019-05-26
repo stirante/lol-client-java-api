@@ -1,8 +1,5 @@
 package generated;
 
-import java.util.List;
-import com.google.gson.annotations.SerializedName;
-
 public class GcloudVoiceChatUpdateSettingsResource {
 
 	public String currentCaptureDeviceHandle;

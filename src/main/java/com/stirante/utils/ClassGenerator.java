@@ -16,6 +16,7 @@ import java.util.*;
 /**
  * Generates all classes from OpenAPI scheme. League of Legends client should be opened while running generator.
  */
+@SuppressWarnings("deprecation")
 public class ClassGenerator {
 
     /**
@@ -24,9 +25,10 @@ public class ClassGenerator {
      */
     private static final List<String> RESERVED =
             Arrays.asList("implements", "int", "long", "short", "extends", "super", "char", "byte");
-    public static final String PATH = "src/main/java/generated/";
+    private static final String PATH = "src/main/java/generated/";
 
     public static void main(String[] args) throws IOException {
+        ClientApi.setLegacyMode(true);
         ClientApi api = new ClientApi();
         String openapiJson = api.getOpenapiJson();
         File f = new File(PATH);
@@ -38,14 +40,14 @@ public class ClassGenerator {
                 new OpenAPIParser().readContents(openapiJson, new ArrayList<>(), new ParseOptions());
         Map<String, Schema> schemas = swagger.getOpenAPI().getComponents().getSchemas();
         for (String s : schemas.keySet()) {
+            boolean importList = false;
+            boolean importSerializedName = false;
             Schema schema = schemas.get(s);
             if (schema.getType().equalsIgnoreCase("object")) {
                 StringBuilder b = new StringBuilder();
                 b
                         .append("package generated;")
-                        .append("\n")
-                        .append("\nimport java.util.List;")
-                        .append("\nimport com.google.gson.annotations.SerializedName;")
+                        .append("%imports%")
                         .append("\n")
                         .append("\npublic class ").append(s).append(" {")
                         .append("\n");
@@ -53,10 +55,14 @@ public class ClassGenerator {
                 for (String s1 : properties.keySet()) {
                     Schema prop = properties.get(s1);
                     String type = getType(prop, true);
+                    if (type.startsWith("List")) {
+                        importList = true;
+                    }
                     if (isValidName(s1)) {
                         b.append("\n\tpublic ").append(type).append(" ").append(s1).append(";");
                     }
                     else {
+                        importSerializedName = true;
                         b.append("\n\t@SerializedName(\"").append(s1).append("\")");
                         b.append("\n\tpublic ").append(type).append(" ").append(toValidName(s1)).append(";");
                     }
@@ -65,7 +71,17 @@ public class ClassGenerator {
                         .append("\n")
                         .append("\n")
                         .append("}");
-                saveFile(s, b);
+                StringBuilder imports = new StringBuilder();
+                if (importList || importSerializedName) {
+                    imports.append("\n");
+                }
+                if (importList) {
+                    imports.append("\nimport java.util.List;");
+                }
+                if (importSerializedName) {
+                    imports.append("\nimport com.google.gson.annotations.SerializedName;");
+                }
+                saveFile(s, b.toString().replace("%imports%", imports));
             }
             else if (schema.getType().equalsIgnoreCase("string") && schema.getEnum() != null &&
                     !schema.getEnum().isEmpty()) {
@@ -92,7 +108,7 @@ public class ClassGenerator {
                         .append("\n")
                         .append("\n")
                         .append("}");
-                saveFile(s, b);
+                saveFile(s, b.toString());
             }
         }
         // generate uri map, so we can match class by it's URI (for receiving live events from client)
@@ -104,7 +120,7 @@ public class ClassGenerator {
                 .append("\n")
                 .append("\npublic class UriMap {")
                 .append("\n")
-                .append("\n\tpublic static HashMap<String, Class> toClass = new HashMap<>();")
+                .append("\n\tpublic static final HashMap<String, Class> toClass = new HashMap<>();")
                 .append("\n")
                 .append("\n\tstatic {");
         for (String path : swagger.getOpenAPI().getPaths().keySet()) {
@@ -127,7 +143,7 @@ public class ClassGenerator {
                 .append("\n\t}")
                 .append("\n")
                 .append("\n}");
-        saveFile("UriMap", b);
+        saveFile("UriMap", b.toString());
     }
 
     /**
@@ -149,10 +165,10 @@ public class ClassGenerator {
      * @param s class name
      * @param b class contents
      */
-    private static void saveFile(String s, StringBuilder b) throws IOException {
+    private static void saveFile(String s, String b) throws IOException {
         File file = new File(PATH + s + ".java");
         FileWriter fw = new FileWriter(file);
-        fw.write(b.toString());
+        fw.write(b);
         fw.flush();
         fw.close();
         System.out.println(s + ".java saved!");
@@ -187,10 +203,10 @@ public class ClassGenerator {
         else if (schema.getType().equalsIgnoreCase("array")) {
             ArraySchema as = (ArraySchema) schema;
             if (asList) {
-                type = "List<" + getType(as.getItems(), asList) + ">";
+                type = "List<" + getType(as.getItems(), true) + ">";
             }
             else {
-                type = getType(as.getItems(), asList) + "[]";
+                type = getType(as.getItems(), false) + "[]";
             }
         }
         else if (schema.getType().equalsIgnoreCase("boolean")) {

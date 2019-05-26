@@ -28,23 +28,35 @@ public class SimpleCLI {
                     lastParam = arg;
                 }
             }
-            if (method.equalsIgnoreCase("GET")) {
-                ClientApi api = new ClientApi();
-                try {
-                    Object o = api.executeGet(path, Object.class);
-                    System.out.println(gson.toJson(o));
-                } catch (IOException e) {
-                    e.printStackTrace();
+            ClientApi api = new ClientApi();
+            String finalMethod = method;
+            String finalPath = path;
+            api.addClientConnectionListener(new ClientConnectionListener() {
+                @Override
+                public void onClientConnected() {
+                    if (finalMethod.equalsIgnoreCase("GET")) {
+                        try {
+                            Object o = api.executeGet(finalPath, Object.class);
+                            System.out.println(gson.toJson(o));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else if (finalMethod.equalsIgnoreCase("POST")) {
+                        try {
+                            Object o = api.executePost(finalPath, Object.class);
+                            System.out.println(gson.toJson(o));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    api.stop();
                 }
-            } else if (method.equalsIgnoreCase("POST")) {
-                ClientApi api = new ClientApi();
-                try {
-                    Object o = api.executePost(path, Object.class);
-                    System.out.println(gson.toJson(o));
-                } catch (IOException e) {
-                    e.printStackTrace();
+
+                @Override
+                public void onClientDisconnected() {
+
                 }
-            }
+            });
         }
     }
 

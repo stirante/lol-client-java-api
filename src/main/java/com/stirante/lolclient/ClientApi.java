@@ -22,13 +22,28 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static java.nio.file.StandardWatchEventKinds.*;
+import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
+import static java.nio.file.StandardWatchEventKinds.ENTRY_DELETE;
 
 public class ClientApi {
 
     private static final Pattern INSTALL_DIR =
             Pattern.compile(".+\"--install-directory=([()a-zA-Z_0-9- :.\\\\/]+)\".+");
     private static final Gson GSON = new GsonBuilder().create();
+    /**
+     * Enabled 'legacy' mode
+     */
+    private static final AtomicBoolean legacyMode = new AtomicBoolean(false);
+
+    /**
+     * If enabled, makes it possible to use the library the way it was prior to version 1.1.0.
+     * It's not guaranteed to work in future versions. In case new features would break legacy mode, I will
+     * prioritize new features over this.
+     */
+    @Deprecated
+    public static void setLegacyMode(boolean legacyMode) {
+        ClientApi.legacyMode.set(legacyMode);
+    }
 
     /**
      * Auth token used for requests
@@ -53,16 +68,19 @@ public class ClientApi {
     /**
      * Is api connected
      */
-    private AtomicBoolean connected = new AtomicBoolean(false);
+    private final AtomicBoolean connected = new AtomicBoolean(false);
     /**
      * Is file watcher started
      */
-    private AtomicBoolean fileWatcherStarted = new AtomicBoolean(false);
+    private final AtomicBoolean fileWatcherStarted = new AtomicBoolean(false);
     /**
      * Is process watcher started
      */
-    private AtomicBoolean processWatcherStarted = new AtomicBoolean(false);
-    private Set<ClientConnectionListener> clientListeners = new HashSet<>();
+    private final AtomicBoolean processWatcherStarted = new AtomicBoolean(false);
+    /**
+     * List of event listeners
+     */
+    private final Set<ClientConnectionListener> clientListeners = new HashSet<>();
 
     /*
      * Localhost needs HTTPS, but doesn't provide valid SSL
@@ -162,7 +180,11 @@ public class ClientApi {
     public void addClientConnectionListener(ClientConnectionListener listener) {
         clientListeners.add(listener);
         if (isConnected()) {
-            listener.onClientConnected();
+            try {
+                listener.onClientConnected();
+            } catch (Throwable t) {
+                t.printStackTrace();
+            }
         }
     }
 
@@ -177,6 +199,12 @@ public class ClientApi {
      * Starts the connection with League of Legends client
      */
     public void start() {
+        if (legacyMode.get()) {
+            checkClientProcess();
+            if (!isConnected()) {
+                throw new IllegalStateException("LoL client not found!");
+            }
+        }
         if (clientPath == null) {
             startProcessWatcher();
         }
@@ -196,10 +224,14 @@ public class ClientApi {
         token = new String(Base64.getEncoder().encode(("riot:" + password).getBytes()));
         port = Integer.parseInt(split[2]);
         connected.set(true);
-        for (ClientConnectionListener listener : clientListeners) {
-            listener.onClientConnected();
-        }
         startFileWatcher(path);
+        for (ClientConnectionListener listener : clientListeners) {
+            try {
+                listener.onClientConnected();
+            } catch (Throwable t) {
+                t.printStackTrace();
+            }
+        }
     }
 
     /**
@@ -208,60 +240,77 @@ public class ClientApi {
     public void stop() {
         fileWatcherStarted.set(false);
         processWatcherStarted.set(false);
-        connected.set(false);
-        for (ClientConnectionListener listener : clientListeners) {
-            listener.onClientDisconnected();
+        if (isConnected()) {
+            connected.set(false);
+            for (ClientConnectionListener listener : clientListeners) {
+                try {
+                    listener.onClientDisconnected();
+                } catch (Throwable t) {
+                    t.printStackTrace();
+                }
+            }
         }
+    }
+
+    /**
+     * Checks process list for LoL client instance
+     *
+     * @return true, if process has been found
+     */
+    private boolean checkClientProcess() {
+        try {
+            String target = "";
+            //Get all processes command line
+            Process process =
+                    Runtime.getRuntime().exec("WMIC PROCESS WHERE name='LeagueClientUx.exe' GET commandline");
+            InputStream in = process.getInputStream();
+            Scanner sc = new Scanner(in);
+            while (sc.hasNextLine()) {
+                String s = sc.nextLine();
+                //executable has to be LeagueClientUx.exe and must contain in arguments install-directory
+                if (s.contains("LeagueClientUx.exe") && s.contains("--install-directory=")) {
+                    target = s;
+                    break;
+                }
+            }
+            in.close();
+            process.destroy();
+            if (target.isEmpty()) {
+                return false;
+            }
+            Matcher matcher = INSTALL_DIR.matcher(target);
+            if (matcher.find()) {
+                clientPath = new File(matcher.group(1)).getAbsolutePath();
+                setupApiWithLockfile();
+                processWatcherStarted.set(false);
+                return true;
+            }
+            else {
+                throw new IllegalStateException("Couldn't find port or token in lockfile!");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     /**
      * Starts service, which listens for creation of League of Legends client process
      */
     private void startProcessWatcher() {
-        if (processWatcherStarted.get()) {
+        if (processWatcherStarted.get() || legacyMode.get()) {
             return;
         }
         new Thread(() -> {
             processWatcherStarted.set(true);
             while (processWatcherStarted.get()) {
-                try {
-                    String target = "";
-                    //Get all processes command line
-                    Process process =
-                            Runtime.getRuntime().exec("WMIC PROCESS WHERE name='LeagueClientUx.exe' GET commandline");
-                    InputStream in = process.getInputStream();
-                    Scanner sc = new Scanner(in);
-                    while (sc.hasNextLine()) {
-                        String s = sc.nextLine();
-                        //executable has to be LeagueClientUx.exe and must contain in arguments install-directory
-                        if (s.contains("LeagueClientUx.exe") && s.contains("--install-directory=")) {
-                            target = s;
-                            break;
-                        }
+                if (!checkClientProcess()) {
+                    //slow down a bit
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
-                    in.close();
-                    process.destroy();
-                    if (target.isEmpty()) {
-                        //slow down a bit
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        continue;
-                    }
-                    Matcher matcher = INSTALL_DIR.matcher(target);
-                    if (matcher.find()) {
-                        clientPath = new File(matcher.group(1)).getAbsolutePath();
-                        setupApiWithLockfile();
-                        processWatcherStarted.set(false);
-                        return;
-                    }
-                    else {
-                        throw new IllegalStateException("Couldn't find port or token in lockfile!");
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
             }
         }).start();
@@ -273,7 +322,7 @@ public class ClientApi {
      * @param lockfilePath absolute path to the lockfile
      */
     private void startFileWatcher(String lockfilePath) {
-        if (fileWatcherStarted.get()) {
+        if (fileWatcherStarted.get() || legacyMode.get()) {
             return;
         }
         new Thread(() -> {
@@ -289,9 +338,15 @@ public class ClientApi {
                         if (!event.context().toString().equals(file.getName())) {
                             continue;
                         }
-                        connected.set(false);
-                        for (ClientConnectionListener listener : clientListeners) {
-                            listener.onClientDisconnected();
+                        if (isConnected()) {
+                            connected.set(false);
+                            for (ClientConnectionListener listener : clientListeners) {
+                                try {
+                                    listener.onClientDisconnected();
+                                } catch (Throwable t) {
+                                    t.printStackTrace();
+                                }
+                            }
                         }
                         if (event.kind() != ENTRY_DELETE) {
                             setupApiWithLockfile();
@@ -345,6 +400,8 @@ public class ClientApi {
                 }
                 sb.append(scanner.nextLine());
             }
+            //wow, I can't believe I forgot about closing this stream
+            scanner.close();
             return sb.toString();
         } catch (FileNotFoundException e) {
             e.printStackTrace();

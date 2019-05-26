@@ -33,7 +33,7 @@ Add the project as a dependency:
 
 ```java
 dependencies {
-	compile 'com.github.stirante:lol-client-java-api:1.0.1'
+	compile 'com.github.stirante:lol-client-java-api:1.1.0'
 }
 ```
 
@@ -56,7 +56,7 @@ Add the project as a dependency:
 <dependency>
     <groupId>com.github.stirante</groupId>
     <artifactId>lol-client-java-api</artifactId>
-    <version>1.0.9</version>
+    <version>1.1.0</version>
 </dependency>
 ```
 
@@ -65,12 +65,14 @@ Add the project as a dependency:
 This library depends on League of Legends client and requires it to be open while using this API.
 
 ```java
+package examples;
+
+import com.stirante.lolclient.ClientApi;
+import com.stirante.lolclient.ClientConnectionListener;
 import generated.LolChampionsCollectionsChampion;
 import generated.LolChampionsCollectionsChampionSkin;
-import generated.Summoner;
-import com.stirante.lolclient.ClientApi;
+import generated.LolSummonerSummoner;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -81,28 +83,47 @@ public class SkinListExample {
     /**
      * Simple example, which show all owned champions and skins (with purchase date)
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         //Initialize API
         ClientApi api = new ClientApi();
-        //Check if user is logged in
-        if (!api.isAuthorized()) {
-            System.out.println("Not logged in!");
-            return;
-        }
-        //Get current summoner
-        Summoner summoner = api.getCurrentSummoner();
-        //Get champion collection of summoner
-        LolChampionsCollectionsChampion[] champions = api.getChampions(summoner.summonerId);
-        for (LolChampionsCollectionsChampion champion : champions) {
-            if (champion.ownership.owned) {
-                System.out.println(champion.name + " purchased on " + FORMATTER.format(new Date(champion.ownership.rental.purchaseDate)));
-                for (LolChampionsCollectionsChampionSkin skin : champion.skins) {
-                    if (!skin.isBase && skin.ownership.owned) {
-                        System.out.println("\t" + skin.name + " purchased on " + FORMATTER.format(new Date(skin.ownership.rental.purchaseDate)));
+        api.addClientConnectionListener(new ClientConnectionListener() {
+            @Override
+            public void onClientConnected() {
+                try {
+                    //Check if user is logged in
+                    if (!api.isAuthorized()) {
+                        System.out.println("Not logged in!");
+                        return;
                     }
+                    //Get current summoner
+                    LolSummonerSummoner summoner = api.executeGet("/lol-summoner/v1/current-summoner", LolSummonerSummoner.class);
+                    //Get champion collection of summoner
+                    LolChampionsCollectionsChampion[] champions = api.executeGet(
+                            "/lol-champions/v1/inventories/" + summoner.summonerId + "/champions",
+                            LolChampionsCollectionsChampion[].class);
+                    for (LolChampionsCollectionsChampion champion : champions) {
+                        if (champion.ownership.owned) {
+                            System.out.println(champion.name + " purchased on " +
+                                    FORMATTER.format(new Date(champion.ownership.rental.purchaseDate)));
+                            for (LolChampionsCollectionsChampionSkin skin : champion.skins) {
+                                if (!skin.isBase && skin.ownership.owned) {
+                                    System.out.println("\t" + skin.name + " purchased on " +
+                                            FORMATTER.format(new Date(skin.ownership.rental.purchaseDate)));
+                                }
+                            }
+                        }
+                    }
+                    api.stop();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
-        }
+
+            @Override
+            public void onClientDisconnected() {
+
+            }
+        });
     }
 }
 ```
@@ -110,8 +131,11 @@ public class SkinListExample {
 This library is still under development and lacks many features. Right now to access them, use these methods.
 
 ```java
-import generated.LolChatUserResource;
+package examples;
+
 import com.stirante.lolclient.ClientApi;
+import com.stirante.lolclient.ClientConnectionListener;
+import generated.LolChatUserResource;
 
 import java.io.IOException;
 
@@ -120,13 +144,29 @@ public class DirectAccessExample {
     /**
      * Simple example, which shows how to access API directly
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         //Initialize API
         ClientApi api = new ClientApi();
-        //Get current user chat info
-        LolChatUserResource user = api.executeGet("/lol-chat/v1/me", LolChatUserResource.class);
-        //Print status message
-        System.out.println(user.statusMessage);
+        //Add listener, which will notify us about client connection available
+        api.addClientConnectionListener(new ClientConnectionListener() {
+            @Override
+            public void onClientConnected() {
+                try {
+                    //Get current user chat info
+                    LolChatUserResource user = api.executeGet("/lol-chat/v1/me", LolChatUserResource.class);
+                    //Print status message
+                    System.out.println(user.statusMessage);
+                    api.stop();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onClientDisconnected() {
+
+            }
+        });
     }
 }
 
@@ -156,6 +196,7 @@ Library also allows for listening to events from League of Legends client
 package examples;
 
 import com.stirante.lolclient.ClientApi;
+import com.stirante.lolclient.ClientConnectionListener;
 import com.stirante.lolclient.ClientWebSocket;
 
 import java.io.BufferedReader;
@@ -163,29 +204,48 @@ import java.io.InputStreamReader;
 
 public class WebSocketExample {
 
+    private static ClientWebSocket socket;
+
     /**
      * Simple example showing how to receive websocket events from client
      */
     public static void main(String[] args) throws Exception {
         //Initialize API
         ClientApi api = new ClientApi();
-        //open web socket
-        ClientWebSocket socket = api.openWebSocket();
-        //add event handler, which prints every received event
-        socket.setSocketListener(new ClientWebSocket.SocketListener() {
+        api.addClientConnectionListener(new ClientConnectionListener() {
             @Override
-            public void onEvent(ClientWebSocket.Event event) {
-                System.out.println(event);
+            public void onClientConnected() {
+                System.out.println("Client connected");
+                try {
+                    //open web socket
+                    socket = api.openWebSocket();
+                    //add event handler, which prints every received event
+                    socket.setSocketListener(new ClientWebSocket.SocketListener() {
+                        @Override
+                        public void onEvent(ClientWebSocket.Event event) {
+                            System.out.println(event);
+                        }
+
+                        @Override
+                        public void onClose(int code, String reason) {
+                            System.out.println("Socket closed, reason: " + reason);
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
-            public void onClose(int code, String reason) {
-                System.out.println("Socket closed, reason: " + reason);
+            public void onClientDisconnected() {
+                System.out.println("Client disconnected");
+                socket.close();
             }
         });
         //close socket when user enters something into console
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         reader.readLine();
+        api.stop();
         socket.close();
     }
 
