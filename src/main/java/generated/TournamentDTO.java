@@ -19,6 +19,7 @@ public class TournamentDTO {
 	public List<TournamentPhaseDTO> phases;
 	public Integer queueId;
 	public Boolean rankRestriction;
+	public Long resumeTime;
 	public List<ClashRewardConfigClient> rewardConfig;
 	public Long rosterCreateDeadline;
 	public Integer rosterSize;
@@ -26,6 +27,7 @@ public class TournamentDTO {
 	public Long scheduleTime;
 	public Long scoutingTimeMs;
 	public Boolean smsRestriction;
+	public TournamentStatusEnum status;
 	public Integer themeId;
 	public List<TierConfig> tierConfigs;
 	public Boolean voiceEnabled;

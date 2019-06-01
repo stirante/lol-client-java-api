@@ -130,6 +130,7 @@ public class UriMap {
 		toClass.put("\\/lol-clash\\/v1\\/roster\\/[^/]+\\/stats", LolClashRosterStats.class);
 		toClass.put("\\/lol-clash\\/v1\\/scouting\\/champions", LolClashScoutingChampions[].class);
 		toClass.put("\\/lol-clash\\/v1\\/scouting\\/matchhistory", Object.class);
+		toClass.put("\\/lol-clash\\/v1\\/simple-state-flags", LolClashSimpleStateFlag[].class);
 		toClass.put("\\/lol-clash\\/v1\\/thirdparty\\/team-data", LolClashThirdPartyApiRoster.class);
 		toClass.put("\\/lol-clash\\/v1\\/time", Long.class);
 		toClass.put("\\/lol-clash\\/v1\\/tournament-state-info", LolClashTournamentStateInfo[].class);
@@ -488,6 +489,7 @@ public class UriMap {
 		toClass.put("\\/player-notifications\\/v1\\/config", PlayerNotificationsPlayerNotificationConfigResource.class);
 		toClass.put("\\/player-notifications\\/v1\\/notifications", PlayerNotificationsPlayerNotificationResource[].class);
 		toClass.put("\\/player-notifications\\/v1\\/notifications\\/[^/]+", PlayerNotificationsPlayerNotificationResource.class);
+		toClass.put("\\/plugin-manager\\/v1\\/external-plugins\\/availability", ExternalPluginsResource.class);
 		toClass.put("\\/plugin-manager\\/v1\\/status", PluginManagerResource.class);
 		toClass.put("\\/plugin-manager\\/v2\\/descriptions", PluginDescriptionResource[].class);
 		toClass.put("\\/plugin-manager\\/v2\\/descriptions\\/[^/]+", PluginDescriptionResource.class);

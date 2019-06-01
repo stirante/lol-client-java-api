@@ -20,6 +20,8 @@ public enum LolClashNotifyReason {
 	OWNER_CLOSE,
 	@SerializedName("DISMISS")
 	DISMISS,
+	@SerializedName("ROSTER_DELETE")
+	ROSTER_DELETE,
 	@SerializedName("OWNER_TRANSFER")
 	OWNER_TRANSFER,
 	@SerializedName("CHANGE_LOGO")

@@ -22,6 +22,7 @@ public class LolLobbyTeamBuilderChampionSelectStateV1 {
 	public LolLobbyTeamBuilderLockedEventsStateV1 lockedEventsState;
 	public String pickIntentClearedReason;
 	public LolLobbyTeamBuilderRerollStateV1 rerollState;
+	public Boolean skipChampionSelect;
 	public String subphase;
 	public String teamChatRoomId;
 	public String teamId;

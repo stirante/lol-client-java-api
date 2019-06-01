@@ -17,6 +17,8 @@ public enum LolClashTournamentNotifyReason {
 	@SerializedName("UPDATE_PHASE")
 	UPDATE_PHASE,
 	@SerializedName("REVERT_PHASE")
-	REVERT_PHASE
+	REVERT_PHASE,
+	@SerializedName("UPDATE_STATUS")
+	UPDATE_STATUS
 
 }

@@ -22,6 +22,7 @@ public class LolChampSelectChampSelectSession {
 	public Integer lockedEventIndex;
 	public List<LolChampSelectChampSelectPlayerSelection> myTeam;
 	public Integer rerollsRemaining;
+	public Boolean skipChampionSelect;
 	public List<LolChampSelectChampSelectPlayerSelection> theirTeam;
 	public LolChampSelectChampSelectTimer timer;
 	public List<LolChampSelectChampSelectTradeContract> trades;

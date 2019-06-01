@@ -21,11 +21,13 @@ public class LolClashTournament {
 	public String nameLocKey;
 	public String nameLocKeySecondary;
 	public List<LolClashTournamentPhase> phases;
+	public Long resumeTime;
 	public List<ClashRewardConfigClient> rewardConfig;
 	public Long rosterCreateDeadline;
 	public Integer rosterSize;
 	public Long scoutingDurationMs;
 	public Long startTimeMs;
+	public TournamentStatusEnum status;
 	public Integer themeId;
 	public List<TierConfig> tierConfigs;
 

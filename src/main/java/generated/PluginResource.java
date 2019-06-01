@@ -9,7 +9,6 @@ public class PluginResource {
 	public List<PluginResourceContract> dependencies;
 	public String dynLibFileName;
 	public String dynLibPath;
-	public String externalUri;
 	public String feature;
 	public String fullName;
 	public List<PluginResourceContract> implementedContracts;
