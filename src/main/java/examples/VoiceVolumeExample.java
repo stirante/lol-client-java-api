@@ -39,15 +39,10 @@ public class VoiceVolumeExample {
                                     for (VoiceChatParticipantResource participant : re.participants) {
                                         //If volume isn't 50, we send an update to this participant
                                         if (participant.volume != 50) {
-                                            VoiceChatUpdateParticipantResource update =
-                                                    new VoiceChatUpdateParticipantResource();
-                                            update.isMuted = false;
-                                            update.volume = 50;
                                             try {
                                                 api.executePut(
-                                                        "/voice-chat/v2/sessions/" + re.id + "/participants/" +
-                                                                participant.id,
-                                                        update);
+                                                        "/lol-premade-voice/v1/participants/" + participant.id + "/volume",
+                                                        50);
                                             } catch (IOException e) {
                                                 e.printStackTrace();
                                             }

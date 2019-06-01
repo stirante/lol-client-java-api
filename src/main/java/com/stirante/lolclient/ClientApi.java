@@ -27,6 +27,57 @@ import static java.nio.file.StandardWatchEventKinds.ENTRY_DELETE;
 
 public class ClientApi {
 
+    private static final List<String> ALLOWED_ENDPOINTS = Arrays.asList(
+            "lol-active-boosts",
+            "lol-banners",
+            "lol-career-stats",
+            "lol-champ-select",
+            "lol-champ-select-legacy",
+            "lol-clubs",
+            "lol-clubs-public",
+            "lol-collections",
+            "lol-end-of-game",
+            "lol-featured-modes",
+            "lol-game-client-chat",
+            "lol-game-queues",
+            "lol-game-settings",
+            "lol-gameflow",
+            "lol-highlights",
+            "lol-honor-v2",
+            "lol-loadouts",
+            "lol-lobby",
+            "lol-lobby-team-builder",
+            "lol-1oot",
+            "lol-loyalty",
+            "lol-maps",
+            "lol-matchmaking",
+            "lol-missions",
+            "lol-npe-rewards",
+            "lol-npe-tutorial-path",
+            "lol-patch",
+            "lol-perks",
+            "lol-pft",
+            "lol-platform-config",
+            "lol-player-behavior",
+            "lol-player-level-up",
+            "lol-summoner",
+            "lol-player-messaging",
+            "lol-player-preferences",
+            "lol-pre-end-of-game",
+            "lol-premade-voice",
+            "lol-purchase-widget",
+            "lol-queue-eligibility",
+            "lol-ranked",
+            "lol-recommendations",
+            "lol-regalia",
+            "lol-replays",
+            "lol-service-status",
+            "lol-settings",
+            "lol-simple-dialog-messages",
+            "lol-spectator",
+            "lol-suggested-players",
+            "lol-trophies"
+    );
     private static final Pattern INSTALL_DIR =
             Pattern.compile(".+\"--install-directory=([()a-zA-Z_0-9- :.\\\\/]+)\".+");
     private static final Gson GSON = new GsonBuilder().create();
@@ -34,6 +85,10 @@ public class ClientApi {
      * Enabled 'legacy' mode
      */
     private static final AtomicBoolean legacyMode = new AtomicBoolean(false);
+    /**
+     * Disables warnings about using disallowed endpoint
+     */
+    private static final AtomicBoolean disableEndpointWarnings = new AtomicBoolean(false);
 
     /**
      * If enabled, makes it possible to use the library the way it was prior to version 1.1.0.
@@ -43,6 +98,13 @@ public class ClientApi {
     @Deprecated
     public static void setLegacyMode(boolean legacyMode) {
         ClientApi.legacyMode.set(legacyMode);
+    }
+
+    /**
+     * Disables warnings about using disallowed endpoint
+     */
+    public static void setDisableEndpointWarnings(boolean disableEndpointWarnings) {
+        ClientApi.disableEndpointWarnings.set(disableEndpointWarnings);
     }
 
     /**
@@ -425,13 +487,9 @@ public class ClientApi {
         return sb.toString();
     }
 
-    public LolRsoAuthAuthorization getAuth() throws IOException {
-        return executeGet("/rso-auth/v1/authorization", LolRsoAuthAuthorization.class);
-    }
-
     public boolean isAuthorized() throws IOException {
         try {
-            return getAuth().currentAccountId > 0;
+            return executeGet("/lol-summoner/v1/current-summoner", LolSummonerSummoner.class).accountId > 0;
         } catch (FileNotFoundException e) {
             return false;
         }
@@ -539,6 +597,15 @@ public class ClientApi {
             throw new IllegalStateException("API not connected!");
         }
         URL url = new URL("https", "127.0.0.1", port, endpoint);
+        if (!disableEndpointWarnings.get()) {
+            String path = url.getPath().substring(1, url.getPath().substring(1).indexOf('/') + 1);
+            if (!ALLOWED_ENDPOINTS.contains(path)) {
+                System.err.println("Using endpoint \"" + path + "\" which is not in the list of allowed endpoints!");
+                System.err.println(
+                        "If you're seeing this message while using allowed endpoint, consider opening an issue" +
+                                " or pull request.");
+            }
+        }
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.addRequestProperty("Authorization", "Basic " + token);
         conn.setRequestProperty("Content-Type", "application/json");
@@ -554,6 +621,14 @@ public class ClientApi {
         new DataOutputStream(out).write(GSON.toJson(obj).getBytes());
         out.flush();
         out.close();
+    }
+
+    /**
+     * @deprecated Uses disallowed endpoint. Will be removed in future versions
+     */
+    @Deprecated
+    public LolRsoAuthAuthorization getAuth() throws IOException {
+        return executeGet("/rso-auth/v1/authorization", LolRsoAuthAuthorization.class);
     }
 
     /**
