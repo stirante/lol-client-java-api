@@ -89,6 +89,10 @@ public class ClientApi {
      * Disables warnings about using disallowed endpoint
      */
     private static final AtomicBoolean disableEndpointWarnings = new AtomicBoolean(false);
+    /**
+     * Prints out all responses from client to System.out
+     */
+    private static final AtomicBoolean printResponse = new AtomicBoolean(false);
 
     /**
      * If enabled, makes it possible to use the library the way it was prior to version 1.1.0.
@@ -105,6 +109,13 @@ public class ClientApi {
      */
     public static void setDisableEndpointWarnings(boolean disableEndpointWarnings) {
         ClientApi.disableEndpointWarnings.set(disableEndpointWarnings);
+    }
+
+    /**
+     * Prints out all responses from client to System.out
+     */
+    public static void setPrintResponse(boolean printResponse) {
+        ClientApi.printResponse.set(printResponse);
     }
 
     /**
@@ -474,17 +485,30 @@ public class ClientApi {
     /**
      * Reads {@code java.io.InputStream} content into String
      *
+     * From https://stackoverflow.com/a/5445161/6459649
+     *
      * @param in InputStream
      * @return Text contents of {@code java.io.InputStream}
      */
-    private String dumpStream(InputStream in) throws IOException {
-        StringBuilder sb = new StringBuilder();
-        Scanner sc = new Scanner(in);
-        while (sc.hasNextLine()) {
-            sb.append(sc.nextLine()).append("\n");
+    private String dumpStream(InputStream in) {
+        java.util.Scanner s = new java.util.Scanner(in).useDelimiter("\\A");
+        return s.hasNext() ? s.next() : "";
+    }
+
+    /**
+     * Decodes input stream into object
+     */
+    private <T> T decodeResponse(InputStream in, Class<T> clz) throws IOException {
+        if (printResponse.get()) {
+            String s = dumpStream(in);
+            in.close();
+            System.out.println(s);
+            return GSON.fromJson(s, clz);
+        } else {
+            T result = GSON.fromJson(new InputStreamReader(in), clz);
+            in.close();
+            return result;
         }
-        in.close();
-        return sb.toString();
     }
 
     public boolean isAuthorized() throws IOException {
@@ -512,9 +536,7 @@ public class ClientApi {
     public <T> T executeGet(String path, Class<T> clz) throws IOException {
         HttpURLConnection conn = getConnection(path, "GET");
         conn.connect();
-        InputStream in = conn.getInputStream();
-        T result = GSON.fromJson(new InputStreamReader(in), clz);
-        in.close();
+        T result = decodeResponse(conn.getInputStream(), clz);
         conn.disconnect();
         return result;
     }
@@ -535,9 +557,7 @@ public class ClientApi {
         conn.setDoOutput(true);
         conn.connect();
         writeJson(conn, jsonObject);
-        InputStream in = conn.getInputStream();
-        T result = GSON.fromJson(new InputStreamReader(in), clz);
-        in.close();
+        T result = decodeResponse(conn.getInputStream(), clz);
         conn.disconnect();
         return result;
     }
@@ -545,9 +565,7 @@ public class ClientApi {
     public <T> T executePost(String path, Class<T> clz) throws IOException {
         HttpURLConnection conn = getConnection(path, "POST");
         conn.connect();
-        InputStream in = conn.getInputStream();
-        T result = GSON.fromJson(new InputStreamReader(in), clz);
-        in.close();
+        T result = decodeResponse(conn.getInputStream(), clz);
         conn.disconnect();
         return result;
     }
