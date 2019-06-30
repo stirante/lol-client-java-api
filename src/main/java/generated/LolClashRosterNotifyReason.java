@@ -40,6 +40,8 @@ public enum LolClashRosterNotifyReason {
 	PERIOD_SPLIT,
 	@SerializedName("GAME_COMPLETED")
 	GAME_COMPLETED,
+	@SerializedName("GAME_SCHEDULED")
+	GAME_SCHEDULED,
 	@SerializedName("GAME_STARTED")
 	GAME_STARTED,
 	@SerializedName("GAME_STARTED_ERROR")

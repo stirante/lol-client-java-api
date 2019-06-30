@@ -5,7 +5,7 @@ import java.util.List;
 public class LolPurchaseWidgetItemDefinition {
 
 	public LolPurchaseWidgetCatalogPluginItemAssets assets;
-	public List<LolPurchaseWidgetBundledItemPricingInfo> bundledItems;
+	public LolPurchaseWidgetBundledItemPricingInfo bundledItemPrice;
 	public String description;
 	public String inventoryType;
 	public Integer itemId;

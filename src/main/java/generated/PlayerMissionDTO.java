@@ -13,6 +13,7 @@ public class PlayerMissionDTO {
 	public String description;
 	public MissionDisplay display;
 	public String displayType;
+	public Long earnedDate;
 	public Long endTime;
 	public List<MissionAlertDTO> expiringWarnings;
 	public String helperText;

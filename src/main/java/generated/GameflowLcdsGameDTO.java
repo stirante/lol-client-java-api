@@ -5,6 +5,7 @@ import java.util.List;
 public class GameflowLcdsGameDTO {
 
 	public String gameMode;
+	public Integer gameQueueConfigId;
 	public String gameState;
 	public String gameType;
 	public Integer gameTypeConfigId;

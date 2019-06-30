@@ -8,5 +8,6 @@ public class LolMatchmakingMatchmakingLowPriorityData {
 	public List<Long> penalizedSummonerIds;
 	public Double penaltyTime;
 	public Double penaltyTimeRemaining;
+	public String reason;
 
 }

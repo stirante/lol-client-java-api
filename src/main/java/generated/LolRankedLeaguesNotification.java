@@ -10,7 +10,6 @@ public class LolRankedLeaguesNotification {
 	public String nextRewardType;
 	public Integer previousSplitPointsRequired;
 	public Long priority;
-	public Object relatedData;
 	public String rewardEarned;
 	public String rewardEarnedType;
 	public LolRankedSeverity severity;

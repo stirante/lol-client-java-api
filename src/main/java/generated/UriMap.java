@@ -7,6 +7,7 @@ public class UriMap {
 	public static final HashMap<String, Class> toClass = new HashMap<>();
 
 	static {
+		toClass.put("\\/anti-addiction\\/v1\\/policies\\/[^/]+\\/anti-addiction-state", LolTencentAntiaddictionAntiAddictionState.class);
 		toClass.put("\\/async\\/v1\\/result\\/[^/]+", Object.class);
 		toClass.put("\\/async\\/v1\\/status\\/[^/]+", Object.class);
 		toClass.put("\\/client-config\\/v1\\/config", Object.class);
@@ -172,15 +173,19 @@ public class UriMap {
 		toClass.put("\\/lol-collections\\/v2\\/inventories\\/[^/]+\\/summoner-icons\\/[^/]+", LolCollectionsCollectionsSummonerIcon.class);
 		toClass.put("\\/lol-content-targeting\\/v1\\/filters", LolContentTargetingContentTargetingFilterResponse.class);
 		toClass.put("\\/lol-content-targeting\\/v1\\/locale", LolContentTargetingContentTargetingLocaleResponse.class);
+		toClass.put("\\/lol-cosmetics\\/v1\\/inventories\\/[^/]+\\/companions", LolCosmeticsCompanionsGroupedViewModel.class);
+		toClass.put("\\/lol-cosmetics\\/v1\\/inventories\\/[^/]+\\/map-skins", LolCosmeticsTFTMapSkinGroupedViewModel.class);
 		toClass.put("\\/lol-email-verification\\/v1\\/email", LolEmailVerificationEmailVerificationSession.class);
 		toClass.put("\\/lol-end-of-game\\/v1\\/champion-mastery-updates", LolEndOfGameChampionMasteryUpdate.class);
 		toClass.put("\\/lol-end-of-game\\/v1\\/eog-stats-block", LolEndOfGameEndOfGameStats.class);
+		toClass.put("\\/lol-end-of-game\\/v1\\/gameclient-eog-stats-block", LolEndOfGameGameClientEndOfGameStats.class);
 		toClass.put("\\/lol-end-of-game\\/v1\\/reported-players", Long[].class);
+		toClass.put("\\/lol-end-of-game\\/v1\\/tft-eog-stats", LolEndOfGameTFTEndOfGameViewModel.class);
 		toClass.put("\\/lol-esport-stream-notifications\\/v1\\/live-streams", LolEsportStreamNotificationsESportsLiveStreams.class);
 		toClass.put("\\/lol-esport-stream-notifications\\/v1\\/stream-url", String.class);
 		toClass.put("\\/lol-featured-modes\\/v1\\/entitled-feature\\/[^/]+", LolFeaturedModesEntitledFeatureResource.class);
 		toClass.put("\\/lol-game-client-chat\\/v1\\/buddies", String[].class);
-		toClass.put("\\/lol-game-client-chat\\/v1\\/ignored-summoners", String[].class);
+		toClass.put("\\/lol-game-client-chat\\/v1\\/ignored-summoners", Long[].class);
 		toClass.put("\\/lol-game-queues\\/v1\\/custom", LolGameQueuesQueueCustomGame.class);
 		toClass.put("\\/lol-game-queues\\/v1\\/custom-non-default", LolGameQueuesQueueCustomGame.class);
 		toClass.put("\\/lol-game-queues\\/v1\\/game-type-config\\/[^/]+", LolGameQueuesQueueGameTypeConfig.class);
@@ -198,6 +203,9 @@ public class UriMap {
 		toClass.put("\\/lol-gameflow\\/v1\\/availability", LolGameflowGameflowAvailability.class);
 		toClass.put("\\/lol-gameflow\\/v1\\/basic-tutorial", Boolean.class);
 		toClass.put("\\/lol-gameflow\\/v1\\/battle-training", Boolean.class);
+		toClass.put("\\/lol-gameflow\\/v1\\/early-exit-notifications\\/eog", Object[].class);
+		toClass.put("\\/lol-gameflow\\/v1\\/early-exit-notifications\\/lobby", Object[].class);
+		toClass.put("\\/lol-gameflow\\/v1\\/early-exit-notifications\\/missions", Object[].class);
 		toClass.put("\\/lol-gameflow\\/v1\\/extra-game-client-args", String[].class);
 		toClass.put("\\/lol-gameflow\\/v1\\/gameflow-metadata\\/player-status", LolGameflowPlayerStatus.class);
 		toClass.put("\\/lol-gameflow\\/v1\\/gameflow-metadata\\/registration-status", LolGameflowRegistrationStatus.class);
@@ -280,6 +288,7 @@ public class UriMap {
 		toClass.put("\\/lol-lobby\\/v1\\/lobby\\/countdown", Long.class);
 		toClass.put("\\/lol-lobby\\/v1\\/lobby\\/invitations", LolLobbyLobbyInvitation[].class);
 		toClass.put("\\/lol-lobby\\/v1\\/lobby\\/invitations\\/[^/]+", LolLobbyLobbyInvitation.class);
+		toClass.put("\\/lol-lobby\\/v1\\/parties\\/gamemode", LolLobbyGameModeDto.class);
 		toClass.put("\\/lol-lobby\\/v1\\/parties\\/health", String.class);
 		toClass.put("\\/lol-lobby\\/v1\\/parties\\/player", LolLobbyPlayerDto.class);
 		toClass.put("\\/lol-lobby\\/v1\\/party-rewards", LolLobbyLobbyPartyRewards.class);
@@ -299,9 +308,11 @@ public class UriMap {
 		toClass.put("\\/lol-lobby\\/v2\\/received-invitations", LolLobbyReceivedInvitationDto[].class);
 		toClass.put("\\/lol-lobby\\/v2\\/registration-status", Object.class);
 		toClass.put("\\/lol-login\\/v1\\/account-state", LolLoginAccountStateResource.class);
+		toClass.put("\\/lol-login\\/v1\\/login-connection-state", LolLoginLoginConnectionState.class);
 		toClass.put("\\/lol-login\\/v1\\/login-data-packet", Object.class);
 		toClass.put("\\/lol-login\\/v1\\/login-in-game-creds", Object.class);
 		toClass.put("\\/lol-login\\/v1\\/login-platform-credentials", LolLoginPlatformGeneratedCredentials.class);
+		toClass.put("\\/lol-login\\/v1\\/login-queue-state", LolLoginLoginQueue.class);
 		toClass.put("\\/lol-login\\/v1\\/session", LolLoginLoginSession.class);
 		toClass.put("\\/lol-login\\/v1\\/wallet", LolLoginLoginSessionWallet.class);
 		toClass.put("\\/lol-loot\\/v1\\/enabled", Boolean.class);
@@ -470,6 +481,10 @@ public class UriMap {
 		toClass.put("\\/lol-summoner\\/v2\\/summoners", LolSummonerSummoner[].class);
 		toClass.put("\\/lol-tencent-qt\\/v1\\/ui-states", Object.class);
 		toClass.put("\\/lol-tencent-qt\\/v1\\/ui-states\\/[^/]+", LolTencentQtTencentQTNotification.class);
+		toClass.put("\\/lol-tft\\/v1\\/tft\\/battlepass", LolMissionsTftBattlepass.class);
+		toClass.put("\\/lol-tft\\/v1\\/tft\\/orb", LolMissionsTftOrb.class);
+		toClass.put("\\/lol-tft\\/v1\\/tft\\/pending-tft-games-count", Integer.class);
+		toClass.put("\\/lol-tft\\/v1\\/tft\\/weekly-missions", LolMissionsTftWeeklyMissions.class);
 		toClass.put("\\/lol-token-upsell\\/v1\\/all", LolWorldsTokenCardTokenUpsell[].class);
 		toClass.put("\\/lol-trophies\\/v1\\/current-summoner\\/trophies\\/profile", LolTrophiesTrophyProfileData.class);
 		toClass.put("\\/lol-trophies\\/v1\\/players\\/[^/]+\\/trophies\\/profile", LolTrophiesTrophyProfileData.class);
