@@ -3,6 +3,7 @@ package com.stirante.lolclient;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import generated.*;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.EntityBuilder;
 import org.apache.http.client.methods.*;
@@ -10,11 +11,11 @@ import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.ContentType;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import javax.net.ssl.*;
 import java.io.*;
-import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.FileSystems;
@@ -463,7 +464,7 @@ public class ClientApi {
 
     /**
      * Reads {@code java.io.InputStream} content into String
-     *
+     * <p>
      * From https://stackoverflow.com/a/5445161/6459649
      *
      * @param in InputStream
@@ -521,6 +522,11 @@ public class ClientApi {
 
     public <T> T executeGet(String path, Class<T> clz) throws IOException {
         HttpGet conn = getConnection(path, new HttpGet());
+        return getResponseObject(clz, conn);
+    }
+
+    public <T> T executeGet(String path, Class<T> clz, String... queryParams) throws IOException {
+        HttpGet conn = getConnection(path, new HttpGet(), queryParams);
         return getResponseObject(clz, conn);
     }
 
@@ -591,16 +597,28 @@ public class ClientApi {
         }
     }
 
-    private <T extends HttpRequestBase> T getConnection(String endpoint, T method) {
+    /**
+     * Prepares Http request with proper URL and authorization.
+     * Simple usage: getConnection("/endpoint", new HttpGet(), "key1", "value1", key2", "value2")
+     * @param endpoint endpoint
+     * @param method Base request
+     * @param queryParams Pairs of get parameters. Must be divisible by 2.
+     */
+    private <T extends HttpRequestBase> T getConnection(String endpoint, T method, String... queryParams) {
         if (!connected.get()) {
             throw new IllegalStateException("API not connected!");
         }
         try {
+            List<NameValuePair> params = new ArrayList<>();
+            for (int i = 0; i < queryParams.length; i += 2) {
+                params.add(new BasicNameValuePair(queryParams[i], queryParams[i + 1]));
+            }
             URI uri = new URIBuilder()
                     .setScheme("https")
                     .setHost("127.0.0.1")
                     .setPath(endpoint)
                     .setPort(port)
+                    .addParameters(params)
                     .build();
             if (!disableEndpointWarnings.get()) {
                 String path = uri.getPath().substring(1, uri.getPath().substring(1).indexOf('/') + 1);
