@@ -3,13 +3,20 @@ package com.stirante.lolclient;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import generated.*;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.entity.EntityBuilder;
+import org.apache.http.client.methods.*;
+import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.entity.ContentType;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 
 import javax.net.ssl.*;
 import java.io.*;
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.file.FileSystems;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
@@ -131,13 +138,13 @@ public class ClientApi {
      */
     private String clientPath;
     /**
-     * Connect timeout
+     * Request config
      */
-    private int connectTimeout;
+    private RequestConfig requestConfig;
     /**
-     * Read timeout
+     * HTTP client
      */
-    private int readTimeout;
+    private CloseableHttpClient client;
     /**
      * Is api connected
      */
@@ -155,19 +162,8 @@ public class ClientApi {
      */
     private final Set<ClientConnectionListener> clientListeners = new HashSet<>();
 
-    /*
-     * Localhost needs HTTPS, but doesn't provide valid SSL
-     */
-    static {
-        try {
-            ignoreSSL();
-        } catch (KeyManagementException | NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        allowMethods("PATCH");
-    }
-
-    private static void ignoreSSL() throws KeyManagementException, NoSuchAlgorithmException {
+    private static CloseableHttpClient createHttpClient() throws KeyManagementException, NoSuchAlgorithmException {
+        //Localhost needs HTTPS, but doesn't provide valid SSL
         TrustManager[] trustAllCerts = new TrustManager[]{
                 new X509TrustManager() {
                     public X509Certificate[] getAcceptedIssuers() {
@@ -188,33 +184,10 @@ public class ClientApi {
 
         HostnameVerifier allHostsValid = (hostname, session) -> true;
         HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
-    }
-
-    /**
-     * Great workaround for java rejecting to send http requests with custom methods
-     * From https://stackoverflow.com/a/46323891/6459649
-     *
-     * @param methods methods to allow
-     */
-    private static void allowMethods(String... methods) {
-        try {
-            Field methodsField = HttpURLConnection.class.getDeclaredField("methods");
-
-            Field modifiersField = Field.class.getDeclaredField("modifiers");
-            modifiersField.setAccessible(true);
-            modifiersField.setInt(methodsField, methodsField.getModifiers() & ~Modifier.FINAL);
-
-            methodsField.setAccessible(true);
-
-            String[] oldMethods = (String[]) methodsField.get(null);
-            Set<String> methodsSet = new LinkedHashSet<>(Arrays.asList(oldMethods));
-            methodsSet.addAll(Arrays.asList(methods));
-            String[] newMethods = methodsSet.toArray(new String[0]);
-
-            methodsField.set(null/*static field*/, newMethods);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            throw new IllegalStateException(e);
-        }
+        return HttpClients.custom()
+                .setSSLContext(sc)
+                .setSSLHostnameVerifier(allHostsValid)
+                .build();
     }
 
     /**
@@ -242,8 +215,15 @@ public class ClientApi {
      */
     public ClientApi(String clientPath, int connectTimeout, int readTimeout) {
         this.clientPath = clientPath;
-        this.connectTimeout = connectTimeout;
-        this.readTimeout = readTimeout;
+        this.requestConfig = RequestConfig.custom()
+                .setConnectTimeout(connectTimeout)
+                .setSocketTimeout(readTimeout)
+                .build();
+        try {
+            this.client = createHttpClient();
+        } catch (KeyManagementException | NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
         start();
     }
 
@@ -473,7 +453,6 @@ public class ClientApi {
                 }
                 sb.append(scanner.nextLine());
             }
-            //wow, I can't believe I forgot about closing this stream
             scanner.close();
             return sb.toString();
         } catch (FileNotFoundException e) {
@@ -490,9 +469,21 @@ public class ClientApi {
      * @param in InputStream
      * @return Text contents of {@code java.io.InputStream}
      */
-    private String dumpStream(InputStream in) {
+    private String dumpStream(InputStream in) throws IOException {
         java.util.Scanner s = new java.util.Scanner(in).useDelimiter("\\A");
         return s.hasNext() ? s.next() : "";
+    }
+
+    private String dumpHttpRequest(HttpRequestBase conn) throws IOException {
+        try (CloseableHttpResponse response = client.execute(conn)) {
+            boolean b = response.getStatusLine().getStatusCode() == 200;
+            if (!b) {
+                return null;
+            }
+            String str = dumpStream(response.getEntity().getContent());
+            EntityUtils.consume(response.getEntity());
+            return str;
+        }
     }
 
     /**
@@ -504,7 +495,8 @@ public class ClientApi {
             in.close();
             System.out.println(s);
             return GSON.fromJson(s, clz);
-        } else {
+        }
+        else {
             T result = GSON.fromJson(new InputStreamReader(in), clz);
             in.close();
             return result;
@@ -520,125 +512,115 @@ public class ClientApi {
     }
 
     public String getSwaggerJson() throws IOException {
-        HttpURLConnection conn = getConnection("/swagger/v2/swagger.json", "GET");
-        conn.connect();
-        InputStream in = conn.getInputStream();
-        return dumpStream(in);
+        return dumpHttpRequest(getConnection("/swagger/v2/swagger.json", new HttpGet()));
     }
 
     public String getOpenapiJson() throws IOException {
-        HttpURLConnection conn = getConnection("/swagger/v3/openapi.json", "GET");
-        conn.connect();
-        InputStream in = conn.getInputStream();
-        return dumpStream(in);
+        return dumpHttpRequest(getConnection("/swagger/v3/openapi.json", new HttpGet()));
     }
 
     public <T> T executeGet(String path, Class<T> clz) throws IOException {
-        HttpURLConnection conn = getConnection(path, "GET");
-        conn.connect();
-        T result = decodeResponse(conn.getInputStream(), clz);
-        conn.disconnect();
-        return result;
+        HttpGet conn = getConnection(path, new HttpGet());
+        return getResponseObject(clz, conn);
     }
 
     public boolean executePut(String path, Object jsonObject) throws IOException {
-        HttpURLConnection conn = getConnection(path, "PUT");
-        conn.setDoOutput(true);
-        conn.connect();
-        writeJson(conn, jsonObject);
-        boolean b = conn.getResponseCode() == 204;
-        conn.getInputStream().close();
-        conn.disconnect();
-        return b;
+        HttpPut conn = getConnection(path, new HttpPut());
+        addJsonBody(jsonObject, conn);
+        return isOk(conn);
     }
 
     public <T> T executePost(String path, Object jsonObject, Class<T> clz) throws IOException {
-        HttpURLConnection conn = getConnection(path, "POST");
-        conn.setDoOutput(true);
-        conn.connect();
-        writeJson(conn, jsonObject);
-        T result = decodeResponse(conn.getInputStream(), clz);
-        conn.disconnect();
-        return result;
+        HttpPost conn = getConnection(path, new HttpPost());
+        addJsonBody(jsonObject, conn);
+        return getResponseObject(clz, conn);
     }
 
     public <T> T executePost(String path, Class<T> clz) throws IOException {
-        HttpURLConnection conn = getConnection(path, "POST");
-        conn.connect();
-        T result = decodeResponse(conn.getInputStream(), clz);
-        conn.disconnect();
-        return result;
+        HttpPost conn = getConnection(path, new HttpPost());
+        return getResponseObject(clz, conn);
     }
 
     public boolean executePost(String path, Object jsonObject) throws IOException {
-        HttpURLConnection conn = getConnection(path, "POST");
-        conn.setDoOutput(true);
-        conn.connect();
-        writeJson(conn, jsonObject);
-        boolean b = conn.getResponseCode() == 204;
-        conn.getInputStream().close();
-        conn.disconnect();
-        return b;
+        HttpPost conn = getConnection(path, new HttpPost());
+        addJsonBody(jsonObject, conn);
+        return isOk(conn);
     }
 
     public boolean executePatch(String path, Object jsonObject) throws IOException {
-        HttpURLConnection conn = getConnection(path, "PATCH");
-        conn.setDoOutput(true);
-        conn.connect();
-        writeJson(conn, jsonObject);
-        boolean b = conn.getResponseCode() == 204;
-        conn.getInputStream().close();
-        conn.disconnect();
-        return b;
+        HttpPatch conn = getConnection(path, new HttpPatch());
+        addJsonBody(jsonObject, conn);
+        return isOk(conn);
     }
 
     public boolean executePost(String path) throws IOException {
-        HttpURLConnection conn = getConnection(path, "POST");
-        conn.connect();
-        boolean b = conn.getResponseCode() == 204;
-        conn.getInputStream().close();
-        conn.disconnect();
-        return b;
+        return isOk(getConnection(path, new HttpPost()));
     }
 
     public boolean executeDelete(String path) throws IOException {
-        HttpURLConnection conn = getConnection(path, "DELETE");
-        conn.connect();
-        boolean b = conn.getResponseCode() == 204;
-        conn.getInputStream().close();
-        conn.disconnect();
-        return b;
+        return isOk(getConnection(path, new HttpDelete()));
     }
 
-    private HttpURLConnection getConnection(String endpoint, String method) throws IOException {
+    private <T extends HttpEntityEnclosingRequestBase> void addJsonBody(Object jsonObject, T method) {
+        method.setEntity(
+                EntityBuilder.create()
+                        .setText(GSON.toJson(jsonObject))
+                        .setContentType(ContentType.APPLICATION_JSON)
+                        .build()
+        );
+    }
+
+    private <T> T getResponseObject(Class<T> clz, HttpRequestBase method) throws IOException {
+        try (CloseableHttpResponse response = client.execute(method)) {
+            boolean b = response.getStatusLine().getStatusCode() == 200;
+            if (!b) {
+                return null;
+            }
+            T t = decodeResponse(response.getEntity().getContent(), clz);
+            EntityUtils.consume(response.getEntity());
+            return t;
+        }
+    }
+
+    private <T extends HttpRequestBase> boolean isOk(T method) throws IOException {
+        try (CloseableHttpResponse response = client.execute(method)) {
+            //All 2XX codes
+            boolean b = response.getStatusLine().getStatusCode() / 100 == 2;
+            EntityUtils.consume(response.getEntity());
+            return b;
+        }
+    }
+
+    private <T extends HttpRequestBase> T getConnection(String endpoint, T method) {
         if (!connected.get()) {
             throw new IllegalStateException("API not connected!");
         }
-        URL url = new URL("https", "127.0.0.1", port, endpoint);
-        if (!disableEndpointWarnings.get()) {
-            String path = url.getPath().substring(1, url.getPath().substring(1).indexOf('/') + 1);
-            if (!ALLOWED_ENDPOINTS.contains(path)) {
-                System.err.println("Using endpoint \"" + path + "\" which is not in the list of allowed endpoints!");
-                System.err.println(
-                        "If you're seeing this message while using allowed endpoint, consider opening an issue" +
-                                " or pull request.");
+        try {
+            URI uri = new URIBuilder()
+                    .setScheme("https")
+                    .setHost("127.0.0.1")
+                    .setPath(endpoint)
+                    .setPort(port)
+                    .build();
+            if (!disableEndpointWarnings.get()) {
+                String path = uri.getPath().substring(1, uri.getPath().substring(1).indexOf('/') + 1);
+                if (!ALLOWED_ENDPOINTS.contains(path)) {
+                    System.err.println(
+                            "Using endpoint \"" + path + "\" which is not in the list of allowed endpoints!");
+                    System.err.println(
+                            "If you're seeing this message while using allowed endpoint, consider opening an issue" +
+                                    " or pull request.");
+                }
             }
+            method.setURI(uri);
+            method.addHeader("Authorization", "Basic " + token);
+            method.addHeader("Content-Type", "application/json");
+            method.addHeader("Accept", "application/json");
+            method.setConfig(requestConfig);
+            return method;
+        } catch (URISyntaxException e) {
+            throw new IllegalArgumentException("Invalid endpoint!", e);
         }
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.addRequestProperty("Authorization", "Basic " + token);
-        conn.setRequestProperty("Content-Type", "application/json");
-        conn.setRequestProperty("Accept", "application/json");
-        conn.setRequestMethod(method);
-        conn.setReadTimeout(readTimeout);
-        conn.setConnectTimeout(connectTimeout);
-        return conn;
-    }
-
-    private void writeJson(HttpURLConnection conn, Object obj) throws IOException {
-        OutputStream out = conn.getOutputStream();
-        new DataOutputStream(out).write(GSON.toJson(obj).getBytes());
-        out.flush();
-        out.close();
     }
 
     /**

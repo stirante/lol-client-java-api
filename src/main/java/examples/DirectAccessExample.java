@@ -1,5 +1,6 @@
 package examples;
 
+import com.google.gson.GsonBuilder;
 import com.stirante.lolclient.ClientApi;
 import com.stirante.lolclient.ClientConnectionListener;
 import generated.LolChatUserResource;
@@ -20,7 +21,7 @@ public class DirectAccessExample {
                     //Get current user chat info
                     LolChatUserResource user = api.executeGet("/lol-chat/v1/me", LolChatUserResource.class);
                     //Print status message
-                    System.out.println(user.statusMessage);
+                    System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(user));
                     api.stop();
                 } catch (Exception e) {
                     e.printStackTrace();

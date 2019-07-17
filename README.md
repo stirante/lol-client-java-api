@@ -1,6 +1,6 @@
 lol-client-java-api
 ----------
-[![lol-client-java-api](https://jitpack.io/v/stirante/lol-client-java-api.svg)](https://jitpack.io/#stirante/lol-client-java-api)
+[![Build Status](https://travis-ci.org/stirante/lol-client-java-api.svg?branch=master)](https://travis-ci.org/stirante/lol-client-java-api) [![lol-client-java-api](https://jitpack.io/v/stirante/lol-client-java-api.svg)](https://jitpack.io/#stirante/lol-client-java-api)
 ----------
 
 Simple library which provides access to internal League of Legends Client API.
@@ -10,7 +10,7 @@ This product is not endorsed, certified or otherwise approved in any way by Riot
 
 ## Requirements
 
-**lol-client-java-api** requires Java 8 and works only on Windows.
+**lol-client-java-api** requires at least Java 8 and works only on Windows.
 
 ## Setup
 
@@ -33,7 +33,7 @@ Add the project as a dependency:
 
 ```java
 dependencies {
-	compile 'com.github.stirante:lol-client-java-api:1.1.0'
+	compile 'com.github.stirante:lol-client-java-api:1.1.2'
 }
 ```
 
@@ -56,7 +56,7 @@ Add the project as a dependency:
 <dependency>
     <groupId>com.github.stirante</groupId>
     <artifactId>lol-client-java-api</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.2</version>
 </dependency>
 ```
 
