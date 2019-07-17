@@ -6,12 +6,9 @@ public class MultiLeagueEntryChangeEventDTO {
 
 	public Long gameId;
 	public LeagueEntryChangeEventDTOV2 mainChangeEventDTO;
-	public String multiLeagueChangeEventJwt;
 	public String participantId;
-	public Boolean positionRanks;
 	public Integer previousSplitPointsRequired;
 	public Integer provisionalGameThreshold;
-	public String queueType;
 	public String shardId;
 	public Object splitPointBreakdown;
 	public Integer splitPointsBeforeGame;

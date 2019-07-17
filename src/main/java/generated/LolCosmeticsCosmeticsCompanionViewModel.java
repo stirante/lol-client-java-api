@@ -12,6 +12,7 @@ public class LolCosmeticsCosmeticsCompanionViewModel {
 	public String loadoutsIcon;
 	public String name;
 	public Boolean owned;
+	public Integer rarityValue;
 	public Boolean selected;
 	public String species;
 	public Integer speciesId;

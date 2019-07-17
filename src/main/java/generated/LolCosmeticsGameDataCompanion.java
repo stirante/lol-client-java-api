@@ -11,6 +11,7 @@ public class LolCosmeticsGameDataCompanion {
 	public Integer level;
 	public String loadoutsIcon;
 	public String name;
+	public Integer rarityValue;
 	public Integer speciesId;
 	public String speciesName;
 	public List<String> upgrades;

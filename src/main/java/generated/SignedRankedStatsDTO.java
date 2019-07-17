@@ -12,5 +12,6 @@ public class SignedRankedStatsDTO {
 	public String jwt;
 	public List<RankedQueueStatsDTO> queues;
 	public Object splitsProgress;
+	public List<RankedQueueStatsDTO> tftQueues;
 
 }

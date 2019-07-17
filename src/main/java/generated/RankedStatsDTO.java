@@ -11,5 +11,6 @@ public class RankedStatsDTO {
 	public String highestPreviousSeasonEndTier;
 	public List<RankedQueueStatsDTO> queues;
 	public Object splitsProgress;
+	public List<RankedQueueStatsDTO> tftQueues;
 
 }

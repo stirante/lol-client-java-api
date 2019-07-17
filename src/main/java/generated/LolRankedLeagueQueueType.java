@@ -11,6 +11,8 @@ public enum LolRankedLeagueQueueType {
 	@SerializedName("FLEXTT")
 	FLEXTT,
 	@SerializedName("FLEXSR")
-	FLEXSR
+	FLEXSR,
+	@SerializedName("RANKED_TFT")
+	RANKED_TFT
 
 }
