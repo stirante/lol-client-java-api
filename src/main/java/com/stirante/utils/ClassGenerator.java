@@ -24,7 +24,7 @@ public class ClassGenerator {
      * for now.
      */
     private static final List<String> RESERVED =
-            Arrays.asList("implements", "int", "long", "short", "extends", "super", "char", "byte");
+            Arrays.asList("implements", "int", "long", "short", "extends", "super", "char", "byte", "private", "protected", "public", "class", "default");
     private static final String PATH = "src/main/java/generated/";
 
     public static void main(String[] args) throws IOException {

@@ -1,9 +1,12 @@
 package generated;
 
+import com.google.gson.annotations.SerializedName;
+
 public class LolChatError {
 
 	public String cid;
-	public String class;
+	@SerializedName("class")
+	public String classField;
 	public String code;
 	public String id;
 	public String pid;
