@@ -3,21 +3,20 @@ package com.stirante.lolclient;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import generated.*;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.EntityBuilder;
 import org.apache.http.client.methods.*;
-import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.ContentType;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import javax.net.ssl.*;
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystems;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
@@ -504,6 +503,10 @@ public class ClientApi {
         }
     }
 
+    public InputStream getAsset(String plugin, String path) throws IOException {
+        return executeBinaryGet(plugin + "/assets/" + URLEncoder.encode(path, StandardCharsets.UTF_8.name()));
+    }
+
     public boolean isAuthorized() throws IOException {
         try {
             return executeGet("/lol-summoner/v1/current-summoner", LolSummonerSummoner.class).accountId > 0;
@@ -523,6 +526,17 @@ public class ClientApi {
     public <T> T executeGet(String path, Class<T> clz) throws IOException {
         HttpGet conn = getConnection(path, new HttpGet());
         return getResponseObject(clz, conn);
+    }
+
+    public InputStream executeBinaryGet(String path) throws IOException {
+        HttpGet conn = getConnection(path, new HttpGet());
+        CloseableHttpResponse response = client.execute(conn);
+        boolean b = response.getStatusLine().getStatusCode() == 200;
+        if (!b) {
+            EntityUtils.consume(response.getEntity());
+            return null;
+        }
+        return response.getEntity().getContent();
     }
 
     public <T> T executeGet(String path, Class<T> clz, String... queryParams) throws IOException {
@@ -600,8 +614,9 @@ public class ClientApi {
     /**
      * Prepares Http request with proper URL and authorization.
      * Simple usage: getConnection("/endpoint", new HttpGet(), "key1", "value1", key2", "value2")
-     * @param endpoint endpoint
-     * @param method Base request
+     *
+     * @param endpoint    endpoint
+     * @param method      Base request
      * @param queryParams Pairs of get parameters. Must be divisible by 2.
      */
     private <T extends HttpRequestBase> T getConnection(String endpoint, T method, String... queryParams) {
@@ -609,17 +624,19 @@ public class ClientApi {
             throw new IllegalStateException("API not connected!");
         }
         try {
-            List<NameValuePair> params = new ArrayList<>();
+            StringBuilder sb = new StringBuilder("https://127.0.0.1:").append(port).append("/").append(endpoint);
+            boolean addedParams = false;
             for (int i = 0; i < queryParams.length; i += 2) {
-                params.add(new BasicNameValuePair(queryParams[i], queryParams[i + 1]));
+                if (!addedParams) {
+                    sb.append("?");
+                    addedParams = true;
+                }
+                else {
+                    sb.append("&");
+                }
+                sb.append(queryParams[i]).append("=").append(queryParams[i + 1]);
             }
-            URI uri = new URIBuilder()
-                    .setScheme("https")
-                    .setHost("127.0.0.1")
-                    .setPath(endpoint)
-                    .setPort(port)
-                    .addParameters(params)
-                    .build();
+            URI uri = new URI(sb.toString());
             if (!disableEndpointWarnings.get()) {
                 String path = uri.getPath().substring(1, uri.getPath().substring(1).indexOf('/') + 1);
                 if (!ALLOWED_ENDPOINTS.contains(path)) {
@@ -632,8 +649,7 @@ public class ClientApi {
             }
             method.setURI(uri);
             method.addHeader("Authorization", "Basic " + token);
-            method.addHeader("Content-Type", "application/json");
-            method.addHeader("Accept", "application/json");
+            method.addHeader("Accept", "*/*");
             method.setConfig(requestConfig);
             return method;
         } catch (URISyntaxException e) {

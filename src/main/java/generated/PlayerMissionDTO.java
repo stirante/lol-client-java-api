@@ -29,6 +29,7 @@ public class PlayerMissionDTO {
 	public List<String> requirements;
 	public RewardStrategy rewardStrategy;
 	public List<PlayerMissionRewardDTO> rewards;
+	public Integer sequence;
 	public String seriesName;
 	public Long startTime;
 	public String status;

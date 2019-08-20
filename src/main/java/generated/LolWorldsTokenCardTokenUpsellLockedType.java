@@ -6,9 +6,9 @@ public enum LolWorldsTokenCardTokenUpsellLockedType {
 
 	@SerializedName("UNASSIGNED")
 	UNASSIGNED,
-	@SerializedName("LOCKED")
-	LOCKED,
 	@SerializedName("UNLOCKED")
-	UNLOCKED
+	UNLOCKED,
+	@SerializedName("LOCKED")
+	LOCKED
 
 }

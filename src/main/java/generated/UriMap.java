@@ -164,7 +164,6 @@ public class UriMap {
 		toClass.put("\\/lol-collections\\/v1\\/inventories\\/[^/]+\\/backdrop", LolCollectionsCollectionsSummonerBackdrop.class);
 		toClass.put("\\/lol-collections\\/v1\\/inventories\\/[^/]+\\/champion-mastery", LolCollectionsCollectionsChampionMastery[].class);
 		toClass.put("\\/lol-collections\\/v1\\/inventories\\/[^/]+\\/champion-mastery\\/top", LolCollectionsCollectionsTopChampionMasteries.class);
-		toClass.put("\\/lol-collections\\/v1\\/inventories\\/[^/]+\\/rune-book", LolCollectionsCollectionsRuneBook.class);
 		toClass.put("\\/lol-collections\\/v1\\/inventories\\/[^/]+\\/spells", LolCollectionsCollectionsSummonerSpells.class);
 		toClass.put("\\/lol-collections\\/v1\\/inventories\\/[^/]+\\/summoner-icons", LolCollectionsCollectionsSummonerIcons.class);
 		toClass.put("\\/lol-collections\\/v1\\/inventories\\/[^/]+\\/ward-skins", LolCollectionsCollectionsWardSkin[].class);
@@ -204,7 +203,6 @@ public class UriMap {
 		toClass.put("\\/lol-gameflow\\/v1\\/basic-tutorial", Boolean.class);
 		toClass.put("\\/lol-gameflow\\/v1\\/battle-training", Boolean.class);
 		toClass.put("\\/lol-gameflow\\/v1\\/early-exit-notifications\\/eog", Object[].class);
-		toClass.put("\\/lol-gameflow\\/v1\\/early-exit-notifications\\/lobby", Object[].class);
 		toClass.put("\\/lol-gameflow\\/v1\\/early-exit-notifications\\/missions", Object[].class);
 		toClass.put("\\/lol-gameflow\\/v1\\/extra-game-client-args", String[].class);
 		toClass.put("\\/lol-gameflow\\/v1\\/gameflow-metadata\\/player-status", LolGameflowPlayerStatus.class);
@@ -349,6 +347,7 @@ public class UriMap {
 		toClass.put("\\/lol-missions\\/v1\\/data", PlayerMissionEligibilityData.class);
 		toClass.put("\\/lol-missions\\/v1\\/missions", PlayerMissionDTO[].class);
 		toClass.put("\\/lol-missions\\/v1\\/series", SeriesDTO[].class);
+		toClass.put("\\/lol-npe-rewards\\/v1\\/challenges\\/progress", LolNpeRewardsChallengesProgress.class);
 		toClass.put("\\/lol-npe-rewards\\/v1\\/level-rewards", LolNpeRewardsRewardSeries.class);
 		toClass.put("\\/lol-npe-rewards\\/v1\\/level-rewards\\/state", LolNpeRewardsRewardSeriesState.class);
 		toClass.put("\\/lol-npe-rewards\\/v1\\/login-rewards", LolNpeRewardsRewardSeries.class);
@@ -433,6 +432,7 @@ public class UriMap {
 		toClass.put("\\/lol-replays\\/v1\\/rofls\\/path", String.class);
 		toClass.put("\\/lol-replays\\/v1\\/rofls\\/path\\/default", String.class);
 		toClass.put("\\/lol-rms\\/v1\\/champion-mastery-leaveup-update", LolRiotMessagingServiceChampionMasteryLevelUp[].class);
+		toClass.put("\\/lol-rso-auth\\/v1\\/auth-hints\\/hint", LolRsoAuthAuthHint.class);
 		toClass.put("\\/lol-rso-auth\\/v1\\/authorization", LolRsoAuthAuthorization.class);
 		toClass.put("\\/lol-rso-auth\\/v1\\/authorization\\/access-token", LolRsoAuthAccessToken.class);
 		toClass.put("\\/lol-rso-auth\\/v1\\/authorization\\/error", LolRsoAuthAuthError.class);
@@ -455,6 +455,7 @@ public class UriMap {
 		toClass.put("\\/lol-store\\/v1\\/catalogByInstanceIds", LolStoreCatalogItem[].class);
 		toClass.put("\\/lol-store\\/v1\\/getStoreUrl", String.class);
 		toClass.put("\\/lol-store\\/v1\\/giftablefriends", LolStoreGiftingFriend[].class);
+		toClass.put("\\/lol-store\\/v1\\/itemKeysFromInstanceIds", Object.class);
 		toClass.put("\\/lol-store\\/v1\\/lastPage", String.class);
 		toClass.put("\\/lol-store\\/v1\\/order-notifications", LolStoreOrderNotificationResource[].class);
 		toClass.put("\\/lol-store\\/v1\\/order-notifications\\/[^/]+", LolStoreOrderNotificationResource.class);

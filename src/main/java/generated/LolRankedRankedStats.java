@@ -13,6 +13,5 @@ public class LolRankedRankedStats {
 	public List<LolRankedRankedQueueStats> queues;
 	public Integer rankedRegaliaLevel;
 	public Object splitsProgress;
-	public List<LolRankedRankedQueueStats> tftQueues;
 
 }

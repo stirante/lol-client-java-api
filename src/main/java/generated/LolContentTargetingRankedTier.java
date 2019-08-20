@@ -6,8 +6,6 @@ public enum LolContentTargetingRankedTier {
 
 	@SerializedName("NONE")
 	NONE,
-	@SerializedName("PROVISIONAL")
-	PROVISIONAL,
 	@SerializedName("IRON")
 	IRON,
 	@SerializedName("BRONZE")

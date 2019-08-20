@@ -23,7 +23,6 @@ public class LolContentTargetingPlatformConfig {
 	public Boolean RankedFilterEnabled;
 	public Boolean SummonerIconFilterEnabled;
 	public Boolean TargetingAttributeStorageEnabled;
-	public Long TargetingAttributeStorageRolloutPct;
 	public String TargetingAttributeStorageUri;
 
 }

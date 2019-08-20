@@ -14,7 +14,7 @@ This product is not endorsed, certified or otherwise approved in any way by Riot
 
 ## Setup
 
-This project is available on [Jitpack](https://jitpack.io/#stirante/lol-client-java-api/1.0.3)
+This project is available on [Jitpack](https://jitpack.io/#stirante/lol-client-java-api/1.1.4)
 
 ### Gradle
 
@@ -33,7 +33,7 @@ Add the project as a dependency:
 
 ```java
 dependencies {
-	compile 'com.github.stirante:lol-client-java-api:1.1.2'
+	compile 'com.github.stirante:lol-client-java-api:1.1.4'
 }
 ```
 
@@ -56,7 +56,7 @@ Add the project as a dependency:
 <dependency>
     <groupId>com.github.stirante</groupId>
     <artifactId>lol-client-java-api</artifactId>
-    <version>1.1.2</version>
+    <version>1.1.4</version>
 </dependency>
 ```
 
