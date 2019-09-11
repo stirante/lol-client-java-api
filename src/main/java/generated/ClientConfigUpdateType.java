@@ -2,7 +2,7 @@ package generated;
 
 import com.google.gson.annotations.SerializedName;
 
-public enum ClientConfigEntitlementsUpdateType {
+public enum ClientConfigUpdateType {
 
 	@SerializedName("Create")
 	CREATE,

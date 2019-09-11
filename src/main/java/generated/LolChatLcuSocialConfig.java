@@ -7,5 +7,6 @@ public class LolChatLcuSocialConfig {
 	public Long QueueJobGraceSeconds;
 	public Boolean ReplaceRichMessages;
 	public Boolean SilenceChatWhileInGame;
+	public Boolean gameNameTaglineEnabled;
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 public class LolGameQueuesQueueCustomGameSubcategory {
 
+	public List<LolGameQueuesQueueCustomGameSpectatorPolicy> customSpectatorPolicies;
 	public String gameMode;
 	public Integer mapId;
 	public Integer maxLevel;

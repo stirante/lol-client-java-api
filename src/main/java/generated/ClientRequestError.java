@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 public enum ClientRequestError {
 
+	@SerializedName("ALREADY_IN_GAME")
+	ALREADY_IN_GAME,
 	@SerializedName("ALREADY_MEMBER")
 	ALREADY_MEMBER,
 	@SerializedName("ALREADY_INVITED")

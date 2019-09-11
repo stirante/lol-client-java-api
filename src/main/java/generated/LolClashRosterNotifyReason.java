@@ -94,6 +94,8 @@ public enum LolClashRosterNotifyReason {
 	BRACKET_ROSTER_REMOVED,
 	@SerializedName("BRACKET_ROSTER_REPLACED")
 	BRACKET_ROSTER_REPLACED,
+	@SerializedName("CANNOT_FIND_MATCH")
+	CANNOT_FIND_MATCH,
 	@SerializedName("BANNED_SMURF")
 	BANNED_SMURF,
 	@SerializedName("BANNED_SMURF_TEAMMATE")

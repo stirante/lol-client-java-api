@@ -624,7 +624,11 @@ public class ClientApi {
             throw new IllegalStateException("API not connected!");
         }
         try {
-            StringBuilder sb = new StringBuilder("https://127.0.0.1:").append(port).append("/").append(endpoint);
+            StringBuilder sb = new StringBuilder("https://127.0.0.1:").append(port);
+            if (!endpoint.startsWith("/")) {
+                sb.append("/");
+            }
+            sb.append(endpoint);
             boolean addedParams = false;
             for (int i = 0; i < queryParams.length; i += 2) {
                 if (!addedParams) {

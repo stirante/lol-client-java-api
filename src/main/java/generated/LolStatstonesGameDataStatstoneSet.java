@@ -1,0 +1,14 @@
+package generated;
+
+import java.util.List;
+
+public class LolStatstonesGameDataStatstoneSet {
+
+	public String inventoryType;
+	public Integer itemId;
+	public String name;
+	public Integer price;
+	public List<LolStatstonesGameDataStatstone> statstones;
+	public String subInventoryType;
+
+}

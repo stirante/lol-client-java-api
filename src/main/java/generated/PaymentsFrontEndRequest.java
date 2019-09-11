@@ -8,5 +8,6 @@ public class PaymentsFrontEndRequest {
 	public String localeId;
 	public String rsoToken;
 	public Integer summonerLevel;
+	public Boolean usePmcSessions;
 
 }
