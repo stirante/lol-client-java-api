@@ -4,6 +4,7 @@ import java.util.List;
 
 public class LolLobbyRegistrationCredentials {
 
+	public String gameClientVersion;
 	public String inventoryToken;
 	public List<String> inventoryTokens;
 	public String rankedOverviewToken;

@@ -8,6 +8,7 @@ public class LolChatChatSettings {
 	@SerializedName("chat-status-message")
 	public String chat_status_message;
 	public Boolean chatFilterDisabled;
+	public Boolean chatGBG;
 	public Boolean chatGroupMobile;
 	public Boolean chatGroupOffline;
 	public LolChatChatWindowSettings chatWindow;

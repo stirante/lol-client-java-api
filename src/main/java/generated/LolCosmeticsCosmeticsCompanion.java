@@ -10,6 +10,7 @@ public class LolCosmeticsCosmeticsCompanion {
 	public Integer itemId;
 	public Integer level;
 	public String loadoutsIcon;
+	public Boolean loyalty;
 	public String name;
 	public Boolean owned;
 	public Integer rarityValue;

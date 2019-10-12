@@ -9,6 +9,8 @@ public class LolLoyaltyLoyaltyRewards {
 	public Integer freeRewardedSkinsCount;
 	public LolLoyaltyGlobalRewards global;
 	public Integer ipBoost;
+	public Integer loyaltyTFTCompanionCount;
+	public Integer loyaltyTFTMapSkinCount;
 	public List<Integer> skinIds;
 	public Integer xpBoost;
 

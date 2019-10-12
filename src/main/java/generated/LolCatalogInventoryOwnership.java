@@ -8,6 +8,8 @@ public enum LolCatalogInventoryOwnership {
 	OWNED,
 	@SerializedName("RENTED")
 	RENTED,
+	@SerializedName("LOYALTY")
+	LOYALTY,
 	@SerializedName("F2P")
 	F2P
 

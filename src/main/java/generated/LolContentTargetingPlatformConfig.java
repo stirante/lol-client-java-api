@@ -13,6 +13,7 @@ public class LolContentTargetingPlatformConfig {
 	public Integer LaneFilterThreshold;
 	public Boolean LevelFilterEnabled;
 	public Boolean LocationFiltersEnabled;
+	public Boolean MainFilterEnabled;
 	public String Mapping;
 	public Integer MasteryFilterChampionLimit;
 	public Integer MasteryFilterDaysSinceLastPlayed;
@@ -24,5 +25,6 @@ public class LolContentTargetingPlatformConfig {
 	public Boolean SummonerIconFilterEnabled;
 	public Boolean TargetingAttributeStorageEnabled;
 	public String TargetingAttributeStorageUri;
+	public Integer TasIngestionDelayInSeconds;
 
 }
