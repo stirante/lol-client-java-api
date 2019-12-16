@@ -2,10 +2,10 @@ package generated;
 
 public class LolPerksSummonerRerollPoints {
 
-	public Long currentPoints;
+	public Integer currentPoints;
 	public Integer maxRolls;
 	public Integer numberOfRolls;
-	public Long pointsCostToRoll;
-	public Long pointsToReroll;
+	public Integer pointsCostToRoll;
+	public Integer pointsToReroll;
 
 }

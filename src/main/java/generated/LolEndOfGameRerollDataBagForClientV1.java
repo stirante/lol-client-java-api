@@ -3,10 +3,10 @@ package generated;
 public class LolEndOfGameRerollDataBagForClientV1 {
 
 	public Integer maximumRerolls;
-	public Long pointCostOfReroll;
-	public Long pointsGainedLastGame;
-	public Long pointsUntilNextReroll;
+	public Integer pointCostOfReroll;
+	public Integer pointsGainedLastGame;
+	public Integer pointsUntilNextReroll;
 	public Integer rerollCount;
-	public Long totalPoints;
+	public Integer totalPoints;
 
 }

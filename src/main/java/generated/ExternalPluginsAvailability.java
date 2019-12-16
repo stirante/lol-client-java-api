@@ -10,6 +10,8 @@ public enum ExternalPluginsAvailability {
 	PREPARING,
 	@SerializedName("Connected")
 	CONNECTED,
+	@SerializedName("Recovering")
+	RECOVERING,
 	@SerializedName("Error")
 	ERROR
 

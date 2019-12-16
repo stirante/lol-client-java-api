@@ -4,6 +4,6 @@ import java.util.List;
 
 public class LolServiceStatusBroadcastNotification {
 
-	public List<Object> broadcastMessages;
+	public List<LolServiceStatusBroadcastMessage> broadcastMessages;
 
 }

@@ -48,6 +48,8 @@ public enum LolLobbyEligibilityRestrictionCode {
 	TEAMSIZERESTRICTION,
 	@SerializedName("PrerequisiteQueuesNotPlayedRestriction")
 	PREREQUISITEQUEUESNOTPLAYEDRESTRICTION,
+	@SerializedName("GameVersionMismatch")
+	GAMEVERSIONMISMATCH,
 	@SerializedName("QueueEntryNotEntitledRestriction")
 	QUEUEENTRYNOTENTITLEDRESTRICTION,
 	@SerializedName("UnknownRestriction")

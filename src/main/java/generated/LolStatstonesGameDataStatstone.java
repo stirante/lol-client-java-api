@@ -12,11 +12,11 @@ public class LolStatstonesGameDataStatstone {
 	public String iconLit;
 	public String iconUnlit;
 	public String iconUnowned;
-	public Boolean isDuration;
 	public Boolean isEpic;
 	public Boolean isRetired;
 	public Integer itemId;
 	public List<Integer> milestones;
 	public String name;
+	public Integer trackingType;
 
 }

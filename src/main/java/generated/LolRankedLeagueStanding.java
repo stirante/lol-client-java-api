@@ -18,6 +18,7 @@ public class LolRankedLeagueStanding {
 	public LolRankedLeagueDivision previousSeasonAchievedDivision;
 	public LolRankedLeagueTier previousSeasonAchievedTier;
 	public Integer provisionalGamesRemaining;
+	public String puuid;
 	public Integer rankedRegaliaLevel;
 	public String rivalName;
 	public Long summonerId;

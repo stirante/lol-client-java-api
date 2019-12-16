@@ -3,7 +3,7 @@ package generated;
 public class LolPurchaseWidgetItemPrice {
 
 	public String currencyType;
-	public Integer price;
+	public Long price;
 	public Boolean purchasable;
 
 }

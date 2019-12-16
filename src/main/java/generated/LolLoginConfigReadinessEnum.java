@@ -7,6 +7,8 @@ public enum LolLoginConfigReadinessEnum {
 	@SerializedName("NotReady")
 	NOTREADY,
 	@SerializedName("Ready")
-	READY
+	READY,
+	@SerializedName("Disabled")
+	DISABLED
 
 }

@@ -12,6 +12,7 @@ public class LeagueLadderEntryDTO {
 	public String previousSeasonAchievedRank;
 	public String previousSeasonAchievedTier;
 	public Integer provisionalGamesRemaining;
+	public String puuid;
 	public String rank;
 	public Long summonerId;
 	public String summonerName;

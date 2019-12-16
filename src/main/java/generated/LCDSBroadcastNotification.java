@@ -4,6 +4,6 @@ import java.util.List;
 
 public class LCDSBroadcastNotification {
 
-	public List<Object> broadcastMessages;
+	public List<LolServiceStatusBroadcastMessage> broadcastMessages;
 
 }

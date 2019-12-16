@@ -11,6 +11,7 @@ public class LolChatConversationResource {
 	public String name;
 	public String password;
 	public String pid;
+	public String targetRegion;
 	public String type;
 	public Long unreadMessageCount;
 

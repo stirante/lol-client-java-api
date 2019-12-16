@@ -4,6 +4,7 @@ import java.util.List;
 
 public class LolClashClashConfig {
 
+	public Boolean CheckPartiesRegistration;
 	public String DarkModeEntitlement;
 	public List<String> DisabledEvents;
 	public LolClashClashState EnabledState;

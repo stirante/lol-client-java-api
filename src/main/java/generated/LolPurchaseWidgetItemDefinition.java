@@ -12,6 +12,7 @@ public class LolPurchaseWidgetItemDefinition {
 	public String name;
 	public Boolean owned;
 	public String subInventoryType;
+	public String subTitle;
 	public List<String> tags;
 
 }

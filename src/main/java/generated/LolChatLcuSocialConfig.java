@@ -8,5 +8,6 @@ public class LolChatLcuSocialConfig {
 	public Boolean ReplaceRichMessages;
 	public Boolean SilenceChatWhileInGame;
 	public Boolean gameNameTaglineEnabled;
+	public Object platformToRegionMap;
 
 }

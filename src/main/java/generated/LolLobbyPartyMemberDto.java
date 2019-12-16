@@ -9,6 +9,7 @@ public class LolLobbyPartyMemberDto {
 	public Long invitedBySummonerId;
 	public LolLobbyPartyMemberMetadataDto metadata;
 	public String partyId;
+	public Long partyVersion;
 	public String platformId;
 	public String puuid;
 	public Boolean ready;
