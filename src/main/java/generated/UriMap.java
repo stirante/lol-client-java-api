@@ -509,6 +509,7 @@ public class UriMap {
 		toClass.put("\\/lol-summoner\\/v2\\/summoner-icons", LolSummonerSummonerIdAndIcon[].class);
 		toClass.put("\\/lol-summoner\\/v2\\/summoner-names", LolSummonerSummonerIdAndName[].class);
 		toClass.put("\\/lol-summoner\\/v2\\/summoners", LolSummonerSummoner[].class);
+		toClass.put("\\/lol-summoner\\/v2\\/summoners\\/puuid\\/[^/]+", LolSummonerSummoner.class);
 		toClass.put("\\/lol-tencent-qt\\/v1\\/ui-states", Object.class);
 		toClass.put("\\/lol-tencent-qt\\/v1\\/ui-states\\/[^/]+", LolTencentQtTencentQTNotification.class);
 		toClass.put("\\/lol-tft\\/v1\\/tft\\/battlepass", LolMissionsTftBattlepass.class);
@@ -518,8 +519,6 @@ public class UriMap {
 		toClass.put("\\/lol-token-upsell\\/v1\\/all", LolWorldsTokenCardTokenUpsell[].class);
 		toClass.put("\\/lol-trophies\\/v1\\/current-summoner\\/trophies\\/profile", LolTrophiesTrophyProfileData.class);
 		toClass.put("\\/lol-trophies\\/v1\\/players\\/[^/]+\\/trophies\\/profile", LolTrophiesTrophyProfileData.class);
-		toClass.put("\\/network-testing\\/v1\\/experiments", NetworkTestingNetworkExperimentsResource.class);
-		toClass.put("\\/network-testing\\/v1\\/game-latency", NetworkTestingGameLatencyExperimentResults.class);
 		toClass.put("\\/patcher\\/v1\\/executable-version", String.class);
 		toClass.put("\\/patcher\\/v1\\/notifications", PatcherNotification[].class);
 		toClass.put("\\/patcher\\/v1\\/p2p\\/status", PatcherP2PStatus.class);

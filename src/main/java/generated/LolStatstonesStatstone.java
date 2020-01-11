@@ -13,6 +13,7 @@ public class LolStatstonesStatstone {
 	public Boolean isComplete;
 	public Boolean isEpic;
 	public Boolean isFavorite;
+	public Boolean isRetired;
 	public String name;
 	public String nextMilestone;
 	public LolStatstonesStatstonePlayerRecord playerRecord;

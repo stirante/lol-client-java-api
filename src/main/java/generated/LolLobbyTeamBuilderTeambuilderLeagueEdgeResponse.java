@@ -2,7 +2,7 @@ package generated;
 
 public class LolLobbyTeamBuilderTeambuilderLeagueEdgeResponse {
 
-	public String payload;
+	public LolLobbyTeamBuilderTbLobbyStateResource payload;
 	public String status;
 
 }
