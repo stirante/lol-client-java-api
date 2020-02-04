@@ -6,7 +6,7 @@
 
     <groupId>com.stirante</groupId>
     <artifactId>lol-client-java-api</artifactId>
-    <version>1.1.7</version>
+    <version>1.1.8</version>
 
     <properties>
         <java.version>1.8</java.version>
@@ -96,6 +96,22 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <relocations>
+                        <relocation>
+                            <pattern>org.apache</pattern>
+                            <shadedPattern>com.stirante.lolclient.libs.org.apache</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>com.google</pattern>
+                            <shadedPattern>com.stirante.lolclient.libs.com.google</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>org.java_websocket</pattern>
+                            <shadedPattern>com.stirante.lolclient.libs.org.java_websocket</shadedPattern>
+                        </relocation>
+                    </relocations>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>

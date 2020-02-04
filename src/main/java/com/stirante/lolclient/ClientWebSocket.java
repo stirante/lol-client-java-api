@@ -59,7 +59,9 @@ public class ClientWebSocket extends WebSocketClient {
     }
 
     private static Map<String, String> createHeaders(String... headers) {
-        if (headers.length % 2 != 0) throw new IllegalArgumentException("Invalid amount of parameters!");
+        if (headers.length % 2 != 0) {
+            throw new IllegalArgumentException("Invalid amount of parameters!");
+        }
         HashMap<String, String> map = new HashMap<>();
         for (int i = 0; i < headers.length; i += 2) {
             String key = headers[i];
@@ -70,13 +72,12 @@ public class ClientWebSocket extends WebSocketClient {
     }
 
     public void subscribe(String event) {
-        sendMessage(MessageType.SUBSCRIBE, event);
+        sendMessage(new Message(MessageType.SUBSCRIBE, event, null));
     }
 
     public void unsubscribe(String event) {
-        sendMessage(MessageType.UNSUBSCRIBE, event);
+        sendMessage(new Message(MessageType.UNSUBSCRIBE, event, null));
     }
-
 
     public void onOpen(ServerHandshake handshakedata) {
     }
@@ -88,8 +89,13 @@ public class ClientWebSocket extends WebSocketClient {
     }
 
     public void onMessage(String message) {
-        if (message.isEmpty()) return;
+        if (message.isEmpty()) {
+            return;
+        }
         Message mess = GSON.fromJson(message, Message.class);
+        if (mess == null) {
+            return;
+        }
         if (mess.type == MessageType.EVENT && socketListener != null) {
             socketListener.onEvent(mess.event);
         }
@@ -99,8 +105,9 @@ public class ClientWebSocket extends WebSocketClient {
         this.socketListener = socketListener;
     }
 
-    public void sendMessage(MessageType type, String message) {
-        send(GSON.toJson(new Object[]{type.getId(), message}));
+    public void sendMessage(Message message) {
+        String text = GSON.toJson(message);
+        send(text);
     }
 
     @Override
@@ -155,7 +162,7 @@ public class ClientWebSocket extends WebSocketClient {
         private final String source;
         private final Event event;
 
-        private Message(MessageType type, String source, Event event) {
+        public Message(MessageType type, String source, Event event) {
             this.type = type;
             this.source = source;
             this.event = event;
@@ -232,7 +239,9 @@ public class ClientWebSocket extends WebSocketClient {
                     }
                 }
             }
-            if (c == null) data = context.deserialize((JsonElement) data, Object.class);
+            if (c == null) {
+                data = context.deserialize((JsonElement) data, Object.class);
+            }
             else {
                 try {
                     data = context.deserialize((JsonElement) data, c);
@@ -246,10 +255,13 @@ public class ClientWebSocket extends WebSocketClient {
         }
     }
 
-    public static class MessageDeserializer implements JsonDeserializer<Message> {
+    public static class MessageDeserializer implements JsonDeserializer<Message>, JsonSerializer<Message> {
 
         @Override
         public Message deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+            if (!(json instanceof JsonArray)) {
+                return null;
+            }
             JsonArray jArr = (JsonArray) json;
             MessageType type = MessageType.getById(jArr.get(0).getAsInt());
             String source = jArr.get(1).getAsString();
@@ -258,6 +270,17 @@ public class ClientWebSocket extends WebSocketClient {
                 event = context.deserialize(jArr.get(2), Event.class);
             }
             return new Message(type, source, event);
+        }
+
+        @Override
+        public JsonElement serialize(Message message, Type type, JsonSerializationContext context) {
+            JsonArray result = new JsonArray();
+            result.add(message.type.id);
+            result.add(message.source);
+            if (message.event != null) {
+                result.add(context.serialize(message.event));
+            }
+            return result;
         }
     }
 
