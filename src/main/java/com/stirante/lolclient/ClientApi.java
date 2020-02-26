@@ -510,7 +510,7 @@ public class ClientApi {
     public boolean isAuthorized() throws IOException {
         try {
             return executeGet("/lol-summoner/v1/current-summoner", LolSummonerSummoner.class).accountId > 0;
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | NullPointerException e) {
             return false;
         }
     }
