@@ -6,8 +6,6 @@ public enum LolClashClashVisibility {
 
 	@SerializedName("Hidden")
 	HIDDEN,
-	@SerializedName("DarkVisible")
-	DARKVISIBLE,
 	@SerializedName("Visible")
 	VISIBLE
 

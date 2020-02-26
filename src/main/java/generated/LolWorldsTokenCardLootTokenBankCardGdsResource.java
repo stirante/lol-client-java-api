@@ -17,5 +17,6 @@ public class LolWorldsTokenCardLootTokenBankCardGdsResource {
 	public String tooltipSplashPath;
 	public String tooltipTitleText;
 	public String unlockItemId;
+	public String unlockItemType;
 
 }

@@ -6,6 +6,7 @@ public class LolRankedSplitReward {
 	public String id;
 	public Integer pointsRequired;
 	public Integer quantity;
+	public Integer regaliaLevel;
 	public String rewardType;
 	public Integer splitId;
 

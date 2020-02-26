@@ -12,7 +12,6 @@ public class PluginResource {
 	public List<PluginResourceContract> implementedContracts;
 	public Object mountedAssetBundles;
 	public Integer orderWADFileMounted;
-	public String pluginInfoApiSemVer;
 	public String shortName;
 	public String subtype;
 	public String supertype;

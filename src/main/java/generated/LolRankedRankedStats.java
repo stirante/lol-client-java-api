@@ -10,6 +10,7 @@ public class LolRankedRankedStats {
 	public LolRankedLeagueDivision highestPreviousSeasonEndDivision;
 	public LolRankedLeagueTier highestPreviousSeasonEndTier;
 	public LolRankedRankedQueueStats highestRankedEntry;
+	public LolRankedRankedQueueStats highestRankedEntrySR;
 	public Object queueMap;
 	public List<LolRankedRankedQueueStats> queues;
 	public Integer rankedRegaliaLevel;

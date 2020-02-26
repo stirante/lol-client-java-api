@@ -9,5 +9,6 @@ public class LolCosmeticsGameDataTFTMapSkin {
 	public Integer itemId;
 	public String loadoutsIcon;
 	public String name;
+	public Integer rarityValue;
 
 }

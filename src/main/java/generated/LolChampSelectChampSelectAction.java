@@ -6,6 +6,7 @@ public class LolChampSelectChampSelectAction {
 	public Integer championId;
 	public Boolean completed;
 	public Long id;
+	public Boolean isAllyAction;
 	public String type;
 
 }

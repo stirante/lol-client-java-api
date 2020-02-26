@@ -1,9 +1,10 @@
 package generated;
 
-import java.util.List;
-
 public class PatcherChunkingPatcherEnvironment {
 
-	public List<String> components;
+	public Boolean client_patcher_available;
+	public Boolean client_patcher_enabled;
+	public Boolean game_patcher_available;
+	public Boolean game_patcher_enabled;
 
 }

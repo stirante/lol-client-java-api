@@ -12,6 +12,7 @@ public class LolCatalogCatalogPluginItem {
 	public String itemInstanceId;
 	public String name;
 	public Boolean owned;
+	public LolCatalogInventoryOwnership ownershipType;
 	public List<LolCatalogCatalogPluginPrice> prices;
 	public Long purchaseDate;
 	public Long releaseDate;

@@ -25,17 +25,74 @@ public class ClassGenerator {
      */
     private static final List<String> RESERVED =
             Arrays.asList("implements", "int", "long", "short", "extends", "super", "char", "byte", "private", "protected", "public", "class", "default");
-    private static final String PATH = "src/main/java/generated/";
+    private static final String PATH = "src/main/java/";
+
+    private static void deleteFolder(File folder) {
+        File[] files = folder.listFiles();
+        if (files != null) {
+            for (File f : files) {
+                if (f.isDirectory()) {
+                    deleteFolder(f);
+                }
+                else {
+                    f.delete();
+                }
+            }
+        }
+        folder.delete();
+    }
 
     public static void main(String[] args) throws IOException {
         ClientApi.setLegacyMode(true);
         ClientApi api = new ClientApi();
         String openapiJson = api.getOpenapiJson();
-        File f = new File(PATH);
-        // create folder just in case
-        f.mkdir();
+        String liveOpenapiJson = api.getLiveOpenapiJson();
+        File f = new File(PATH + "generated/");
         // delete all previously generated classes
-        Arrays.stream(Objects.requireNonNull(f.listFiles())).forEach(File::delete);
+        deleteFolder(f);
+        // create folders
+        f.mkdir();
+        f = new File(f, "live");
+        f.mkdir();
+
+        parseOpenApi("generated.live", liveOpenapiJson);
+        SwaggerParseResult swagger = parseOpenApi("generated", openapiJson);
+        // generate uri map, so we can match class by it's URI (for receiving live events from client)
+        StringBuilder b = new StringBuilder();
+        b
+                .append("package generated;")
+                .append("\n")
+                .append("\nimport java.util.HashMap;")
+                .append("\n")
+                .append("\npublic class UriMap {")
+                .append("\n")
+                .append("\n\tpublic static final HashMap<String, Class> toClass = new HashMap<>();")
+                .append("\n")
+                .append("\n\tstatic {");
+        for (String path : swagger.getOpenAPI().getPaths().keySet()) {
+            PathItem item = swagger.getOpenAPI().getPaths().get(path);
+            if (item.getGet() != null && item.getGet().getResponses().containsKey("200") &&
+                    item.getGet().getResponses().get("200").getContent().containsKey("application/json")) {
+                Schema schema =
+                        item.getGet().getResponses().get("200").getContent().get("application/json").getSchema();
+                if (schema == null) {
+                    continue;
+                }
+                b.append("\n\t\ttoClass.put(\"")
+                        .append(toRegex(path))
+                        .append("\", ")
+                        .append(getType(schema, false))
+                        .append(".class);");
+            }
+        }
+        b
+                .append("\n\t}")
+                .append("\n")
+                .append("\n}");
+        saveFile("generated", "UriMap", b.toString());
+    }
+
+    private static SwaggerParseResult parseOpenApi(String pck, String openapiJson) throws IOException {
         SwaggerParseResult swagger =
                 new OpenAPIParser().readContents(openapiJson, new ArrayList<>(), new ParseOptions());
         Map<String, Schema> schemas = swagger.getOpenAPI().getComponents().getSchemas();
@@ -46,7 +103,7 @@ public class ClassGenerator {
             if (schema.getType().equalsIgnoreCase("object")) {
                 StringBuilder b = new StringBuilder();
                 b
-                        .append("package generated;")
+                        .append("package ").append(pck).append(";")
                         .append("%imports%")
                         .append("\n")
                         .append("\npublic class ").append(s).append(" {")
@@ -81,13 +138,13 @@ public class ClassGenerator {
                 if (importSerializedName) {
                     imports.append("\nimport com.google.gson.annotations.SerializedName;");
                 }
-                saveFile(s, b.toString().replace("%imports%", imports));
+                saveFile(pck, s, b.toString().replace("%imports%", imports));
             }
             else if (schema.getType().equalsIgnoreCase("string") && schema.getEnum() != null &&
                     !schema.getEnum().isEmpty()) {
                 StringBuilder b = new StringBuilder();
                 b
-                        .append("package generated;")
+                        .append("package ").append(pck).append(";")
                         .append("\n")
                         .append("\nimport com.google.gson.annotations.SerializedName;")
                         .append("\n")
@@ -108,50 +165,19 @@ public class ClassGenerator {
                         .append("\n")
                         .append("\n")
                         .append("}");
-                saveFile(s, b.toString());
+                saveFile(pck, s, b.toString());
             }
         }
-        // generate uri map, so we can match class by it's URI (for receiving live events from client)
-        StringBuilder b = new StringBuilder();
-        b
-                .append("package generated;")
-                .append("\n")
-                .append("\nimport java.util.HashMap;")
-                .append("\n")
-                .append("\npublic class UriMap {")
-                .append("\n")
-                .append("\n\tpublic static final HashMap<String, Class> toClass = new HashMap<>();")
-                .append("\n")
-                .append("\n\tstatic {");
-        for (String path : swagger.getOpenAPI().getPaths().keySet()) {
-            PathItem item = swagger.getOpenAPI().getPaths().get(path);
-            if (item.getGet() != null && item.getGet().getResponses().containsKey("200") &&
-                    item.getGet().getResponses().get("200").getContent().containsKey("application/json")) {
-                Schema schema =
-                        item.getGet().getResponses().get("200").getContent().get("application/json").getSchema();
-                if (schema == null) {
-                    continue;
-                }
-                b.append("\n\t\ttoClass.put(\"")
-                        .append(toRegex(path))
-                        .append("\", ")
-                        .append(getType(schema, false))
-                        .append(".class);");
-            }
-        }
-        b
-                .append("\n\t}")
-                .append("\n")
-                .append("\n}");
-        saveFile("UriMap", b.toString());
+        return swagger;
     }
 
     /**
      * Turns URI with parameters into regex
      * Example:
      * '/voice-chat/v2/sessions/{sessionId}/participants/{participantId}'
-     *                       is turned into
+     * is turned into
      * '\/voice-chat\/v2\/sessions\/[^/]+\/participants\/[^/]+'
+     *
      * @param str path with parameters
      * @return regex string
      */
@@ -162,11 +188,12 @@ public class ClassGenerator {
 
     /**
      * Saves class to file
+     *
      * @param s class name
      * @param b class contents
      */
-    private static void saveFile(String s, String b) throws IOException {
-        File file = new File(PATH + s + ".java");
+    private static void saveFile(String pck, String s, String b) throws IOException {
+        File file = new File(PATH + pck.replaceAll("\\.", "/") + "/" + s + ".java");
         FileWriter fw = new FileWriter(file);
         fw.write(b);
         fw.flush();
@@ -176,6 +203,7 @@ public class ClassGenerator {
 
     /**
      * Returns java type name based on type from scheme
+     *
      * @param schema schema
      * @param asList should type be list instead of an array
      * @return java type or empty string if schema type is null
@@ -220,6 +248,7 @@ public class ClassGenerator {
 
     /**
      * Is name valid for java. Probably can be improved
+     *
      * @param s name
      * @return true if name is valid
      */
@@ -235,6 +264,7 @@ public class ClassGenerator {
 
     /**
      * Turns name into valid java name
+     *
      * @param s name
      * @return valid java name
      */
@@ -248,6 +278,7 @@ public class ClassGenerator {
     /**
      * Turns name into more java-like enum name. Could be probably improved.
      * Example: 'enum-name' into 'ENUM_NAME'
+     *
      * @param s name
      * @return java enum name
      */

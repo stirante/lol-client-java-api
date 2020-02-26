@@ -12,7 +12,7 @@ public class LolStatstonesStatstone {
 	public String imageUrl;
 	public Boolean isComplete;
 	public Boolean isEpic;
-	public Boolean isFavorite;
+	public Boolean isFeatured;
 	public Boolean isRetired;
 	public String name;
 	public String nextMilestone;

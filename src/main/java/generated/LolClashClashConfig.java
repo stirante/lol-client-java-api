@@ -5,7 +5,6 @@ import java.util.List;
 public class LolClashClashConfig {
 
 	public Boolean CheckPartiesRegistration;
-	public String DarkModeEntitlement;
 	public List<String> DisabledEvents;
 	public LolClashClashState EnabledState;
 	public Boolean EventSendingEnabled;
@@ -17,7 +16,6 @@ public class LolClashClashConfig {
 	public Integer MinClashNotificationsSummonerLevel;
 	public Integer MinClashSummonerLevel;
 	public Integer RewardGrantRetryIntervalSeconds;
-	public Boolean UseIndividualEntitlement;
 	public LolClashClashVisibility Visibility;
 	public Integer VoiceEobQuitDelaySeconds;
 	public Integer VoiceNoDelayAutoStartSeconds;

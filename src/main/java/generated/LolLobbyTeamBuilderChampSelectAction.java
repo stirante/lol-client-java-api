@@ -6,6 +6,8 @@ public class LolLobbyTeamBuilderChampSelectAction {
 	public Integer championId;
 	public Boolean completed;
 	public Long id;
+	public Boolean isAllyAction;
+	public Boolean isInProgress;
 	public String type;
 
 }

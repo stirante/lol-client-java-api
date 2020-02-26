@@ -10,6 +10,9 @@ public class LolChampSelectLegacyChampSelectSession {
 	public Boolean allowSkinSelection;
 	public LolChampSelectLegacyChampSelectBannedChampions bans;
 	public LolChampSelectLegacyChampSelectChatRoomDetails chatDetails;
+	public Boolean hasSimultaneousBans;
+	public Boolean hasSimultaneousPicks;
+	public Boolean isCustomGame;
 	public Boolean isSpectating;
 	public Long localPlayerCellId;
 	public List<LolChampSelectLegacyChampSelectPlayerSelection> myTeam;

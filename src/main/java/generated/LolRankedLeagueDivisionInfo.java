@@ -6,7 +6,7 @@ public class LolRankedLeagueDivisionInfo {
 
 	public Long apexUnlockTimeMillis;
 	public LolRankedLeagueDivision division;
-	public Long maxLeagueSize;
+	public Integer maxLeagueSize;
 	public List<LolRankedLeagueStanding> standings;
 	public LolRankedLeagueTier tier;
 

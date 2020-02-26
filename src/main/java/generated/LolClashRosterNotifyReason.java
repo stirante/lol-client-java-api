@@ -50,8 +50,6 @@ public enum LolClashRosterNotifyReason {
 	GAME_END_ERROR,
 	@SerializedName("QUEUE_DODGE")
 	QUEUE_DODGE,
-	@SerializedName("LOSER_ROUND_COMPLETE")
-	LOSER_ROUND_COMPLETE,
 	@SerializedName("OWNER_TRANSFER")
 	OWNER_TRANSFER,
 	@SerializedName("SUB_INVITE")
@@ -84,8 +82,8 @@ public enum LolClashRosterNotifyReason {
 	VOTE_WITHDRAW_DISMISS,
 	@SerializedName("WITHDRAW")
 	WITHDRAW,
-	@SerializedName("WINNER_ROUND_COMPLETE")
-	WINNER_ROUND_COMPLETE,
+	@SerializedName("ROUND_COMPLETE")
+	ROUND_COMPLETE,
 	@SerializedName("NO_SHOW_PING")
 	NO_SHOW_PING,
 	@SerializedName("TIER_CHANGED")
@@ -102,6 +100,10 @@ public enum LolClashRosterNotifyReason {
 	BANNED_SMURF_TEAMMATE,
 	@SerializedName("BANNED_SMURF_OPPONENT")
 	BANNED_SMURF_OPPONENT,
+	@SerializedName("TICKET_CHARGED")
+	TICKET_CHARGED,
+	@SerializedName("TICKET_REFUNDED")
+	TICKET_REFUNDED,
 	@SerializedName("SUB_INVITE_SELF")
 	SUB_INVITE_SELF,
 	@SerializedName("GAME_START_RETRY")

@@ -11,6 +11,7 @@ public class LolCosmeticsCosmeticsTFTMapSkin {
 	public Boolean loyalty;
 	public String name;
 	public Boolean owned;
+	public Integer rarityValue;
 	public Boolean selected;
 
 }

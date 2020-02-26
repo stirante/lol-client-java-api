@@ -16,6 +16,8 @@ public class LolLobbyTeamBuilderChampSelectSession {
 	public LolLobbyTeamBuilderChampSelectChatRoomDetails chatDetails;
 	public Long counter;
 	public LolLobbyTeamBuilderEntitledFeatureState entitledFeatureState;
+	public Boolean hasSimultaneousBans;
+	public Boolean hasSimultaneousPicks;
 	public Boolean isSpectating;
 	public Long localPlayerCellId;
 	public Integer lockedEventIndex;

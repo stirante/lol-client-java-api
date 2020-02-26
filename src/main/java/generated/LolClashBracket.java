@@ -4,11 +4,8 @@ import java.util.List;
 
 public class LolClashBracket {
 
-	public Integer currentLoserRound;
-	public Integer currentRound;
 	public Long id;
 	public Boolean isComplete;
-	public List<BracketMatch> loserBracketMatches;
 	public List<BracketMatch> matches;
 	public Integer period;
 	public List<BracketRoster> rosters;

@@ -83,10 +83,12 @@ public class UriMap {
 		toClass.put("\\/lol-champ-select\\/v1\\/grid-champions\\/[^/]+", LolChampSelectChampGridChampion.class);
 		toClass.put("\\/lol-champ-select\\/v1\\/pickable-champion-ids", Integer[].class);
 		toClass.put("\\/lol-champ-select\\/v1\\/pickable-skins", LolChampSelectChampSelectPickableSkins.class);
+		toClass.put("\\/lol-champ-select\\/v1\\/pin-drop-notification", LolChampSelectChampSelectPinDropNotification.class);
 		toClass.put("\\/lol-champ-select\\/v1\\/session", LolChampSelectChampSelectSession.class);
 		toClass.put("\\/lol-champ-select\\/v1\\/session\\/timer", LolChampSelectChampSelectTimer.class);
 		toClass.put("\\/lol-champ-select\\/v1\\/session\\/trades", LolChampSelectChampSelectTradeContract[].class);
 		toClass.put("\\/lol-champ-select\\/v1\\/session\\/trades\\/[^/]+", LolChampSelectChampSelectTradeContract.class);
+		toClass.put("\\/lol-champ-select\\/v1\\/sfx-notifications", LolChampSelectSfxNotification[].class);
 		toClass.put("\\/lol-champ-select\\/v1\\/team-boost", LolChampSelectTeamBoost.class);
 		toClass.put("\\/lol-champions\\/v1\\/inventories\\/[^/]+\\/champions", LolChampionsCollectionsChampion[].class);
 		toClass.put("\\/lol-champions\\/v1\\/inventories\\/[^/]+\\/champions-minimal", LolChampionsCollectionsChampionMinimal[].class);
@@ -450,9 +452,6 @@ public class UriMap {
 		toClass.put("\\/lol-replays\\/v1\\/metadata\\/[^/]+", LolReplaysReplayMetadata.class);
 		toClass.put("\\/lol-replays\\/v1\\/rofls\\/path", String.class);
 		toClass.put("\\/lol-replays\\/v1\\/rofls\\/path\\/default", String.class);
-		toClass.put("\\/lol-revivals\\/v1\\/challenges-progress", LolRevivalsChallengesProgress.class);
-		toClass.put("\\/lol-revivals\\/v1\\/daily-play-progress", LolRevivalsDailyPlayProgress.class);
-		toClass.put("\\/lol-revivals\\/v1\\/eligibility", LolRevivalsEligibility.class);
 		toClass.put("\\/lol-rms\\/v1\\/champion-mastery-leaveup-update", LolRiotMessagingServiceChampionMasteryLevelUp[].class);
 		toClass.put("\\/lol-rso-auth\\/v1\\/auth-hints\\/hint", LolRsoAuthAuthHint.class);
 		toClass.put("\\/lol-rso-auth\\/v1\\/authorization", LolRsoAuthAuthorization.class);
@@ -474,7 +473,7 @@ public class UriMap {
 		toClass.put("\\/lol-simple-dialog-messages\\/v1\\/messages", LolSimpleDialogMessagesMessage[].class);
 		toClass.put("\\/lol-spectator\\/v1\\/spectate", LolSpectatorSpectateGameInfo.class);
 		toClass.put("\\/lol-statstones\\/v1\\/eog-notifications", Object[].class);
-		toClass.put("\\/lol-statstones\\/v1\\/favorite-champion-statstones\\/[^/]+", String[].class);
+		toClass.put("\\/lol-statstones\\/v1\\/featured-champion-statstones\\/[^/]+", LolStatstonesStatstone[].class);
 		toClass.put("\\/lol-statstones\\/v1\\/profile-summary\\/[^/]+", LolStatstonesProfileStatstoneSummary[].class);
 		toClass.put("\\/lol-statstones\\/v1\\/statstones-enabled-queue-ids", Integer[].class);
 		toClass.put("\\/lol-statstones\\/v1\\/vignette-notifications", Object[].class);
@@ -502,6 +501,7 @@ public class UriMap {
 		toClass.put("\\/lol-summoner\\/v1\\/current-summoner\\/jwt", String.class);
 		toClass.put("\\/lol-summoner\\/v1\\/current-summoner\\/rerollPoints", LolSummonerSummonerRerollPoints.class);
 		toClass.put("\\/lol-summoner\\/v1\\/current-summoner\\/summoner-profile", Object.class);
+		toClass.put("\\/lol-summoner\\/v1\\/status", LolSummonerStatus.class);
 		toClass.put("\\/lol-summoner\\/v1\\/summoner-profile", Object.class);
 		toClass.put("\\/lol-summoner\\/v1\\/summoners", LolSummonerSummoner.class);
 		toClass.put("\\/lol-summoner\\/v1\\/summoners-by-puuid-cached\\/[^/]+", LolSummonerSummoner.class);
@@ -516,10 +516,10 @@ public class UriMap {
 		toClass.put("\\/lol-tft\\/v1\\/tft\\/orb", LolMissionsTftOrb.class);
 		toClass.put("\\/lol-tft\\/v1\\/tft\\/pending-tft-games-count", Integer.class);
 		toClass.put("\\/lol-tft\\/v1\\/tft\\/weekly-missions", LolMissionsTftWeeklyMissions.class);
+		toClass.put("\\/lol-tft\\/v2\\/tft\\/battlepass", LolMissionsTftPaidBattlepass.class);
 		toClass.put("\\/lol-token-upsell\\/v1\\/all", LolWorldsTokenCardTokenUpsell[].class);
 		toClass.put("\\/lol-trophies\\/v1\\/current-summoner\\/trophies\\/profile", LolTrophiesTrophyProfileData.class);
 		toClass.put("\\/lol-trophies\\/v1\\/players\\/[^/]+\\/trophies\\/profile", LolTrophiesTrophyProfileData.class);
-		toClass.put("\\/patcher\\/v1\\/executable-version", String.class);
 		toClass.put("\\/patcher\\/v1\\/notifications", PatcherNotification[].class);
 		toClass.put("\\/patcher\\/v1\\/p2p\\/status", PatcherP2PStatus.class);
 		toClass.put("\\/patcher\\/v1\\/products", String[].class);
@@ -558,6 +558,7 @@ public class UriMap {
 		toClass.put("\\/riot-messaging-service\\/v1\\/message\\/[^/]+\\/[^/]+\\/[^/]+", RmsMessage.class);
 		toClass.put("\\/riot-messaging-service\\/v1\\/message\\/[^/]+\\/[^/]+\\/[^/]+\\/[^/]+", RmsMessage.class);
 		toClass.put("\\/riot-messaging-service\\/v1\\/message\\/[^/]+\\/[^/]+\\/[^/]+\\/[^/]+\\/[^/]+", RmsMessage.class);
+		toClass.put("\\/riot-messaging-service\\/v1\\/message\\/[^/]+\\/[^/]+\\/[^/]+\\/[^/]+\\/[^/]+\\/[^/]+", RmsMessage.class);
 		toClass.put("\\/riot-messaging-service\\/v1\\/session", RiotMessagingServiceSession.class);
 		toClass.put("\\/riot-messaging-service\\/v1\\/state", RiotMessagingServiceState.class);
 		toClass.put("\\/riotclient\\/affinity", Object.class);
@@ -572,7 +573,7 @@ public class UriMap {
 		toClass.put("\\/riotclient\\/trace", Object.class);
 		toClass.put("\\/riotclient\\/ux-crash-count", Integer.class);
 		toClass.put("\\/riotclient\\/ux-state", String.class);
-		toClass.put("\\/riotclient\\/v1\\/bugsplat\\/platform-id", String.class);
+		toClass.put("\\/riotclient\\/v1\\/crash-reporting\\/environment", CrashReportingEnvironment.class);
 		toClass.put("\\/riotclient\\/zoom-scale", Double.class);
 		toClass.put("\\/sanitizer\\/v1\\/status", SanitizerSanitizerStatus.class);
 		toClass.put("\\/swagger\\/v1\\/api-docs", Object.class);

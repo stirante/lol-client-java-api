@@ -14,6 +14,7 @@ public class TournamentDTO {
 	public Long id;
 	public Boolean lastThemeOfSeason;
 	public Integer maxSub;
+	public Integer minGames;
 	public String nameLocKey;
 	public String nameLocKeySecondary;
 	public List<TournamentPhaseDTO> phases;

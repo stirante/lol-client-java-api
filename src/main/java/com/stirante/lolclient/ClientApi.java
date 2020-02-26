@@ -2,6 +2,7 @@ package com.stirante.lolclient;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import generated.*;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.EntityBuilder;
@@ -83,11 +84,13 @@ public class ClientApi {
             "lol-simple-dialog-messages",
             "lol-spectator",
             "lol-suggested-players",
-            "lol-trophies"
+            "lol-trophies",
+            "liveclientdata"
     );
     private static final Pattern INSTALL_DIR =
             Pattern.compile(".+\"--install-directory=([()a-zA-Z_0-9- :.\\\\/]+)\".+");
     private static final Gson GSON = new GsonBuilder().create();
+    private static final int LIVE_PORT = 2999;
     /**
      * Enabled 'legacy' mode
      */
@@ -225,6 +228,13 @@ public class ClientApi {
             throw new RuntimeException(e);
         }
         start();
+    }
+
+    /**
+     * @return a {@code java.lang.String} that points to the League of Legends client directory
+     */
+    public String getClientPath() {
+        return clientPath;
     }
 
     /**
@@ -516,20 +526,33 @@ public class ClientApi {
     }
 
     public String getSwaggerJson() throws IOException {
-        return dumpHttpRequest(getConnection("/swagger/v2/swagger.json", new HttpGet()));
+        return dumpHttpRequest(getConnection("/swagger/v2/swagger.json", port, new HttpGet()));
     }
 
     public String getOpenapiJson() throws IOException {
-        return dumpHttpRequest(getConnection("/swagger/v3/openapi.json", new HttpGet()));
+        return dumpHttpRequest(getConnection("/swagger/v3/openapi.json", port, new HttpGet()));
+    }
+
+    public String getLiveSwaggerJson() throws IOException {
+        return dumpHttpRequest(getConnection("/swagger/v2/swagger.json", LIVE_PORT, new HttpGet()));
+    }
+
+    public String getLiveOpenapiJson() throws IOException {
+        return dumpHttpRequest(getConnection("/swagger/v3/openapi.json", LIVE_PORT, new HttpGet()));
     }
 
     public <T> T executeGet(String path, Class<T> clz) throws IOException {
-        HttpGet conn = getConnection(path, new HttpGet());
+        HttpGet conn = getConnection(path, port, new HttpGet());
+        return getResponseObject(clz, conn);
+    }
+
+    public <T> T executeLiveGet(String path, Class<T> clz) throws IOException {
+        HttpGet conn = getConnection(path, LIVE_PORT, new HttpGet());
         return getResponseObject(clz, conn);
     }
 
     public InputStream executeBinaryGet(String path) throws IOException {
-        HttpGet conn = getConnection(path, new HttpGet());
+        HttpGet conn = getConnection(path, port, new HttpGet());
         CloseableHttpResponse response = client.execute(conn);
         boolean b = response.getStatusLine().getStatusCode() == 200;
         if (!b) {
@@ -540,45 +563,45 @@ public class ClientApi {
     }
 
     public <T> T executeGet(String path, Class<T> clz, String... queryParams) throws IOException {
-        HttpGet conn = getConnection(path, new HttpGet(), queryParams);
+        HttpGet conn = getConnection(path, port, new HttpGet(), queryParams);
         return getResponseObject(clz, conn);
     }
 
     public boolean executePut(String path, Object jsonObject) throws IOException {
-        HttpPut conn = getConnection(path, new HttpPut());
+        HttpPut conn = getConnection(path, port, new HttpPut());
         addJsonBody(jsonObject, conn);
         return isOk(conn);
     }
 
     public <T> T executePost(String path, Object jsonObject, Class<T> clz) throws IOException {
-        HttpPost conn = getConnection(path, new HttpPost());
+        HttpPost conn = getConnection(path, port, new HttpPost());
         addJsonBody(jsonObject, conn);
         return getResponseObject(clz, conn);
     }
 
     public <T> T executePost(String path, Class<T> clz) throws IOException {
-        HttpPost conn = getConnection(path, new HttpPost());
+        HttpPost conn = getConnection(path, port, new HttpPost());
         return getResponseObject(clz, conn);
     }
 
     public boolean executePost(String path, Object jsonObject) throws IOException {
-        HttpPost conn = getConnection(path, new HttpPost());
+        HttpPost conn = getConnection(path, port, new HttpPost());
         addJsonBody(jsonObject, conn);
         return isOk(conn);
     }
 
     public boolean executePatch(String path, Object jsonObject) throws IOException {
-        HttpPatch conn = getConnection(path, new HttpPatch());
+        HttpPatch conn = getConnection(path, port, new HttpPatch());
         addJsonBody(jsonObject, conn);
         return isOk(conn);
     }
 
     public boolean executePost(String path) throws IOException {
-        return isOk(getConnection(path, new HttpPost()));
+        return isOk(getConnection(path, port, new HttpPost()));
     }
 
     public boolean executeDelete(String path) throws IOException {
-        return isOk(getConnection(path, new HttpDelete()));
+        return isOk(getConnection(path, port, new HttpDelete()));
     }
 
     private <T extends HttpEntityEnclosingRequestBase> void addJsonBody(Object jsonObject, T method) {
@@ -619,7 +642,7 @@ public class ClientApi {
      * @param method      Base request
      * @param queryParams Pairs of get parameters. Must be divisible by 2.
      */
-    private <T extends HttpRequestBase> T getConnection(String endpoint, T method, String... queryParams) {
+    private <T extends HttpRequestBase> T getConnection(String endpoint, int port, T method, String... queryParams) {
         if (!connected.get()) {
             throw new IllegalStateException("API not connected!");
         }
@@ -641,7 +664,7 @@ public class ClientApi {
                 sb.append(queryParams[i]).append("=").append(queryParams[i + 1]);
             }
             URI uri = new URI(sb.toString());
-            if (!disableEndpointWarnings.get()) {
+            if (!disableEndpointWarnings.get() && uri.getPath().substring(1).indexOf('/') != -1) {
                 String path = uri.getPath().substring(1, uri.getPath().substring(1).indexOf('/') + 1);
                 if (!ALLOWED_ENDPOINTS.contains(path)) {
                     System.err.println(
@@ -667,6 +690,14 @@ public class ClientApi {
     @Deprecated
     public LolRsoAuthAuthorization getAuth() throws IOException {
         return executeGet("/rso-auth/v1/authorization", LolRsoAuthAuthorization.class);
+    }
+
+    /**
+     * @deprecated Will be removed someday. It should be moved and organized.
+     */
+    @Deprecated
+    public JsonObject getLiveGameData() throws IOException {
+        return executeGet("/liveclientdata/allgamedata", JsonObject.class);
     }
 
     /**

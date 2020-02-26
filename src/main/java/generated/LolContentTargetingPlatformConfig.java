@@ -5,6 +5,7 @@ public class LolContentTargetingPlatformConfig {
 	public Boolean ABTestFilterEnabled;
 	public Long ABTestFilterGroups;
 	public Long ABTestFilterSalt;
+	public Integer AsynchronousEventHandlerSetupDelayInSeconds;
 	public Boolean Enabled;
 	public Boolean EntitlementsFilterEnabled;
 	public String EntitlementsPrefix;
@@ -23,8 +24,8 @@ public class LolContentTargetingPlatformConfig {
 	public Boolean RankFilterEnabled;
 	public Boolean RankedFilterEnabled;
 	public Boolean SummonerIconFilterEnabled;
+	public String TargetingAttributeStorageBaseUri;
 	public Boolean TargetingAttributeStorageEnabled;
-	public String TargetingAttributeStorageUri;
 	public Integer TasIngestionDelayInSeconds;
 
 }
