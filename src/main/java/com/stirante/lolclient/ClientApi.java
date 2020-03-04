@@ -272,7 +272,11 @@ public class ClientApi {
             startProcessWatcher();
         }
         else {
-            startFileWatcher(new File(new File(clientPath), "lockfile").getAbsolutePath());
+            File lockfile = new File(new File(clientPath), "lockfile");
+            startFileWatcher(lockfile.getAbsolutePath());
+            if (lockfile.exists()) {
+                setupApiWithLockfile();
+            }
         }
     }
 
