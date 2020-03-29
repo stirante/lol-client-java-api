@@ -3,6 +3,7 @@ package generated;
 public class LolStatstonesStatstonePlayerRecord {
 
 	public String dateAcquired;
+	public String dateArchived;
 	public String dateCompleted;
 	public String dateModified;
 	public Boolean entitled;

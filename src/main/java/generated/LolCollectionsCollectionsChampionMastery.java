@@ -8,6 +8,8 @@ public class LolCollectionsCollectionsChampionMastery {
 	public Integer championPointsSinceLastLevel;
 	public Integer championPointsUntilNextLevel;
 	public Boolean chestGranted;
+	public String formattedChampionPoints;
+	public String formattedMasteryGoal;
 	public String highestGrade;
 	public Long lastPlayTime;
 	public Long playerId;

@@ -1,6 +1,6 @@
 package generated;
 
-public class LolStatstonesNumberFormattingBehavior {
+public class LolCollectionsNumberFormattingBehavior {
 
 	public Integer digitsForThousandsSeperator;
 	public Boolean trimTrailingZerosAfterDecimal;

@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 public enum LolLicenseAgreementLicenseAgreementType {
 
-	@SerializedName("Eula")
-	EULA,
+	@SerializedName("PrivacyNotice")
+	PRIVACYNOTICE,
 	@SerializedName("TermsOfUse")
 	TERMSOFUSE
 

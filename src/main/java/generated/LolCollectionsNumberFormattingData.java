@@ -1,6 +1,6 @@
 package generated;
 
-public class LolStatstonesNumberFormattingData {
+public class LolCollectionsNumberFormattingData {
 
 	public String billionAbbreviation;
 	public String decimalSeperator;
@@ -9,7 +9,7 @@ public class LolStatstonesNumberFormattingData {
 	public String metersAbbreviation;
 	public String millionAbbreviation;
 	public String minuteAbbreviation;
-	public LolStatstonesNumberFormattingBehavior numberFormattingBehavior;
+	public LolCollectionsNumberFormattingBehavior numberFormattingBehavior;
 	public String oneHundredMillionAbbreviation;
 	public String secondAbbreviation;
 	public String tenThousandAbbreviation;

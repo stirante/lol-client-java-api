@@ -1,6 +1,6 @@
 package generated;
 
-public class LolSpectatorSpectateGameInfo {
+public class LolGameflowSpectateGameInfoResource {
 
 	public String allowObserveMode;
 	public String dropInSpectateGameId;

@@ -6,7 +6,9 @@ public class LolClashClashConfig {
 
 	public Boolean CheckPartiesRegistration;
 	public List<String> DisabledEvents;
+	public String DisabledReason;
 	public LolClashClashState EnabledState;
+	public Long EstimatedEnableTimeMillis;
 	public Boolean EventSendingEnabled;
 	public Integer HonorLevelRequired;
 	public Integer HonorRefreshRetrySeconds;

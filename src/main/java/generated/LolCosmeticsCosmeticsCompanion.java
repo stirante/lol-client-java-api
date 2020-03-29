@@ -7,6 +7,7 @@ public class LolCosmeticsCosmeticsCompanion {
 	public String color;
 	public String contentId;
 	public String description;
+	public Integer groupId;
 	public Integer itemId;
 	public Integer level;
 	public String loadoutsIcon;
@@ -16,7 +17,6 @@ public class LolCosmeticsCosmeticsCompanion {
 	public Integer rarityValue;
 	public Boolean selected;
 	public String species;
-	public Integer speciesId;
 	public List<String> upgrades;
 
 }

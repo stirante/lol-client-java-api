@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 public class LolChatMultiGamePresence {
 
 	public String actor;
-	public String basic;
 	public String details;
 	public String game_name;
 	public String game_tag;

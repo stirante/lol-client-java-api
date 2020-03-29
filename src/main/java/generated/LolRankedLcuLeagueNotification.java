@@ -14,6 +14,7 @@ public class LolRankedLcuLeagueNotification {
 	public Integer miniseriesWins;
 	public String msgId;
 	public String notifyReason;
+	public Integer numberOfPromotions;
 	public Integer provisionalGamesRemaining;
 	public LolRankedLeagueQueueType queueType;
 	public String rewardEarnedId;

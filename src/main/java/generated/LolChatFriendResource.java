@@ -3,7 +3,6 @@ package generated;
 public class LolChatFriendResource {
 
 	public String availability;
-	public String basic;
 	public Integer displayGroupId;
 	public String displayGroupName;
 	public String gameName;

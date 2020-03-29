@@ -2,9 +2,8 @@ package generated;
 
 import java.util.List;
 
-public class LolCosmeticsCosmeticsCompanionViewModel {
+public class LolCosmeticsCosmeticsTFTDamageSkinViewModel {
 
-	public String color;
 	public String contentId;
 	public String description;
 	public Integer groupId;
@@ -16,7 +15,6 @@ public class LolCosmeticsCosmeticsCompanionViewModel {
 	public Boolean owned;
 	public Integer rarityValue;
 	public Boolean selected;
-	public String species;
-	public List<LolCosmeticsCosmeticsCompanionViewModel> upgrades;
+	public List<LolCosmeticsCosmeticsTFTDamageSkinViewModel> upgrades;
 
 }
