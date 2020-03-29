@@ -1,4 +1,4 @@
-package com.stirante.utils;
+package com.stirante.lolclient.utils;
 
 import com.stirante.lolclient.ClientApi;
 

@@ -1,7 +1,7 @@
 package com.stirante.lolclient;
 
 import com.google.gson.*;
-import com.stirante.utils.SSLUtil;
+import com.stirante.lolclient.utils.SSLUtil;
 import generated.UriMap;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
