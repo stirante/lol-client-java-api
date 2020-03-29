@@ -3,16 +3,21 @@ package com.stirante.lolclient;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import com.stirante.utils.SSLUtil;
 import generated.*;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.EntityBuilder;
 import org.apache.http.client.methods.*;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.entity.ContentType;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
-import javax.net.ssl.*;
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManagerFactory;
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -23,8 +28,10 @@ import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 import java.security.KeyManagementException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
-import java.security.cert.X509Certificate;
+import java.security.cert.CertificateException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Matcher;
@@ -165,31 +172,9 @@ public class ClientApi {
      */
     private final Set<ClientConnectionListener> clientListeners = new HashSet<>();
 
-    private static CloseableHttpClient createHttpClient() throws KeyManagementException, NoSuchAlgorithmException {
-        //Localhost needs HTTPS, but doesn't provide valid SSL
-        TrustManager[] trustAllCerts = new TrustManager[]{
-                new X509TrustManager() {
-                    public X509Certificate[] getAcceptedIssuers() {
-                        return null;
-                    }
-
-                    public void checkClientTrusted(X509Certificate[] certs, String authType) {
-                    }
-
-                    public void checkServerTrusted(X509Certificate[] certs, String authType) {
-                    }
-
-                }
-        };
-        SSLContext sc = SSLContext.getInstance("SSL");
-        sc.init(null, trustAllCerts, new java.security.SecureRandom());
-        HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
-
-        HostnameVerifier allHostsValid = (hostname, session) -> true;
-        HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
+    private static CloseableHttpClient createHttpClient() throws Exception {
         return HttpClients.custom()
-                .setSSLContext(sc)
-                .setSSLHostnameVerifier(allHostsValid)
+                .setSSLSocketFactory(new SSLConnectionSocketFactory(SSLUtil.getSocketFactory(), (HostnameVerifier) null))
                 .build();
     }
 
@@ -224,7 +209,7 @@ public class ClientApi {
                 .build();
         try {
             this.client = createHttpClient();
-        } catch (KeyManagementException | NoSuchAlgorithmException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
         start();

@@ -1,17 +1,14 @@
 package com.stirante.lolclient;
 
 import com.google.gson.*;
+import com.stirante.utils.SSLUtil;
 import generated.UriMap;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 
-import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 import java.lang.reflect.Type;
 import java.net.URI;
-import java.security.cert.X509Certificate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -33,26 +30,8 @@ public class ClientWebSocket extends WebSocketClient {
 
     ClientWebSocket(String token, int port) throws Exception {
         super(new URI("wss://localhost:" + port + "/"), createHeaders("Authorization", "Basic " + token));
-        //ignore SSL as sockets are secure, but without valid certificate
-        TrustManager[] trustAllCerts = new TrustManager[]{
-                new X509TrustManager() {
-                    public X509Certificate[] getAcceptedIssuers() {
-                        return null;
-                    }
 
-                    public void checkClientTrusted(X509Certificate[] certs, String authType) {
-                    }
-
-                    public void checkServerTrusted(X509Certificate[] certs, String authType) {
-                    }
-
-                }
-        };
-        SSLContext sslContext;
-        sslContext = SSLContext.getInstance("TLS");
-        sslContext.init(null, trustAllCerts, null);
-
-        SSLSocketFactory factory = sslContext.getSocketFactory();
+        SSLSocketFactory factory = SSLUtil.getSocketFactory();
         setSocket(factory.createSocket());
         connectBlocking();
         subscribe("OnJsonApiEvent");
