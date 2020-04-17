@@ -4,9 +4,11 @@ public class LolChatBlockedPlayerResource {
 
 	public String gameName;
 	public String gameTag;
+	public Integer icon;
 	public String id;
 	public String name;
 	public String pid;
+	public String puuid;
 	public Long summonerId;
 
 }

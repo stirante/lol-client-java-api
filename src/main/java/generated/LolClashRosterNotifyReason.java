@@ -104,6 +104,8 @@ public enum LolClashRosterNotifyReason {
 	TICKET_CHARGED,
 	@SerializedName("TICKET_REFUNDED")
 	TICKET_REFUNDED,
+	@SerializedName("TICKET_COULD_NOT_BE_CHARGED")
+	TICKET_COULD_NOT_BE_CHARGED,
 	@SerializedName("SUB_INVITE_SELF")
 	SUB_INVITE_SELF,
 	@SerializedName("GAME_START_RETRY")

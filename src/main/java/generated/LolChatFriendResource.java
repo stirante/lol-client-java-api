@@ -21,6 +21,7 @@ public class LolChatFriendResource {
 	public String platformId;
 	public String product;
 	public String productName;
+	public String puuid;
 	public String statusMessage;
 	public String summary;
 	public Long summonerId;

@@ -11,6 +11,7 @@ public class LolStatstonesNumberFormattingData {
 	public String minuteAbbreviation;
 	public LolStatstonesNumberFormattingBehavior numberFormattingBehavior;
 	public String oneHundredMillionAbbreviation;
+	public String percentageFormat;
 	public String secondAbbreviation;
 	public String tenThousandAbbreviation;
 	public String thousandAbbreviation;

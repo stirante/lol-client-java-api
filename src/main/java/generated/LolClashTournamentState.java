@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 public enum LolClashTournamentState {
 
+	@SerializedName("UPCOMING")
+	UPCOMING,
 	@SerializedName("IDLE")
 	IDLE,
 	@SerializedName("LOCK_IN")

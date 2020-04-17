@@ -9,10 +9,12 @@ public class ClashEventData {
 	public List<String> playerUUIDs;
 	public ClashRewardSpec rewardSpec;
 	public String rewardType;
+	public Long rosterId;
 	public Integer seasonId;
 	public String teamLogoChromaId;
 	public String teamLogoName;
 	public String teamName;
+	public String teamShortName;
 	public String theme;
 	public String tier;
 	public Long tournamentId;

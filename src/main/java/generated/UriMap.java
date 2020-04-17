@@ -480,6 +480,7 @@ public class UriMap {
 		toClass.put("\\/lol-statstones\\/v2\\/player-statstones-self\\/[^/]+", LolStatstonesStatstoneSet[].class);
 		toClass.put("\\/lol-statstones\\/v2\\/player-summary-self", LolStatstonesChampionStatstoneSummary[].class);
 		toClass.put("\\/lol-store\\/v1\\/catalog", LolStoreCatalogItem[].class);
+		toClass.put("\\/lol-store\\/v1\\/catalog\\/[^/]+", LolStoreCatalogItem[].class);
 		toClass.put("\\/lol-store\\/v1\\/catalogByInstanceIds", LolStoreCatalogItem[].class);
 		toClass.put("\\/lol-store\\/v1\\/getStoreUrl", String.class);
 		toClass.put("\\/lol-store\\/v1\\/giftablefriends", LolStoreGiftingFriend[].class);
@@ -503,6 +504,7 @@ public class UriMap {
 		toClass.put("\\/lol-summoner\\/v1\\/current-summoner\\/summoner-profile", Object.class);
 		toClass.put("\\/lol-summoner\\/v1\\/status", LolSummonerStatus.class);
 		toClass.put("\\/lol-summoner\\/v1\\/summoner-profile", Object.class);
+		toClass.put("\\/lol-summoner\\/v1\\/summoner-requests-ready", Boolean.class);
 		toClass.put("\\/lol-summoner\\/v1\\/summoners", LolSummonerSummoner.class);
 		toClass.put("\\/lol-summoner\\/v1\\/summoners-by-puuid-cached\\/[^/]+", LolSummonerSummoner.class);
 		toClass.put("\\/lol-summoner\\/v1\\/summoners\\/[^/]+", LolSummonerSummoner.class);
@@ -510,12 +512,6 @@ public class UriMap {
 		toClass.put("\\/lol-summoner\\/v2\\/summoner-names", LolSummonerSummonerIdAndName[].class);
 		toClass.put("\\/lol-summoner\\/v2\\/summoners", LolSummonerSummoner[].class);
 		toClass.put("\\/lol-summoner\\/v2\\/summoners\\/puuid\\/[^/]+", LolSummonerSummoner.class);
-		toClass.put("\\/lol-tencent-qt\\/v1\\/ui-states", Object.class);
-		toClass.put("\\/lol-tencent-qt\\/v1\\/ui-states\\/[^/]+", LolTencentQtTencentQTNotification.class);
-		toClass.put("\\/lol-tft\\/v1\\/tft\\/battlepass", LolMissionsTftBattlepass.class);
-		toClass.put("\\/lol-tft\\/v1\\/tft\\/orb", LolMissionsTftOrb.class);
-		toClass.put("\\/lol-tft\\/v1\\/tft\\/pending-tft-games-count", Integer.class);
-		toClass.put("\\/lol-tft\\/v1\\/tft\\/weekly-missions", LolMissionsTftWeeklyMissions.class);
 		toClass.put("\\/lol-tft\\/v2\\/tft\\/battlepass", LolMissionsTftPaidBattlepass.class);
 		toClass.put("\\/lol-token-upsell\\/v1\\/all", LolWorldsTokenCardTokenUpsell[].class);
 		toClass.put("\\/lol-trophies\\/v1\\/current-summoner\\/trophies\\/profile", LolTrophiesTrophyProfileData.class);

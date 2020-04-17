@@ -7,6 +7,7 @@ public class LolCosmeticsCosmeticsTFTDamageSkin {
 	public String contentId;
 	public String description;
 	public Integer groupId;
+	public String groupName;
 	public Integer itemId;
 	public Integer level;
 	public String loadoutsIcon;

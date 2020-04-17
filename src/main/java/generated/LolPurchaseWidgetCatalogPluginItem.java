@@ -4,6 +4,7 @@ import java.util.List;
 
 public class LolPurchaseWidgetCatalogPluginItem {
 
+	public Boolean active;
 	public String description;
 	public String imagePath;
 	public Long inactiveDate;
