@@ -24,6 +24,7 @@ import java.nio.file.FileSystems;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Matcher;
@@ -434,7 +435,7 @@ public class ClientApi {
      * @param path path to the file
      * @return text contents of the file
      */
-    private String readFile(String path) {
+    private static String readFile(String path) {
         try {
             Scanner scanner = new Scanner(new InputStreamReader(new FileInputStream(path)));
             StringBuilder sb = new StringBuilder();
@@ -460,7 +461,7 @@ public class ClientApi {
      * @param in InputStream
      * @return Text contents of {@code java.io.InputStream}
      */
-    private String dumpStream(InputStream in) throws IOException {
+    private static String dumpStream(InputStream in) throws IOException {
         java.util.Scanner s = new java.util.Scanner(in).useDelimiter("\\A");
         return s.hasNext() ? s.next() : "";
     }
@@ -776,6 +777,92 @@ public class ClientApi {
     @Deprecated
     public LolChatSessionResource getChatSession() throws IOException {
         return executeGet("/lol-chat/v1/session", LolChatSessionResource.class);
+    }
+
+    public static String generateDebugLog() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Created at ")
+                .append(SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.FULL, SimpleDateFormat.FULL, Locale.ENGLISH).format(new Date()))
+                .append("\n");
+        try {
+            String target = null;
+            boolean found = false;
+            Process process =
+                    Runtime.getRuntime().exec("WMIC PROCESS WHERE name='LeagueClientUx.exe' GET commandline");
+            InputStream in = process.getInputStream();
+            Scanner sc = new Scanner(in);
+            while (sc.hasNextLine()) {
+                String s = sc.nextLine();
+                sb.append(s).append("\n");
+                if (s.contains("LeagueClientUx.exe") && s.contains("--install-directory=")) {
+                    sb.append("Found correct process\n");
+                    found = true;
+                    target = s;
+                    break;
+                }
+            }
+            in.close();
+            process.destroy();
+            if (!found) {
+                process =
+                        Runtime.getRuntime().exec("WMIC PROCESS GET name,commandline /format:csv");
+                in = process.getInputStream();
+                sc = new Scanner(in);
+                while (sc.hasNextLine()) {
+                    String s = sc.nextLine();
+                    sb.append(s).append("\n");
+                }
+                in.close();
+                process.destroy();
+            }
+            else {
+                Matcher matcher = INSTALL_DIR.matcher(target);
+                if (matcher.find()) {
+                    String clientPath = new File(matcher.group(1)).getAbsolutePath();
+                    String path = new File(new File(clientPath), "lockfile").getAbsolutePath();
+                    String lockfile = readFile(path);
+                    if (lockfile == null) {
+                        sb.append("Lockfile not found!\n");
+                    }
+                    else {
+                        sb.append("Lockfile found: ");
+                        sb.append(lockfile).append("\n");
+                        String[] split = lockfile.split(":");
+                        String password = split[3];
+                        String token = new String(Base64.getEncoder().encode(("riot:" + password).getBytes()));
+                        int port = Integer.parseInt(split[2]);
+                        sb.append("Token: ").append(token).append("\n");
+                        sb.append("Port: ").append(port).append("\n");
+                        sb.append("Executing test request\n");
+                        CloseableHttpClient client = createHttpClient();
+                        HttpGet method = new HttpGet();
+                        method.setURI(new URI("https://127.0.0.1:" + port + "/system/v1/builds"));
+                        method.addHeader("Authorization", "Basic " + token);
+                        method.addHeader("Accept", "*/*");
+                        try (CloseableHttpResponse response = client.execute(method)) {
+                            boolean b = response.getStatusLine().getStatusCode() == 200;
+                            if (!b) {
+                                sb.append("Status code: ")
+                                        .append(response.getStatusLine().getStatusCode())
+                                        .append("\n");
+                            }
+                            else {
+                                String t = dumpStream(response.getEntity().getContent());
+                                EntityUtils.consume(response.getEntity());
+                                sb.append("Response: ").append(t).append("\n");
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Throwable t) {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            PrintStream stream = new PrintStream(baos);
+            t.printStackTrace(stream);
+            sb.append(baos.toString()).append("\n");
+        }
+
+        return sb.toString();
     }
 
 }
