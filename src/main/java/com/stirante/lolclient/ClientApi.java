@@ -35,58 +35,6 @@ import static java.nio.file.StandardWatchEventKinds.ENTRY_DELETE;
 
 public class ClientApi {
 
-    private static final List<String> ALLOWED_ENDPOINTS = Arrays.asList(
-            "lol-active-boosts",
-            "lol-banners",
-            "lol-career-stats",
-            "lol-champ-select",
-            "lol-champ-select-legacy",
-            "lol-clubs",
-            "lol-clubs-public",
-            "lol-collections",
-            "lol-end-of-game",
-            "lol-featured-modes",
-            "lol-game-client-chat",
-            "lol-game-queues",
-            "lol-game-settings",
-            "lol-gameflow",
-            "lol-highlights",
-            "lol-honor-v2",
-            "lol-loadouts",
-            "lol-lobby",
-            "lol-lobby-team-builder",
-            "lol-1oot",
-            "lol-loyalty",
-            "lol-maps",
-            "lol-matchmaking",
-            "lol-missions",
-            "lol-npe-rewards",
-            "lol-npe-tutorial-path",
-            "lol-patch",
-            "lol-perks",
-            "lol-pft",
-            "lol-platform-config",
-            "lol-player-behavior",
-            "lol-player-level-up",
-            "lol-summoner",
-            "lol-player-messaging",
-            "lol-player-preferences",
-            "lol-pre-end-of-game",
-            "lol-premade-voice",
-            "lol-purchase-widget",
-            "lol-queue-eligibility",
-            "lol-ranked",
-            "lol-recommendations",
-            "lol-regalia",
-            "lol-replays",
-            "lol-service-status",
-            "lol-settings",
-            "lol-simple-dialog-messages",
-            "lol-spectator",
-            "lol-suggested-players",
-            "lol-trophies",
-            "liveclientdata"
-    );
     private static final Pattern INSTALL_DIR =
             Pattern.compile(".+\"--install-directory=([()a-zA-Z_0-9- :.\\\\/]+)\".+");
     private static final Gson GSON = new GsonBuilder().create();
@@ -95,10 +43,6 @@ public class ClientApi {
      * Enabled 'legacy' mode
      */
     private static final AtomicBoolean legacyMode = new AtomicBoolean(false);
-    /**
-     * Disables warnings about using disallowed endpoint
-     */
-    private static final AtomicBoolean disableEndpointWarnings = new AtomicBoolean(false);
     /**
      * Prints out all responses from client to System.out
      */
@@ -112,13 +56,6 @@ public class ClientApi {
     @Deprecated
     public static void setLegacyMode(boolean legacyMode) {
         ClientApi.legacyMode.set(legacyMode);
-    }
-
-    /**
-     * Disables warnings about using disallowed endpoint
-     */
-    public static void setDisableEndpointWarnings(boolean disableEndpointWarnings) {
-        ClientApi.disableEndpointWarnings.set(disableEndpointWarnings);
     }
 
     /**
@@ -646,16 +583,6 @@ public class ClientApi {
                 sb.append(queryParams[i]).append("=").append(queryParams[i + 1]);
             }
             URI uri = new URI(sb.toString());
-            if (!disableEndpointWarnings.get() && uri.getPath().substring(1).indexOf('/') != -1) {
-                String path = uri.getPath().substring(1, uri.getPath().substring(1).indexOf('/') + 1);
-                if (!ALLOWED_ENDPOINTS.contains(path)) {
-                    System.err.println(
-                            "Using endpoint \"" + path + "\" which is not in the list of allowed endpoints!");
-                    System.err.println(
-                            "If you're seeing this message while using allowed endpoint, consider opening an issue" +
-                                    " or pull request.");
-                }
-            }
             method.setURI(uri);
             method.addHeader("Authorization", "Basic " + token);
             method.addHeader("Accept", "*/*");
