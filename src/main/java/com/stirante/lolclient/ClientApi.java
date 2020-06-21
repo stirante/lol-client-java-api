@@ -519,7 +519,7 @@ public class ClientApi {
         try (CloseableHttpResponse response = client.execute(method)) {
             int statusCode = response.getStatusLine().getStatusCode();
             String rawResponse = null;
-            if (response.getEntity().getContentLength() > 0) {
+            if (response.getEntity() != null && response.getEntity().getContentLength() > 0) {
                 InputStream in = response.getEntity().getContent();
                 rawResponse = dumpStream(in);
             }
