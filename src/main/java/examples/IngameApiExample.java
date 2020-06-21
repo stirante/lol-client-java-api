@@ -20,7 +20,7 @@ public class IngameApiExample {
             public void onClientConnected() {
                 try {
                     LolGameflowGameflowPhase phase =
-                            api.executeGet("/lol-gameflow/v1/gameflow-phase", LolGameflowGameflowPhase.class);
+                            api.executeGet("/lol-gameflow/v1/gameflow-phase", LolGameflowGameflowPhase.class).getResponseObject();
                     if (phase != LolGameflowGameflowPhase.INPROGRESS) {
                         System.out.println("You're not in game! Run this example while the game is in progress.");
                         api.stop();
@@ -29,7 +29,7 @@ public class IngameApiExample {
                     //Get all data about current game
                     //Almost all those models are actually not generated, because current API documentation
                     //lacks schema for an automated model generation
-                    GameData data = api.executeLiveGet("/liveclientdata/allgamedata", GameData.class);
+                    GameData data = api.executeLiveGet("/liveclientdata/allgamedata", GameData.class).getResponseObject();
                     //Print data
                     System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(data));
                     api.stop();

@@ -8,7 +8,6 @@ import java.io.IOException;
 public class SimpleCLI {
 
     public static void main(String[] args) {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         if (args.length == 0) {
             showUsage();
         } else {
@@ -36,15 +35,13 @@ public class SimpleCLI {
                 public void onClientConnected() {
                     if (finalMethod.equalsIgnoreCase("GET")) {
                         try {
-                            Object o = api.executeGet(finalPath, Object.class);
-                            System.out.println(gson.toJson(o));
+                            System.out.println(api.executeGet(finalPath, Object.class).getRawResponse());
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
                     } else if (finalMethod.equalsIgnoreCase("POST")) {
                         try {
-                            Object o = api.executePost(finalPath, Object.class);
-                            System.out.println(gson.toJson(o));
+                            System.out.println(api.executePost(finalPath, Object.class).getRawResponse());
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

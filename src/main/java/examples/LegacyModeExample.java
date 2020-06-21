@@ -17,7 +17,7 @@ public class LegacyModeExample {
         //Initialize API
         ClientApi api = new ClientApi();
         //Get current user chat info
-        LolChatUserResource user = api.executeGet("/lol-chat/v1/me", LolChatUserResource.class);
+        LolChatUserResource user = api.executeGet("/lol-chat/v1/me", LolChatUserResource.class).getResponseObject();
         //Print status message
         System.out.println(user.statusMessage);
         api.stop();

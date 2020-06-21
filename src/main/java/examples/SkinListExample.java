@@ -29,11 +29,11 @@ public class SkinListExample {
                         return;
                     }
                     //Get current summoner
-                    LolSummonerSummoner summoner = api.executeGet("/lol-summoner/v1/current-summoner", LolSummonerSummoner.class);
+                    LolSummonerSummoner summoner = api.executeGet("/lol-summoner/v1/current-summoner", LolSummonerSummoner.class).getResponseObject();
                     //Get champion collection of summoner
                     LolChampionsCollectionsChampion[] champions = api.executeGet(
                             "/lol-champions/v1/inventories/" + summoner.summonerId + "/champions",
-                            LolChampionsCollectionsChampion[].class);
+                            LolChampionsCollectionsChampion[].class).getResponseObject();
                     for (LolChampionsCollectionsChampion champion : champions) {
                         if (champion.ownership.owned) {
                             System.out.println(champion.name + " purchased on " +

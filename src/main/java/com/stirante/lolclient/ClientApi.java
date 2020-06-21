@@ -80,11 +80,11 @@ public class ClientApi {
     /**
      * Request config
      */
-    private RequestConfig requestConfig;
+    private final RequestConfig requestConfig;
     /**
      * HTTP client
      */
-    private CloseableHttpClient client;
+    private final CloseableHttpClient client;
     /**
      * Is api connected
      */
@@ -398,7 +398,7 @@ public class ClientApi {
      * @param in InputStream
      * @return Text contents of {@code java.io.InputStream}
      */
-    private static String dumpStream(InputStream in) throws IOException {
+    private static String dumpStream(InputStream in) {
         java.util.Scanner s = new java.util.Scanner(in).useDelimiter("\\A");
         return s.hasNext() ? s.next() : "";
     }
@@ -415,30 +415,13 @@ public class ClientApi {
         }
     }
 
-    /**
-     * Decodes input stream into object
-     */
-    private <T> T decodeResponse(InputStream in, Class<T> clz) throws IOException {
-        if (printResponse.get()) {
-            String s = dumpStream(in);
-            in.close();
-            System.out.println(s);
-            return GSON.fromJson(s, clz);
-        }
-        else {
-            T result = GSON.fromJson(new InputStreamReader(in), clz);
-            in.close();
-            return result;
-        }
-    }
-
     public InputStream getAsset(String plugin, String path) throws IOException {
         return executeBinaryGet(plugin + "/assets/" + URLEncoder.encode(path, StandardCharsets.UTF_8.name()));
     }
 
     public boolean isAuthorized() throws IOException {
         try {
-            return executeGet("/lol-summoner/v1/current-summoner", LolSummonerSummoner.class).accountId > 0;
+            return executeGet("/lol-summoner/v1/current-summoner", LolSummonerSummoner.class).getResponseObject().accountId > 0;
         } catch (FileNotFoundException | NullPointerException e) {
             return false;
         }
@@ -460,14 +443,14 @@ public class ClientApi {
         return dumpHttpRequest(getConnection("/swagger/v3/openapi.json", LIVE_PORT, new HttpGet()));
     }
 
-    public <T> T executeGet(String path, Class<T> clz) throws IOException {
+    public <T> ApiResponse<T> executeGet(String path, Class<T> clz) throws IOException {
         HttpGet conn = getConnection(path, port, new HttpGet());
-        return getResponseObject(clz, conn);
+        return getResponse(clz, conn);
     }
 
-    public <T> T executeLiveGet(String path, Class<T> clz) throws IOException {
+    public <T> ApiResponse<T> executeLiveGet(String path, Class<T> clz) throws IOException {
         HttpGet conn = getConnection(path, LIVE_PORT, new HttpGet());
-        return getResponseObject(clz, conn);
+        return getResponse(clz, conn);
     }
 
     public InputStream executeBinaryGet(String path) throws IOException {
@@ -481,46 +464,46 @@ public class ClientApi {
         return response.getEntity().getContent();
     }
 
-    public <T> T executeGet(String path, Class<T> clz, String... queryParams) throws IOException {
+    public <T> ApiResponse<T> executeGet(String path, Class<T> clz, String... queryParams) throws IOException {
         HttpGet conn = getConnection(path, port, new HttpGet(), queryParams);
-        return getResponseObject(clz, conn);
+        return getResponse(clz, conn);
     }
 
-    public boolean executePut(String path, Object jsonObject) throws IOException {
+    public ApiResponse<Void> executePut(String path, Object jsonObject) throws IOException {
         HttpPut conn = getConnection(path, port, new HttpPut());
         addJsonBody(jsonObject, conn);
-        return isOk(conn);
+        return getResponse(conn);
     }
 
-    public <T> T executePost(String path, Object jsonObject, Class<T> clz) throws IOException {
+    public <T> ApiResponse<T> executePost(String path, Object jsonObject, Class<T> clz) throws IOException {
         HttpPost conn = getConnection(path, port, new HttpPost());
         addJsonBody(jsonObject, conn);
-        return getResponseObject(clz, conn);
+        return getResponse(clz, conn);
     }
 
-    public <T> T executePost(String path, Class<T> clz) throws IOException {
+    public <T> ApiResponse<T> executePost(String path, Class<T> clz) throws IOException {
         HttpPost conn = getConnection(path, port, new HttpPost());
-        return getResponseObject(clz, conn);
+        return getResponse(clz, conn);
     }
 
-    public boolean executePost(String path, Object jsonObject) throws IOException {
+    public ApiResponse<Void> executePost(String path, Object jsonObject) throws IOException {
         HttpPost conn = getConnection(path, port, new HttpPost());
         addJsonBody(jsonObject, conn);
-        return isOk(conn);
+        return getResponse(conn);
     }
 
-    public boolean executePatch(String path, Object jsonObject) throws IOException {
+    public ApiResponse<Void> executePatch(String path, Object jsonObject) throws IOException {
         HttpPatch conn = getConnection(path, port, new HttpPatch());
         addJsonBody(jsonObject, conn);
-        return isOk(conn);
+        return getResponse(conn);
     }
 
-    public boolean executePost(String path) throws IOException {
-        return isOk(getConnection(path, port, new HttpPost()));
+    public ApiResponse<Void> executePost(String path) throws IOException {
+        return getResponse(getConnection(path, port, new HttpPost()));
     }
 
-    public boolean executeDelete(String path) throws IOException {
-        return isOk(getConnection(path, port, new HttpDelete()));
+    public ApiResponse<Void> executeDelete(String path) throws IOException {
+        return getResponse(getConnection(path, port, new HttpDelete()));
     }
 
     private <T extends HttpEntityEnclosingRequestBase> void addJsonBody(Object jsonObject, T method) {
@@ -532,24 +515,33 @@ public class ClientApi {
         );
     }
 
-    private <T> T getResponseObject(Class<T> clz, HttpRequestBase method) throws IOException {
+    private ApiResponse<Void> getResponse(HttpRequestBase method) throws IOException {
         try (CloseableHttpResponse response = client.execute(method)) {
-            boolean b = response.getStatusLine().getStatusCode() == 200;
-            if (!b) {
-                return null;
+            int statusCode = response.getStatusLine().getStatusCode();
+            String rawResponse = null;
+            if (response.getEntity().getContentLength() > 0) {
+                InputStream in = response.getEntity().getContent();
+                rawResponse = dumpStream(in);
             }
-            T t = decodeResponse(response.getEntity().getContent(), clz);
             EntityUtils.consume(response.getEntity());
-            return t;
+            return new ApiResponse<>(null, rawResponse, statusCode);
         }
     }
 
-    private <T extends HttpRequestBase> boolean isOk(T method) throws IOException {
+    private <T> ApiResponse<T> getResponse(Class<T> clz, HttpRequestBase method) throws IOException {
         try (CloseableHttpResponse response = client.execute(method)) {
-            //All 2XX codes
-            boolean b = response.getStatusLine().getStatusCode() / 100 == 2;
+            int statusCode = response.getStatusLine().getStatusCode();
+            T t = null;
+            String rawResponse = null;
+            if (response.getEntity().getContentLength() > 0) {
+                InputStream in = response.getEntity().getContent();
+                rawResponse = dumpStream(in);
+                if (statusCode / 200 == 1 && rawResponse != null && !rawResponse.isEmpty() && clz != Void.class) {
+                    t = GSON.fromJson(rawResponse, clz);
+                }
+            }
             EntityUtils.consume(response.getEntity());
-            return b;
+            return new ApiResponse<>(t, rawResponse, statusCode);
         }
     }
 
@@ -598,7 +590,7 @@ public class ClientApi {
      */
     @Deprecated
     public LolRsoAuthAuthorization getAuth() throws IOException {
-        return executeGet("/rso-auth/v1/authorization", LolRsoAuthAuthorization.class);
+        return executeGet("/rso-auth/v1/authorization", LolRsoAuthAuthorization.class).getResponseObject();
     }
 
     /**
@@ -606,7 +598,7 @@ public class ClientApi {
      */
     @Deprecated
     public JsonObject getLiveGameData() throws IOException {
-        return executeGet("/liveclientdata/allgamedata", JsonObject.class);
+        return executeGet("/liveclientdata/allgamedata", JsonObject.class).getResponseObject();
     }
 
     /**
@@ -614,7 +606,7 @@ public class ClientApi {
      */
     @Deprecated
     public LolSummonerSummoner getCurrentSummoner() throws IOException {
-        return executeGet("/lol-summoner/v1/current-summoner", LolSummonerSummoner.class);
+        return executeGet("/lol-summoner/v1/current-summoner", LolSummonerSummoner.class).getResponseObject();
     }
 
     /**
@@ -622,7 +614,7 @@ public class ClientApi {
      */
     @Deprecated
     public PlayerNotificationsPlayerNotificationResource[] getPlayerNotifications() throws IOException {
-        return executeGet("/player-notifications/v1/notifications", PlayerNotificationsPlayerNotificationResource[].class);
+        return executeGet("/player-notifications/v1/notifications", PlayerNotificationsPlayerNotificationResource[].class).getResponseObject();
     }
 
     /**
@@ -630,7 +622,7 @@ public class ClientApi {
      */
     @Deprecated
     public PlayerNotificationsPlayerNotificationResource addPlayerNotification(PlayerNotificationsPlayerNotificationResource notification) throws IOException {
-        return executePost("/player-notifications/v1/notifications", notification, PlayerNotificationsPlayerNotificationResource.class);
+        return executePost("/player-notifications/v1/notifications", notification, PlayerNotificationsPlayerNotificationResource.class).getResponseObject();
     }
 
     /**
@@ -639,7 +631,7 @@ public class ClientApi {
     @Deprecated
     public LolChampionsCollectionsChampion[] getChampions(long summonerId) throws IOException {
         return executeGet(
-                "/lol-champions/v1/inventories/" + summonerId + "/champions", LolChampionsCollectionsChampion[].class);
+                "/lol-champions/v1/inventories/" + summonerId + "/champions", LolChampionsCollectionsChampion[].class).getResponseObject();
     }
 
     /**
@@ -647,7 +639,7 @@ public class ClientApi {
      */
     @Deprecated
     public RegionLocale getRegionLocale() throws IOException {
-        return executeGet("/riotclient/region-locale", RegionLocale.class);
+        return executeGet("/riotclient/region-locale", RegionLocale.class).getResponseObject();
     }
 
     /**
@@ -655,7 +647,7 @@ public class ClientApi {
      */
     @Deprecated
     public LolStoreWallet getWallet() throws IOException {
-        return executeGet("/lol-store/v1/wallet", LolStoreWallet.class);
+        return executeGet("/lol-store/v1/wallet", LolStoreWallet.class).getResponseObject();
     }
 
     /**
@@ -663,7 +655,7 @@ public class ClientApi {
      */
     @Deprecated
     public boolean setRegionLocale(RegionLocale locale) throws IOException {
-        return executePut("/riotclient/region-locale", locale);
+        return executePut("/riotclient/region-locale", locale).isOk();
     }
 
     /**
@@ -671,7 +663,7 @@ public class ClientApi {
      */
     @Deprecated
     public String[] getProducts() throws IOException {
-        return executeGet("/patcher/v1/products", String[].class);
+        return executeGet("/patcher/v1/products", String[].class).getResponseObject();
     }
 
     /**
@@ -679,7 +671,7 @@ public class ClientApi {
      */
     @Deprecated
     public PatcherProductState requestCorruptionCheck(String product) throws IOException {
-        return executePost("/patcher/v1/products/" + product + "/detect-corruption-request", PatcherProductState.class);
+        return executePost("/patcher/v1/products/" + product + "/detect-corruption-request", PatcherProductState.class).getResponseObject();
     }
 
     /**
@@ -687,7 +679,7 @@ public class ClientApi {
      */
     @Deprecated
     public boolean requestPartialRepair(String product) throws IOException {
-        return executePost("/patcher/v1/products/" + product + "/partial-repair-request");
+        return executePost("/patcher/v1/products/" + product + "/partial-repair-request").isOk();
     }
 
     /**
@@ -695,7 +687,7 @@ public class ClientApi {
      */
     @Deprecated
     public boolean requestFullRepair(String product) throws IOException {
-        return executePost("/patcher/v1/products/" + product + "/full-repair-request");
+        return executePost("/patcher/v1/products/" + product + "/full-repair-request").isOk();
     }
 
     /**
@@ -703,7 +695,7 @@ public class ClientApi {
      */
     @Deprecated
     public LolChatSessionResource getChatSession() throws IOException {
-        return executeGet("/lol-chat/v1/session", LolChatSessionResource.class);
+        return executeGet("/lol-chat/v1/session", LolChatSessionResource.class).getResponseObject();
     }
 
     public static String generateDebugLog() {

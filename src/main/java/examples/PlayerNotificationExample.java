@@ -34,7 +34,7 @@ public class PlayerNotificationExample {
                 n.data = data;
                 try {
                     n = api.executePost("/player-notifications/v1/notifications", n,
-                            PlayerNotificationsPlayerNotificationResource.class);
+                            PlayerNotificationsPlayerNotificationResource.class).getResponseObject();
                     System.out.println(n.id);
                 } catch (Exception e) {
                     e.printStackTrace();

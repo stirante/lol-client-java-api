@@ -27,7 +27,7 @@ public class InstaLockExample {
                 try {
                     //save current summoner id
                     final Long id =
-                            api.executeGet("/lol-summoner/v1/current-summoner", LolSummonerSummoner.class).summonerId;
+                            api.executeGet("/lol-summoner/v1/current-summoner", LolSummonerSummoner.class).getResponseObject().summonerId;
                     //open web socket
                     ClientWebSocket socket = api.openWebSocket();
                     //add event handler
