@@ -1,8 +1,5 @@
 package com.stirante.lolclient;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import java.io.IOException;
 
 public class SimpleCLI {
@@ -10,20 +7,28 @@ public class SimpleCLI {
     public static void main(String[] args) {
         if (args.length == 0) {
             showUsage();
-        } else {
+        }
+        else {
             String path = "";
             String method = "GET";
             String lastParam = "";
             for (String arg : args) {
                 if (lastParam.isEmpty() && arg.charAt(0) != '-') {
                     showUsage();
-                } else if (!lastParam.isEmpty() && arg.charAt(0) == '-') {
+                }
+                else if (!lastParam.isEmpty() && arg.charAt(0) == '-') {
                     showUsage();
-                } else if (!lastParam.isEmpty()) {
-                    if (lastParam.equals("-p")) path = "/" + arg;
-                    else if (lastParam.equals("-m")) method = arg;
+                }
+                else if (!lastParam.isEmpty()) {
+                    if (lastParam.equals("-p")) {
+                        path = "/" + arg;
+                    }
+                    else if (lastParam.equals("-m")) {
+                        method = arg;
+                    }
                     lastParam = "";
-                } else {
+                }
+                else {
                     lastParam = arg;
                 }
             }
@@ -39,7 +44,8 @@ public class SimpleCLI {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                    } else if (finalMethod.equalsIgnoreCase("POST")) {
+                    }
+                    else if (finalMethod.equalsIgnoreCase("POST")) {
                         try {
                             System.out.println(api.executePost(finalPath, Object.class).getRawResponse());
                         } catch (IOException e) {

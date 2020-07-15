@@ -241,23 +241,8 @@ public class ClientApi {
      */
     private boolean checkClientProcess() {
         try {
-            String target = "";
-            //Get all processes command line
-            Process process =
-                    Runtime.getRuntime().exec("WMIC PROCESS WHERE name='LeagueClientUx.exe' GET commandline");
-            InputStream in = process.getInputStream();
-            Scanner sc = new Scanner(in);
-            while (sc.hasNextLine()) {
-                String s = sc.nextLine();
-                //executable has to be LeagueClientUx.exe and must contain in arguments install-directory
-                if (s.contains("LeagueClientUx.exe") && s.contains("--install-directory=")) {
-                    target = s;
-                    break;
-                }
-            }
-            in.close();
-            process.destroy();
-            if (target.isEmpty()) {
+            String target = ProcessWatcher.getInstance().getInstallDirectory();
+            if (target == null) {
                 return false;
             }
             Matcher matcher = INSTALL_DIR.matcher(target);
