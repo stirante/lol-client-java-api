@@ -11,6 +11,7 @@ public class LcdsPracticeGameConfig {
 	public String gameName;
 	public String gamePassword;
 	public Integer gameTypeConfig;
+	public String gameVersion;
 	public Integer maxNumPlayers;
 	public String passbackDataPacket;
 	public String passbackUrl;

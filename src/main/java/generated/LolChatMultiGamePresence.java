@@ -18,6 +18,8 @@ public class LolChatMultiGamePresence {
 	public String privateField;
 	public String privateJwt;
 	public String product;
+	public String puuid;
+	public String region;
 	public String resource;
 	public LolChatAccountState state;
 	public String summary;

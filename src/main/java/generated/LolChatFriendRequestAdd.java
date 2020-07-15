@@ -7,5 +7,7 @@ public class LolChatFriendRequestAdd {
 	public String name;
 	public String note;
 	public String pid;
+	public String puuid;
+	public String region;
 
 }

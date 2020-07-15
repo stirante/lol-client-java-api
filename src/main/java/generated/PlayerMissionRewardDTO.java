@@ -13,6 +13,7 @@ public class PlayerMissionRewardDTO {
 	public Boolean rewardGroupSelected;
 	public String rewardType;
 	public Integer sequence;
+	public String smallIconUrl;
 	public String uniqueName;
 
 }

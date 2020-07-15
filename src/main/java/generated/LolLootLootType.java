@@ -10,6 +10,8 @@ public enum LolLootLootType {
 	CURRENCY,
 	@SerializedName("Material")
 	MATERIAL,
+	@SerializedName("WardSkin")
+	WARDSKIN,
 	@SerializedName("Skin")
 	SKIN,
 	@SerializedName("Skin_Rental")
@@ -21,6 +23,10 @@ public enum LolLootLootType {
 	@SerializedName("Egg")
 	EGG,
 	@SerializedName("Egg_Color")
-	EGG_COLOR
+	EGG_COLOR,
+	@SerializedName("Statstone")
+	STATSTONE,
+	@SerializedName("Statstone_Shard")
+	STATSTONE_SHARD
 
 }

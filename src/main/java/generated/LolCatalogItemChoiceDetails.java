@@ -8,7 +8,7 @@ public class LolCatalogItemChoiceDetails {
 	public List<LolCatalogItemDetails> contents;
 	public String discount;
 	public String displayType;
-	public Integer fullPrice;
+	public Long fullPrice;
 	public LolCatalogCatalogPluginItem item;
 	public Object metadata;
 

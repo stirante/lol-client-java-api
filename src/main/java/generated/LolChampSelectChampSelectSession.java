@@ -17,6 +17,7 @@ public class LolChampSelectChampSelectSession {
 	public LolChampSelectChampSelectChatRoomDetails chatDetails;
 	public Long counter;
 	public LolChampSelectEntitledFeatureState entitledFeatureState;
+	public Long gameId;
 	public Boolean hasSimultaneousBans;
 	public Boolean hasSimultaneousPicks;
 	public Boolean isCustomGame;

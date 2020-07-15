@@ -25,6 +25,7 @@ public class LolChampSelectChampSelectSummoner {
 	public Boolean shouldShowRingAnimations;
 	public Boolean shouldShowSelectedSkin;
 	public Boolean shouldShowSpells;
+	public Boolean showMuted;
 	public Boolean showTrades;
 	public Integer skinId;
 	public String skinSplashPath;

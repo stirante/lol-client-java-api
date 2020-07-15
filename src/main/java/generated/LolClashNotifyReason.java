@@ -65,6 +65,12 @@ public enum LolClashNotifyReason {
 	@SerializedName("REWARD_GRANT_RETRY")
 	REWARD_GRANT_RETRY,
 	@SerializedName("REVERTED_REGISTRATION")
-	REVERTED_REGISTRATION
+	REVERTED_REGISTRATION,
+	@SerializedName("BAN")
+	BAN,
+	@SerializedName("UNBAN")
+	UNBAN,
+	@SerializedName("MEMBER_BAN")
+	MEMBER_BAN
 
 }
