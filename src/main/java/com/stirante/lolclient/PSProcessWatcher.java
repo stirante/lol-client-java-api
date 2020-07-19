@@ -50,4 +50,9 @@ public class PSProcessWatcher extends ProcessWatcher {
         return 1;
     }
 
+    @Override
+    public void stop() {
+
+    }
+
 }

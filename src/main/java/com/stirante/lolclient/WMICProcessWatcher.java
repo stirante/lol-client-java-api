@@ -1,29 +1,34 @@
 package com.stirante.lolclient;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Scanner;
 
 public class WMICProcessWatcher extends ProcessWatcher {
 
+    public static final String EXECUTABLE = "cmd.exe";
+    public static final String COMMAND = "WMIC PROCESS WHERE name='LeagueClientUx.exe' GET commandline";
+    private SimpleConsole thread;
+
     @Override
     public String getInstallDirectory() throws IOException {
+        if (thread == null) {
+            thread = new SimpleConsole(EXECUTABLE);
+            thread.start();
+        }
         String target = "";
         //Get all processes command line
-        Process process =
-                Runtime.getRuntime().exec("WMIC PROCESS WHERE name='LeagueClientUx.exe' GET commandline");
-        InputStream in = process.getInputStream();
-        Scanner sc = new Scanner(in);
-        while (sc.hasNextLine()) {
-            String s = sc.nextLine();
+        thread.writeCommand(COMMAND);
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        for (String s : thread.getCommandOutput()) {
             //executable has to be LeagueClientUx.exe and must contain in arguments install-directory
             if (s.contains("LeagueClientUx.exe") && s.contains("--install-directory=")) {
                 target = s;
                 break;
             }
         }
-        in.close();
-        process.destroy();
         if (target.isEmpty()) {
             return null;
         }
@@ -36,11 +41,12 @@ public class WMICProcessWatcher extends ProcessWatcher {
             return false;
         }
         try {
-            Runtime.getRuntime().exec("wmic");
+            if (thread == null) {
+                thread = new SimpleConsole(EXECUTABLE);
+                thread.start();
+            }
             return true;
-
         } catch (Exception e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -49,5 +55,11 @@ public class WMICProcessWatcher extends ProcessWatcher {
     public int getPriority() {
         return 2;
     }
+
+    @Override
+    public void stop() {
+        thread.close();
+    }
+
 
 }

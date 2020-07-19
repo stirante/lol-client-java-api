@@ -28,6 +28,8 @@ public abstract class ProcessWatcher {
 
     public abstract int getPriority();
 
+    public abstract void stop();
+
     public static ProcessWatcher getInstance() {
         if (!initialized) {
             init();

@@ -222,6 +222,7 @@ public class ClientApi {
     public void stop() {
         fileWatcherStarted.set(false);
         processWatcherStarted.set(false);
+        ProcessWatcher.getInstance().stop();
         if (isConnected()) {
             connected.set(false);
             for (ClientConnectionListener listener : clientListeners) {
