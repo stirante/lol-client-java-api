@@ -36,7 +36,7 @@ import static java.nio.file.StandardWatchEventKinds.ENTRY_DELETE;
 public class ClientApi {
 
     private static final Pattern INSTALL_DIR =
-            Pattern.compile(".+\"--install-directory=([()a-zA-Z_0-9- :.\\\\/]+)\".+");
+            Pattern.compile(".+\"--install-directory=([^\"]+)\".+");
     private static final Gson GSON = new GsonBuilder().create();
     private static final int LIVE_PORT = 2999;
     /**
