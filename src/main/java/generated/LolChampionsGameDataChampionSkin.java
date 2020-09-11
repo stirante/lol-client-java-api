@@ -11,6 +11,7 @@ public class LolChampionsGameDataChampionSkin {
 	public Integer id;
 	public String loadScreenPath;
 	public String name;
+	public LolChampionsGameDataQuestSkinInfo questSkinInfo;
 	public String rarityGemPath;
 	public String skinType;
 	public String splashPath;

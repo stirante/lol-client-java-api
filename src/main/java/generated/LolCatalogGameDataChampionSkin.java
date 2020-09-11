@@ -10,6 +10,7 @@ public class LolCatalogGameDataChampionSkin {
 	public List<LolCatalogChampionSkinEmblem> emblems;
 	public Long id;
 	public String name;
+	public LolCatalogSkinLineInfo questSkinInfo;
 	public String splashPath;
 	public String tilePath;
 	public String uncenteredSplashPath;

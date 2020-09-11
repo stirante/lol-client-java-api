@@ -34,6 +34,8 @@ public enum LolClashNotifyReason {
 	CHANGE_POSITION,
 	@SerializedName("CHANGE_NAMETAGLOGO")
 	CHANGE_NAMETAGLOGO,
+	@SerializedName("CHANGE_LFT")
+	CHANGE_LFT,
 	@SerializedName("INVITE")
 	INVITE,
 	@SerializedName("RESENT_INVITE")
@@ -71,6 +73,10 @@ public enum LolClashNotifyReason {
 	@SerializedName("UNBAN")
 	UNBAN,
 	@SerializedName("MEMBER_BAN")
-	MEMBER_BAN
+	MEMBER_BAN,
+	@SerializedName("TEAMMATE_BAN")
+	TEAMMATE_BAN,
+	@SerializedName("TEAMMATE_UNBAN")
+	TEAMMATE_UNBAN
 
 }

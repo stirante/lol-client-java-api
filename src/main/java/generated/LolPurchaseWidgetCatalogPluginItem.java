@@ -15,6 +15,7 @@ public class LolPurchaseWidgetCatalogPluginItem {
 	public Boolean owned;
 	public List<LolPurchaseWidgetCatalogPluginPrice> prices;
 	public Long purchaseDate;
+	public LolPurchaseWidgetSkinLineInfo questSkinInfo;
 	public Long releaseDate;
 	public String subInventoryType;
 	public String subTitle;

@@ -9,6 +9,7 @@ public class PendingRosterDTO {
 	public String invitationId;
 	public List<FailedInvite> inviteFaileds;
 	public List<PendingRosterInviteeDTO> invitees;
+	public Boolean lft;
 	public Integer logo;
 	public Integer logoColor;
 	public List<PendingRosterMemberDTO> members;

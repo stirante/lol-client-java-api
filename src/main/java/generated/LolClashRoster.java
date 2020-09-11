@@ -17,6 +17,7 @@ public class LolClashRoster {
 	public Boolean isCurrentBracketComplete;
 	public Boolean isEliminated;
 	public Boolean isRegistered;
+	public Boolean lft;
 	public Integer losses;
 	public List<LolClashRosterMember> members;
 	public String name;

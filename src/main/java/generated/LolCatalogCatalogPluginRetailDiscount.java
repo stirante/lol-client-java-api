@@ -1,6 +1,6 @@
 package generated;
 
-public class LolCatalogCatalogPluginSale {
+public class LolCatalogCatalogPluginRetailDiscount {
 
 	public Long cost;
 	public Double discount;

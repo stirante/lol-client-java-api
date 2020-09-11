@@ -69,6 +69,8 @@ public enum LolLobbyEligibilityRestrictionCode {
 	@SerializedName("InventoryChampsInfoNotAvailable")
 	INVENTORYCHAMPSINFONOTAVAILABLE,
 	@SerializedName("InventoryQueuesInfoNotAvailable")
-	INVENTORYQUEUESINFONOTAVAILABLE
+	INVENTORYQUEUESINFONOTAVAILABLE,
+	@SerializedName("MmrStandardDeviationTooLarge")
+	MMRSTANDARDDEVIATIONTOOLARGE
 
 }

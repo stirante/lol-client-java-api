@@ -14,5 +14,6 @@ public class LolLobbyLobbyDto {
 	public String partyId;
 	public String partyType;
 	public List<LolLobbyEligibilityRestriction> restrictions;
+	public List<LolLobbyEligibilityRestriction> warnings;
 
 }

@@ -16,6 +16,9 @@ public class LolChampionsCollectionsChampionSkin {
 	public String loadScreenPath;
 	public String name;
 	public LolChampionsCollectionsOwnership ownership;
+	public String questSkinGroupSplashPath;
+	public List<LolChampionsCollectionsChampionSkinMinimal> questSkins;
+	public Integer questStage;
 	public String rarityGemPath;
 	public String skinType;
 	public String splashPath;

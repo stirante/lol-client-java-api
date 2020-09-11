@@ -10,6 +10,8 @@ public class LolChampionsCollectionsChampionSkinMinimal {
 	public Boolean lastSelected;
 	public String name;
 	public LolChampionsCollectionsOwnership ownership;
+	public String questSkinGroupSplashPath;
+	public Integer questStage;
 	public String splashPath;
 	public Boolean stillObtainable;
 	public String tilePath;

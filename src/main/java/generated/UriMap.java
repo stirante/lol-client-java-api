@@ -90,6 +90,8 @@ public class UriMap {
 		toClass.put("\\/lol-champ-select\\/v1\\/session\\/trades", LolChampSelectChampSelectTradeContract[].class);
 		toClass.put("\\/lol-champ-select\\/v1\\/session\\/trades\\/[^/]+", LolChampSelectChampSelectTradeContract.class);
 		toClass.put("\\/lol-champ-select\\/v1\\/sfx-notifications", LolChampSelectSfxNotification[].class);
+		toClass.put("\\/lol-champ-select\\/v1\\/skin-carousel-skins", LolChampSelectSkinSelectorSkin[].class);
+		toClass.put("\\/lol-champ-select\\/v1\\/skin-selector-info", LolChampSelectSkinSelectorInfo.class);
 		toClass.put("\\/lol-champ-select\\/v1\\/summoners\\/[^/]+", LolChampSelectChampSelectSummoner.class);
 		toClass.put("\\/lol-champ-select\\/v1\\/team-boost", LolChampSelectTeamBoost.class);
 		toClass.put("\\/lol-champions\\/v1\\/inventories\\/[^/]+\\/champions", LolChampionsCollectionsChampion[].class);
@@ -113,6 +115,7 @@ public class UriMap {
 		toClass.put("\\/lol-chat\\/v1\\/conversations\\/[^/]+\\/participants\\/[^/]+", LolChatUserResource.class);
 		toClass.put("\\/lol-chat\\/v1\\/errors", LolChatErrorResource[].class);
 		toClass.put("\\/lol-chat\\/v1\\/friend-counts", LolChatFriendCountsResource.class);
+		toClass.put("\\/lol-chat\\/v1\\/friend-exists\\/[^/]+", Boolean.class);
 		toClass.put("\\/lol-chat\\/v1\\/friend-groups", LolChatGroupResource[].class);
 		toClass.put("\\/lol-chat\\/v1\\/friend-groups\\/[^/]+", LolChatGroupResource.class);
 		toClass.put("\\/lol-chat\\/v1\\/friend-groups\\/[^/]+\\/friends", LolChatFriendResource[].class);
@@ -294,7 +297,7 @@ public class UriMap {
 		toClass.put("\\/lol-lobby-team-builder\\/champ-select\\/v1\\/has-auto-assigned-smite", Boolean.class);
 		toClass.put("\\/lol-lobby-team-builder\\/champ-select\\/v1\\/implementation-active", Boolean.class);
 		toClass.put("\\/lol-lobby-team-builder\\/champ-select\\/v1\\/pickable-champion-ids", Integer[].class);
-		toClass.put("\\/lol-lobby-team-builder\\/champ-select\\/v1\\/pickable-skins", LolLobbyTeamBuilderChampSelectPickableSkins.class);
+		toClass.put("\\/lol-lobby-team-builder\\/champ-select\\/v1\\/pickable-skins", Integer[].class);
 		toClass.put("\\/lol-lobby-team-builder\\/champ-select\\/v1\\/preferences", LolLobbyTeamBuilderChampionSelectPreferences.class);
 		toClass.put("\\/lol-lobby-team-builder\\/champ-select\\/v1\\/sending-loadouts-gcos-enabled", Boolean.class);
 		toClass.put("\\/lol-lobby-team-builder\\/champ-select\\/v1\\/session", LolLobbyTeamBuilderChampSelectSession.class);
@@ -436,6 +439,8 @@ public class UriMap {
 		toClass.put("\\/lol-purchase-widget\\/v1\\/configuration", LolPurchaseWidgetPurchaseWidgetConfig.class);
 		toClass.put("\\/lol-purchase-widget\\/v1\\/order-notifications", LolPurchaseWidgetOrderNotificationResource[].class);
 		toClass.put("\\/lol-purchase-widget\\/v1\\/purchasable-item", LolPurchaseWidgetPurchasableItem.class);
+		toClass.put("\\/lol-purchase-widget\\/v3\\/base-skin-line-data\\/[^/]+", LolPurchaseWidgetBaseSkinLineDto.class);
+		toClass.put("\\/lol-purchase-widget\\/v3\\/purchase-offer-order-statuses", LolPurchaseWidgetPurchaseOfferOrderStatuses.class);
 		toClass.put("\\/lol-ranked\\/v1\\/apex-leagues\\/[^/]+\\/[^/]+", LolRankedLeagueLadderInfo.class);
 		toClass.put("\\/lol-ranked\\/v1\\/current-lp-change-notification", LolRankedLcuLeagueNotification.class);
 		toClass.put("\\/lol-ranked\\/v1\\/current-ranked-stats", LolRankedRankedStats.class);
@@ -488,12 +493,15 @@ public class UriMap {
 		toClass.put("\\/lol-statstones\\/v2\\/player-statstones-self\\/[^/]+", LolStatstonesStatstoneSet[].class);
 		toClass.put("\\/lol-statstones\\/v2\\/player-summary-self", LolStatstonesChampionStatstoneSummary[].class);
 		toClass.put("\\/lol-store\\/v1\\/catalog", LolStoreCatalogItem[].class);
+		toClass.put("\\/lol-store\\/v1\\/catalog\\/sales", LolStoreItemSale[].class);
 		toClass.put("\\/lol-store\\/v1\\/catalog\\/[^/]+", LolStoreCatalogItem[].class);
 		toClass.put("\\/lol-store\\/v1\\/catalogByInstanceIds", LolStoreCatalogItem[].class);
 		toClass.put("\\/lol-store\\/v1\\/getStoreUrl", String.class);
 		toClass.put("\\/lol-store\\/v1\\/giftablefriends", LolStoreGiftingFriend[].class);
 		toClass.put("\\/lol-store\\/v1\\/itemKeysFromInstanceIds", Object.class);
+		toClass.put("\\/lol-store\\/v1\\/itemKeysFromOfferIds", Object.class);
 		toClass.put("\\/lol-store\\/v1\\/lastPage", String.class);
+		toClass.put("\\/lol-store\\/v1\\/offers", LolStoreCapOffer[].class);
 		toClass.put("\\/lol-store\\/v1\\/order-notifications", LolStoreOrderNotificationResource[].class);
 		toClass.put("\\/lol-store\\/v1\\/order-notifications\\/[^/]+", LolStoreOrderNotificationResource.class);
 		toClass.put("\\/lol-store\\/v1\\/paymentDetails", Object.class);

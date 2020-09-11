@@ -2,6 +2,7 @@ package generated;
 
 public class LolPlayerMessagingDynamicCelebrationMessagingNotificationResource {
 
+	public Long accountId;
 	public String celebrationBody;
 	public String celebrationMessage;
 	public String celebrationTitle;

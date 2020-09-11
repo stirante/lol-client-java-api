@@ -1,5 +1,7 @@
 package generated;
 
+import java.util.List;
+
 public class LolHovercardHovercardUserInfo {
 
 	public Long accountId;
@@ -11,6 +13,7 @@ public class LolHovercardHovercardUserInfo {
 	public Object lol;
 	public String name;
 	public String note;
+	public List<String> partySummoners;
 	public String patchline;
 	public String platformId;
 	public String product;
