@@ -519,7 +519,7 @@ public class ClientApi {
             int statusCode = response.getStatusLine().getStatusCode();
             T t = null;
             String rawResponse = null;
-            if (response.getEntity().getContentLength() > 0) {
+            if (response.getEntity() != null && response.getEntity().getContentLength() > 0) {
                 InputStream in = response.getEntity().getContent();
                 rawResponse = dumpStream(in);
                 if (statusCode / 200 == 1 && rawResponse != null && !rawResponse.isEmpty() && clz != Void.class) {
