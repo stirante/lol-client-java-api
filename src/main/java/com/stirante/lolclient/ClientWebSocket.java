@@ -170,17 +170,30 @@ public class ClientWebSocket extends WebSocketClient {
     }
 
     public static class Event {
-        private final Object data;
+        private final JsonElement dataJson;
+        private Object data;
+        private final Class<?> dataType;
+        private boolean dataDeserialized;
         private final String eventType;
         private final String uri;
 
-        private Event(Object data, String eventType, String uri) {
-            this.data = data;
+        private Event(JsonElement data, Class<?> dataType, String eventType, String uri) {
+            this.dataJson = data;
+            this.dataType = dataType;
             this.eventType = eventType;
             this.uri = uri;
         }
 
         public Object getData() {
+            if (!dataDeserialized) {
+                try {
+                    data = GSON.fromJson(dataJson, dataType);
+                } catch (JsonSyntaxException e) {
+                    //TODO: I think it should be reported a bit better, but don't really have an idea for that
+                    System.err.println("Failed to deserialize from URI " + uri);
+                }
+                dataDeserialized = true;
+            }
             return data;
         }
 
@@ -195,9 +208,9 @@ public class ClientWebSocket extends WebSocketClient {
         @Override
         public String toString() {
             return "Event{" +
-                    "eventType='" + eventType + '\'' +
-                    ", uri='" + uri + '\'' +
-                    ", data=" + data +
+                    "eventType='" + getEventType() + '\'' +
+                    ", uri='" + getUri() + '\'' +
+                    ", data=" + getData() +
                     '}';
         }
     }
@@ -209,8 +222,8 @@ public class ClientWebSocket extends WebSocketClient {
             JsonObject jObject = (JsonObject) json;
             String uri = jObject.get("uri").getAsString();
             String eventType = jObject.get("eventType").getAsString();
-            Object data = jObject.get("data");
-            Class c = UriMap.toClass.get(uri);
+            JsonElement data = jObject.get("data");
+            Class<?> c = UriMap.toClass.get(uri);
             if (c == null) {
                 for (Pattern pattern : patterns.keySet()) {
                     if (pattern.matcher(uri).matches()) {
@@ -218,19 +231,7 @@ public class ClientWebSocket extends WebSocketClient {
                     }
                 }
             }
-            if (c == null) {
-                data = context.deserialize((JsonElement) data, Object.class);
-            }
-            else {
-                try {
-                    data = context.deserialize((JsonElement) data, c);
-                } catch (JsonSyntaxException e) {
-                    //TODO: I think it should be reported a bit better, but don't really have an idea for that
-                    System.err.println("Failed to deserialize from URI " + uri);
-                    return new Event(data, eventType, uri);
-                }
-            }
-            return new Event(data, eventType, uri);
+            return new Event(data, c == null ? Object.class : c, eventType, uri);
         }
     }
 
