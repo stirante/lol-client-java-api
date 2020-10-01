@@ -1,6 +1,7 @@
 package com.stirante.utils;
 
 import com.stirante.lolclient.ClientApi;
+import com.stirante.lolclient.ClientConnectionListener;
 import io.swagger.oas.models.PathItem;
 import io.swagger.oas.models.media.ArraySchema;
 import io.swagger.oas.models.media.Schema;
@@ -11,7 +12,10 @@ import io.swagger.parser.models.SwaggerParseResult;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Generates all classes from OpenAPI scheme. League of Legends client should be opened while running generator.
@@ -42,54 +46,73 @@ public class ClassGenerator {
         folder.delete();
     }
 
-    public static void main(String[] args) throws IOException {
-        ClientApi.setLegacyMode(true);
+    public static void main(String[] args) {
         ClientApi api = new ClientApi();
-        String openapiJson = api.getOpenapiJson();
-        String liveOpenapiJson = api.getLiveOpenapiJson();
-        File f = new File(PATH + "generated/");
-        // delete all previously generated classes
-        deleteFolder(f);
-        // create folders
-        f.mkdir();
-        f = new File(f, "live");
-        f.mkdir();
+        api.addClientConnectionListener(new ClientConnectionListener() {
+            @Override
+            public void onClientConnected() {
+                try {
+                    String openapiJson = api.getOpenapiJson();
+                    String liveOpenapiJson = api.getLiveOpenapiJson();
+                    File f = new File(PATH + "generated/");
+                    // delete all previously generated classes
+                    deleteFolder(f);
+                    // create folders
+                    f.mkdir();
+                    f = new File(f, "live");
+                    f.mkdir();
 
-        parseOpenApi("generated.live", liveOpenapiJson);
-        SwaggerParseResult swagger = parseOpenApi("generated", openapiJson);
-        // generate uri map, so we can match class by it's URI (for receiving live events from client)
-        StringBuilder b = new StringBuilder();
-        b
-                .append("package generated;")
-                .append("\n")
-                .append("\nimport java.util.HashMap;")
-                .append("\n")
-                .append("\npublic class UriMap {")
-                .append("\n")
-                .append("\n\tpublic static final HashMap<String, Class> toClass = new HashMap<>();")
-                .append("\n")
-                .append("\n\tstatic {");
-        for (String path : swagger.getOpenAPI().getPaths().keySet()) {
-            PathItem item = swagger.getOpenAPI().getPaths().get(path);
-            if (item.getGet() != null && item.getGet().getResponses().containsKey("200") &&
-                    item.getGet().getResponses().get("200").getContent().containsKey("application/json")) {
-                Schema schema =
-                        item.getGet().getResponses().get("200").getContent().get("application/json").getSchema();
-                if (schema == null) {
-                    continue;
+                    parseOpenApi("generated.live", liveOpenapiJson);
+                    SwaggerParseResult swagger = parseOpenApi("generated", openapiJson);
+                    // generate uri map, so we can match class by it's URI (for receiving live events from client)
+                    StringBuilder b = new StringBuilder();
+                    b
+                            .append("package generated;")
+                            .append("\n")
+                            .append("\nimport java.util.HashMap;")
+                            .append("\n")
+                            .append("\npublic class UriMap {")
+                            .append("\n")
+                            .append("\n\tpublic static final HashMap<String, Class> toClass = new HashMap<>();")
+                            .append("\n")
+                            .append("\n\tstatic {");
+                    for (String path : swagger.getOpenAPI().getPaths().keySet()) {
+                        PathItem item = swagger.getOpenAPI().getPaths().get(path);
+                        if (item.getGet() != null && item.getGet().getResponses().containsKey("200") &&
+                                item.getGet().getResponses().get("200").getContent().containsKey("application/json")) {
+                            Schema schema =
+                                    item.getGet()
+                                            .getResponses()
+                                            .get("200")
+                                            .getContent()
+                                            .get("application/json")
+                                            .getSchema();
+                            if (schema == null) {
+                                continue;
+                            }
+                            b.append("\n\t\ttoClass.put(\"")
+                                    .append(toRegex(path))
+                                    .append("\", ")
+                                    .append(getType(schema, false))
+                                    .append(".class);");
+                        }
+                    }
+                    b
+                            .append("\n\t}")
+                            .append("\n")
+                            .append("\n}");
+                    saveFile("generated", "UriMap", b.toString());
+                } catch (Throwable t) {
+                    t.printStackTrace();
                 }
-                b.append("\n\t\ttoClass.put(\"")
-                        .append(toRegex(path))
-                        .append("\", ")
-                        .append(getType(schema, false))
-                        .append(".class);");
+                api.stop();
             }
-        }
-        b
-                .append("\n\t}")
-                .append("\n")
-                .append("\n}");
-        saveFile("generated", "UriMap", b.toString());
+
+            @Override
+            public void onClientDisconnected() {
+
+            }
+        });
     }
 
     private static SwaggerParseResult parseOpenApi(String pck, String openapiJson) throws IOException {
