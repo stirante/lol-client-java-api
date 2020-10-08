@@ -27,6 +27,7 @@ import java.nio.file.WatchService;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -407,7 +408,8 @@ public class ClientApi {
 
     public boolean isAuthorized() throws IOException {
         try {
-            return executeGet("/lol-summoner/v1/current-summoner", LolSummonerSummoner.class).getResponseObject().accountId > 0;
+            return executeGet("/lol-summoner/v1/current-summoner", LolSummonerSummoner.class).getResponseObject().accountId >
+                    0;
         } catch (FileNotFoundException | NullPointerException e) {
             return false;
         }
@@ -600,7 +602,8 @@ public class ClientApi {
      */
     @Deprecated
     public PlayerNotificationsPlayerNotificationResource[] getPlayerNotifications() throws IOException {
-        return executeGet("/player-notifications/v1/notifications", PlayerNotificationsPlayerNotificationResource[].class).getResponseObject();
+        return executeGet("/player-notifications/v1/notifications", PlayerNotificationsPlayerNotificationResource[].class)
+                .getResponseObject();
     }
 
     /**
@@ -608,7 +611,8 @@ public class ClientApi {
      */
     @Deprecated
     public PlayerNotificationsPlayerNotificationResource addPlayerNotification(PlayerNotificationsPlayerNotificationResource notification) throws IOException {
-        return executePost("/player-notifications/v1/notifications", notification, PlayerNotificationsPlayerNotificationResource.class).getResponseObject();
+        return executePost("/player-notifications/v1/notifications", notification, PlayerNotificationsPlayerNotificationResource.class)
+                .getResponseObject();
     }
 
     /**
@@ -617,7 +621,8 @@ public class ClientApi {
     @Deprecated
     public LolChampionsCollectionsChampion[] getChampions(long summonerId) throws IOException {
         return executeGet(
-                "/lol-champions/v1/inventories/" + summonerId + "/champions", LolChampionsCollectionsChampion[].class).getResponseObject();
+                "/lol-champions/v1/inventories/" + summonerId +
+                        "/champions", LolChampionsCollectionsChampion[].class).getResponseObject();
     }
 
     /**
@@ -657,7 +662,8 @@ public class ClientApi {
      */
     @Deprecated
     public PatcherProductState requestCorruptionCheck(String product) throws IOException {
-        return executePost("/patcher/v1/products/" + product + "/detect-corruption-request", PatcherProductState.class).getResponseObject();
+        return executePost("/patcher/v1/products/" + product +
+                "/detect-corruption-request", PatcherProductState.class).getResponseObject();
     }
 
     /**
@@ -684,11 +690,10 @@ public class ClientApi {
         return executeGet("/lol-chat/v1/session", LolChatSessionResource.class).getResponseObject();
     }
 
-    public static String generateDebugLog() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Created at ")
-                .append(SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.FULL, SimpleDateFormat.FULL, Locale.ENGLISH).format(new Date()))
-                .append("\n");
+    public static void generateDebugLog(Consumer<String> logConsumer) {
+        logConsumer.accept("Created at " +
+                SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.FULL, SimpleDateFormat.FULL, Locale.ENGLISH)
+                        .format(new Date()));
         try {
             String target = null;
             boolean found = false;
@@ -698,9 +703,9 @@ public class ClientApi {
             Scanner sc = new Scanner(in);
             while (sc.hasNextLine()) {
                 String s = sc.nextLine();
-                sb.append(s).append("\n");
+                logConsumer.accept(s);
                 if (s.contains("LeagueClientUx.exe") && s.contains("--install-directory=")) {
-                    sb.append("Found correct process\n");
+                    logConsumer.accept("Found correct process");
                     found = true;
                     target = s;
                     break;
@@ -715,7 +720,7 @@ public class ClientApi {
                 sc = new Scanner(in);
                 while (sc.hasNextLine()) {
                     String s = sc.nextLine();
-                    sb.append(s).append("\n");
+                    logConsumer.accept(s);
                 }
                 in.close();
                 process.destroy();
@@ -727,18 +732,17 @@ public class ClientApi {
                     String path = new File(new File(clientPath), "lockfile").getAbsolutePath();
                     String lockfile = readFile(path);
                     if (lockfile == null) {
-                        sb.append("Lockfile not found!\n");
+                        logConsumer.accept("Lockfile not found!");
                     }
                     else {
-                        sb.append("Lockfile found: ");
-                        sb.append(lockfile).append("\n");
+                        logConsumer.accept("Lockfile found: " + lockfile);
                         String[] split = lockfile.split(":");
                         String password = split[3];
                         String token = new String(Base64.getEncoder().encode(("riot:" + password).getBytes()));
                         int port = Integer.parseInt(split[2]);
-                        sb.append("Token: ").append(token).append("\n");
-                        sb.append("Port: ").append(port).append("\n");
-                        sb.append("Executing test request\n");
+                        logConsumer.accept("Token: " + token);
+                        logConsumer.accept("Port: " + port);
+                        logConsumer.accept("Executing test request");
                         CloseableHttpClient client = createHttpClient();
                         HttpGet method = new HttpGet();
                         method.setURI(new URI("https://127.0.0.1:" + port + "/system/v1/builds"));
@@ -747,14 +751,12 @@ public class ClientApi {
                         try (CloseableHttpResponse response = client.execute(method)) {
                             boolean b = response.getStatusLine().getStatusCode() == 200;
                             if (!b) {
-                                sb.append("Status code: ")
-                                        .append(response.getStatusLine().getStatusCode())
-                                        .append("\n");
+                                logConsumer.accept("Status code: " + response.getStatusLine().getStatusCode());
                             }
                             else {
                                 String t = dumpStream(response.getEntity().getContent());
                                 EntityUtils.consume(response.getEntity());
-                                sb.append("Response: ").append(t).append("\n");
+                                logConsumer.accept("Response: " + t);
                             }
                         }
                     }
@@ -764,10 +766,8 @@ public class ClientApi {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             PrintStream stream = new PrintStream(baos);
             t.printStackTrace(stream);
-            sb.append(baos.toString()).append("\n");
+            logConsumer.accept(baos.toString());
         }
-
-        return sb.toString();
     }
 
 }
