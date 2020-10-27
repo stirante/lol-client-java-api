@@ -2,15 +2,15 @@ package com.stirante.lolclient;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.Scanner;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 class SimpleConsole extends Thread {
     private final AtomicBoolean running = new AtomicBoolean(true);
 
-    private final Queue<String> output = new ArrayDeque<>();
+    private final Queue<String> output = new LinkedBlockingQueue<>();
     private final String executable;
     private Process process;
     private Scanner cmdOutput;

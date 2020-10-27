@@ -19,11 +19,12 @@ public class PowershellProcessWatcher extends ProcessWatcher {
         //Get all processes command line
         thread.writeCommand(COMMAND);
         try {
-            Thread.sleep(100);
+            Thread.sleep(200);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        for (String s : thread.getCommandOutput()) {
+        while (!thread.getCommandOutput().isEmpty()) {
+            String s = thread.getCommandOutput().remove();
             //executable has to be LeagueClientUx.exe and must contain in arguments install-directory
             if (s.contains("LeagueClientUx.exe") && s.contains("--install-directory=")) {
                 target = s;
@@ -46,7 +47,16 @@ public class PowershellProcessWatcher extends ProcessWatcher {
                 thread = new SimpleConsole(EXECUTABLE);
                 thread.start();
             }
-            return true;
+            thread.writeCommand("Get-CimInstance -ClassName win32_process -Filter \"name like 'java%'\"");
+            Thread.sleep(500);
+            boolean found = false;
+            while (!thread.getCommandOutput().isEmpty()) {
+                String s = thread.getCommandOutput().remove();
+                if (s.contains("ProcessId")) {
+                    found = true;
+                }
+            }
+            return found;
         } catch (Exception e) {
             return false;
         }
@@ -54,7 +64,7 @@ public class PowershellProcessWatcher extends ProcessWatcher {
 
     @Override
     public int getPriority() {
-        return 2;
+        return 1;
     }
 
     @Override

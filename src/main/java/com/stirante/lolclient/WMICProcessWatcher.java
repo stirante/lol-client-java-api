@@ -18,11 +18,12 @@ public class WMICProcessWatcher extends ProcessWatcher {
         //Get all processes command line
         thread.writeCommand(COMMAND);
         try {
-            Thread.sleep(100);
+            Thread.sleep(200);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        for (String s : thread.getCommandOutput()) {
+        while (!thread.getCommandOutput().isEmpty()) {
+            String s = thread.getCommandOutput().remove();
             //executable has to be LeagueClientUx.exe and must contain in arguments install-directory
             if (s.contains("LeagueClientUx.exe") && s.contains("--install-directory=")) {
                 target = s;
@@ -53,7 +54,7 @@ public class WMICProcessWatcher extends ProcessWatcher {
 
     @Override
     public int getPriority() {
-        return 1;
+        return 2;
     }
 
     @Override
