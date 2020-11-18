@@ -3,11 +3,12 @@ package com.stirante.lolclient;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
+import java.util.concurrent.CompletableFuture;
 
 public class PSProcessWatcher extends ProcessWatcher {
 
     @Override
-    public String getInstallDirectory() throws IOException {
+    public CompletableFuture<String> getInstallDirectory() throws IOException {
         String target = "";
         //Get all processes command line
         Process process =
@@ -25,23 +26,23 @@ public class PSProcessWatcher extends ProcessWatcher {
         in.close();
         process.destroy();
         if (target.isEmpty()) {
-            return null;
+            return CompletableFuture.completedFuture(null);
         }
-        return target;
+        return CompletableFuture.completedFuture(target);
     }
 
     @Override
-    public boolean isApplicable() {
+    public CompletableFuture<Boolean> isApplicable() {
         if (System.getProperty("os.name").startsWith("Windows")) {
-            return false;
+            return CompletableFuture.completedFuture(false);
         }
         try {
             Runtime.getRuntime().exec("ps");
-            return true;
+            return CompletableFuture.completedFuture(true);
 
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return CompletableFuture.completedFuture(false);
         }
     }
 

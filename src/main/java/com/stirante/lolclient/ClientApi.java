@@ -26,6 +26,7 @@ import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 import java.util.regex.Matcher;
@@ -243,7 +244,8 @@ public class ClientApi {
      */
     private boolean checkClientProcess() {
         try {
-            String target = ProcessWatcher.getInstance().getInstallDirectory();
+            CompletableFuture<String> future = ProcessWatcher.getInstance().getInstallDirectory();
+            String target = future.join();
             if (target == null) {
                 return false;
             }
@@ -257,7 +259,7 @@ public class ClientApi {
             else {
                 throw new IllegalStateException("Couldn't find port or token in lockfile!");
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;

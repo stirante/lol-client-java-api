@@ -1,54 +1,74 @@
 package com.stirante.lolclient;
 
 import java.io.IOException;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class WMICProcessWatcher extends ProcessWatcher {
 
     public static final String EXECUTABLE = "cmd.exe";
-    public static final String COMMAND = "WMIC PROCESS WHERE name='LeagueClientUx.exe' GET commandline";
+    public static final String COMMAND = "WMIC PROCESS WHERE name='LeagueClientUx.exe' GET commandline & echo --end-marker--";
     private SimpleConsole thread;
+    private CompletableFuture<Boolean> applicable;
 
     @Override
-    public String getInstallDirectory() throws IOException {
+    public CompletableFuture<String> getInstallDirectory() throws IOException {
         if (thread == null) {
             thread = new SimpleConsole(EXECUTABLE);
             thread.start();
         }
-        String target = "";
+        final CompletableFuture<String> target = new CompletableFuture<>();
+        thread.addOutputListener(s -> {
+            if (s.contains("LeagueClientUx.exe") && s.contains("--install-directory=")) {
+                target.complete(s);
+                return true;
+            }
+            if (s.equals("--end-marker--")) {
+                target.complete(null);
+                return true;
+            }
+            return false;
+        });
         //Get all processes command line
         thread.writeCommand(COMMAND);
-        try {
-            Thread.sleep(200);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        while (!thread.getCommandOutput().isEmpty()) {
-            String s = thread.getCommandOutput().remove();
-            //executable has to be LeagueClientUx.exe and must contain in arguments install-directory
-            if (s.contains("LeagueClientUx.exe") && s.contains("--install-directory=")) {
-                target = s;
-                break;
-            }
-        }
-        if (target.isEmpty()) {
-            return null;
-        }
         return target;
     }
 
     @Override
-    public boolean isApplicable() {
+    public CompletableFuture<Boolean> isApplicable() {
+        if (applicable != null) {
+            return applicable;
+        }
+        applicable = new CompletableFuture<>();
         if (!System.getProperty("os.name").startsWith("Windows")) {
-            return false;
+            applicable.complete(false);
+            return applicable;
         }
         try {
             if (thread == null) {
                 thread = new SimpleConsole(EXECUTABLE);
                 thread.start();
             }
-            return true;
+            AtomicInteger counter = new AtomicInteger(0);
+            thread.addOutputListener(s -> {
+                if (s.contains("ProcessId")) {
+                    applicable.complete(true);
+                    return true;
+                }
+                if (s.equals("--end-marker--")) {
+                    applicable.complete(false);
+                    return true;
+                }
+                if (counter.incrementAndGet() > 10) {
+                    applicable.complete(false);
+                }
+                return false;
+            });
+            thread.writeCommand("WMIC PROCESS WHERE name='java.exe' GET ProcessId & echo --end-marker--");
+            return applicable;
         } catch (Exception e) {
-            return false;
+            applicable.complete(false);
+            return applicable;
         }
     }
 

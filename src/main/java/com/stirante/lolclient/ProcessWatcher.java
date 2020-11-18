@@ -1,43 +1,52 @@
 package com.stirante.lolclient;
 
 import java.io.IOException;
+import java.util.concurrent.CompletableFuture;
 
 public abstract class ProcessWatcher {
 
     private static ProcessWatcher instance;
-    private static boolean initialized = false;
+    private static CompletableFuture<Boolean> initialized;
 
     private static void init() {
+        initialized = new CompletableFuture<>();
         register(new PSProcessWatcher());
         register(new WMICProcessWatcher());
         register(new PowershellProcessWatcher());
-        initialized = true;
     }
 
     public static void register(ProcessWatcher processWatcher) {
-        if (processWatcher.isApplicable() &&
-                (instance == null || instance.getPriority() > processWatcher.getPriority())) {
-            if (instance != null) {
-                instance.stop();
+        processWatcher.isApplicable().whenComplete((applicable, throwable) -> {
+            if (applicable && throwable == null &&
+                    (instance == null || instance.getPriority() > processWatcher.getPriority())) {
+                if (instance != null) {
+                    instance.stop();
+                }
+                instance = processWatcher;
+                if (!initialized.isDone()) {
+                    initialized.complete(true);
+                }
             }
-            instance = processWatcher;
-        }
-        else {
-            processWatcher.stop();
-        }
+            else {
+                processWatcher.stop();
+            }
+        });
     }
 
-    public abstract String getInstallDirectory() throws IOException;
+    public abstract CompletableFuture<String> getInstallDirectory() throws IOException;
 
-    public abstract boolean isApplicable();
+    public abstract CompletableFuture<Boolean> isApplicable();
 
     public abstract int getPriority();
 
     public abstract void stop();
 
     public static ProcessWatcher getInstance() {
-        if (!initialized) {
+        if (initialized == null) {
             init();
+        }
+        if (!initialized.isDone()) {
+            initialized.join();
         }
         return instance;
     }

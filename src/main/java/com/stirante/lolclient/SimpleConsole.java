@@ -2,16 +2,19 @@ package com.stirante.lolclient;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Queue;
 import java.util.Scanner;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Function;
 
 class SimpleConsole extends Thread {
     private final AtomicBoolean running = new AtomicBoolean(true);
 
-    private final Queue<String> output = new LinkedBlockingQueue<>();
     private final String executable;
+    private final List<Function<String, Boolean>> listeners = new ArrayList<>();
     private Process process;
     private Scanner cmdOutput;
     private PrintWriter cmdInput;
@@ -32,7 +35,7 @@ class SimpleConsole extends Thread {
         while (running.get()) {
             while (running.get() && cmdOutput.hasNextLine()) {
                 String s = cmdOutput.nextLine();
-                output.add(s);
+                listeners.removeIf(stringBooleanFunction -> stringBooleanFunction.apply(s));
             }
             if (!process.isAlive() && running.get()) {
                 try {
@@ -46,6 +49,10 @@ class SimpleConsole extends Thread {
         }
     }
 
+    public void addOutputListener(Function<String, Boolean> listener) {
+        listeners.add(listener);
+    }
+
     public void writeCommand(String s) {
         cmdInput.println(s);
         cmdInput.flush();
@@ -56,10 +63,6 @@ class SimpleConsole extends Thread {
         cmdInput.close();
         cmdOutput.close();
         process.destroyForcibly();
-    }
-
-    public Queue<String> getCommandOutput() {
-        return output;
     }
 
 }
