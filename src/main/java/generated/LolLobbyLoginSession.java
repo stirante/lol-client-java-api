@@ -6,7 +6,6 @@ public class LolLobbyLoginSession {
 	public Boolean connected;
 	public Object gasToken;
 	public String idToken;
-	public Boolean isNewPlayer;
 	public String puuid;
 	public LolLobbyLoginSessionStates state;
 	public Long summonerId;

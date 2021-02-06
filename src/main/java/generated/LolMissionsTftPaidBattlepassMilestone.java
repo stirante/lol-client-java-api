@@ -5,6 +5,7 @@ import java.util.List;
 public class LolMissionsTftPaidBattlepassMilestone {
 
 	public String description;
+	public Boolean iconNeedsFrame;
 	public String internalName;
 	public Boolean isBonus;
 	public Boolean isKeystone;

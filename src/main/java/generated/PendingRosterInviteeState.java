@@ -11,6 +11,8 @@ public enum PendingRosterInviteeState {
 	@SerializedName("DECLINED")
 	DECLINED,
 	@SerializedName("REVOKED")
-	REVOKED
+	REVOKED,
+	@SerializedName("ACCEPTED")
+	ACCEPTED
 
 }

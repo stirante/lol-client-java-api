@@ -20,7 +20,6 @@ public class LolRankedLeagueStanding {
 	public Integer provisionalGamesRemaining;
 	public String puuid;
 	public Integer rankedRegaliaLevel;
-	public String rivalName;
 	public Long summonerId;
 	public String summonerName;
 	public LolRankedLeagueTier tier;

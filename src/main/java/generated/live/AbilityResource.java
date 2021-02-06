@@ -30,6 +30,8 @@ public enum AbilityResource {
 	WIND,
 	@SerializedName("AMMO")
 	AMMO,
+	@SerializedName("MOONLIGHT")
+	MOONLIGHT,
 	@SerializedName("OTHER")
 	OTHER,
 	@SerializedName("MAX")

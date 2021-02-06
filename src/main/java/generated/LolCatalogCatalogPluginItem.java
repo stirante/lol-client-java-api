@@ -11,6 +11,7 @@ public class LolCatalogCatalogPluginItem {
 	public String inventoryType;
 	public Integer itemId;
 	public String itemInstanceId;
+	public List<LolCatalogItemMetadataEntry> metadata;
 	public String name;
 	public String offerId;
 	public Boolean owned;

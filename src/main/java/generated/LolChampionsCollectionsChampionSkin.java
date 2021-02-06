@@ -7,6 +7,7 @@ public class LolChampionsCollectionsChampionSkin {
 	public Integer championId;
 	public String chromaPath;
 	public List<LolChampionsCollectionsChampionChroma> chromas;
+	public String collectionSplashVideoPath;
 	public Boolean disabled;
 	public List<LolChampionsCollectionsChampionSkinEmblem> emblems;
 	public String featuresText;
@@ -16,9 +17,7 @@ public class LolChampionsCollectionsChampionSkin {
 	public String loadScreenPath;
 	public String name;
 	public LolChampionsCollectionsOwnership ownership;
-	public String questSkinGroupSplashPath;
-	public List<LolChampionsCollectionsChampionSkinMinimal> questSkins;
-	public Integer questStage;
+	public LolChampionsChampionQuestSkinInfo questSkinInfo;
 	public String rarityGemPath;
 	public String skinType;
 	public String splashPath;

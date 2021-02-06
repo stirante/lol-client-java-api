@@ -9,8 +9,6 @@ public class LolChampSelectCollectionsChampionSkinMinimal {
 	public Boolean isBase;
 	public String name;
 	public LolChampSelectCollectionsOwnership ownership;
-	public String questSkinGroupSplashPath;
-	public Integer questStage;
 	public String splashPath;
 	public Boolean stillObtainable;
 	public String tilePath;

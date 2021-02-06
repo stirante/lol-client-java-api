@@ -20,8 +20,10 @@ public class LolLobbyQueue {
 	public Long lastToggledOffTime;
 	public Long lastToggledOnTime;
 	public Integer mapId;
+	public String maxDivisionForPremadeSize2;
 	public Integer maxLevel;
 	public Integer maxSummonerLevelForFirstWinOfTheDay;
+	public String maxTierForPremadeSize2;
 	public Integer maximumParticipantListSize;
 	public Integer minLevel;
 	public Integer minimumParticipantListSize;

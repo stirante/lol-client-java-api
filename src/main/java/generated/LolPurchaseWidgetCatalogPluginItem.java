@@ -11,6 +11,7 @@ public class LolPurchaseWidgetCatalogPluginItem {
 	public String inventoryType;
 	public Integer itemId;
 	public String itemInstanceId;
+	public List<LolPurchaseWidgetItemMetadataEntry> metadata;
 	public String name;
 	public Boolean owned;
 	public List<LolPurchaseWidgetCatalogPluginPrice> prices;

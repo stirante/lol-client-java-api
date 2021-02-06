@@ -8,7 +8,6 @@ public class LolLobbyTeamBuilderTbLobbyStateResource {
 	public Long gameId;
 	public LolLobbyTeamBuilderTBDMatchmakingState matchmakingState;
 	public String phaseName;
-	public LolLobbyTeamBuilderTbLobbyPremadeStateResource premadeState;
 	public Integer queueId;
 
 }

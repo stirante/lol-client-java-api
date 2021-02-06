@@ -11,6 +11,7 @@ public class SignedRankedStatsDTO {
 	public String highestPreviousSeasonEndTier;
 	public String jwt;
 	public List<RankedQueueStatsDTO> queues;
+	public Object seasons;
 	public Object splitsProgress;
 
 }

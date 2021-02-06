@@ -14,6 +14,7 @@ public class LolRankedRankedStats {
 	public Object queueMap;
 	public List<LolRankedRankedQueueStats> queues;
 	public Integer rankedRegaliaLevel;
+	public Object seasons;
 	public Object splitsProgress;
 
 }

@@ -21,6 +21,7 @@ public class LolCosmeticsCosmeticsCompanionViewModel {
 	public Integer rarityValue;
 	public Boolean selected;
 	public String species;
+	public LolCosmeticsCosmeticsOfferPrice starShardsPrice;
 	public List<LolCosmeticsCosmeticsCompanionViewModel> upgrades;
 
 }

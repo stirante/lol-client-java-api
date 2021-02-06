@@ -15,7 +15,9 @@ public class LolChampSelectSkinSelectorChildSkin {
 	public String name;
 	public LolChampSelectCollectionsOwnership ownership;
 	public Integer parentSkinId;
+	public String shortName;
 	public String splashPath;
+	public String splashVideoPath;
 	public Integer stage;
 	public Boolean stillObtainable;
 	public String tilePath;

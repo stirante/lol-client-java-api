@@ -3,6 +3,7 @@ package generated;
 public class PlayerMissionRewardDTO {
 
 	public String description;
+	public Boolean iconNeedsFrame;
 	public String iconUrl;
 	public Boolean isObjectiveBasedReward;
 	public String itemId;

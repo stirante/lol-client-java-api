@@ -17,6 +17,8 @@ public class LolClashTournament {
 	public Boolean isRankedRestrictionEnabled;
 	public Boolean isSmsRestrictionEnabled;
 	public Boolean lastThemeOfSeason;
+	public Boolean lft;
+	public Integer maxInvites;
 	public Integer maxSubstitutes;
 	public String nameLocKey;
 	public String nameLocKeySecondary;

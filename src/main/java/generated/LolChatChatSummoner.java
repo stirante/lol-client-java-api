@@ -7,5 +7,6 @@ public class LolChatChatSummoner {
 	public String puuid;
 	public Long summonerId;
 	public Integer summonerLevel;
+	public Boolean unnamed;
 
 }

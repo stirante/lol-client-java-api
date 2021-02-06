@@ -6,6 +6,7 @@ public class LolChampionsGameDataChampionSkin {
 
 	public String chromaPath;
 	public List<LolChampionsGameDataChampionChroma> chromas;
+	public String collectionSplashVideoPath;
 	public List<LolChampionsCollectionsChampionSkinEmblem> emblems;
 	public String featuresText;
 	public Integer id;

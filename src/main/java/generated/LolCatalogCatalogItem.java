@@ -13,6 +13,7 @@ public class LolCatalogCatalogItem {
 	public String itemInstanceId;
 	public List<LolCatalogItemKey> itemRequirements;
 	public Object localizations;
+	public List<LolCatalogItemMetadataEntry> metadata;
 	public String offerId;
 	public List<LolCatalogItemCost> prices;
 	public String releaseDate;

@@ -14,6 +14,7 @@ public class LolStoreCatalogItem {
 	public List<LolStoreItemKey> itemRequirements;
 	public Object localizations;
 	public Integer maxQuantity;
+	public List<LolStoreItemMetadataEntry> metadata;
 	public String offerId;
 	public List<LolStoreItemCost> prices;
 	public String releaseDate;

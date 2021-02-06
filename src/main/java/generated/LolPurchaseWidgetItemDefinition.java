@@ -9,6 +9,7 @@ public class LolPurchaseWidgetItemDefinition {
 	public String description;
 	public String inventoryType;
 	public Integer itemId;
+	public List<LolPurchaseWidgetItemMetadataEntry> metadata;
 	public String name;
 	public Boolean owned;
 	public String subInventoryType;

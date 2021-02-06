@@ -4,10 +4,13 @@ import java.util.List;
 
 public class LolPurchaseWidgetSkinLineInfo {
 
+	public String collectionCardPath;
+	public String collectionDescription;
 	public List<LolPurchaseWidgetSkinLineDescriptionInfo> descriptionInfo;
 	public String name;
-	public String splash;
+	public String splashPath;
 	public List<LolPurchaseWidgetSkinLineTier> tiers;
-	public String tileSplash;
+	public String tilePath;
+	public String uncenteredSplashPath;
 
 }

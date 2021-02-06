@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 public enum LolClashRosterMemberState {
 
+	@SerializedName("DECLINED")
+	DECLINED,
 	@SerializedName("PENDING")
 	PENDING,
 	@SerializedName("NOT_READY")

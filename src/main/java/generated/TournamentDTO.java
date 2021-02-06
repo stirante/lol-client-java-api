@@ -13,6 +13,8 @@ public class TournamentDTO {
 	public Boolean honorRestriction;
 	public Long id;
 	public Boolean lastThemeOfSeason;
+	public Boolean lft;
+	public Integer maxInvites;
 	public Integer maxSub;
 	public Integer minGames;
 	public String nameLocKey;

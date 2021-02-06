@@ -12,5 +12,6 @@ public class LolSummonerSummonerDTO {
 	public String partnerId;
 	public Integer profileIconId;
 	public String puuid;
+	public Boolean unnamed;
 
 }

@@ -13,9 +13,7 @@ public class LolChampSelectCollectionsChampionSkin {
 	public Boolean isBase;
 	public String name;
 	public LolChampSelectCollectionsOwnership ownership;
-	public String questSkinGroupSplashPath;
-	public List<LolChampSelectCollectionsChampionSkinMinimal> questSkins;
-	public Integer questStage;
+	public LolChampSelectChampionQuestSkinInfo questSkinInfo;
 	public String rarityGemPath;
 	public String splashPath;
 	public String splashVideoPath;

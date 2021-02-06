@@ -10,6 +10,7 @@ public class RankedStatsDTO {
 	public String highestPreviousSeasonEndRank;
 	public String highestPreviousSeasonEndTier;
 	public List<RankedQueueStatsDTO> queues;
+	public Object seasons;
 	public Object splitsProgress;
 
 }
