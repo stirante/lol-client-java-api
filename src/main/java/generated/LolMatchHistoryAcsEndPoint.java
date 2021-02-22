@@ -1,6 +1,6 @@
 package generated;
 
-public class LolAcsAcsEndPoint {
+public class LolMatchHistoryAcsEndPoint {
 
 	public String url;
 

@@ -12,6 +12,14 @@ public enum LolClashNotifyReason {
 	ACCEPT_SUGGESTION,
 	@SerializedName("REVOKE_SUGGESTION")
 	REVOKE_SUGGESTION,
+	@SerializedName("DECLINE_SELFJOIN")
+	DECLINE_SELFJOIN,
+	@SerializedName("ACCEPT_SELFJOIN")
+	ACCEPT_SELFJOIN,
+	@SerializedName("REVOKE_SELFJOIN")
+	REVOKE_SELFJOIN,
+	@SerializedName("SELFJOIN")
+	SELFJOIN,
 	@SerializedName("READY")
 	READY,
 	@SerializedName("UNREADY")

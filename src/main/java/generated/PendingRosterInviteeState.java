@@ -12,7 +12,17 @@ public enum PendingRosterInviteeState {
 	DECLINED,
 	@SerializedName("REVOKED")
 	REVOKED,
+	@SerializedName("SUGGEST_DECLINED")
+	SUGGEST_DECLINED,
+	@SerializedName("SUGGEST_REVOKED")
+	SUGGEST_REVOKED,
 	@SerializedName("ACCEPTED")
-	ACCEPTED
+	ACCEPTED,
+	@SerializedName("SELFJOIN")
+	SELFJOIN,
+	@SerializedName("SELFJOIN_DECLINED")
+	SELFJOIN_DECLINED,
+	@SerializedName("SELFJOIN_REVOKED")
+	SELFJOIN_REVOKED
 
 }

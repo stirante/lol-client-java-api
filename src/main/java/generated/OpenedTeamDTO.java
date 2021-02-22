@@ -11,6 +11,7 @@ public class OpenedTeamDTO {
 	public Integer logoColor;
 	public List<OpenedTeamMemberDTO> members;
 	public String name;
+	public List<Position> openPositions;
 	public String shortName;
 	public Integer tier;
 

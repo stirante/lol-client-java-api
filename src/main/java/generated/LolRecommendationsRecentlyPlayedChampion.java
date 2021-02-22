@@ -1,6 +1,6 @@
 package generated;
 
-public class LolRecommendationsAcsChampionGames {
+public class LolRecommendationsRecentlyPlayedChampion {
 
 	public Integer championId;
 	public String lane;
