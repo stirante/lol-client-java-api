@@ -4,14 +4,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 import java.util.Scanner;
-import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Function;
 
 class SimpleConsole extends Thread {
     private final AtomicBoolean running = new AtomicBoolean(true);
+    private final ReentrantLock LISTENERS_LOCK = new ReentrantLock();
 
     private final String executable;
     private final List<Function<String, Boolean>> listeners = new ArrayList<>();
@@ -35,7 +35,9 @@ class SimpleConsole extends Thread {
         while (running.get()) {
             while (running.get() && cmdOutput.hasNextLine()) {
                 String s = cmdOutput.nextLine();
+                LISTENERS_LOCK.lock();
                 listeners.removeIf(stringBooleanFunction -> stringBooleanFunction.apply(s));
+                LISTENERS_LOCK.unlock();
             }
             if (!process.isAlive() && running.get()) {
                 try {
@@ -50,7 +52,9 @@ class SimpleConsole extends Thread {
     }
 
     public void addOutputListener(Function<String, Boolean> listener) {
+        LISTENERS_LOCK.lock();
         listeners.add(listener);
+        LISTENERS_LOCK.unlock();
     }
 
     public void writeCommand(String s) {
