@@ -33,7 +33,7 @@ class SimpleConsole extends Thread {
     @Override
     public void run() {
         while (running.get()) {
-            while (running.get() && cmdOutput.hasNextLine()) {
+            while (running.get() && process.isAlive() && cmdOutput.hasNextLine()) {
                 String s = cmdOutput.nextLine();
                 LISTENERS_LOCK.lock();
                 listeners.removeIf(stringBooleanFunction -> stringBooleanFunction.apply(s));
