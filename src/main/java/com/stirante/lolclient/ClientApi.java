@@ -697,6 +697,9 @@ public class ClientApi {
                 SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.FULL, SimpleDateFormat.FULL, Locale.ENGLISH)
                         .format(new Date()));
         try {
+            logConsumer.accept("Using " + ProcessWatcher.getInstance().getClass().getName());
+            String s1 = ProcessWatcher.getInstance().getInstallDirectory().get();
+            logConsumer.accept("Result from ProcessWatcher: " + s1);
             String target = null;
             boolean found = false;
             Process process =
