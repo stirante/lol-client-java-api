@@ -60,9 +60,9 @@ Add the project as a dependency:
 </dependency>
 ```
 
-### Snapshots
+#### Snapshots
 
-Snapshots of all the latest changes are available in my private nexus repository.
+Snapshots of all the latest changes are available in my personal nexus repository.
 
 
 ```xml
