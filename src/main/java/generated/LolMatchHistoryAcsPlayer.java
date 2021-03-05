@@ -2,7 +2,7 @@ package generated;
 
 public class LolMatchHistoryAcsPlayer {
 
-	public String accountId;
+	public Long accountId;
 	public String platformId;
 
 }

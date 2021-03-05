@@ -15,6 +15,7 @@ public class LolMapsMaps {
 	public Long id;
 	public Boolean isDefault;
 	public Boolean isRGM;
+	public Object locStrings;
 	public String mapStringId;
 	public String name;
 	public String platformId;

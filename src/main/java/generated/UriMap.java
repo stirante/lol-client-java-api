@@ -18,6 +18,7 @@ public class UriMap {
 		toClass.put("\\/client-config\\/v2\\/namespace\\/[^/]+\\/player", Object.class);
 		toClass.put("\\/client-config\\/v2\\/namespace\\/[^/]+\\/public", Object.class);
 		toClass.put("\\/cookie-jar\\/v1\\/cookies", cookie[].class);
+		toClass.put("\\/crash-reporting\\/v1\\/crash-status", Boolean.class);
 		toClass.put("\\/data-store\\/v1\\/install-dir", String.class);
 		toClass.put("\\/data-store\\/v1\\/install-settings\\/[^/]+", Object.class);
 		toClass.put("\\/data-store\\/v1\\/system-settings\\/[^/]+", Object.class);
@@ -152,11 +153,8 @@ public class UriMap {
 		toClass.put("\\/lol-collections\\/v1\\/inventories\\/[^/]+\\/champion-mastery", LolCollectionsCollectionsChampionMastery[].class);
 		toClass.put("\\/lol-collections\\/v1\\/inventories\\/[^/]+\\/champion-mastery\\/top", LolCollectionsCollectionsTopChampionMasteries.class);
 		toClass.put("\\/lol-collections\\/v1\\/inventories\\/[^/]+\\/spells", LolCollectionsCollectionsSummonerSpells.class);
-		toClass.put("\\/lol-collections\\/v1\\/inventories\\/[^/]+\\/summoner-icons", LolCollectionsCollectionsSummonerIcons.class);
 		toClass.put("\\/lol-collections\\/v1\\/inventories\\/[^/]+\\/ward-skins", LolCollectionsCollectionsWardSkin[].class);
 		toClass.put("\\/lol-collections\\/v1\\/inventories\\/[^/]+\\/ward-skins\\/[^/]+", LolCollectionsCollectionsWardSkin.class);
-		toClass.put("\\/lol-collections\\/v2\\/inventories\\/[^/]+\\/summoner-icons", LolCollectionsCollectionsSummonerIcons.class);
-		toClass.put("\\/lol-collections\\/v2\\/inventories\\/[^/]+\\/summoner-icons\\/[^/]+", LolCollectionsCollectionsSummonerIcon.class);
 		toClass.put("\\/lol-content-targeting\\/v1\\/filters", LolContentTargetingContentTargetingFilterResponse.class);
 		toClass.put("\\/lol-content-targeting\\/v1\\/locale", LolContentTargetingContentTargetingLocaleResponse.class);
 		toClass.put("\\/lol-content-targeting\\/v1\\/protected_filters", LolContentTargetingContentTargetingFilterResponse.class);
@@ -200,10 +198,6 @@ public class UriMap {
 		toClass.put("\\/lol-gameflow\\/v1\\/session", LolGameflowGameflowSession.class);
 		toClass.put("\\/lol-gameflow\\/v1\\/spectate", Boolean.class);
 		toClass.put("\\/lol-gameflow\\/v1\\/watch", LolGameflowGameflowWatchPhase.class);
-		toClass.put("\\/lol-gamhs\\/v1\\/products\\/[^/]+\\/current-summoner\\/matches", LolGamhsMatchHistoryList.class);
-		toClass.put("\\/lol-gamhs\\/v1\\/products\\/[^/]+\\/matches\\/[^/]+\\/details", LolGamhsMatchHistoryData.class);
-		toClass.put("\\/lol-gamhs\\/v1\\/products\\/[^/]+\\/matches\\/[^/]+\\/summary", LolGamhsMatchHistoryData.class);
-		toClass.put("\\/lol-gamhs\\/v1\\/products\\/[^/]+\\/[^/]+\\/matches", LolGamhsMatchHistoryList.class);
 		toClass.put("\\/lol-geoinfo\\/v1\\/getlocation", LolGeoinfoGeoInfo.class);
 		toClass.put("\\/lol-geoinfo\\/v1\\/whereami", LolGeoinfoGeoInfoResponse.class);
 		toClass.put("\\/lol-highlights\\/v1\\/config", LolHighlightsHighlightsConfig.class);
@@ -311,6 +305,10 @@ public class UriMap {
 		toClass.put("\\/lol-loot\\/v1\\/enabled", Boolean.class);
 		toClass.put("\\/lol-loot\\/v1\\/loot-grants", LolLootLootGrantNotification[].class);
 		toClass.put("\\/lol-loot\\/v1\\/loot-items", LolLootLootItem[].class);
+		toClass.put("\\/lol-loot\\/v1\\/milestones", LolLootLootMilestones[].class);
+		toClass.put("\\/lol-loot\\/v1\\/milestones\\/counters", LolLootLootMilestonesCounter[].class);
+		toClass.put("\\/lol-loot\\/v1\\/milestones\\/[^/]+", LolLootLootMilestones.class);
+		toClass.put("\\/lol-loot\\/v1\\/milestones\\/[^/]+\\/counter", LolLootLootMilestonesCounter.class);
 		toClass.put("\\/lol-loot\\/v1\\/new-player-check-done", Boolean.class);
 		toClass.put("\\/lol-loot\\/v1\\/player-display-categories", String[].class);
 		toClass.put("\\/lol-loot\\/v1\\/player-loot", LolLootPlayerLoot[].class);
@@ -319,7 +317,7 @@ public class UriMap {
 		toClass.put("\\/lol-loot\\/v1\\/player-loot\\/[^/]+", LolLootPlayerLoot.class);
 		toClass.put("\\/lol-loot\\/v1\\/player-loot\\/[^/]+\\/context-menu", LolLootContextMenu[].class);
 		toClass.put("\\/lol-loot\\/v1\\/ready", Boolean.class);
-		toClass.put("\\/lol-loot\\/v1\\/recipes\\/initial-item\\/[^/]+", LolLootRecipe[].class);
+		toClass.put("\\/lol-loot\\/v1\\/recipes\\/initial-item\\/[^/]+", LolLootRecipeWithMilestones[].class);
 		toClass.put("\\/lol-loot\\/v2\\/player-loot-map", LolLootPlayerLootMap.class);
 		toClass.put("\\/lol-loyalty\\/v1\\/status-notification", LolLoyaltyLoyaltyStatusNotification.class);
 		toClass.put("\\/lol-maps\\/v1\\/map\\/[^/]+", LolMapsMaps.class);
@@ -330,13 +328,15 @@ public class UriMap {
 		toClass.put("\\/lol-match-history\\/v1\\/delta", LolMatchHistoryMatchHistoryPlayerDelta.class);
 		toClass.put("\\/lol-match-history\\/v1\\/game-timelines\\/[^/]+", LolMatchHistoryMatchHistoryTimelineFrames.class);
 		toClass.put("\\/lol-match-history\\/v1\\/games\\/[^/]+", LolMatchHistoryMatchHistoryGame.class);
+		toClass.put("\\/lol-match-history\\/v1\\/products\\/lol\\/current-summoner\\/matches", LolMatchHistoryMatchHistoryList.class);
+		toClass.put("\\/lol-match-history\\/v1\\/products\\/lol\\/[^/]+\\/matches", LolMatchHistoryMatchHistoryList.class);
+		toClass.put("\\/lol-match-history\\/v1\\/products\\/tft\\/[^/]+\\/matches", LolMatchHistoryGAMHSMatchHistoryList.class);
 		toClass.put("\\/lol-match-history\\/v1\\/recently-played-champions\\/[^/]+", LolMatchHistoryRecentlyPlayedChampionCollection.class);
 		toClass.put("\\/lol-match-history\\/v1\\/recently-played-summoners", LolMatchHistoryRecentlyPlayedSummoner[].class);
 		toClass.put("\\/lol-match-history\\/v1\\/web-url", String.class);
 		toClass.put("\\/lol-match-history\\/v2\\/recently-played-champions\\/current-summoner", LolMatchHistoryRecentlyPlayedChampionCollection.class);
 		toClass.put("\\/lol-match-history\\/v2\\/recently-played-champions\\/[^/]+", LolMatchHistoryRecentlyPlayedChampionCollection.class);
 		toClass.put("\\/lol-match-history\\/v3\\/matchlist\\/account\\/[^/]+", LolMatchHistoryMatchHistoryList.class);
-		toClass.put("\\/lol-match-history\\/v3\\/matchlist\\/current-summoner", LolMatchHistoryMatchHistoryList.class);
 		toClass.put("\\/lol-matchmaking\\/v1\\/ready-check", LolMatchmakingMatchmakingReadyCheckResource.class);
 		toClass.put("\\/lol-matchmaking\\/v1\\/search", LolMatchmakingMatchmakingSearchResource.class);
 		toClass.put("\\/lol-matchmaking\\/v1\\/search\\/errors", LolMatchmakingMatchmakingSearchErrorResource[].class);
