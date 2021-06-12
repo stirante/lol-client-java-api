@@ -13,6 +13,12 @@ public enum LolChampSelectChampSelectTradeState {
 	@SerializedName("RECEIVED")
 	RECEIVED,
 	@SerializedName("SENT")
-	SENT
+	SENT,
+	@SerializedName("DECLINED")
+	DECLINED,
+	@SerializedName("CANCELLED")
+	CANCELLED,
+	@SerializedName("ACCEPTED")
+	ACCEPTED
 
 }

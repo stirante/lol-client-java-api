@@ -6,6 +6,7 @@ public class LolEndOfGameGameClientEndOfGameStats {
 	public String gameMode;
 	public Boolean isRanked;
 	public Integer queueId;
+	public String queueType;
 	public Object statsBlock;
 
 }

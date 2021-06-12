@@ -5,6 +5,7 @@ import java.util.List;
 public class LolChampSelectCollectionsChampionMinimal {
 
 	public String banVoPath;
+	public String baseSplashPath;
 	public String chooseVoPath;
 	public List<String> disabledQueues;
 	public Boolean freeToPlay;

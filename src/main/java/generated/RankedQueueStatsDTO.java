@@ -13,6 +13,8 @@ public class RankedQueueStatsDTO {
 	public Integer provisionalGamesRemaining;
 	public String queueType;
 	public String rank;
+	public Integer ratedRating;
+	public String ratedTier;
 	public String tier;
 	public RankedQueueWarningsDTO warnings;
 	public Integer wins;

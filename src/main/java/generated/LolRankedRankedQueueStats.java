@@ -14,6 +14,8 @@ public class LolRankedRankedQueueStats {
 	public Integer provisionalGameThreshold;
 	public Integer provisionalGamesRemaining;
 	public LolRankedLeagueQueueType queueType;
+	public Integer ratedRating;
+	public LolRankedRatedTier ratedTier;
 	public LolRankedLeagueTier tier;
 	public LolRankedRankedQueueWarnings warnings;
 	public Integer wins;

@@ -21,6 +21,9 @@ public class LolRankedLcuLeagueNotification {
 	public Boolean promoSeriesForRanksEnabled;
 	public Integer provisionalGamesRemaining;
 	public LolRankedLeagueQueueType queueType;
+	public Integer ratedRating;
+	public Integer ratedRatingDelta;
+	public LolRankedRatedTier ratedTier;
 	public String rewardEarnedId;
 	public String rewardEarnedType;
 	public LolRankedSplitPointsNotification splitPointsNotification;

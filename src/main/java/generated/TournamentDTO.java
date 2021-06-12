@@ -16,6 +16,7 @@ public class TournamentDTO {
 	public Boolean lft;
 	public Integer maxInvites;
 	public Integer maxSub;
+	public Integer maxSuggestionsPerPlayer;
 	public Integer minGames;
 	public String nameLocKey;
 	public String nameLocKeySecondary;

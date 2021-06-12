@@ -16,6 +16,9 @@ public class LolRankedLeagueNotification {
 	public Integer provisionalGamesRemaining;
 	public String queueType;
 	public String rank;
+	public Integer ratedRating;
+	public Integer ratedRatingDelta;
+	public String ratedTier;
 	public Integer splitPoints;
 	public Object splitPointsBreakdown;
 	public String tier;

@@ -2,6 +2,7 @@ package generated;
 
 public class PaymentsPMCStartUrlRequest {
 
+	public String game;
 	public String gifteeAccountId;
 	public String gifteeMessage;
 	public Boolean isPrepaid;

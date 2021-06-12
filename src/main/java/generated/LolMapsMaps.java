@@ -18,6 +18,8 @@ public class LolMapsMaps {
 	public Object locStrings;
 	public String mapStringId;
 	public String name;
+	public Object perPositionDisallowedSummonerSpells;
+	public Object perPositionRequiredSummonerSpells;
 	public String platformId;
 	public String platformName;
 	public Object properties;

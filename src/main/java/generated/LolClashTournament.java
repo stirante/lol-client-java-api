@@ -20,6 +20,7 @@ public class LolClashTournament {
 	public Boolean lft;
 	public Integer maxInvites;
 	public Integer maxSubstitutes;
+	public Integer maxSuggestionsPerPlayer;
 	public String nameLocKey;
 	public String nameLocKeySecondary;
 	public List<LolClashTournamentPhase> phases;

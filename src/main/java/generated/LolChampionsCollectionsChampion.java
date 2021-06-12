@@ -8,6 +8,7 @@ public class LolChampionsCollectionsChampion {
 	public String alias;
 	public String banVoPath;
 	public String baseLoadScreenPath;
+	public String baseSplashPath;
 	public Boolean botEnabled;
 	public String chooseVoPath;
 	public List<String> disabledQueues;

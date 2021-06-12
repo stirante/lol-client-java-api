@@ -15,5 +15,6 @@ public class LolLobbyPartyMemberDto {
 	public Boolean ready;
 	public LolLobbyPartyMemberRoleEnum role;
 	public Long summonerId;
+	public String team;
 
 }

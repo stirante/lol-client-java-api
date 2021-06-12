@@ -9,6 +9,7 @@ public class LolLobbyReceivedInvitationDto {
 	public String fromSummonerName;
 	public LolLobbyReceivedInvitationGameConfigDto gameConfig;
 	public String invitationId;
+	public LolLobbyInvitationType invitationType;
 	public List<LolLobbyEligibilityRestriction> restrictions;
 	public LolLobbyLobbyInvitationState state;
 	public String timestamp;

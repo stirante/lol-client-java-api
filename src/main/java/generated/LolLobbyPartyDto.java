@@ -8,6 +8,7 @@ public class LolLobbyPartyDto {
 	public Boolean activityLocked;
 	public Long activityResumeUtcMillis;
 	public Long activityStartedUtcMillis;
+	public List<LolLobbyBotParticipantDto> botParticipants;
 	public LolLobbyPartyChatDto chat;
 	public Long eligibilityHash;
 	public List<LolLobbyGatekeeperRestrictionDto> eligibilityRestrictions;

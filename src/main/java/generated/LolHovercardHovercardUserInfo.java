@@ -11,6 +11,7 @@ public class LolHovercardHovercardUserInfo {
 	public Integer icon;
 	public String id;
 	public Object lol;
+	public Long masteryScore;
 	public String name;
 	public String note;
 	public List<String> partySummoners;
@@ -23,7 +24,6 @@ public class LolHovercardHovercardUserInfo {
 	public Boolean remoteProduct;
 	public String remoteProductBackdropUrl;
 	public String remoteProductIconUrl;
-	public Long score;
 	public String statusMessage;
 	public Integer summonerIcon;
 	public Long summonerId;

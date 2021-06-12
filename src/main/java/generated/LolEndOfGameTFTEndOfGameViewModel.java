@@ -10,5 +10,6 @@ public class LolEndOfGameTFTEndOfGameViewModel {
 	public LolEndOfGameTFTEndOfGamePlayerViewModel localPlayer;
 	public List<LolEndOfGameTFTEndOfGamePlayerViewModel> players;
 	public Integer queueId;
+	public String queueType;
 
 }

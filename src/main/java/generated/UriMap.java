@@ -61,6 +61,7 @@ public class UriMap {
 		toClass.put("\\/lol-champ-select\\/v1\\/disabled-champion-ids", Integer[].class);
 		toClass.put("\\/lol-champ-select\\/v1\\/grid-champions\\/[^/]+", LolChampSelectChampGridChampion.class);
 		toClass.put("\\/lol-champ-select\\/v1\\/muted-players", LolChampSelectMutedPlayerInfo[].class);
+		toClass.put("\\/lol-champ-select\\/v1\\/ongoing-trade", LolChampSelectChampSelectTradeNotification.class);
 		toClass.put("\\/lol-champ-select\\/v1\\/pickable-champion-ids", Integer[].class);
 		toClass.put("\\/lol-champ-select\\/v1\\/pickable-skin-ids", Integer[].class);
 		toClass.put("\\/lol-champ-select\\/v1\\/pin-drop-notification", LolChampSelectChampSelectPinDropNotification.class);
@@ -148,7 +149,9 @@ public class UriMap {
 		toClass.put("\\/lol-clash\\/v1\\/visible", Boolean.class);
 		toClass.put("\\/lol-clash\\/v1\\/voice-enabled", Boolean.class);
 		toClass.put("\\/lol-clash\\/v2\\/playmode-restricted", LolClashPlaymodeRestrictedInfo.class);
+		toClass.put("\\/lol-client-config\\/v3\\/client-config\\/[^/]+", Object.class);
 		toClass.put("\\/lol-collections\\/v1\\/inventories\\/chest-eligibility", LolCollectionsCollectionsChestEligibility.class);
+		toClass.put("\\/lol-collections\\/v1\\/inventories\\/local-player\\/champion-mastery-score", Long.class);
 		toClass.put("\\/lol-collections\\/v1\\/inventories\\/[^/]+\\/backdrop", LolCollectionsCollectionsSummonerBackdrop.class);
 		toClass.put("\\/lol-collections\\/v1\\/inventories\\/[^/]+\\/champion-mastery", LolCollectionsCollectionsChampionMastery[].class);
 		toClass.put("\\/lol-collections\\/v1\\/inventories\\/[^/]+\\/champion-mastery\\/top", LolCollectionsCollectionsTopChampionMasteries.class);
@@ -342,7 +345,6 @@ public class UriMap {
 		toClass.put("\\/lol-matchmaking\\/v1\\/search\\/errors", LolMatchmakingMatchmakingSearchErrorResource[].class);
 		toClass.put("\\/lol-matchmaking\\/v1\\/search\\/errors\\/[^/]+", LolMatchmakingMatchmakingSearchErrorResource.class);
 		toClass.put("\\/lol-missions\\/v1\\/data", PlayerMissionEligibilityData.class);
-		toClass.put("\\/lol-missions\\/v1\\/grants", LolMissionsRewardGrant[].class);
 		toClass.put("\\/lol-missions\\/v1\\/missions", PlayerMissionDTO[].class);
 		toClass.put("\\/lol-missions\\/v1\\/series", SeriesDTO[].class);
 		toClass.put("\\/lol-npe-rewards\\/v1\\/challenges\\/progress", LolNpeRewardsChallengesProgress.class);
@@ -422,10 +424,10 @@ public class UriMap {
 		toClass.put("\\/lol-ranked\\/v1\\/notifications", LolRankedLcuLeagueNotification[].class);
 		toClass.put("\\/lol-ranked\\/v1\\/ranked-stats", Object.class);
 		toClass.put("\\/lol-ranked\\/v1\\/ranked-stats\\/[^/]+", LolRankedRankedStats.class);
+		toClass.put("\\/lol-ranked\\/v1\\/rated-ladder\\/[^/]+", LolRankedRatedLadderInfo.class);
 		toClass.put("\\/lol-ranked\\/v1\\/signed-ranked-stats", SignedRankedStatsDTO.class);
 		toClass.put("\\/lol-ranked\\/v1\\/splits-config", LolRankedRewardsInfo.class);
 		toClass.put("\\/lol-ranked\\/v2\\/tiers", LolRankedParticipantTiers[].class);
-		toClass.put("\\/lol-recommendations\\/v1\\/recommendations", LolRecommendationsRecommendationsCollection.class);
 		toClass.put("\\/lol-regalia\\/v2\\/config", LolRegaliaRegaliaFrontendConfig.class);
 		toClass.put("\\/lol-regalia\\/v2\\/current-summoner\\/regalia", LolRegaliaRegaliaWithPreferences.class);
 		toClass.put("\\/lol-regalia\\/v2\\/summoners\\/[^/]+\\/queues\\/[^/]+\\/positions\\/[^/]+\\/regalia", LolRegaliaRegalia.class);
@@ -436,6 +438,8 @@ public class UriMap {
 		toClass.put("\\/lol-replays\\/v1\\/metadata\\/[^/]+", LolReplaysReplayMetadata.class);
 		toClass.put("\\/lol-replays\\/v1\\/rofls\\/path", String.class);
 		toClass.put("\\/lol-replays\\/v1\\/rofls\\/path\\/default", String.class);
+		toClass.put("\\/lol-rewards\\/v1\\/grants", LolRewardsRewardGrant[].class);
+		toClass.put("\\/lol-rewards\\/v1\\/groups", LolRewardsSvcRewardGroup[].class);
 		toClass.put("\\/lol-rms\\/v1\\/champion-mastery-leaveup-update", LolRiotMessagingServiceChampionMasteryLevelUp[].class);
 		toClass.put("\\/lol-rso-auth\\/v1\\/auth-hints\\/hint", LolRsoAuthAuthHint.class);
 		toClass.put("\\/lol-rso-auth\\/v1\\/authorization", LolRsoAuthAuthorization.class);
