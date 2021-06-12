@@ -129,7 +129,7 @@ public class ClassGenerator {
                         .append("package ").append(pck).append(";")
                         .append("%imports%")
                         .append("\n")
-                        .append("\npublic class ").append(s).append(" {")
+                        .append("\npublic class ").append(toValidClassName(s)).append(" {")
                         .append("\n");
                 Map<String, Schema> properties = schema.getProperties();
                 for (String s1 : properties.keySet()) {
@@ -144,7 +144,7 @@ public class ClassGenerator {
                     else {
                         importSerializedName = true;
                         b.append("\n\t@SerializedName(\"").append(s1).append("\")");
-                        b.append("\n\tpublic ").append(type).append(" ").append(toValidName(s1)).append(";");
+                        b.append("\n\tpublic ").append(type).append(" ").append(toValidFieldName(s1)).append(";");
                     }
                 }
                 b
@@ -161,7 +161,7 @@ public class ClassGenerator {
                 if (importSerializedName) {
                     imports.append("\nimport com.google.gson.annotations.SerializedName;");
                 }
-                saveFile(pck, s, b.toString().replace("%imports%", imports));
+                saveFile(pck, toValidClassName(s), b.toString().replace("%imports%", imports));
             }
             else if (schema.getType().equalsIgnoreCase("string") && schema.getEnum() != null &&
                     !schema.getEnum().isEmpty()) {
@@ -171,7 +171,7 @@ public class ClassGenerator {
                         .append("\n")
                         .append("\nimport com.google.gson.annotations.SerializedName;")
                         .append("\n")
-                        .append("\npublic enum ").append(s).append(" {")
+                        .append("\npublic enum ").append(toValidClassName(s)).append(" {")
                         .append("\n");
                 boolean first = true;
                 for (Object o : schema.getEnum()) {
@@ -188,7 +188,7 @@ public class ClassGenerator {
                         .append("\n")
                         .append("\n")
                         .append("}");
-                saveFile(pck, s, b.toString());
+                saveFile(pck, toValidClassName(s), b.toString());
             }
         }
         return swagger;
@@ -266,7 +266,7 @@ public class ClassGenerator {
         else if (schema.getType().equalsIgnoreCase("number")) {
             type = "Double";
         }
-        return type;
+        return toValidClassName(type);
     }
 
     /**
@@ -291,9 +291,22 @@ public class ClassGenerator {
      * @param s name
      * @return valid java name
      */
-    private static String toValidName(String s) {
+    private static String toValidFieldName(String s) {
         if (RESERVED.contains(s)) {
             return s + "Field";
+        }
+        return s.replaceAll("-", "_");
+    }
+
+    /**
+     * Turns name into valid java name
+     *
+     * @param s name
+     * @return valid java name
+     */
+    private static String toValidClassName(String s) {
+        if (RESERVED.contains(s)) {
+            return s + "Class";
         }
         return s.replaceAll("-", "_");
     }
