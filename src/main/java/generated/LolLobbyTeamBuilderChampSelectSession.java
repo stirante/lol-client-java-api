@@ -23,6 +23,7 @@ public class LolLobbyTeamBuilderChampSelectSession {
 	public Long localPlayerCellId;
 	public Integer lockedEventIndex;
 	public List<LolLobbyTeamBuilderChampSelectPlayerSelection> myTeam;
+	public Long recoveryCounter;
 	public Integer rerollsRemaining;
 	public Boolean skipChampionSelect;
 	public List<LolLobbyTeamBuilderChampSelectPlayerSelection> theirTeam;

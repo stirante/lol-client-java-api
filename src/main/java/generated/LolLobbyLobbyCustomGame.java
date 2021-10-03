@@ -12,6 +12,7 @@ public class LolLobbyLobbyCustomGame {
 	public Integer maxPlayerSlots;
 	public Long maxSpectatorSlots;
 	public String ownerSummonerName;
+	public String partyId;
 	public String passbackUrl;
 	public String spectatorPolicy;
 

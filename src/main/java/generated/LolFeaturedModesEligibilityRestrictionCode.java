@@ -30,6 +30,8 @@ public enum LolFeaturedModesEligibilityRestrictionCode {
 	PLAYERINGAMERESTRICTION,
 	@SerializedName("PlayerLeaverBustedRestriction")
 	PLAYERLEAVERBUSTEDRESTRICTION,
+	@SerializedName("PlayerLeaverQueueLockoutRestriction")
+	PLAYERLEAVERQUEUELOCKOUTRESTRICTION,
 	@SerializedName("PlayerLeaverTaintedWarningRestriction")
 	PLAYERLEAVERTAINTEDWARNINGRESTRICTION,
 	@SerializedName("PlayerMaxLevelRestriction")

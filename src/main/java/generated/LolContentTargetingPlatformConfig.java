@@ -9,9 +9,6 @@ public class LolContentTargetingPlatformConfig {
 	public Boolean Enabled;
 	public Boolean EntitlementsFilterEnabled;
 	public String EntitlementsPrefix;
-	public Boolean InactiveFilterEnabled;
-	public Boolean LaneFilterEnabled;
-	public Integer LaneFilterThreshold;
 	public Boolean LevelFilterEnabled;
 	public Boolean LocationFiltersEnabled;
 	public Boolean MainFilterEnabled;

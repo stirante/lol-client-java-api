@@ -7,6 +7,7 @@ public class LolLeaverBusterLeaverBusterNotificationResource {
 	public Integer id;
 	public String msgId;
 	public Integer punishedGamesRemaining;
+	public Long queueLockoutTimerExpiryUtcMillisDiff;
 	public LolLeaverBusterLeaverBusterNotificationType type;
 
 }

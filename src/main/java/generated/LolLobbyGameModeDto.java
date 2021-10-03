@@ -4,6 +4,7 @@ public class LolLobbyGameModeDto {
 
 	public String allowSpectators;
 	public String botDifficulty;
+	public LolLobbyCustomGameSettingsDto customsSettings;
 	public Object gameCustomization;
 	public String gameType;
 	public Long gameTypeConfigId;

@@ -23,6 +23,7 @@ public class PlayerMissionDTO {
 	public Boolean isNew;
 	public Long lastUpdatedTimestamp;
 	public String locale;
+	public Object media;
 	public MissionMetadata metadata;
 	public String missionType;
 	public List<PlayerMissionObjectiveDTO> objectives;

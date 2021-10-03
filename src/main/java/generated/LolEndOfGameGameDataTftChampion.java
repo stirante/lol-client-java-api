@@ -1,5 +1,7 @@
 package generated;
 
+import java.util.List;
+
 public class LolEndOfGameGameDataTftChampion {
 
 	public String character_id;
@@ -7,5 +9,6 @@ public class LolEndOfGameGameDataTftChampion {
 	public String path;
 	public Integer rarity;
 	public String squareIconPath;
+	public List<LolEndOfGameGameDataTftTrait> traits;
 
 }

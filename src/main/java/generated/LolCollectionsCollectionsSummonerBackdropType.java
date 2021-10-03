@@ -8,8 +8,6 @@ public enum LolCollectionsCollectionsSummonerBackdropType {
 	DEFAULT,
 	@SerializedName("summoner-icon")
 	SUMMONER_ICON,
-	@SerializedName("recently-played")
-	RECENTLY_PLAYED,
 	@SerializedName("highest-mastery")
 	HIGHEST_MASTERY,
 	@SerializedName("specified-skin")

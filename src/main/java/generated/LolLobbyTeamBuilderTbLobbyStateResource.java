@@ -9,5 +9,6 @@ public class LolLobbyTeamBuilderTbLobbyStateResource {
 	public LolLobbyTeamBuilderTBDMatchmakingState matchmakingState;
 	public String phaseName;
 	public Integer queueId;
+	public Integer recoveryCounter;
 
 }

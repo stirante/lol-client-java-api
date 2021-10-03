@@ -13,6 +13,10 @@ public enum LolLeaverBusterLeaverBusterNotificationType {
 	@SerializedName("PunishedGamesRemaining")
 	PUNISHEDGAMESREMAINING,
 	@SerializedName("Reforming")
-	REFORMING
+	REFORMING,
+	@SerializedName("PreLockoutWarning")
+	PRELOCKOUTWARNING,
+	@SerializedName("OnLockoutWarning")
+	ONLOCKOUTWARNING
 
 }

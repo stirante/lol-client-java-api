@@ -4,6 +4,7 @@ import java.util.List;
 
 public class LolCosmeticsGameDataCompanion {
 
+	public Boolean TFTOnly;
 	public String colorName;
 	public String contentId;
 	public String description;

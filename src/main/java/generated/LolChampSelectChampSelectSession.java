@@ -25,6 +25,7 @@ public class LolChampSelectChampSelectSession {
 	public Long localPlayerCellId;
 	public Integer lockedEventIndex;
 	public List<LolChampSelectChampSelectPlayerSelection> myTeam;
+	public Long recoveryCounter;
 	public Integer rerollsRemaining;
 	public Boolean skipChampionSelect;
 	public List<LolChampSelectChampSelectPlayerSelection> theirTeam;

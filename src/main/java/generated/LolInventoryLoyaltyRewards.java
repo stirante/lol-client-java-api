@@ -8,6 +8,8 @@ public class LolInventoryLoyaltyRewards {
 	public Integer freeRewardedChampionsCount;
 	public Integer freeRewardedSkinsCount;
 	public Integer ipBoost;
+	public Integer loyaltyTFTCompanionCount;
+	public Integer loyaltyTFTMapSkinCount;
 	public List<Integer> skinIds;
 	public Integer xpBoost;
 
