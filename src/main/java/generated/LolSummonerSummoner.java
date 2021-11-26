@@ -7,6 +7,7 @@ public class LolSummonerSummoner {
 	public String internalName;
 	public Boolean nameChangeFlag;
 	public Integer percentCompleteForNextLevel;
+	public LolSummonerProfilePrivacySetting privacy;
 	public Integer profileIconId;
 	public String puuid;
 	public LolSummonerSummonerRerollPoints rerollPoints;

@@ -4,6 +4,7 @@ public class LolRankedLcuLeagueNotification {
 
 	public Integer afkLpPenaltyAmount;
 	public Integer afkLpPenaltyLevel;
+	public Boolean canDemoteFromTier;
 	public String changeReason;
 	public Integer consolationLpUsed;
 	public LolRankedNotificationDisplayType displayType;

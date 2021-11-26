@@ -6,6 +6,7 @@ public class LolRewardsSvcRewardGrant {
 
 	public List<LolRewardsSvcRewardGrantElement> grantElements;
 	public String granteeId;
+	public LolRewardsGrantorDescription grantorDescription;
 	public String id;
 	public String rewardGroupId;
 	public List<String> selectedIds;

@@ -10,6 +10,7 @@ public class LolEndOfGameTFTEndOfGamePlayerViewModel {
 	public Integer health;
 	public Integer iconId;
 	public Boolean isLocalPlayer;
+	public Integer partnerGroupId;
 	public String puuid;
 	public Integer rank;
 	public Long summonerId;

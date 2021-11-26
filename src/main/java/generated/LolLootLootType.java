@@ -27,6 +27,10 @@ public enum LolLootLootType {
 	@SerializedName("Statstone")
 	STATSTONE,
 	@SerializedName("Statstone_Shard")
-	STATSTONE_SHARD
+	STATSTONE_SHARD,
+	@SerializedName("Boost")
+	BOOST,
+	@SerializedName("SkinBorder")
+	SKINBORDER
 
 }

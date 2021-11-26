@@ -7,6 +7,8 @@ public enum LolAntiAddictionPolicyType {
 	@SerializedName("antiAddictionWarning")
 	ANTIADDICTIONWARNING,
 	@SerializedName("antiAddictionShutdown")
-	ANTIADDICTIONSHUTDOWN
+	ANTIADDICTIONSHUTDOWN,
+	@SerializedName("antiAddictionHeartbeat")
+	ANTIADDICTIONHEARTBEAT
 
 }

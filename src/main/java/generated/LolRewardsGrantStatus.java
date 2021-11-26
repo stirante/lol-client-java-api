@@ -9,6 +9,8 @@ public enum LolRewardsGrantStatus {
 	@SerializedName("PENDING_SELECTION")
 	PENDING_SELECTION,
 	@SerializedName("FULFILLED")
-	FULFILLED
+	FULFILLED,
+	@SerializedName("FAILED")
+	FAILED
 
 }

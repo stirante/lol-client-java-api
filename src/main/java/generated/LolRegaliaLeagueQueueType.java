@@ -15,6 +15,8 @@ public enum LolRegaliaLeagueQueueType {
 	@SerializedName("RANKED_TFT")
 	RANKED_TFT,
 	@SerializedName("RANKED_TFT_TURBO")
-	RANKED_TFT_TURBO
+	RANKED_TFT_TURBO,
+	@SerializedName("RANKED_TFT_PAIRS")
+	RANKED_TFT_PAIRS
 
 }

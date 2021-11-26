@@ -26,6 +26,7 @@ public class UriMap {
 		toClass.put("\\/lol-account-verification\\/v1\\/device", LolAccountVerificationDeviceResponse.class);
 		toClass.put("\\/lol-account-verification\\/v1\\/is-verified", LolAccountVerificationIsVerifiedResponse.class);
 		toClass.put("\\/lol-active-boosts\\/v1\\/active-boosts", LolActiveBoostsActiveBoosts.class);
+		toClass.put("\\/lol-anti-addiction\\/v1\\/anti-addiction-token", LolAntiAddictionAntiAddictionToken.class);
 		toClass.put("\\/lol-banners\\/v1\\/current-summoner\\/flags", LolBannersBannerFlag[].class);
 		toClass.put("\\/lol-banners\\/v1\\/current-summoner\\/flags\\/equipped", LolBannersBannerFlag.class);
 		toClass.put("\\/lol-banners\\/v1\\/current-summoner\\/frames\\/equipped", LolBannersBannerFrame.class);
@@ -44,6 +45,15 @@ public class UriMap {
 		toClass.put("\\/lol-catalog\\/v1\\/item-details", LolCatalogCatalogPluginItemWithDetails.class);
 		toClass.put("\\/lol-catalog\\/v1\\/items", LolCatalogItemChoiceDetails[].class);
 		toClass.put("\\/lol-catalog\\/v1\\/items\\/[^/]+", LolCatalogCatalogPluginItem[].class);
+		toClass.put("\\/lol-challenges\\/v1\\/challenges\\/[^/]+\\/local-player", LolChallengesUIChallenge[].class);
+		toClass.put("\\/lol-challenges\\/v1\\/level-points", Object.class);
+		toClass.put("\\/lol-challenges\\/v1\\/my-updated-challenges\\/[^/]+", LolChallengesUIChallenge[].class);
+		toClass.put("\\/lol-challenges\\/v1\\/suggested-challenges\\/[^/]+\\/local-player", LolChallengesUIChallenge[].class);
+		toClass.put("\\/lol-challenges\\/v1\\/summary-player-data\\/[^/]+\\/local-player", LolChallengesUIPlayerSummary.class);
+		toClass.put("\\/lol-challenges\\/v1\\/summary-player-data\\/[^/]+\\/player\\/[^/]+", LolChallengesUIPlayerSummary.class);
+		toClass.put("\\/lol-challenges\\/v1\\/summary-players-data\\/[^/]+\\/players", Object.class);
+		toClass.put("\\/lol-challenges\\/v1\\/titles\\/local-player", LolChallengesUITitle[].class);
+		toClass.put("\\/lol-challenges\\/v1\\/updated-challenge\\/[^/]+\\/[^/]+", LolChallengesUIChallenge.class);
 		toClass.put("\\/lol-champ-select-legacy\\/v1\\/bannable-champion-ids", Integer[].class);
 		toClass.put("\\/lol-champ-select-legacy\\/v1\\/current-champion", Integer.class);
 		toClass.put("\\/lol-champ-select-legacy\\/v1\\/disabled-champion-ids", Integer[].class);
@@ -501,8 +511,10 @@ public class UriMap {
 		toClass.put("\\/lol-summoner\\/v1\\/current-summoner\\/account-and-summoner-ids", LolSummonerAccountIdAndSummonerId.class);
 		toClass.put("\\/lol-summoner\\/v1\\/current-summoner\\/autofill", LolSummonerAutoFillQueueDto[].class);
 		toClass.put("\\/lol-summoner\\/v1\\/current-summoner\\/jwt", String.class);
+		toClass.put("\\/lol-summoner\\/v1\\/current-summoner\\/profile-privacy", LolSummonerProfilePrivacy.class);
 		toClass.put("\\/lol-summoner\\/v1\\/current-summoner\\/rerollPoints", LolSummonerSummonerRerollPoints.class);
 		toClass.put("\\/lol-summoner\\/v1\\/current-summoner\\/summoner-profile", Object.class);
+		toClass.put("\\/lol-summoner\\/v1\\/profile-privacy-enabled", LolSummonerProfilePrivacyEnabledState.class);
 		toClass.put("\\/lol-summoner\\/v1\\/status", LolSummonerStatus.class);
 		toClass.put("\\/lol-summoner\\/v1\\/summoner-profile", Object.class);
 		toClass.put("\\/lol-summoner\\/v1\\/summoner-requests-ready", Boolean.class);
@@ -515,6 +527,8 @@ public class UriMap {
 		toClass.put("\\/lol-summoner\\/v2\\/summoners\\/puuid\\/[^/]+", LolSummonerSummoner.class);
 		toClass.put("\\/lol-tastes\\/v1\\/ready", Boolean.class);
 		toClass.put("\\/lol-tastes\\/v1\\/skins-model", LolTastesDataModelResponse.class);
+		toClass.put("\\/lol-tft\\/v1\\/tft\\/hubFooterColors", LolTftLolTftHubFooterColors.class);
+		toClass.put("\\/lol-tft\\/v1\\/tft\\/storePromos", LolTftLolTftStorePromos.class);
 		toClass.put("\\/lol-tft\\/v2\\/tft\\/battlepass", LolMissionsTftPaidBattlepass.class);
 		toClass.put("\\/lol-token-upsell\\/v1\\/all", LolWorldsTokenCardTokenUpsell[].class);
 		toClass.put("\\/lol-trophies\\/v1\\/current-summoner\\/trophies\\/profile", LolTrophiesTrophyProfileData.class);

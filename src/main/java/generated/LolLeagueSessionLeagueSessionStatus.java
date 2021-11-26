@@ -11,6 +11,8 @@ public enum LolLeagueSessionLeagueSessionStatus {
 	@SerializedName("EXPIRED")
 	EXPIRED,
 	@SerializedName("DUPLICATED")
-	DUPLICATED
+	DUPLICATED,
+	@SerializedName("ANTI_ADDICTION_EXPIRED")
+	ANTI_ADDICTION_EXPIRED
 
 }

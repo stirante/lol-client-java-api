@@ -4,6 +4,7 @@ public class LolRankedLeagueNotification {
 
 	public Integer afkLpPenaltyAmount;
 	public Integer afkLpPenaltyLevel;
+	public Boolean canDemoteFromTier;
 	public String changeReason;
 	public Integer consolationLpUsed;
 	public Boolean eligibleForPromoHelper;

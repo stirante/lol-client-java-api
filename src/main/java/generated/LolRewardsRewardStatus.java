@@ -7,6 +7,8 @@ public enum LolRewardsRewardStatus {
 	@SerializedName("PENDING")
 	PENDING,
 	@SerializedName("FULFILLED")
-	FULFILLED
+	FULFILLED,
+	@SerializedName("FAILED")
+	FAILED
 
 }
