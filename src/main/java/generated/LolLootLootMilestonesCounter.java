@@ -6,7 +6,7 @@ public class LolLootLootMilestonesCounter {
 
 	public List<String> claimedMilestones;
 	public Integer completedLoops;
-	public Integer counterValue;
+	public Long counterValue;
 	public String lootMilestonesId;
 
 }

@@ -7,6 +7,7 @@ public class LolLootLootMilestoneReward {
 	public String itemInstanceId;
 	public LolLootPlayerLoot lootItem;
 	public Integer quantity;
+	public String rewardGroupId;
 	public String rewardType;
 
 }

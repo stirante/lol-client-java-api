@@ -13,6 +13,7 @@ public class PendingRosterDTO {
 	public Integer logo;
 	public Integer logoColor;
 	public List<PendingRosterMemberDTO> members;
+	public String multiUserChatJWT;
 	public String name;
 	public List<RewardLogo> rewardLogos;
 	public String shortName;

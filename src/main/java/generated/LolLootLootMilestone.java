@@ -6,6 +6,6 @@ public class LolLootLootMilestone {
 
 	public String id;
 	public List<LolLootLootMilestoneReward> rewards;
-	public Integer threshold;
+	public Long threshold;
 
 }

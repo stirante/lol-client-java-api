@@ -6,7 +6,9 @@ public class LolLootLootMilestones {
 
 	public Boolean active;
 	public String endDate;
+	public Boolean errorCachingMilestoneSet;
 	public String id;
+	public String ledgerConfigId;
 	public List<String> lootItems;
 	public List<LolLootLootMilestone> milestones;
 	public List<String> recipes;

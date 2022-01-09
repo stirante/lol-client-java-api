@@ -2,8 +2,8 @@ package generated;
 
 public class LolRewardsSvcRewardGrantElement {
 
+	public String elementId;
 	public String fulfillmentSource;
-	public String id;
 	public String itemId;
 	public String itemType;
 	public Object localizations;

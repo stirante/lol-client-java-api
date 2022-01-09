@@ -45,6 +45,7 @@ public class UriMap {
 		toClass.put("\\/lol-catalog\\/v1\\/item-details", LolCatalogCatalogPluginItemWithDetails.class);
 		toClass.put("\\/lol-catalog\\/v1\\/items", LolCatalogItemChoiceDetails[].class);
 		toClass.put("\\/lol-catalog\\/v1\\/items\\/[^/]+", LolCatalogCatalogPluginItem[].class);
+		toClass.put("\\/lol-challenges\\/v1\\/available-queue-ids", Integer[].class);
 		toClass.put("\\/lol-challenges\\/v1\\/challenges\\/[^/]+\\/local-player", LolChallengesUIChallenge[].class);
 		toClass.put("\\/lol-challenges\\/v1\\/level-points", Object.class);
 		toClass.put("\\/lol-challenges\\/v1\\/my-updated-challenges\\/[^/]+", LolChallengesUIChallenge[].class);
@@ -275,6 +276,7 @@ public class UriMap {
 		toClass.put("\\/lol-lobby-team-builder\\/champ-select\\/v1\\/disabled-champion-ids", Integer[].class);
 		toClass.put("\\/lol-lobby-team-builder\\/champ-select\\/v1\\/has-auto-assigned-smite", Boolean.class);
 		toClass.put("\\/lol-lobby-team-builder\\/champ-select\\/v1\\/implementation-active", Boolean.class);
+		toClass.put("\\/lol-lobby-team-builder\\/champ-select\\/v1\\/match-token", String.class);
 		toClass.put("\\/lol-lobby-team-builder\\/champ-select\\/v1\\/pickable-champion-ids", Integer[].class);
 		toClass.put("\\/lol-lobby-team-builder\\/champ-select\\/v1\\/pickable-skin-ids", Integer[].class);
 		toClass.put("\\/lol-lobby-team-builder\\/champ-select\\/v1\\/preferences", LolLobbyTeamBuilderChampionSelectPreferences.class);
@@ -391,6 +393,7 @@ public class UriMap {
 		toClass.put("\\/lol-perks\\/v1\\/show-auto-modified-pages-notification", Boolean.class);
 		toClass.put("\\/lol-perks\\/v1\\/styles", LolPerksPerkUIStyle[].class);
 		toClass.put("\\/lol-personalized-offers\\/v1\\/offers", LolPersonalizedOffersUIOffer[].class);
+		toClass.put("\\/lol-personalized-offers\\/v1\\/ready", Boolean.class);
 		toClass.put("\\/lol-personalized-offers\\/v1\\/status", LolPersonalizedOffersUIStatus.class);
 		toClass.put("\\/lol-personalized-offers\\/v1\\/themed", Boolean.class);
 		toClass.put("\\/lol-pft\\/v2\\/survey", LolPftPFTSurvey.class);
@@ -433,13 +436,12 @@ public class UriMap {
 		toClass.put("\\/lol-ranked\\/v1\\/current-ranked-stats", LolRankedRankedStats.class);
 		toClass.put("\\/lol-ranked\\/v1\\/eos-notifications", LolRankedEosNotificationResource[].class);
 		toClass.put("\\/lol-ranked\\/v1\\/eos-rewards", LolRankedEosRewardsConfig.class);
-		toClass.put("\\/lol-ranked\\/v1\\/global-notifications", LolRankedGlobalNotification[].class);
 		toClass.put("\\/lol-ranked\\/v1\\/league-ladders\\/[^/]+", LolRankedLeagueLadderInfo[].class);
 		toClass.put("\\/lol-ranked\\/v1\\/notifications", LolRankedLcuLeagueNotification[].class);
 		toClass.put("\\/lol-ranked\\/v1\\/ranked-stats", Object.class);
 		toClass.put("\\/lol-ranked\\/v1\\/ranked-stats\\/[^/]+", LolRankedRankedStats.class);
 		toClass.put("\\/lol-ranked\\/v1\\/rated-ladder\\/[^/]+", LolRankedRatedLadderInfo.class);
-		toClass.put("\\/lol-ranked\\/v1\\/signed-ranked-stats", SignedRankedStatsDTO.class);
+		toClass.put("\\/lol-ranked\\/v1\\/signed-ranked-stats", LolRankedSignedRankedStatsDTO.class);
 		toClass.put("\\/lol-ranked\\/v1\\/social-leaderboard-ranked-queue-stats-for-puuids", Object.class);
 		toClass.put("\\/lol-ranked\\/v1\\/splits-config", LolRankedRewardsInfo.class);
 		toClass.put("\\/lol-ranked\\/v2\\/tiers", LolRankedParticipantTiers[].class);

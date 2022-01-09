@@ -34,6 +34,7 @@ public class EndOfGameLcdsEndOfGameStats {
 	public Boolean leveledUp;
 	public Integer loyaltyBoostIpEarned;
 	public Integer loyaltyBoostXpEarned;
+	public String multiUserChatJwt;
 	public EndOfGameLcdsTeamInfo myTeamInfo;
 	public String myTeamStatus;
 	public List<EndOfGameLcdsSpell> newSpells;

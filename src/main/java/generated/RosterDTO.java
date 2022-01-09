@@ -14,6 +14,7 @@ public class RosterDTO {
 	public Integer logoColor;
 	public Integer losses;
 	public List<RosterMemberDTO> members;
+	public String multiUserChatJWT;
 	public String name;
 	public List<PhaseRosterDTO> phases;
 	public Integer points;

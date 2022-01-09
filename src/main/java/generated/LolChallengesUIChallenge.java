@@ -15,10 +15,13 @@ public class LolChallengesUIChallenge {
 	public String description;
 	public String descriptionShort;
 	public List<LolChallengesFriendLevelsData> friendsAtLevels;
+	public List<String> gameModes;
+	public Boolean hasLeaderboard;
 	public String iconPath;
 	public Long id;
 	public Boolean isApex;
 	public Boolean isCapstone;
+	public Boolean isReverseDirection;
 	public Object levelToIconPath;
 	public String name;
 	public String nextLevel;

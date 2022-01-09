@@ -9,6 +9,7 @@ public class LolLobbyTeamBuilderAfkCheckStateV1 {
 	public Boolean compressAfkCheckPayload;
 	public LolLobbyTeamBuilderTbdInventory inventoryDraft;
 	public Integer maxAfkMillis;
+	public String multiUserChatJWT;
 	public Integer remainingAfkMillis;
 
 }

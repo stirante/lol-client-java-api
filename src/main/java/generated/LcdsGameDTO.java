@@ -12,6 +12,7 @@ public class LcdsGameDTO {
 	public Long id;
 	public Integer mapId;
 	public Integer maxNumPlayers;
+	public Object multiUserChatJwtMap;
 	public String name;
 	public List<LcdsPlayerParticipant> observers;
 	public Long optimisticLock;

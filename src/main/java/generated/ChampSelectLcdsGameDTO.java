@@ -8,6 +8,7 @@ public class ChampSelectLcdsGameDTO {
 	public List<String> gameMutators;
 	public String gameState;
 	public Long id;
+	public Object multiUserChatJwtMap;
 	public String name;
 	public Long optimisticLock;
 	public Integer pickTurn;

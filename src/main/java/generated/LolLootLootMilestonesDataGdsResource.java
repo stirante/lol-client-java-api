@@ -6,8 +6,8 @@ public class LolLootLootMilestonesDataGdsResource {
 
 	public String endDate;
 	public String id;
-	public LolLootLootMilestonesDataLedgerConfigGdsResource ledgerConfig;
-	public List<LolLootLootMilestonesDataRecipeGdsResource> recipes;
+	public LolLootLedgerConfigGdsResource ledgerConfig;
+	public List<LolLootMilestonesRecipeGdsResource> recipes;
 	public String startDate;
 	public String storeGroupTitle;
 

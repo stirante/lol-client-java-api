@@ -31,6 +31,10 @@ public enum LolLootLootType {
 	@SerializedName("Boost")
 	BOOST,
 	@SerializedName("SkinBorder")
-	SKINBORDER
+	SKINBORDER,
+	@SerializedName("TFT_Map_Skin")
+	TFT_MAP_SKIN,
+	@SerializedName("TFT_Damage_Skin")
+	TFT_DAMAGE_SKIN
 
 }
