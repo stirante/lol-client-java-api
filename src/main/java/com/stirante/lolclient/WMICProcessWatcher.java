@@ -80,6 +80,7 @@ public class WMICProcessWatcher extends ProcessWatcher {
     @Override
     public void stop() {
         thread.close();
+        thread = null;
     }
 
 
