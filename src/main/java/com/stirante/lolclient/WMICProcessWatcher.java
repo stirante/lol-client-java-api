@@ -1,8 +1,13 @@
 package com.stirante.lolclient;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 public class WMICProcessWatcher extends ProcessWatcher {
 
@@ -41,6 +46,12 @@ public class WMICProcessWatcher extends ProcessWatcher {
         }
         applicable = new CompletableFuture<>();
         if (!System.getProperty("os.name").startsWith("Windows")) {
+            applicable.complete(false);
+            return applicable;
+        }
+        if (Stream.of(System.getenv("PATH").split(Pattern.quote(File.pathSeparator)))
+                .map(Paths::get)
+                .anyMatch(path -> Files.exists(path.resolve("powershell.exe")))) {
             applicable.complete(false);
             return applicable;
         }
