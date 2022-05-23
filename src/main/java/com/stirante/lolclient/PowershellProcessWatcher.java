@@ -50,12 +50,6 @@ public class PowershellProcessWatcher extends ProcessWatcher {
             applicable.complete(false);
             return applicable;
         }
-        if (Stream.of(System.getenv("PATH").split(Pattern.quote(File.pathSeparator)))
-                .map(Paths::get)
-                .noneMatch(path -> Files.exists(path.resolve("powershell.exe")))) {
-            applicable.complete(false);
-            return applicable;
-        }
         try {
             if (thread == null) {
                 thread = new SimpleConsole(EXECUTABLE);
