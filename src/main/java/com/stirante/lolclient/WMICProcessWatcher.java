@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
@@ -50,6 +51,14 @@ public class WMICProcessWatcher extends ProcessWatcher {
             return applicable;
         }
         try {
+            Process process =
+                    Runtime.getRuntime().exec("WMIC PROCESS WHERE name='LeagueClientUx.exe' GET commandline");
+            process.waitFor(10, TimeUnit.SECONDS);
+            if (process.exitValue() != 0) {
+                applicable.complete(false);
+                return applicable;
+            }
+            process.destroy();
             if (thread == null) {
                 thread = new SimpleConsole(EXECUTABLE);
                 thread.start();
