@@ -245,7 +245,7 @@ public class ClientApi {
             if (target == null) {
                 return false;
             }
-            File file = new File(target);
+            File file = new File(target.trim());
             if (file.exists()) {
                 clientPath = file.getParentFile().getAbsolutePath();
                 setupApiWithLockfile();
