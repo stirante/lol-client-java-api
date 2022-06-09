@@ -84,7 +84,7 @@ public class WMICProcessWatcher extends ProcessWatcher {
 
     @Override
     public int getPriority() {
-        return 2;
+        return 3;
     }
 
     @Override

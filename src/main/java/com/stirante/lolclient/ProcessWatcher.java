@@ -10,6 +10,7 @@ public abstract class ProcessWatcher {
 
     private static void init() {
         initialized = new CompletableFuture<>();
+        register(new Win32ProcessWatcher());
         register(new PSProcessWatcher());
         register(new WMICProcessWatcher());
         register(new PowershellProcessWatcher());
