@@ -1,19 +1,14 @@
 package com.stirante.lolclient;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.regex.Pattern;
-import java.util.stream.Stream;
 
 public class PowershellProcessWatcher extends ProcessWatcher {
 
     public static final String EXECUTABLE = "powershell.exe";
     public static final String COMMAND =
-            "(Get-CimInstance -ClassName win32_process -Filter \"name like 'LeagueClientUx.exe'\").CommandLine;echo --end-marker--";
+            "(Get-CimInstance -ClassName win32_process -Filter \"name like 'LeagueClientUx.exe'\").Path;echo --end-marker--";
     private SimpleConsole thread;
     private CompletableFuture<Boolean> applicable;
 
@@ -25,7 +20,7 @@ public class PowershellProcessWatcher extends ProcessWatcher {
         }
         final CompletableFuture<String> target = new CompletableFuture<>();
         thread.addOutputListener(s -> {
-            if (s.contains("LeagueClientUx.exe") && s.contains("--install-directory=")) {
+            if (s.contains("LeagueClientUx.exe") && !s.contains(COMMAND)) {
                 target.complete(s);
                 return true;
             }

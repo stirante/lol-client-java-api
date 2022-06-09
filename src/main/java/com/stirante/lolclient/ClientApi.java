@@ -29,16 +29,12 @@ import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
 import static java.nio.file.StandardWatchEventKinds.ENTRY_DELETE;
 
 public class ClientApi {
 
-    private static final Pattern INSTALL_DIR =
-            Pattern.compile(".+\"--install-directory=([^\"]+)\".+");
     private static final Gson GSON = new GsonBuilder().create();
     private static final int LIVE_PORT = 2999;
     /**
@@ -249,9 +245,9 @@ public class ClientApi {
             if (target == null) {
                 return false;
             }
-            Matcher matcher = INSTALL_DIR.matcher(target);
-            if (matcher.find()) {
-                clientPath = new File(matcher.group(1)).getAbsolutePath();
+            File file = new File(target);
+            if (file.exists()) {
+                clientPath = file.getParentFile().getAbsolutePath();
                 setupApiWithLockfile();
                 processWatcherStarted.set(false);
                 return true;
@@ -703,13 +699,13 @@ public class ClientApi {
             String target = null;
             boolean found = false;
             Process process =
-                    Runtime.getRuntime().exec("WMIC PROCESS WHERE name='LeagueClientUx.exe' GET commandline");
+                    Runtime.getRuntime().exec("WMIC PROCESS WHERE name='LeagueClientUx.exe' GET executablepath");
             InputStream in = process.getInputStream();
             Scanner sc = new Scanner(in);
             while (sc.hasNextLine()) {
                 String s = sc.nextLine();
                 logConsumer.accept(s);
-                if (s.contains("LeagueClientUx.exe") && s.contains("--install-directory=")) {
+                if (s.contains("LeagueClientUx.exe")) {
                     logConsumer.accept("Found correct process");
                     found = true;
                     target = s;
@@ -720,7 +716,7 @@ public class ClientApi {
             process.destroy();
             if (!found) {
                 process =
-                        Runtime.getRuntime().exec("WMIC PROCESS GET name,commandline /format:csv");
+                        Runtime.getRuntime().exec("WMIC PROCESS GET name,executablepath /format:csv");
                 in = process.getInputStream();
                 sc = new Scanner(in);
                 while (sc.hasNextLine()) {
@@ -731,38 +727,35 @@ public class ClientApi {
                 process.destroy();
             }
             else {
-                Matcher matcher = INSTALL_DIR.matcher(target);
-                if (matcher.find()) {
-                    String clientPath = new File(matcher.group(1)).getAbsolutePath();
-                    String path = new File(new File(clientPath), "lockfile").getAbsolutePath();
-                    String lockfile = readFile(path);
-                    if (lockfile == null) {
-                        logConsumer.accept("Lockfile not found!");
-                    }
-                    else {
-                        logConsumer.accept("Lockfile found: " + lockfile);
-                        String[] split = lockfile.split(":");
-                        String password = split[3];
-                        String token = new String(Base64.getEncoder().encode(("riot:" + password).getBytes()));
-                        int port = Integer.parseInt(split[2]);
-                        logConsumer.accept("Token: " + token);
-                        logConsumer.accept("Port: " + port);
-                        logConsumer.accept("Executing test request");
-                        CloseableHttpClient client = createHttpClient();
-                        HttpGet method = new HttpGet();
-                        method.setURI(new URI("https://127.0.0.1:" + port + "/system/v1/builds"));
-                        method.addHeader("Authorization", "Basic " + token);
-                        method.addHeader("Accept", "*/*");
-                        try (CloseableHttpResponse response = client.execute(method)) {
-                            boolean b = response.getStatusLine().getStatusCode() == 200;
-                            if (!b) {
-                                logConsumer.accept("Status code: " + response.getStatusLine().getStatusCode());
-                            }
-                            else {
-                                String t = dumpStream(response.getEntity().getContent());
-                                EntityUtils.consume(response.getEntity());
-                                logConsumer.accept("Response: " + t);
-                            }
+                String clientPath = new File(target).getAbsolutePath();
+                String path = new File(new File(clientPath), "lockfile").getAbsolutePath();
+                String lockfile = readFile(path);
+                if (lockfile == null) {
+                    logConsumer.accept("Lockfile not found!");
+                }
+                else {
+                    logConsumer.accept("Lockfile found: " + lockfile);
+                    String[] split = lockfile.split(":");
+                    String password = split[3];
+                    String token = new String(Base64.getEncoder().encode(("riot:" + password).getBytes()));
+                    int port = Integer.parseInt(split[2]);
+                    logConsumer.accept("Token: " + token);
+                    logConsumer.accept("Port: " + port);
+                    logConsumer.accept("Executing test request");
+                    CloseableHttpClient client = createHttpClient();
+                    HttpGet method = new HttpGet();
+                    method.setURI(new URI("https://127.0.0.1:" + port + "/system/v1/builds"));
+                    method.addHeader("Authorization", "Basic " + token);
+                    method.addHeader("Accept", "*/*");
+                    try (CloseableHttpResponse response = client.execute(method)) {
+                        boolean b = response.getStatusLine().getStatusCode() == 200;
+                        if (!b) {
+                            logConsumer.accept("Status code: " + response.getStatusLine().getStatusCode());
+                        }
+                        else {
+                            String t = dumpStream(response.getEntity().getContent());
+                            EntityUtils.consume(response.getEntity());
+                            logConsumer.accept("Response: " + t);
                         }
                     }
                 }
