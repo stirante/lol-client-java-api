@@ -141,6 +141,10 @@
                             <pattern>org.slf4j</pattern>
                             <shadedPattern>com.stirante.lolclient.libs.org.slf4j</shadedPattern>
                         </relocation>
+                        <relocation>
+                            <pattern>net.java.dev.jna</pattern>
+                            <shadedPattern>com.stirante.lolclient.libs.net.java.dev.jna</shadedPattern>
+                        </relocation>
                     </relocations>
                 </configuration>
             </plugin>

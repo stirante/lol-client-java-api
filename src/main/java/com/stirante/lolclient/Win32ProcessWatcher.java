@@ -69,11 +69,6 @@ public class Win32ProcessWatcher extends ProcessWatcher {
     public void stop() {
     }
 
-    public static void main(String[] args) {
-        int pid = getProcessId("LeagueClientUx.exe");
-        getProcessPath(pid);
-    }
-
     private static int getProcessId(String executable) {
         Tlhelp32.PROCESSENTRY32.ByReference processEntry = new Tlhelp32.PROCESSENTRY32.ByReference();
 
