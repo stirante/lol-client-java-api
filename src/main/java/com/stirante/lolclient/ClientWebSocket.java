@@ -32,7 +32,7 @@ public class ClientWebSocket extends WebSocketClient {
         super(new URI("wss://localhost:" + port + "/"), createHeaders("Authorization", "Basic " + token));
 
         SSLSocketFactory factory = SSLUtil.getSocketFactory();
-        setSocket(factory.createSocket());
+        setSocketFactory(factory);
         connectBlocking();
         subscribe("OnJsonApiEvent");
     }

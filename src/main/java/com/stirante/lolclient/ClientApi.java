@@ -3,19 +3,26 @@ package com.stirante.lolclient;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.stirante.lolclient.utils.SSLUtil;
 import generated.*;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.entity.EntityBuilder;
-import org.apache.http.client.methods.*;
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.entity.ContentType;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
+import org.apache.hc.client5.http.classic.methods.*;
+import org.apache.hc.client5.http.config.RequestConfig;
+import org.apache.hc.client5.http.entity.EntityBuilder;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManagerBuilder;
+import org.apache.hc.client5.http.io.HttpClientConnectionManager;
+import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactory;
+import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactoryBuilder;
+import org.apache.hc.core5.http.ClassicHttpRequest;
+import org.apache.hc.core5.http.ContentType;
+import org.apache.hc.core5.http.io.entity.EntityUtils;
+import org.apache.hc.core5.ssl.SSLContexts;
+import org.apache.hc.core5.util.Timeout;
 
-import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLContext;
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
@@ -100,9 +107,19 @@ public class ClientApi {
      */
     private final Set<ClientConnectionListener> clientListeners = new HashSet<>();
 
-    private static CloseableHttpClient createHttpClient() throws Exception {
+    private CloseableHttpClient createHttpClient() throws Exception {
+        final SSLContext sslcontext = SSLContexts.custom()
+                .loadTrustMaterial(ClientApi.class.getResource("/riotgames.jks"), "nopass".toCharArray())
+                .build();
+        final SSLConnectionSocketFactory sslSocketFactory = SSLConnectionSocketFactoryBuilder.create()
+                .setSslContext(sslcontext)
+                .build();
+        final HttpClientConnectionManager cm = PoolingHttpClientConnectionManagerBuilder.create()
+                .setSSLSocketFactory(sslSocketFactory)
+                .build();
         return HttpClients.custom()
-                .setSSLSocketFactory(new SSLConnectionSocketFactory(SSLUtil.getSocketFactory(), (HostnameVerifier) null))
+                .setConnectionManager(cm)
+                .setDefaultRequestConfig(requestConfig)
                 .build();
     }
 
@@ -132,8 +149,8 @@ public class ClientApi {
     public ClientApi(String clientPath, int connectTimeout, int readTimeout) {
         this.clientPath = clientPath;
         this.requestConfig = RequestConfig.custom()
-                .setConnectTimeout(connectTimeout)
-                .setSocketTimeout(readTimeout)
+                .setConnectTimeout(Timeout.ofMilliseconds(connectTimeout))
+                .setResponseTimeout(Timeout.ofMilliseconds(readTimeout))
                 .build();
         try {
             this.client = createHttpClient();
@@ -388,9 +405,9 @@ public class ClientApi {
         return s.hasNext() ? s.next() : "";
     }
 
-    private String dumpHttpRequest(HttpRequestBase conn) throws IOException {
+    private String dumpHttpRequest(ClassicHttpRequest conn) throws IOException {
         try (CloseableHttpResponse response = client.execute(conn)) {
-            boolean b = response.getStatusLine().getStatusCode() == 200;
+            boolean b = response.getCode() == 200;
             if (!b) {
                 return null;
             }
@@ -414,35 +431,35 @@ public class ClientApi {
     }
 
     public String getSwaggerJson() throws IOException {
-        return dumpHttpRequest(getConnection("/swagger/v2/swagger.json", port, new HttpGet()));
+        return dumpHttpRequest(getConnection("/swagger/v2/swagger.json", port, HttpGet.class));
     }
 
     public String getOpenapiJson() throws IOException {
-        return dumpHttpRequest(getConnection("/swagger/v3/openapi.json", port, new HttpGet()));
+        return dumpHttpRequest(getConnection("/swagger/v3/openapi.json", port, HttpGet.class));
     }
 
     public String getLiveSwaggerJson() throws IOException {
-        return dumpHttpRequest(getConnection("/swagger/v2/swagger.json", LIVE_PORT, new HttpGet()));
+        return dumpHttpRequest(getConnection("/swagger/v2/swagger.json", LIVE_PORT, HttpGet.class));
     }
 
     public String getLiveOpenapiJson() throws IOException {
-        return dumpHttpRequest(getConnection("/swagger/v3/openapi.json", LIVE_PORT, new HttpGet()));
+        return dumpHttpRequest(getConnection("/swagger/v3/openapi.json", LIVE_PORT, HttpGet.class));
     }
 
     public <T> ApiResponse<T> executeGet(String path, Class<T> clz) throws IOException {
-        HttpGet conn = getConnection(path, port, new HttpGet());
+        HttpGet conn = getConnection(path, port, HttpGet.class);
         return getResponse(clz, conn);
     }
 
     public <T> ApiResponse<T> executeLiveGet(String path, Class<T> clz) throws IOException {
-        HttpGet conn = getConnection(path, LIVE_PORT, new HttpGet());
+        HttpGet conn = getConnection(path, LIVE_PORT, HttpGet.class);
         return getResponse(clz, conn);
     }
 
     public InputStream executeBinaryGet(String path) throws IOException {
-        HttpGet conn = getConnection(path, port, new HttpGet());
+        HttpGet conn = getConnection(path, port, HttpGet.class);
         CloseableHttpResponse response = client.execute(conn);
-        boolean b = response.getStatusLine().getStatusCode() == 200;
+        boolean b = response.getCode() == 200;
         if (!b) {
             EntityUtils.consume(response.getEntity());
             return null;
@@ -451,48 +468,48 @@ public class ClientApi {
     }
 
     public <T> ApiResponse<T> executeGet(String path, Class<T> clz, String... queryParams) throws IOException {
-        HttpGet conn = getConnection(path, port, new HttpGet(), queryParams);
+        HttpGet conn = getConnection(path, port, HttpGet.class, queryParams);
         return getResponse(clz, conn);
     }
 
     public ApiResponse<Void> executePut(String path, Object jsonObject) throws IOException {
-        HttpPut conn = getConnection(path, port, new HttpPut());
+        HttpPut conn = getConnection(path, port, HttpPut.class);
         addJsonBody(jsonObject, conn);
         return getResponse(conn);
     }
 
     public <T> ApiResponse<T> executePost(String path, Object jsonObject, Class<T> clz) throws IOException {
-        HttpPost conn = getConnection(path, port, new HttpPost());
+        HttpPost conn = getConnection(path, port, HttpPost.class);
         addJsonBody(jsonObject, conn);
         return getResponse(clz, conn);
     }
 
     public <T> ApiResponse<T> executePost(String path, Class<T> clz) throws IOException {
-        HttpPost conn = getConnection(path, port, new HttpPost());
+        HttpPost conn = getConnection(path, port, HttpPost.class);
         return getResponse(clz, conn);
     }
 
     public ApiResponse<Void> executePost(String path, Object jsonObject) throws IOException {
-        HttpPost conn = getConnection(path, port, new HttpPost());
+        HttpPost conn = getConnection(path, port, HttpPost.class);
         addJsonBody(jsonObject, conn);
         return getResponse(conn);
     }
 
     public ApiResponse<Void> executePatch(String path, Object jsonObject) throws IOException {
-        HttpPatch conn = getConnection(path, port, new HttpPatch());
+        HttpPatch conn = getConnection(path, port, HttpPatch.class);
         addJsonBody(jsonObject, conn);
         return getResponse(conn);
     }
 
     public ApiResponse<Void> executePost(String path) throws IOException {
-        return getResponse(getConnection(path, port, new HttpPost()));
+        return getResponse(getConnection(path, port, HttpPost.class));
     }
 
     public ApiResponse<Void> executeDelete(String path) throws IOException {
-        return getResponse(getConnection(path, port, new HttpDelete()));
+        return getResponse(getConnection(path, port, HttpDelete.class));
     }
 
-    private <T extends HttpEntityEnclosingRequestBase> void addJsonBody(Object jsonObject, T method) {
+    private <T extends HttpUriRequestBase> void addJsonBody(Object jsonObject, T method) {
         method.setEntity(
                 EntityBuilder.create()
                         .setText(GSON.toJson(jsonObject))
@@ -501,9 +518,9 @@ public class ClientApi {
         );
     }
 
-    private ApiResponse<Void> getResponse(HttpRequestBase method) throws IOException {
+    private ApiResponse<Void> getResponse(HttpUriRequestBase method) throws IOException {
         try (CloseableHttpResponse response = client.execute(method)) {
-            int statusCode = response.getStatusLine().getStatusCode();
+            int statusCode = response.getCode();
             String rawResponse = null;
             if (response.getEntity() != null && response.getEntity().getContentLength() > 0) {
                 InputStream in = response.getEntity().getContent();
@@ -514,9 +531,9 @@ public class ClientApi {
         }
     }
 
-    private <T> ApiResponse<T> getResponse(Class<T> clz, HttpRequestBase method) throws IOException {
+    private <T> ApiResponse<T> getResponse(Class<T> clz, HttpUriRequestBase method) throws IOException {
         try (CloseableHttpResponse response = client.execute(method)) {
-            int statusCode = response.getStatusLine().getStatusCode();
+            int statusCode = response.getCode();
             T t = null;
             String rawResponse = null;
             if (response.getEntity() != null && response.getEntity().getContentLength() > 0) {
@@ -539,7 +556,8 @@ public class ClientApi {
      * @param method      Base request
      * @param queryParams Pairs of get parameters. Must be divisible by 2.
      */
-    private <T extends HttpRequestBase> T getConnection(String endpoint, int port, T method, String... queryParams) {
+    @SuppressWarnings("unchecked")
+    private <T extends HttpUriRequestBase> T getConnection(String endpoint, int port, Class<T> method, String... queryParams) {
         if (!connected.get()) {
             throw new IllegalStateException("API not connected!");
         }
@@ -561,13 +579,15 @@ public class ClientApi {
                 sb.append(queryParams[i]).append("=").append(queryParams[i + 1]);
             }
             URI uri = new URI(sb.toString());
-            method.setURI(uri);
-            method.addHeader("Authorization", "Basic " + token);
-            method.addHeader("Accept", "*/*");
-            method.setConfig(requestConfig);
-            return method;
+            T conn = method.getConstructor(URI.class).newInstance(uri);
+            conn.addHeader("Authorization", "Basic " + token);
+            conn.addHeader("Accept", "*/*");
+            conn.setConfig(requestConfig);
+            return conn;
         } catch (URISyntaxException e) {
             throw new IllegalArgumentException("Invalid endpoint!", e);
+        } catch (InvocationTargetException | IllegalAccessException | NoSuchMethodException | InstantiationException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -742,15 +762,15 @@ public class ClientApi {
                     logConsumer.accept("Token: " + token);
                     logConsumer.accept("Port: " + port);
                     logConsumer.accept("Executing test request");
-                    CloseableHttpClient client = createHttpClient();
-                    HttpGet method = new HttpGet();
-                    method.setURI(new URI("https://127.0.0.1:" + port + "/system/v1/builds"));
+                    ClientApi api = new ClientApi(clientPath);
+                    CloseableHttpClient client = api.client;
+                    HttpGet method = new HttpGet(new URI("https://127.0.0.1:" + port + "/system/v1/builds"));
                     method.addHeader("Authorization", "Basic " + token);
                     method.addHeader("Accept", "*/*");
                     try (CloseableHttpResponse response = client.execute(method)) {
-                        boolean b = response.getStatusLine().getStatusCode() == 200;
+                        boolean b = response.getCode() == 200;
                         if (!b) {
-                            logConsumer.accept("Status code: " + response.getStatusLine().getStatusCode());
+                            logConsumer.accept("Status code: " + response.getCode());
                         }
                         else {
                             String t = dumpStream(response.getEntity().getContent());
@@ -758,6 +778,7 @@ public class ClientApi {
                             logConsumer.accept("Response: " + t);
                         }
                     }
+                    api.stop();
                 }
             }
         } catch (Throwable t) {

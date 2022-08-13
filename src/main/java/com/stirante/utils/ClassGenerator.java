@@ -2,12 +2,12 @@ package com.stirante.utils;
 
 import com.stirante.lolclient.ClientApi;
 import com.stirante.lolclient.ClientConnectionListener;
-import io.swagger.oas.models.PathItem;
-import io.swagger.oas.models.media.ArraySchema;
-import io.swagger.oas.models.media.Schema;
 import io.swagger.parser.OpenAPIParser;
-import io.swagger.parser.models.ParseOptions;
-import io.swagger.parser.models.SwaggerParseResult;
+import io.swagger.v3.oas.models.PathItem;
+import io.swagger.v3.oas.models.media.ArraySchema;
+import io.swagger.v3.oas.models.media.Schema;
+import io.swagger.v3.parser.core.models.ParseOptions;
+import io.swagger.v3.parser.core.models.SwaggerParseResult;
 
 import java.io.File;
 import java.io.FileWriter;
