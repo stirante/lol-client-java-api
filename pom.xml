@@ -105,7 +105,7 @@
                         <configuration>
                             <excludes>
                                 <exclude>com/stirante/utils/**/*</exclude>
-                                <exclude>examples/*</exclude>
+                                <exclude>examples/**/*</exclude>
                             </excludes>
                         </configuration>
                     </execution>
@@ -144,6 +144,10 @@
                         <relocation>
                             <pattern>net.java.dev.jna</pattern>
                             <shadedPattern>com.stirante.lolclient.libs.net.java.dev.jna</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>com.sun.jna</pattern>
+                            <shadedPattern>com.stirante.lolclient.libs.com.sun.jna</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>
