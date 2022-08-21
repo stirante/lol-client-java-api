@@ -1,9 +1,14 @@
 package com.stirante.lolclient;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 
 public abstract class ProcessWatcher {
+
+    private static final Logger logger = LoggerFactory.getLogger(ProcessWatcher.class);
 
     private static ProcessWatcher instance;
     private static CompletableFuture<Boolean> initialized;
@@ -20,7 +25,9 @@ public abstract class ProcessWatcher {
         processWatcher.isApplicable().whenComplete((applicable, throwable) -> {
             if (applicable && throwable == null &&
                     (instance == null || instance.getPriority() > processWatcher.getPriority())) {
+                logger.debug("ProcessWatcher " + processWatcher.getClass().getSimpleName() + " is applicable");
                 if (instance != null) {
+                    logger.debug("ProcessWatcher " + processWatcher.getClass().getSimpleName() + " is applicable and higher priority than " + instance.getClass().getSimpleName() + " - replacing");
                     instance.stop();
                 }
                 instance = processWatcher;
@@ -29,6 +36,11 @@ public abstract class ProcessWatcher {
                 }
             }
             else {
+                if (instance != null && applicable) {
+                    logger.debug("ProcessWatcher " + processWatcher.getClass().getSimpleName() + " is applicable, but lower priority than " + instance.getClass().getSimpleName() + " - ignoring");
+                } else {
+                    logger.debug("ProcessWatcher " + processWatcher.getClass().getSimpleName() + " is not applicable");
+                }
                 processWatcher.stop();
             }
         });

@@ -19,6 +19,8 @@ import org.apache.hc.core5.http.ContentType;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
 import org.apache.hc.core5.ssl.SSLContexts;
 import org.apache.hc.core5.util.Timeout;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.net.ssl.SSLContext;
 import java.io.*;
@@ -42,6 +44,7 @@ import static java.nio.file.StandardWatchEventKinds.ENTRY_DELETE;
 
 public class ClientApi {
 
+    private static final Logger logger = LoggerFactory.getLogger(ClientApi.class);
     private static final Gson GSON = new GsonBuilder().create();
     private static final int LIVE_PORT = 2999;
     /**
@@ -176,7 +179,7 @@ public class ClientApi {
             try {
                 listener.onClientConnected();
             } catch (Throwable t) {
-                t.printStackTrace();
+                logger.error("Error while calling onClientConnected()", t);
             }
         }
     }
@@ -226,7 +229,7 @@ public class ClientApi {
             try {
                 listener.onClientConnected();
             } catch (Throwable t) {
-                t.printStackTrace();
+                logger.error("Error while calling onClientConnected()", t);
             }
         }
     }
@@ -244,7 +247,7 @@ public class ClientApi {
                 try {
                     listener.onClientDisconnected();
                 } catch (Throwable t) {
-                    t.printStackTrace();
+                    logger.error("Error while calling onClientDisconnected()", t);
                 }
             }
         }
@@ -273,7 +276,7 @@ public class ClientApi {
                 throw new IllegalStateException("Couldn't find port or token in lockfile!");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Error while checking client process", e);
         }
         return false;
     }
@@ -286,14 +289,14 @@ public class ClientApi {
             return;
         }
         new Thread(() -> {
+            logger.debug("Starting process watcher");
             processWatcherStarted.set(true);
             while (processWatcherStarted.get()) {
                 if (!checkClientProcess()) {
                     //slow down a bit
                     try {
                         Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                    } catch (InterruptedException ignored) {
                     }
                 }
             }
@@ -328,7 +331,7 @@ public class ClientApi {
                                 try {
                                     listener.onClientDisconnected();
                                 } catch (Throwable t) {
-                                    t.printStackTrace();
+                                    logger.error("Error while calling onClientDisconnected()", t);
                                 }
                             }
                         }
@@ -339,12 +342,11 @@ public class ClientApi {
                     //slow down a bit
                     try {
                         Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                    } catch (InterruptedException ignored) {
                     }
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.error("Error while watching lockfile", e);
             }
         }).start();
     }
@@ -387,7 +389,7 @@ public class ClientApi {
             scanner.close();
             return sb.toString();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            logger.error("Error while reading file", e);
         }
         return null;
     }
@@ -556,7 +558,6 @@ public class ClientApi {
      * @param method      Base request
      * @param queryParams Pairs of get parameters. Must be divisible by 2.
      */
-    @SuppressWarnings("unchecked")
     private <T extends HttpUriRequestBase> T getConnection(String endpoint, int port, Class<T> method, String... queryParams) {
         if (!connected.get()) {
             throw new IllegalStateException("API not connected!");
@@ -709,6 +710,7 @@ public class ClientApi {
     }
 
     public static void generateDebugLog(Consumer<String> logConsumer) {
+        //TODO: This should be rewritten to check each process watcher separately and not stop after the first failure
         logConsumer.accept("Created at " +
                 SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.FULL, SimpleDateFormat.FULL, Locale.ENGLISH)
                         .format(new Date()));
@@ -747,7 +749,7 @@ public class ClientApi {
                 process.destroy();
             }
             else {
-                String clientPath = new File(target).getAbsolutePath();
+                String clientPath = new File(target.trim()).getParentFile().getAbsolutePath();
                 String path = new File(new File(clientPath), "lockfile").getAbsolutePath();
                 String lockfile = readFile(path);
                 if (lockfile == null) {

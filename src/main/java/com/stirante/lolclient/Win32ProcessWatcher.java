@@ -6,12 +6,15 @@ import com.sun.jna.platform.win32.Tlhelp32;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.win32.W32APIOptions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 
 public class Win32ProcessWatcher extends ProcessWatcher {
 
+    private static final Logger logger = LoggerFactory.getLogger(Win32ProcessWatcher.class);
     private CompletableFuture<Boolean> applicable;
 
     @Override
@@ -38,23 +41,27 @@ public class Win32ProcessWatcher extends ProcessWatcher {
         }
         applicable = new CompletableFuture<>();
         if (!System.getProperty("os.name").startsWith("Windows")) {
+            logger.debug("ProcessWatcher is not applicable - not Windows");
             applicable.complete(false);
             return applicable;
         }
         try {
             int pid = getProcessId("java.exe");
             if (pid == -1) {
+                logger.debug("ProcessWatcher is not applicable - could not find process ID of java.exe");
                 applicable.complete(false);
                 return applicable;
             }
             String processPath = getProcessPath(pid);
             if (processPath == null) {
+                logger.debug("ProcessWatcher is not applicable - could not find process path of java.exe");
                 applicable.complete(false);
                 return applicable;
             }
             applicable.complete(true);
             return applicable;
         } catch (Exception e) {
+            logger.debug("ProcessWatcher is not applicable - exception", e);
             applicable.complete(false);
             return applicable;
         }

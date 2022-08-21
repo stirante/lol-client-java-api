@@ -5,6 +5,8 @@ import com.stirante.lolclient.utils.SSLUtil;
 import generated.UriMap;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.net.ssl.SSLSocketFactory;
 import java.lang.reflect.Type;
@@ -15,6 +17,7 @@ import java.util.regex.Pattern;
 
 public class ClientWebSocket extends WebSocketClient {
 
+    private static final Logger logger = LoggerFactory.getLogger(ClientWebSocket.class);
     private SocketListener socketListener;
     private static final Gson GSON = new GsonBuilder()
             .registerTypeAdapter(Event.class, new EventDeserializer())
@@ -91,7 +94,7 @@ public class ClientWebSocket extends WebSocketClient {
 
     @Override
     public void onError(Exception ex) {
-        ex.printStackTrace();
+        logger.error("WebSocket error", ex);
     }
 
     public interface SocketListener {

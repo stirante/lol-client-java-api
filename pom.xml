@@ -7,11 +7,28 @@
     <groupId>com.stirante</groupId>
     <artifactId>lol-client-java-api</artifactId>
     <version>1.2.8-SNAPSHOT</version>
+    <name>lol-client-java-api</name>
+    <description>Simple library which provides access to internal League of Legends Client API.</description>
+    <url>https://github.com/stirante/lol-client-java-api</url>
 
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <licenses>
+        <license>
+            <name>GNU GENERAL PUBLIC LICENSE Version 3</name>
+            <url>https://github.com/stirante/lol-client-java-api/blob/master/LICENSE</url>
+        </license>
+    </licenses>
+    <scm>
+        <url>https://github.com/stirante/lol-client-java-api/</url>
+    </scm>
+    <issueManagement>
+        <url>https://github.com/stirante/lol-client-java-api//issues</url>
+        <system>GitHub Issues</system>
+    </issueManagement>
 
     <distributionManagement>
         <repository>
@@ -23,12 +40,6 @@
             <url>https://nexus.stirante.com/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
-
-    <scm>
-        <connection>scm:git:git@github.com:stirante/lol-client-java-api.git</connection>
-        <url>scm:git:git@github.com:stirante/lol-client-java-api.git</url>
-        <developerConnection>scm:git:git@github.com:stirante/lol-client-java-api.git</developerConnection>
-    </scm>
 
     <dependencies>
         <dependency>
@@ -71,22 +82,20 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.7.36</version>
         </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.7.36</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.slf4j</groupId>-->
+<!--            <artifactId>slf4j-simple</artifactId>-->
+<!--            <version>1.7.36</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>net.java.dev.jna</groupId>
             <artifactId>jna</artifactId>
             <version>5.12.1</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>net.java.dev.jna</groupId>
             <artifactId>jna-platform</artifactId>
             <version>5.12.1</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 
@@ -126,6 +135,32 @@
                                 <exclude>examples/**/*</exclude>
                             </excludes>
                         </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.3</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>

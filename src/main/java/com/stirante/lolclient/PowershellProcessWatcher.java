@@ -1,11 +1,15 @@
 package com.stirante.lolclient;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class PowershellProcessWatcher extends ProcessWatcher {
 
+    private static final Logger logger = LoggerFactory.getLogger(PowershellProcessWatcher.class);
     public static final String EXECUTABLE = "powershell.exe";
     public static final String COMMAND =
             "(Get-CimInstance -ClassName win32_process -Filter \"name like 'LeagueClientUx.exe'\").Path;echo --end-marker--";
@@ -42,6 +46,7 @@ public class PowershellProcessWatcher extends ProcessWatcher {
         }
         applicable = new CompletableFuture<>();
         if (!System.getProperty("os.name").startsWith("Windows")) {
+            logger.debug("ProcessWatcher is not applicable - not Windows");
             applicable.complete(false);
             return applicable;
         }

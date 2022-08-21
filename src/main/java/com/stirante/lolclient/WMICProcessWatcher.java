@@ -1,5 +1,8 @@
 package com.stirante.lolclient;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
@@ -7,6 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class WMICProcessWatcher extends ProcessWatcher {
 
+    private static final Logger logger = LoggerFactory.getLogger(WMICProcessWatcher.class);
     public static final String EXECUTABLE = "cmd.exe";
     public static final String COMMAND =
             "WMIC PROCESS WHERE name='LeagueClientUx.exe' GET ExecutablePath & echo --end-marker--";
@@ -43,14 +47,16 @@ public class WMICProcessWatcher extends ProcessWatcher {
         }
         applicable = new CompletableFuture<>();
         if (!System.getProperty("os.name").startsWith("Windows")) {
+            logger.debug("ProcessWatcher is not applicable - not Windows");
             applicable.complete(false);
             return applicable;
         }
         try {
             Process process =
-                    Runtime.getRuntime().exec("WMIC PROCESS WHERE name='LeagueClientUx.exe' GET ExecutablePath");
+                    Runtime.getRuntime().exec("WMIC PROCESS WHERE name='java.exe' GET ExecutablePath");
             process.waitFor(10, TimeUnit.SECONDS);
             if (process.exitValue() != 0) {
+                logger.debug("ProcessWatcher is not applicable - WMIC failed");
                 applicable.complete(false);
                 return applicable;
             }
@@ -70,6 +76,7 @@ public class WMICProcessWatcher extends ProcessWatcher {
                     return true;
                 }
                 if (counter.incrementAndGet() > 10) {
+                    logger.debug("ProcessWatcher is not applicable - no java processes");
                     applicable.complete(false);
                 }
                 return false;

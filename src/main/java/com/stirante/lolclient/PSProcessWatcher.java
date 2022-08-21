@@ -1,11 +1,16 @@
 package com.stirante.lolclient;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
 import java.util.concurrent.CompletableFuture;
 
 public class PSProcessWatcher extends ProcessWatcher {
+
+    private static final Logger logger = LoggerFactory.getLogger(PSProcessWatcher.class);
 
     @Override
     public CompletableFuture<String> getInstallDirectory() throws IOException {
@@ -34,6 +39,7 @@ public class PSProcessWatcher extends ProcessWatcher {
     @Override
     public CompletableFuture<Boolean> isApplicable() {
         if (System.getProperty("os.name").startsWith("Windows")) {
+            logger.debug("ProcessWatcher is not applicable - Windows");
             return CompletableFuture.completedFuture(false);
         }
         try {
@@ -41,7 +47,7 @@ public class PSProcessWatcher extends ProcessWatcher {
             return CompletableFuture.completedFuture(true);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug("ProcessWatcher is not applicable - ps failed", e);
             return CompletableFuture.completedFuture(false);
         }
     }
