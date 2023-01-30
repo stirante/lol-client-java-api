@@ -1,9 +1,11 @@
 package generated;
 
+import java.math.BigInteger;
+
 public class LolChampionsCollectionsRental {
 
 	public Long endDate;
-	public Long purchaseDate;
+	public BigInteger purchaseDate;
 	public Boolean rented;
 	public Integer winCountRemaining;
 

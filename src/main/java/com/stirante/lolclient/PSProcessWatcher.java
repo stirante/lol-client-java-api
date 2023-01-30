@@ -10,6 +10,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class PSProcessWatcher extends ProcessWatcher {
 
+    private static final String MAC_OS_X = "Mac OS X";
     private static final Logger logger = LoggerFactory.getLogger(PSProcessWatcher.class);
 
     @Override
@@ -38,7 +39,7 @@ public class PSProcessWatcher extends ProcessWatcher {
 
     @Override
     public CompletableFuture<Boolean> isApplicable() {
-        if (System.getProperty("os.name").startsWith("Windows")) {
+        if (System.getProperty("os.name").startsWith("Windows") || System.getProperty("os.name").startsWith(MAC_OS_X)) {
             logger.debug("ProcessWatcher is not applicable - Windows");
             return CompletableFuture.completedFuture(false);
         }

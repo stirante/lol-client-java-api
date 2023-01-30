@@ -1,5 +1,6 @@
 package generated;
 
+import java.math.BigInteger;
 import java.util.List;
 
 public class LolChampionsCollectionsChampion {
@@ -17,7 +18,7 @@ public class LolChampionsCollectionsChampion {
 	public String name;
 	public LolChampionsCollectionsOwnership ownership;
 	public LolChampionsCollectionsChampionSpell passive;
-	public Long purchased;
+	public BigInteger purchased;
 	public Boolean rankedPlayEnabled;
 	public List<String> roles;
 	public List<LolChampionsCollectionsChampionSkin> skins;
