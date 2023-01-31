@@ -1,5 +1,6 @@
 package com.stirante.lolclient;
 
+import com.stirante.lolclient.watchers.MacOSProcessWatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,6 +20,7 @@ public abstract class ProcessWatcher {
         register(new PSProcessWatcher());
         register(new WMICProcessWatcher());
         register(new PowershellProcessWatcher());
+        register(new MacOSProcessWatcher());
     }
 
     public static void register(ProcessWatcher processWatcher) {

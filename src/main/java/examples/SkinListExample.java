@@ -37,11 +37,11 @@ public class SkinListExample {
                     for (LolChampionsCollectionsChampion champion : champions) {
                         if (champion.ownership.owned) {
                             System.out.println(champion.name + " purchased on " +
-                                    FORMATTER.format(new Date(champion.ownership.rental.purchaseDate)));
+                                    FORMATTER.format(new Date(champion.ownership.rental.purchaseDate.longValue())));
                             for (LolChampionsCollectionsChampionSkin skin : champion.skins) {
                                 if (!skin.isBase && skin.ownership.owned) {
                                     System.out.println("\t" + skin.name + " purchased on " +
-                                            FORMATTER.format(new Date(skin.ownership.rental.purchaseDate)));
+                                            FORMATTER.format(new Date(skin.ownership.rental.purchaseDate.longValue())));
                                 }
                             }
                         }
