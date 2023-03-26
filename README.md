@@ -20,7 +20,7 @@ This project is available on [Jitpack](https://jitpack.io/#stirante/lol-client-j
 
 Add Jitpack to your root build.gradle at the end of repositories:
 
-```java
+```
 allprojects {
 	repositories {
 		...
@@ -31,7 +31,7 @@ allprojects {
 
 Add the project as a dependency:
 
-```java
+```
 dependencies {
 	compile 'com.github.stirante:lol-client-java-api:1.2.3'
 }
@@ -39,6 +39,20 @@ dependencies {
 
 ### Maven
 
+
+#### 1. Nexus Repo
+The public nexus repository can be access directly from maven you will just require the dependency to access any version.
+```xml
+	<!-- https://github.com/stirante/lol-client-java-api -->
+        <dependency>
+            <groupId>com.stirante</groupId>
+            <artifactId>lol-client-java-api</artifactId>
+            <version>1.2.11-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+```
+
+#### 2. JitPack
 Add Jitpack as a repository:
 
 ```xml
@@ -56,11 +70,11 @@ Add the project as a dependency:
 <dependency>
     <groupId>com.github.stirante</groupId>
     <artifactId>lol-client-java-api</artifactId>
-    <version>1.2.3</version>
+    <version>1.2.11-SNAPSHOT</version>
 </dependency>
 ```
 
-#### Snapshots
+#### 3. Snapshots
 
 Snapshots of all the latest changes are available in my personal nexus repository.
 
