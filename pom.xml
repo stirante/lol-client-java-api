@@ -6,7 +6,7 @@
 
     <groupId>com.stirante</groupId>
     <artifactId>lol-client-java-api</artifactId>
-    <version>1.2.10-SNAPSHOT</version>
+    <version>1.2.11-SNAPSHOT</version>
     <name>lol-client-java-api</name>
     <description>Simple library which provides access to internal League of Legends Client API.</description>
     <url>https://github.com/stirante/lol-client-java-api</url>

@@ -1,7 +1,16 @@
 package generated;
 
+import java.math.BigInteger;
 import java.util.List;
 
+/**
+ * Endpoint:
+ * /lol-champions/v1/owned-champions-minimal
+ * JSON response mapped to this class:
+ * GetLolChampionsV1OwnedChampionsMinimal
+ * @see UriMap
+ */
+@SuppressWarnings("unused")
 public class LolChampionsCollectionsChampionMinimal {
 
 	public Boolean active;
@@ -16,7 +25,7 @@ public class LolChampionsCollectionsChampionMinimal {
 	public Integer id;
 	public String name;
 	public LolChampionsCollectionsOwnership ownership;
-	public Long purchased;
+	public BigInteger purchased;
 	public Boolean rankedPlayEnabled;
 	public List<String> roles;
 	public String squarePortraitPath;

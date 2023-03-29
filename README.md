@@ -20,7 +20,7 @@ This project is available on [Jitpack](https://jitpack.io/#stirante/lol-client-j
 
 Add Jitpack to your root build.gradle at the end of repositories:
 
-```java
+```
 allprojects {
 	repositories {
 		...
@@ -31,7 +31,7 @@ allprojects {
 
 Add the project as a dependency:
 
-```java
+```
 dependencies {
 	compile 'com.github.stirante:lol-client-java-api:1.2.3'
 }
@@ -75,10 +75,11 @@ Snapshots of all the latest changes are available in my personal nexus repositor
 ```
 
 ```xml
+<!-- https://github.com/stirante/lol-client-java-api -->
 <dependency>
     <groupId>com.stirante</groupId>
     <artifactId>lol-client-java-api</artifactId>
-    <version>1.2.4-SNAPSHOT</version>
+    <version>1.2.11-SNAPSHOT</version>
 </dependency>
 ```
 
