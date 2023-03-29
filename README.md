@@ -39,20 +39,6 @@ dependencies {
 
 ### Maven
 
-
-#### 1. Nexus Repo
-The public nexus repository can be access directly from maven you will just require the dependency to access any version.
-```xml
-	<!-- https://github.com/stirante/lol-client-java-api -->
-        <dependency>
-            <groupId>com.stirante</groupId>
-            <artifactId>lol-client-java-api</artifactId>
-            <version>1.2.11-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-```
-
-#### 2. JitPack
 Add Jitpack as a repository:
 
 ```xml
@@ -70,11 +56,11 @@ Add the project as a dependency:
 <dependency>
     <groupId>com.github.stirante</groupId>
     <artifactId>lol-client-java-api</artifactId>
-    <version>1.2.11-SNAPSHOT</version>
+    <version>1.2.3</version>
 </dependency>
 ```
 
-#### 3. Snapshots
+#### Snapshots
 
 Snapshots of all the latest changes are available in my personal nexus repository.
 
@@ -89,10 +75,11 @@ Snapshots of all the latest changes are available in my personal nexus repositor
 ```
 
 ```xml
+<!-- https://github.com/stirante/lol-client-java-api -->
 <dependency>
     <groupId>com.stirante</groupId>
     <artifactId>lol-client-java-api</artifactId>
-    <version>1.2.4-SNAPSHOT</version>
+    <version>1.2.11-SNAPSHOT</version>
 </dependency>
 ```
 
