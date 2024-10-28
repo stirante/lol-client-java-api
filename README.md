@@ -79,7 +79,7 @@ Snapshots of all the latest changes are available in my personal nexus repositor
 <dependency>
     <groupId>com.stirante</groupId>
     <artifactId>lol-client-java-api</artifactId>
-    <version>1.2.11-SNAPSHOT</version>
+    <version>1.2.12-SNAPSHOT</version>
 </dependency>
 ```
 
